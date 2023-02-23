@@ -6,7 +6,7 @@ import Constants from 'expo-constants';
 
 
 const Drawer = createDrawerNavigator();
-
+// Documentation: https://reactnavigation.org/docs/drawer-navigator
 
 
 
