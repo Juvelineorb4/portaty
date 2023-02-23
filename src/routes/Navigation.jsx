@@ -2,9 +2,9 @@ import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Drawer from "./Tabs/Drawer";
+import DrawerNavigator from "./Tabs/Drawer";
 import LoginNavigator from "./Authentication/LoginNavigator";
-import ItemProductNavigator from "./Products/ItemProductNavigator";
+import Tabs from "./Tabs/Tabs";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -21,18 +21,12 @@ const Navigation = () => {
         />
         <Stack.Screen
           name={`Home`}
-          component={Tabs}
+          component={DrawerNavigator}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name={`ItemProducts`}
-          component={ItemProductNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

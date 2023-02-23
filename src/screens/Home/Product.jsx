@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Product = ({item}) => {
+const Product = ({route}) => {
   return (
     <View>
-      <Text>{item}</Text>
+      <Text>{JSON.stringify(route.params)}</Text>
     </View>
   )
 }
