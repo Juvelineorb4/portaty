@@ -5,7 +5,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate('Home')}
         style={{
           backgroundColor: "blue",
           width: 100,
