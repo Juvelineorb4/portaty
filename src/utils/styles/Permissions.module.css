@@ -1,0 +1,39 @@
+.container {
+  flex: 1;
+  position: relative;
+}
+.textContainer {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.title {
+  font-weight: 100;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.subtitle {
+  font-weight: 400;
+  font-size: 14px;
+}
+.containerSelect {
+  padding: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.textContainerSelect {
+  width: 75%;
+}
+.textTitleSelect {
+  font-weight: 100;
+  font-size: 18px;
+}
+.textSubtitleSelect {
+  font-weight: 400;
+  font-size: 12px;
+}
+.line {
+  width: 150%;
+  height: 1px;
+  position: absolute;
+}
