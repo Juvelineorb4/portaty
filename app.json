@@ -14,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -38,6 +36,38 @@
         "expo-image-picker",
         {
           "photosPermission": "Espero no tengas nudes"
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow Portaty to access your contacts."
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Portaty needs to access your calendar."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Portaty to access your camera."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Portaty to use your location."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Portasty to access your photos.",
+          "savePhotosPermission": "Allow Portaty to save photos.",
+          "isAccessMediaLocationEnabled": true
         }
       ]
     ]
