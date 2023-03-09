@@ -11,7 +11,7 @@ module.exports = StyleSheet.create({
     color: '#fafafa'
   },
   bgWhiteSoft: {
-    backgroundColor: '#efeded'
+    backgroundColor: '#fafafa'
   },
   whiteSmoke: {
     color: '#efeded'
@@ -37,4 +37,9 @@ module.exports = StyleSheet.create({
   mainBgColor: {
     backgroundColor: '#ffa424'
   },
+
+
+  /* Fonts */
+
+  
 });

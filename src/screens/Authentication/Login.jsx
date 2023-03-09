@@ -103,7 +103,7 @@ const Login = ({ navigation }) => {
               )}
               <Text style={styles.checkText}>Remember Me</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Forgot_App")}>
               <Text style={styles.forgot}>Forgot the password?</Text>
             </TouchableOpacity>
           </View>
@@ -141,7 +141,7 @@ const Login = ({ navigation }) => {
           </View>
           <View style={styles.signup}>
             <Text style={styles.dont}>Don't have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Register_App")}>
               <Text style={styles.signupBtn}>Sign Up</Text>
             </TouchableOpacity>
           </View>
