@@ -40,8 +40,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/cart.gif"),
-              inActiveIcon: require("@/utils/images/cart.png"),
+              activeIcon: require("@/utils/images/orders.png"),
+              inActiveIcon: require("@/utils/images/orders.png"),
             },
             tabBarLabel: "Orders",
           }}
@@ -52,8 +52,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/add.gif"),
-              inActiveIcon: require("@/utils/images/add.png"),
+              activeIcon: require("@/utils/images/cart.gif"),
+              inActiveIcon: require("@/utils/images/cart.png"),
             },
             tabBarLabel: "Sell",
           }}
@@ -64,8 +64,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/settings.gif"),
-              inActiveIcon: require("@/utils/images/settings.png"),
+              activeIcon: require("@/utils/images/add.gif"),
+              inActiveIcon: require("@/utils/images/add.png"),
             },
             tabBarLabel: "Settings",
           }}
@@ -148,7 +148,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
 
   const animatedIconContainerStyles = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(active ? 1 : 0.7, { duration: 250 }),
+      opacity: withTiming(active ? 1 : 1, { duration: 250 }),
     };
   });
 
@@ -172,8 +172,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
         ) : (
           <Image
             style={{
-              width: 28,
-              height: 28,
+              width: 33,
+              height: 33,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.inActiveIcon}
