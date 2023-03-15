@@ -163,7 +163,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
         style={[animatedComponentCircleStyles]}
       />
       <Animated.View
-        style={[active ? styles.componentActive : styles.component, animatedIconContainerStyles]}
+        style={[styles.component, animatedIconContainerStyles, {backgroundColor: active ? '#ffa424' : 'transparent' }]}
       >
         {active ? (
           <Image
@@ -217,17 +217,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 30,
-    alignItems: "center",
-    justifyContent: 'center',
-    marginTop: -5,
-  },
-  componentActive: {
-    position: "relative",
-    zIndex: 1,
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    backgroundColor: "#ffa424",
     alignItems: "center",
     justifyContent: 'center',
     marginTop: -5,
