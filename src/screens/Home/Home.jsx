@@ -24,14 +24,13 @@ import { categories } from "@/utils/constants/categories";
 import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
 import { products } from "@/utils/constants/products";
-
+import { useRoute } from '@react-navigation/native'
 const Home = ({ data, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const [settings, setSettings] = useState(false);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [status, requestPermission] = Camera.useCameraPermissions();
-
   // const [permissionStatus, setPermissionStatus] =
   //   useRecoilState(permissionsStatus);
 
@@ -169,7 +168,7 @@ const Home = ({ data, navigation }) => {
           </View>
         </View>
       </View>
-      <View style={{flexDirection: "row", padding: 20, justifyContent: "center", alignItems: "center"}}>
+      <View style={{ flexDirection: "row", padding: 20, justifyContent: "center", alignItems: "center" }}>
         <TouchableOpacity
           onPress={() => setSettings(true)}
           style={{

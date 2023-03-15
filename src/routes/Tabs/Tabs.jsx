@@ -12,6 +12,7 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 
+
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
@@ -101,6 +102,7 @@ const AnimatedTabBar = ({
     };
   });
 
+
   return (
     <View style={[styles.tabBar, { paddingBottom: 10 }]}>
       <AnimatedSvg
@@ -126,6 +128,7 @@ const AnimatedTabBar = ({
               options={options}
               onLayout={(e) => handleLayout(e, index)}
               onPress={() => navigation.navigate(route.name)}
+              route={route.name}
             />
           );
         })}
@@ -134,8 +137,9 @@ const AnimatedTabBar = ({
   );
 };
 
-const TabBarComponent = ({ active, options, onLayout, onPress }) => {
+const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
   const ref = useRef(null);
+
   const animatedComponentCircleStyles = useAnimatedStyle(() => {
     return {
       transform: [
@@ -148,12 +152,15 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
 
   const animatedIconContainerStyles = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(active ? 1 : 0.6, { duration: 250 }),
+      opacity: withTiming(active ? 1 : 1, { duration: 250 }),
     };
   });
 
   return (
-    <Pressable onPress={onPress} onLayout={onLayout} style={styles.component}>
+    <Pressable onPress={() => {
+      onPress()
+      console.log(route)
+    }} onLayout={onLayout} style={styles.component}>
       <Animated.View
         style={[styles.componentCircle, animatedComponentCircleStyles]}
       />
@@ -163,8 +170,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
         {active ? (
           <Image
             style={{
-              width: 31,
-              height: 31,
+              width: 33,
+              height: 33,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.activeIcon}
@@ -172,8 +179,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
         ) : (
           <Image
             style={{
-              width: 28,
-              height: 39,
+              width: 33,
+              height: 33,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.inActiveIcon}
@@ -211,7 +218,7 @@ const styles = StyleSheet.create({
   },
   componentCircle: {
     flex: 1,
-    borderRadius: 30,
+    borderRadius: 50,
     backgroundColor: "#ffa424",
   },
   iconContainer: {
