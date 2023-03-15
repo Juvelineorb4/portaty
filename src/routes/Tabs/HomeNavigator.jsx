@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
 import Product from "@/screens/Home/Product";
+import SearchCategory from "@/screens/Search/SearchCategory";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,10 @@ const HomeNavigator = () => {
           initialParams={item}
         />
       ))}
+      <Stack.Screen
+        name="SearchCategory"
+        component={SearchCategory}
+      />
     </Stack.Navigator>
   );
 };

@@ -148,7 +148,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
 
   const animatedIconContainerStyles = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(active ? 1 : 1, { duration: 250 }),
+      opacity: withTiming(active ? 1 : 0.6, { duration: 250 }),
     };
   });
 
@@ -163,8 +163,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
         {active ? (
           <Image
             style={{
-              width: 33,
-              height: 33,
+              width: 31,
+              height: 31,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.activeIcon}
@@ -172,8 +172,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress }) => {
         ) : (
           <Image
             style={{
-              width: 33,
-              height: 33,
+              width: 28,
+              height: 39,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.inActiveIcon}
