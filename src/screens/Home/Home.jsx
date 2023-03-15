@@ -85,17 +85,17 @@ const Home = ({ data, navigation }) => {
           text = errorMsg;
         } else if (location) {
           text = JSON.stringify(location);
-          console.log(text);
+          // console.log(text);
         }
         /* Contacts */
         if (data.length > 0) {
           const contact = data;
-          console.log(contact);
+          // console.log(contact);
         }
         /* Calendars */
-        console.log({ calendars });
+        // console.log({ calendars });
         /* Camera */
-        console.log("Done Camera");
+        // console.log("Done Camera");
         /* check */
         // checkPermissions()
       }

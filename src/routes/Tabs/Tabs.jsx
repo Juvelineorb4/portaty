@@ -17,6 +17,7 @@ const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
 const Tabs = () => {
+  
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -160,12 +161,12 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
     <Pressable onPress={() => {
       onPress()
       console.log(route)
-    }} onLayout={onLayout} style={styles.component}>
+    }} onLayout={onLayout}>
       <Animated.View
-        style={[styles.componentCircle, animatedComponentCircleStyles]}
+        style={[animatedComponentCircleStyles]}
       />
       <Animated.View
-        style={[styles.iconContainer, animatedIconContainerStyles]}
+        style={[active ? styles.componentActive : styles.component, animatedIconContainerStyles]}
       >
         {active ? (
           <Image
@@ -205,30 +206,48 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffa424",
   },
   activeBackground: {
+    
     position: "absolute",
+    zIndex: -100
   },
   tabBarContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
   component: {
+    position: "relative",
+    zIndex: 1,
     height: 60,
     width: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: 'center',
+    marginTop: -5,
+  },
+  componentActive: {
+    position: "relative",
+    zIndex: 1,
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    backgroundColor: "#ffa424",
+    alignItems: "center",
+    justifyContent: 'center',
     marginTop: -5,
   },
   componentCircle: {
-    flex: 1,
-    borderRadius: 50,
-    backgroundColor: "#ffa424",
+    // flex: 1,
+    // borderRadius: 30,
+    // backgroundColor: "#ffa424",
   },
   iconContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
+    // position: "absolute",
+    // zIndex: 0,
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    
   },
 });
 export default Tabs;
