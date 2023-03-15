@@ -3,10 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
 import Product from "@/screens/Home/Product";
 import SearchCategory from "@/screens/Search/SearchCategory";
+import { useRoute } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
+  const router = useRoute();
   const [data, setData] = useState([]);
 
   function getData() {
@@ -26,11 +28,12 @@ const HomeNavigator = () => {
 
   useEffect(() => {
     getData();
+    console.log(router.name);
   }, []);
   return (
     <Stack.Navigator initialRouteName={`Home`}>
       <Stack.Screen name="Home">
-      {(props) => <Home data={data} {...props} />}
+        {(props) => <Home data={data} {...props} />}
       </Stack.Screen>
       {data.map((item, index) => (
         <Stack.Screen
@@ -40,10 +43,7 @@ const HomeNavigator = () => {
           initialParams={item}
         />
       ))}
-      <Stack.Screen
-        name="SearchCategory"
-        component={SearchCategory}
-      />
+      <Stack.Screen name="SearchCategory" component={SearchCategory} />
     </Stack.Navigator>
   );
 };
