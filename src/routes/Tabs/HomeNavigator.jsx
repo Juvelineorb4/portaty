@@ -1,49 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
-import Product from "@/screens/Home/Product";
-import SearchCategory from "@/screens/Search/SearchCategory";
-import { useRoute } from "@react-navigation/native";
+import CustomSearch from "@/components/CustomSearch";
 
 const Stack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
-  const router = useRoute();
-  const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  function getData() {
+  function getData(url, method, save) {
     fetch(
-      "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/sendDefault",
-      { method: "POST" }
+      url,
+      { method: method }
     )
       .then((response) => response.json())
       .then((json) => {
-        setData(json);
+        if (save === 'categories') setCategories(json);
+        if (save === 'brands') setBrands(json);
+        if (save === 'products') setProducts(json);
       })
       .catch((error) => {
-        alert(JSON.stringify(error));
-        console.error(error);
+        console.error(JSON.stringify(error));
       });
   }
 
   useEffect(() => {
-    getData();
-    console.log(router.name);
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getCategories", "GET", 'categories' );
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getBrands", "GET", 'brands');
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getProducts", "GET", 'products')
   }, []);
   return (
     <Stack.Navigator initialRouteName={`Home`}>
       <Stack.Screen name="Home">
-        {(props) => <Home data={data} {...props} />}
+        {(props) => <Home categories={categories} brands={brands} products={products} {...props} />}
       </Stack.Screen>
-      {data.map((item, index) => (
+      {categories.map((item, index) => (
         <Stack.Screen
-          name={`${item.brand}`}
-          component={Product}
+          name={`${item.title}`}
+          component={CustomSearch}
           key={index}
-          initialParams={item}
+          options={{
+            animation: 'slide_from_right'
+          }}
         />
       ))}
-      <Stack.Screen name="SearchCategory" component={SearchCategory} />
+      {brands.map((item, index) => (
+        <Stack.Screen
+          name={`${item.title}`}
+          component={CustomSearch}
+          key={index}
+          options={{
+            animation: 'slide_from_right'
+          }}
+        />
+      ))}
     </Stack.Navigator>
   );
 };
