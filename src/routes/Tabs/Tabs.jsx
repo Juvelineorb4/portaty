@@ -12,6 +12,7 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 
+
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
@@ -102,6 +103,7 @@ const AnimatedTabBar = ({
     };
   });
 
+
   return (
     <View style={[styles.tabBar, { paddingBottom: 10 }]}>
       <AnimatedSvg
@@ -138,6 +140,7 @@ const AnimatedTabBar = ({
 
 const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
   const ref = useRef(null);
+
   const animatedComponentCircleStyles = useAnimatedStyle(() => {
     return {
       transform: [
@@ -150,14 +153,14 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
 
   const animatedIconContainerStyles = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(active ? 1 : 0.6, { duration: 250 }),
+      opacity: withTiming(active ? 1 : 1, { duration: 250 }),
     };
   });
 
   return (
     <Pressable onPress={() => {
       onPress()
-      console.log(route)
+      // console.log(route)
     }} onLayout={onLayout}>
       <Animated.View
         style={[animatedComponentCircleStyles]}
@@ -168,8 +171,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
         {active ? (
           <Image
             style={{
-              width: 31,
-              height: 31,
+              width: 33,
+              height: 33,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.activeIcon}
@@ -177,8 +180,8 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
         ) : (
           <Image
             style={{
-              width: 28,
-              height: 39,
+              width: 33,
+              height: 33,
               resizeMode: "contain",
             }}
             source={options.tabBarIcon.inActiveIcon}
