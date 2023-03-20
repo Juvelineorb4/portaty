@@ -3,6 +3,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Sell from "@/screens/Sell/Sell";
 import { useRoute } from "@react-navigation/native";
 
+import Header from './HeaderTabs/index'
+
+
 const Stack = createNativeStackNavigator();
 
 const SellNavigator = () => {
@@ -11,10 +14,13 @@ const SellNavigator = () => {
     console.log(router.name);
   }, []);
   return (
-    <Stack.Navigator initialRouteName={`Sell`}>
+    <Stack.Navigator
+      initialRouteName={`Sell`}
+    >
       <Stack.Screen
         name="Sell"
         component={Sell}
+        options={{ header: (props) => <Header {...props} /> }}
       />
     </Stack.Navigator>
   );

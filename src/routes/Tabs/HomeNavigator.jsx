@@ -5,10 +5,20 @@ import CustomSearch from "@/components/CustomSearch";
 import CustomPageProduct from "@/components/CustomPageProduct";
 import CustomSellerProduct from "@/components/CustomSellerProduct";
 
-const Stack = createNativeStackNavigator();
+// Header
+import Header from './HeaderTabs/index'
 
+// Hooks
+import useHeaderScroll from '@/hooks/useHeaderScroll'
+
+
+
+const Stack = createNativeStackNavigator();
 const HomeNavigator = () => {
+
+  const { translateY, headerHeight, handleScroll, handleSnap } = useHeaderScroll({ headerHeight: 128 })
   const [data, setData] = useState([]);
+
 
   function getData(url, method) {
     fetch(url, { method: method })
@@ -29,7 +39,10 @@ const HomeNavigator = () => {
   }, []);
   return (
     <Stack.Navigator initialRouteName={`Home`}>
-      <Stack.Screen name="Home">
+      <Stack.Screen
+        name="Home"
+        options={{ header: (props) => <Header {...props} /> }}
+      >
         {(props) => <Home data={data} {...props} />}
       </Stack.Screen>
       {data.map((item, index) => (

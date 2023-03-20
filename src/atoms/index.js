@@ -30,3 +30,10 @@ export const cameraPermissions = atom({
   default: false,
 });
 /*  */
+
+/* Search */
+export const searchGlobal = atom({
+  key: "searchGlobalValue",
+  default: "",
+});
+/* */

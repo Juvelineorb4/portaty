@@ -5,6 +5,7 @@ import {
   useDrawerProgress,
 } from "@react-navigation/drawer";
 import TabsNavigator from './Tabs';
+import SearchNavigator from './SearchNavigator'
 import Constants from "expo-constants";
 
 const Drawer = createDrawerNavigator();
@@ -40,6 +41,16 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name="Tabs"
         component={TabsNavigator}
+        options={{
+          title: "None",
+          drawerItemStyle: {
+            display: "none",
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="SearchNavigator"
+        component={SearchNavigator}
         options={{
           title: "None",
           drawerItemStyle: {

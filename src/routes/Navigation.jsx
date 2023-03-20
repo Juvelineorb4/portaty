@@ -11,13 +11,13 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={`Login`}>
-        <Stack.Screen
+        {!false && <Stack.Screen
           name={`Login_Welcome`}
           component={LoginNavigator}
           options={{
             headerShown: false,
           }}
-        />
+        />}
         <Stack.Screen
           name={`Home`}
           component={DrawerNavigator}
@@ -25,7 +25,7 @@ const Navigation = () => {
             headerShown: false,
           }}
         />
-        
+
       </Stack.Navigator>
     </NavigationContainer>
   );
