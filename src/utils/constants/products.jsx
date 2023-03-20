@@ -1,4 +1,4 @@
-export const products = [
+export const productsHome = [
   {
     title: "Iphone 14",
     image: require("@/utils/images/iphone-14.png"),

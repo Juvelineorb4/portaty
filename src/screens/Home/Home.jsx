@@ -4,7 +4,12 @@ import {
   TouchableOpacity,
   Linking,
   ScrollView,
+<<<<<<< HEAD
   Animated
+=======
+  SafeAreaView,
+  FlatList,
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -24,9 +29,20 @@ import styles from "@/utils/styles/Home.module.css";
 import { categories } from "@/utils/constants/categories";
 import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
+<<<<<<< HEAD
 import { products } from "@/utils/constants/products";
 import { useRoute } from '@react-navigation/native'
 const Home = ({ data, navigation }) => {
+=======
+import { productsHome } from "@/utils/constants/products";
+
+const Home = ({ categories, brands, products, navigation }) => {
+  const categoriesOne = categories.slice(0, 4);
+  const categoriesTwo = categories.slice(4, 8);
+  const productsApple = products.slice(0, 10);
+  const productsSamsung = products.slice(10, 12);
+  console.log(productsSamsung);
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
   const global = require("@/utils/styles/global.js");
   const [settings, setSettings] = useState(false);
   const [location, setLocation] = useState(null);
@@ -105,23 +121,38 @@ const Home = ({ data, navigation }) => {
 
   if (settings) Linking.openSettings();
   return (
+<<<<<<< HEAD
     <ScrollView style={[styles.container, global.bgWhite]} >
+=======
+    <ScrollView showsVerticalScrollIndicator={false}
+    nestedScrollEnabled style={[styles.container, global.bgWhite]}>
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
       <View style={styles.categoriesOne}>
-        {categories.partOne.map((category, index) => (
+        {categoriesOne.map((category, index) => (
           <CustomCategory
             title={category.title}
             icon={category.icon}
             key={index}
+            onPress={() =>
+              navigation.navigate(category.title, {
+                data: productsHome,
+              })
+            }
           />
         ))}
       </View>
 
       <View style={styles.categoriesTwo}>
-        {categories.partTwo.map((category, index) => (
+        {categoriesTwo.map((category, index) => (
           <CustomCategory
             title={category.title}
             icon={category.icon}
             key={index}
+            onPress={() =>
+              navigation.navigate(category.title, {
+                data: productsHome,
+              })
+            }
           />
         ))}
       </View>
@@ -132,21 +163,34 @@ const Home = ({ data, navigation }) => {
           <Text style={[styles.textAll, global.black]}>All</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
-          <View style={styles.productsTopTrendingPopular}>
-            <CustomProductCard product={products[0]} />
-            <CustomProductCard product={products[1]} />
-          </View>
-          <View style={styles.productsBotTrendingPopular}>
-            <CustomProductCard product={products[2]} />
-            <CustomProductCard product={products[3]} />
-          </View>
+          <FlatList
+            data={productsHome}
+            renderItem={({ item }) => (
+              <CustomProductCard product={item} />
+            )}
+            nestedScrollEnabled
+            numColumns={2}
+            keyExtractor={(item, index) => index}
+          />
+          {/* <View style={styles.productsTopTrendingPopular}> */}
+          {/* <CustomProductCard product={productsHome[0]} /> */}
+          {/* <CustomProductCard product={productsHome[1]} /> */}
+          {/* </View> */}
+          {/* <View style={styles.productsBotTrendingPopular}> */}
+          {/* <CustomProductCard product={productsHome[2]} /> */}
+          {/* <CustomProductCard product={productsHome[3]} /> */}
+          {/* </View> */}
         </View>
       </View>
       <ScrollView horizontal style={{ flex: 1 }}>
         <View style={styles.categoriesBrand}>
-          {categories.brands.map((category, index) => (
+          {brands.map((brand, index) => (
             <View style={styles.bubbleBrand} key={index}>
-              <CustomCategory title={category.title} icon={category.icon} />
+              <CustomCategory
+                title={brand.title}
+                icon={brand.icon}
+                onPress={() => navigation.navigate(brand.title)}
+              />
             </View>
           ))}
         </View>
@@ -160,16 +204,27 @@ const Home = ({ data, navigation }) => {
         </View>
         <View style={styles.productsTrendingPopular}>
           <View style={styles.productsTopTrendingPopular}>
-            <CustomProductCard product={products[0]} />
-            <CustomProductCard product={products[1]} />
+            <CustomProductCard product={productsHome[0]} />
+            <CustomProductCard product={productsHome[1]} />
           </View>
           <View style={styles.productsBotTrendingPopular}>
-            <CustomProductCard product={products[2]} />
-            <CustomProductCard product={products[3]} />
+            <CustomProductCard product={productsHome[2]} />
+            <CustomProductCard product={productsHome[3]} />
           </View>
         </View>
       </View>
+<<<<<<< HEAD
       <View style={{ flexDirection: "row", padding: 20, justifyContent: "center", alignItems: "center" }}>
+=======
+      <View
+        style={{
+          flexDirection: "row",
+          padding: 20,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
         <TouchableOpacity
           onPress={() => setSettings(true)}
           style={{

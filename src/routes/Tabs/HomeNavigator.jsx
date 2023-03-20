@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
-import Product from "@/screens/Home/Product";
-import SearchCategory from "@/screens/Search/SearchCategory";
-import { useRoute } from "@react-navigation/native";
+import CustomSearch from "@/components/CustomSearch";
 
 // Header
 import Header from './HeaderTabs/index'
@@ -15,31 +13,40 @@ import useHeaderScroll from '@/hooks/useHeaderScroll'
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = () => {
+<<<<<<< HEAD
   const { translateY, headerHeight, handleScroll, handleSnap } = useHeaderScroll({ headerHeight: 128 })
 
   const router = useRoute();
   const [data, setData] = useState([]);
+=======
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [products, setProducts] = useState([]);
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
 
-  function getData() {
+  function getData(url, method, save) {
     fetch(
-      "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/sendDefault",
-      { method: "POST" }
+      url,
+      { method: method }
     )
       .then((response) => response.json())
       .then((json) => {
-        setData(json);
+        if (save === 'categories') setCategories(json);
+        if (save === 'brands') setBrands(json);
+        if (save === 'products') setProducts(json);
       })
       .catch((error) => {
-        alert(JSON.stringify(error));
-        console.error(error);
+        console.error(JSON.stringify(error));
       });
   }
 
   useEffect(() => {
-    getData();
-    console.log(router.name);
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getCategories", "GET", 'categories' );
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getBrands", "GET", 'brands');
+    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getProducts", "GET", 'products')
   }, []);
   return (
+<<<<<<< HEAD
     <Stack.Navigator
       initialRouteName={`Home`}
     >
@@ -61,6 +68,33 @@ const HomeNavigator = () => {
       }
       <Stack.Screen name="SearchCategory" component={SearchCategory} />
     </Stack.Navigator >
+=======
+    <Stack.Navigator initialRouteName={`Home`}>
+      <Stack.Screen name="Home">
+        {(props) => <Home categories={categories} brands={brands} products={products} {...props} />}
+      </Stack.Screen>
+      {categories.map((item, index) => (
+        <Stack.Screen
+          name={`${item.title}`}
+          component={CustomSearch}
+          key={index}
+          options={{
+            animation: 'slide_from_right'
+          }}
+        />
+      ))}
+      {brands.map((item, index) => (
+        <Stack.Screen
+          name={`${item.title}`}
+          component={CustomSearch}
+          key={index}
+          options={{
+            animation: 'slide_from_right'
+          }}
+        />
+      ))}
+    </Stack.Navigator>
+>>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
   );
 };
 
