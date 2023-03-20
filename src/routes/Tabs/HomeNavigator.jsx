@@ -13,16 +13,13 @@ import useHeaderScroll from '@/hooks/useHeaderScroll'
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = () => {
-<<<<<<< HEAD
   const { translateY, headerHeight, handleScroll, handleSnap } = useHeaderScroll({ headerHeight: 128 })
 
   const router = useRoute();
   const [data, setData] = useState([]);
-=======
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [products, setProducts] = useState([]);
->>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
 
   function getData(url, method, save) {
     fetch(
@@ -46,31 +43,11 @@ const HomeNavigator = () => {
     getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getProducts", "GET", 'products')
   }, []);
   return (
-<<<<<<< HEAD
-    <Stack.Navigator
-      initialRouteName={`Home`}
-    >
-      <Stack.Screen
-        name="Home"
-        options={{ header: (props) => <Header {...props} /> }}
-      >
-        {(props) => <Home data={data} {...props} />}
-      </Stack.Screen>
-      {
-        data.map((item, index) => (
-          <Stack.Screen
-            name={`${item.brand}`}
-            component={Product}
-            key={index}
-            initialParams={item}
-          />
-        ))
-      }
-      <Stack.Screen name="SearchCategory" component={SearchCategory} />
-    </Stack.Navigator >
-=======
     <Stack.Navigator initialRouteName={`Home`}>
-      <Stack.Screen name="Home">
+      <Stack.Screen 
+      name="Home"
+      options={{ header: (props) => <Header {...props} /> }}
+      >
         {(props) => <Home categories={categories} brands={brands} products={products} {...props} />}
       </Stack.Screen>
       {categories.map((item, index) => (
@@ -94,7 +71,6 @@ const HomeNavigator = () => {
         />
       ))}
     </Stack.Navigator>
->>>>>>> f6fff60da6569e9eaf2a086187b584f19ce0651b
   );
 };
 
