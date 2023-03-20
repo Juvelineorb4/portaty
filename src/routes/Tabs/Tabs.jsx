@@ -160,7 +160,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
   return (
     <Pressable onPress={() => {
       onPress()
-      console.log(route)
+      // console.log(route)
     }} onLayout={onLayout}>
       <Animated.View
         style={[animatedComponentCircleStyles]}

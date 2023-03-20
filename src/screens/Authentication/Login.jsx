@@ -43,9 +43,9 @@ const Login = ({ navigation }) => {
               color: "#404040",
               size: 25,
             }}
-            // rules={{
-            //   required: "Email is required",
-            // }}
+          // rules={{
+          //   required: "Email is required",
+          // }}
           />
           <CustomInput
             control={control}
@@ -65,19 +65,19 @@ const Login = ({ navigation }) => {
               size: 25,
             }}
             security={true}
-            // rules={{
-            //   required: "Password is required",
-            //   minLength: {
-            //     value: 8,
-            //     message: "Min 8 characters",
-            //   },
-            // }}
+          // rules={{
+          //   required: "Password is required",
+          //   minLength: {
+          //     value: 8,
+          //     message: "Min 8 characters",
+          //   },
+          // }}
           />
         </View>
         <View style={styles.panel}>
           <CustomButton
             text={`Log In`}
-            handlePress={handleSubmit(() => navigation.navigate("Home"))}
+            handlePress={handleSubmit(() => navigation.navigate("Home", { screen: "Home_Tab" }))}
             textStyles={[styles.textLogin, global.white]}
             buttonStyles={[styles.login, global.bgBlack]}
           />

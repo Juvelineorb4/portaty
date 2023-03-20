@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Linking,
   ScrollView,
+  Animated
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -104,7 +105,7 @@ const Home = ({ data, navigation }) => {
 
   if (settings) Linking.openSettings();
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} >
       <View style={styles.categoriesOne}>
         {categories.partOne.map((category, index) => (
           <CustomCategory
@@ -196,7 +197,7 @@ const Home = ({ data, navigation }) => {
           <Text>Salir</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </ScrollView >
   );
 };
 
