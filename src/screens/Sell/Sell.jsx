@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Product = ({route}) => {
+const Sell = () => {
   return (
     <View>
-      <Text>{JSON.stringify(route.params)}</Text>
+      <Text>Sell</Text>
     </View>
   )
 }
 
-export default Product
+export default Sell

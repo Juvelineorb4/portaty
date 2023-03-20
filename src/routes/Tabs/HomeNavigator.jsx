@@ -1,44 +1,80 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
-import Product from "@/screens/Home/Product";
+import CustomSearch from "@/components/CustomSearch";
+import CustomPageProduct from "@/components/CustomPageProduct";
+import CustomSellerProduct from "@/components/CustomSellerProduct";
 
 const Stack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
   const [data, setData] = useState([]);
 
-  function getData() {
-    fetch(
-      "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/sendDefault",
-      { method: "POST" }
-    )
+  function getData(url, method) {
+    fetch(url, { method: method })
       .then((response) => response.json())
       .then((json) => {
         setData(json);
       })
       .catch((error) => {
-        alert(JSON.stringify(error));
-        console.error(error);
+        console.error(JSON.stringify(error));
       });
   }
 
   useEffect(() => {
-    getData();
+    getData(
+      "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getAll",
+      "GET"
+    );
   }, []);
   return (
     <Stack.Navigator initialRouteName={`Home`}>
       <Stack.Screen name="Home">
-      {(props) => <Home data={data} {...props} />}
+        {(props) => <Home data={data} {...props} />}
       </Stack.Screen>
       {data.map((item, index) => (
         <Stack.Screen
-          name={`${item.brand}`}
-          component={Product}
+          name={`${item.title}`}
+          component={CustomSearch}
           key={index}
-          initialParams={item}
+          options={{
+            animation: "slide_from_right",
+          }}
         />
       ))}
+      {data.map((item) =>
+        item.brands.map((brand, index) => {
+          <Stack.Screen
+            name={`${brand.title}_${index}`}
+            component={CustomSearch}
+            key={index}
+            options={{
+              animation: "slide_from_right",
+            }}
+          />;
+        })
+      )}
+      {data.map((item) =>
+        item.brands.map((brand) =>
+          brand.products.map((product, index) => (
+            <Stack.Screen
+              name={`${product.brand}_${product.id}`}
+              component={CustomPageProduct}
+              key={index}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+          ))
+        )
+      )}
+      <Stack.Screen
+        name="SellerProduct"
+        component={CustomSellerProduct}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
     </Stack.Navigator>
   );
 };
