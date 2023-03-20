@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
 import CustomSearch from "@/components/CustomSearch";
+import CustomPageProduct from "@/components/CustomPageProduct";
+import CustomSellerProduct from "@/components/CustomSellerProduct";
 
 // Header
 import Header from './HeaderTabs/index'
@@ -13,24 +15,16 @@ import useHeaderScroll from '@/hooks/useHeaderScroll'
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = () => {
+
   const { translateY, headerHeight, handleScroll, handleSnap } = useHeaderScroll({ headerHeight: 128 })
-
-  const router = useRoute();
   const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
-  const [products, setProducts] = useState([]);
 
-  function getData(url, method, save) {
-    fetch(
-      url,
-      { method: method }
-    )
+
+  function getData(url, method) {
+    fetch(url, { method: method })
       .then((response) => response.json())
       .then((json) => {
-        if (save === 'categories') setCategories(json);
-        if (save === 'brands') setBrands(json);
-        if (save === 'products') setProducts(json);
+        setData(json);
       })
       .catch((error) => {
         console.error(JSON.stringify(error));
@@ -38,38 +32,62 @@ const HomeNavigator = () => {
   }
 
   useEffect(() => {
-    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getCategories", "GET", 'categories' );
-    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getBrands", "GET", 'brands');
-    getData("https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getProducts", "GET", 'products')
+    getData(
+      "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getAll",
+      "GET"
+    );
   }, []);
   return (
     <Stack.Navigator initialRouteName={`Home`}>
-      <Stack.Screen 
-      name="Home"
-      options={{ header: (props) => <Header {...props} /> }}
+      <Stack.Screen
+        name="Home"
+        options={{ header: (props) => <Header {...props} /> }}
       >
-        {(props) => <Home categories={categories} brands={brands} products={products} {...props} />}
+        {(props) => <Home data={data} {...props} />}
       </Stack.Screen>
-      {categories.map((item, index) => (
+      {data.map((item, index) => (
         <Stack.Screen
           name={`${item.title}`}
           component={CustomSearch}
           key={index}
           options={{
-            animation: 'slide_from_right'
+            animation: "slide_from_right",
           }}
         />
       ))}
-      {brands.map((item, index) => (
-        <Stack.Screen
-          name={`${item.title}`}
-          component={CustomSearch}
-          key={index}
-          options={{
-            animation: 'slide_from_right'
-          }}
-        />
-      ))}
+      {data.map((item) =>
+        item.brands.map((brand, index) => {
+          <Stack.Screen
+            name={`${brand.title}_${index}`}
+            component={CustomSearch}
+            key={index}
+            options={{
+              animation: "slide_from_right",
+            }}
+          />;
+        })
+      )}
+      {data.map((item) =>
+        item.brands.map((brand) =>
+          brand.products.map((product, index) => (
+            <Stack.Screen
+              name={`${product.brand}_${product.id}`}
+              component={CustomPageProduct}
+              key={index}
+              options={{
+                animation: "slide_from_right",
+              }}
+            />
+          ))
+        )
+      )}
+      <Stack.Screen
+        name="SellerProduct"
+        component={CustomSellerProduct}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
     </Stack.Navigator>
   );
 };

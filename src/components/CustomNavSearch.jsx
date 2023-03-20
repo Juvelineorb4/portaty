@@ -29,7 +29,7 @@ const CustomNavSearch = ({
             'keyboardDidHide',
             () => {
                 setKeyboardVisible(false);
-                navigation.popToTop();
+                navigation.goBack();
             }
         );
 
