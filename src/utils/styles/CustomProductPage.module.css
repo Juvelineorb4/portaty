@@ -1,0 +1,93 @@
+.container {
+  flex: 1;
+}
+.containerImages {
+  flex: 1;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  padding: 10px 20px;
+}
+.containerTitle {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.containerInfo,
+.containerReviews {
+  flex-direction: row;
+  align-items: center;
+}
+.containerInfo {
+  margin-top: 5px;
+}
+.containerReviews {
+  margin-left: 7px;
+}
+.textReviews {
+  margin-left: 5px;
+  font-style: italic;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0px;
+}
+.descriptionText {
+  font-size: 13px;
+  margin: 7px 0px;
+  font-style: italic;
+  font-weight: 100;
+}
+.feature {
+  margin: 10px 5px;
+  flex-direction: row;
+  align-items: center;
+}
+.featureText {
+  margin-left: 5px;
+}
+.containerSeller {
+  padding: 10px;
+  border-radius: 20px;
+  margin: 10px 0px;
+}
+.topInfo,
+.mediumInfo,
+.botInfo {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.price {
+  font-size: 48px;
+  font-weight: 700;
+}
+.textBuy {
+  font-weight: 600;
+  font-size: 20px;
+}
+.buy {
+  border-radius: 16px;
+  padding: 10px 20px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+.name {
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: capitalize;
+  margin-left: 11%;
+}
+.priceRef {
+  font-weight: 700;
+  font-size: 16px;
+}
