@@ -1,11 +1,22 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "@/utils/styles/Home.module.css";
+import { useNavigation } from "@react-navigation/native";
 
 const CustomProductCard = ({ product = {} }) => {
+  console.log(product);
+  const navigation = useNavigation();
   const global = require("@/utils/styles/global.js");
   return (
-    <View style={{ justifyContent: "center" }}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={{ justifyContent: "center", marginBottom: 20 }}
+      onPress={() =>
+        navigation.navigate(`${product.brand}_${product.id}`, {
+          data: product,
+        })
+      }
+    >
       <View
         style={[
           global.bgWhiteSmoke,
@@ -25,7 +36,11 @@ const CustomProductCard = ({ product = {} }) => {
             height: 100,
             resizeMode: "contain",
           }}
-          source={product.image}
+          source={
+            product.images || product.image
+              ? product.images || product.image
+              : require("@/utils/images/notimage.png")
+          }
         />
         <View
           style={[
@@ -53,8 +68,17 @@ const CustomProductCard = ({ product = {} }) => {
         </View>
       </View>
 
-      <Text style={[{ fontSize: 16, fontWeight: "bold", paddingTop: 5 }]}>
-        {product.title}
+      <Text
+        style={[
+          {
+            fontSize: 16,
+            fontWeight: "bold",
+            paddingTop: 5,
+            textTransform: "capitalize",
+          },
+        ]}
+      >
+        {product.name || product.title}
       </Text>
       <View
         style={{
@@ -72,15 +96,20 @@ const CustomProductCard = ({ product = {} }) => {
           }}
         >
           <Image
-          style={{
-            width: 13,
-            height: 13,
-            resizeMode: "contain",
-          }}
-          source={require('@/utils/images/star.png')}
-        />
-          <Text style={[global.black, { fontSize: 12, fontStyle: "italic", marginLeft: 3 }]}>
-            {product.reviews}
+            style={{
+              width: 13,
+              height: 13,
+              resizeMode: "contain",
+            }}
+            source={require("@/utils/images/star.png")}
+          />
+          <Text
+            style={[
+              global.black,
+              { fontSize: 12, fontStyle: "italic", marginLeft: 3 },
+            ]}
+          >
+            {product.avgRating || product.reviews}
           </Text>
         </View>
         <Text>|</Text>
@@ -96,8 +125,10 @@ const CustomProductCard = ({ product = {} }) => {
         </View>
       </View>
 
-      <Text style={{ fontSize: 16, fontWeight: "bold" }}>${product.price}</Text>
-    </View>
+      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+        ${product.maxPrice || product.price}
+      </Text>
+    </TouchableOpacity>
   );
 };
 

@@ -22,17 +22,12 @@ import * as Calendar from "expo-calendar";
 import * as Location from "expo-location";
 import { Camera } from "expo-camera";
 import styles from "@/utils/styles/Home.module.css";
-import { categories } from "@/utils/constants/categories";
 import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
 import { productsHome } from "@/utils/constants/products";
 
-const Home = ({ categories, brands, products, navigation }) => {
-  const categoriesOne = categories.slice(0, 4);
-  const categoriesTwo = categories.slice(4, 8);
-  const productsApple = products.slice(0, 10);
-  const productsSamsung = products.slice(10, 12);
-  console.log(productsSamsung);
+const Home = ({ data, navigation }) => {
+  // console.log(data[0]);
   const global = require("@/utils/styles/global.js");
   const [settings, setSettings] = useState(false);
   const [location, setLocation] = useState(null);
@@ -112,72 +107,54 @@ const Home = ({ categories, brands, products, navigation }) => {
 
   if (settings) Linking.openSettings();
   return (
-    <ScrollView showsVerticalScrollIndicator={false}
-    nestedScrollEnabled style={[styles.container, global.bgWhite]}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      nestedScrollEnabled
+      style={[styles.container, global.bgWhite]}
+    >
       <View style={styles.categoriesOne}>
-        {categoriesOne.map((category, index) => (
+        {data.map((item, index) => (
           <CustomCategory
-            title={category.title}
-            icon={category.icon}
+            title={item.title}
+            icon={item.icon}
             key={index}
             onPress={() =>
-              navigation.navigate(category.title, {
-                data: productsHome,
+              navigation.navigate(item.title, {
+                data: item,
               })
             }
           />
         ))}
       </View>
-
-      <View style={styles.categoriesTwo}>
-        {categoriesTwo.map((category, index) => (
-          <CustomCategory
-            title={category.title}
-            icon={category.icon}
-            key={index}
-            onPress={() =>
-              navigation.navigate(category.title, {
-                data: productsHome,
-              })
-            }
-          />
-        ))}
-      </View>
-
       <View style={styles.trendingPopular}>
         <View style={styles.textTrendingPopular}>
           <Text style={[styles.textMain, global.black]}>Trending Phones</Text>
           <Text style={[styles.textAll, global.black]}>All</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
-          <FlatList
-            data={productsHome}
-            renderItem={({ item }) => (
-              <CustomProductCard product={item} />
-            )}
-            nestedScrollEnabled
-            numColumns={2}
-            keyExtractor={(item, index) => index}
-          />
-          {/* <View style={styles.productsTopTrendingPopular}> */}
-          {/* <CustomProductCard product={productsHome[0]} /> */}
-          {/* <CustomProductCard product={productsHome[1]} /> */}
-          {/* </View> */}
-          {/* <View style={styles.productsBotTrendingPopular}> */}
-          {/* <CustomProductCard product={productsHome[2]} /> */}
-          {/* <CustomProductCard product={productsHome[3]} /> */}
-          {/* </View> */}
+          <View style={styles.productsTopTrendingPopular}>
+            <CustomProductCard product={productsHome[0]} />
+            <CustomProductCard product={productsHome[1]} />
+          </View>
+          <View style={styles.productsBotTrendingPopular}>
+            <CustomProductCard product={productsHome[2]} />
+            <CustomProductCard product={productsHome[3]} />
+          </View>
         </View>
       </View>
       <ScrollView horizontal style={{ flex: 1 }}>
         <View style={styles.categoriesBrand}>
-          {brands.map((brand, index) => (
-            <View style={styles.bubbleBrand} key={index}>
-              <CustomCategory
-                title={brand.title}
-                icon={brand.icon}
-                onPress={() => navigation.navigate(brand.title)}
-              />
+          {data.map((item, index) => (
+            <View style={styles.sectionBrand} key={index}>
+              {item.brands.map((brand, index) => (
+                <View style={styles.bubbleBrand} key={index}>
+                  <CustomCategory
+                    title={brand.title}
+                    icon={brand.icon}
+                    onPress={() => navigation.navigate(brand.title)}
+                  />
+                </View>
+              ))}
             </View>
           ))}
         </View>
