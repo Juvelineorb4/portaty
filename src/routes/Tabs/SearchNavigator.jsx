@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { useRoute } from "@react-navigation/native";
 // screens
-import NotFound from '@/screens/Search/NotFound'
 import Recent from '@/screens/Search/Recent'
 import Result from '@/screens/Search/Result'
 
@@ -24,16 +23,6 @@ const SearchNavigator = () => {
             <Stack.Screen
                 name="Search_Recent"
                 component={Recent}
-                options={{ header: (props) => <Header {...props} /> }}
-            />
-            <Stack.Screen
-                name="Search_NotFound"
-                component={NotFound}
-                options={{ header: (props) => <Header {...props} /> }}
-            />
-            <Stack.Screen
-                name="Search_Result"
-                component={Result}
                 options={{ header: (props) => <Header {...props} /> }}
             />
         </Stack.Navigator>

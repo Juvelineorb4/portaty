@@ -15,12 +15,13 @@ const SellNavigator = () => {
   }, []);
   return (
     <Stack.Navigator
+      id="Sell_Stack"
       initialRouteName={`Sell`}
     >
       <Stack.Screen
         name="Sell"
         component={Sell}
-        options={{ header: (props) => <Header {...props} /> }}
+      // options={{ header: (props) => <Header {...props} /> }}
       />
     </Stack.Navigator>
   );
