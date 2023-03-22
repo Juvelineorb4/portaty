@@ -17,11 +17,13 @@ const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
 const Tabs = () => {
-  
+
+
   return (
     <>
       <StatusBar barStyle="light-content" />
       <Tab.Navigator
+        id="Tabs_1"
         tabBar={(props) => <AnimatedTabBar {...props} />}
         initialRouteName={`Home_Tab`}
       >
@@ -166,7 +168,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
         style={[animatedComponentCircleStyles]}
       />
       <Animated.View
-        style={[styles.component, animatedIconContainerStyles, {backgroundColor: active ? '#ffa424' : 'transparent' }]}
+        style={[styles.component, animatedIconContainerStyles, { backgroundColor: active ? '#ffa424' : 'transparent' }]}
       >
         {active ? (
           <Image
@@ -206,7 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffa424",
   },
   activeBackground: {
-    
+
     position: "absolute",
     zIndex: -100
   },
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
     // left: 0,
     // right: 0,
     // bottom: 0,
-    
+
   },
 });
 export default Tabs;

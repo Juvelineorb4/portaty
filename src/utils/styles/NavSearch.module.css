@@ -1,0 +1,30 @@
+.container {
+    flex-direction: row;
+}
+
+.contentArrow {
+    margin-right: 10px;
+    justify-content: center;
+}
+
+.contentSearch {
+    flex: 1;
+    background-color: #494949;
+    border-radius: 8px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0px 0px 10px;
+}
+
+.contentInput {
+    flex: 1
+}
+
+.inputSearch {
+    padding: 8px 10px;
+}
+
+.contentBack {
+    justify-content: center;
+    align-items: center;
+}
