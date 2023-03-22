@@ -70,3 +70,7 @@
 .inputSearch {
     padding: 8px 10px;
 }
+.contentBack {
+    justify-content: center;
+    align-items: center;
+  }

@@ -6,7 +6,7 @@ import { useRoute } from "@react-navigation/native";
 
 // Header 
 import Header from './HeaderTabs/index'
-
+import Result from '@/screens/Search/Result'
 
 
 const Stack = createNativeStackNavigator();
@@ -18,7 +18,7 @@ const ProfileNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName={`Profile`}
-    // screenOptions={{ header: (props) => <Header {...props} /> }}
+      id="Profile_Stack"
     >
       <Stack.Screen
         name="Profile"
@@ -28,6 +28,14 @@ const ProfileNavigator = () => {
       <Stack.Screen
         name="Permissions"
         component={Permissions}
+      />
+      <Stack.Screen
+        name="Result_Profile"
+        component={Result}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <Header {...props} />
+        }}
       />
     </Stack.Navigator>
   );
