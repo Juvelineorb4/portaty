@@ -32,6 +32,7 @@ const CustomDrawerContent = ({ navigation }) => {
 };
 
 const DrawerNavigator = () => {
+
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -39,6 +40,7 @@ const DrawerNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <Drawer.Screen
+       
         name="Tabs"
         component={TabsNavigator}
         options={{

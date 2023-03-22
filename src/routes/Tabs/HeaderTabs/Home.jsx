@@ -34,16 +34,32 @@ const Home = ({ version = 1, onSearchHandler }) => {
                         />
                     </View>
                 </View>}
-            <Search onSearchHandler={onSearchHandler} />
+            <Search version={version} onSearchHandler={onSearchHandler} />
         </>
     )
 }
 
 
-const Search = ({ onSearchHandler }) => {
+const Search = ({ version, onSearchHandler }) => {
     const global = require("@/utils/styles/global.js");
+    const navigation = useNavigation();
     return (
         <View style={[styles.containerSearch]}>
+            {
+                version === 3 &&
+                <TouchableOpacity style={styles.contentBack} onPress={() => navigation.goBack()}>
+                    <Image
+                        style={{
+                            width: 20,
+                            height: 15,
+                            resizeMode: "cover",
+                            tintColor: "black",
+                            marginRight: 10
+                        }}
+                        source={require("@/utils/images/arrow_back.png")}
+                    />
+                </TouchableOpacity>
+            }
             <TouchableOpacity style={[styles.contentSearch, global.bgWhiteSmoke]} activeOpacity={1}
                 onPress={() => {
                     onSearchHandler();
@@ -60,16 +76,23 @@ const Search = ({ onSearchHandler }) => {
                     />
                 </View>
                 {/* icon */}
-                <View
-                    style={{
-                        height: "100%", paddingRight: 10,
-                        flexDirection: "row",
-                        alignItems: "center"
-                    }}
-                >
-                    <Ionicons name="options-outline" size={24} color="black" />
-                </View>
+
+                {
+                    version === 3 &&
+                    <TouchableOpacity
+                        style={{
+                            height: "100%", paddingRight: 10,
+                            flexDirection: "row",
+                            alignItems: "center"
+                        }}
+                        onPress={() => console.log("Sort & Filter")}
+                    >
+
+                        <Ionicons name="options-outline" size={24} color="black" />
+                    </TouchableOpacity>
+                }
             </TouchableOpacity>
+
         </View >
     )
 }
