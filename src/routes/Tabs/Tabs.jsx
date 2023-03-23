@@ -17,8 +17,6 @@ const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
 const Tabs = () => {
-
-
   return (
     <>
       <StatusBar barStyle="light-content" />
