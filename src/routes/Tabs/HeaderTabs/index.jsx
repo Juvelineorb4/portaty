@@ -34,7 +34,6 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
                 }]}>
                     {
                         headerSwitch(route, navigation, onSearchHandler)
-
                     }
                 </View>
             </View >
