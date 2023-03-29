@@ -4,7 +4,6 @@ import styles from "@/utils/styles/Home.module.css";
 import { useNavigation } from "@react-navigation/native";
 
 const CustomProductCard = ({ product = {} }) => {
-  // console.log(product);
   const navigation = useNavigation();
   const global = require("@/utils/styles/global.js");
   return (
