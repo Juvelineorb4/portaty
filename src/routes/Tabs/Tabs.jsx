@@ -42,8 +42,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/orders.png"),
-              inActiveIcon: require("@/utils/images/orders.png"),
+              activeIcon: require("@/utils/images/cart.gif"),
+              inActiveIcon: require("@/utils/images/cart.png"),
             },
             tabBarLabel: "Orders",
           }}
@@ -54,8 +54,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/cart.gif"),
-              inActiveIcon: require("@/utils/images/cart.png"),
+              activeIcon: require("@/utils/images/orders.png"),
+              inActiveIcon: require("@/utils/images/orders.png"),
             },
             tabBarLabel: "Sell",
           }}

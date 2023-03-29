@@ -28,6 +28,44 @@ const Profile = ({ navigation }) => {
         <Text style={[styles.user, global.black]}>Christopher Alvarez</Text>
       </View>
       <View style={styles.content}>
+        <Text style={[styles.titleSettings, global.black]}>My Shop</Text>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => navigation.navigate("Post_Product")}
+        >
+          <View style={[styles.line, global.bgWhiteSmoke]} />
+          <CustomSelect
+            title={"Post"}
+            subtitle={"Post a product for your shop"}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
+              },
+              container: styles.containerSelect,
+              iconLeft: [styles.iconLeft, global.mainBgColor],
+              iconRight: styles.iconRight,
+            }}
+            icon={{
+              left: {
+                name: "plus-box-outline",
+                size: 20,
+                color: "white",
+                type: "MTI",
+              },
+              right: {
+                name: "arrow-right",
+                size: 24,
+                color: "#404040",
+                type: "MTI",
+              },
+            }}
+            toogle={false}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.content}>
         <Text style={[styles.titleSettings, global.black]}>Settings</Text>
         {buttons.map((button, index) => (
           <View key={index}>
