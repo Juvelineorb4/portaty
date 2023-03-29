@@ -1,22 +1,30 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const CustomCategory = ({ title, icon, onPress }) => {
+const CustomCategory = ({
+  title,
+  icon,
+  onPress,
+  activeSelect = "",
+  itemId,
+}) => {
   const global = require("@/utils/styles/global.js");
   return (
     <TouchableOpacity
       style={{
         justifyContent: "center",
         alignItems: "center",
+        height: 100,
+        width: 80,
+        marginVertical: 10
       }}
       onPress={onPress}
       activeOpacity={1}
     >
       <View
         style={[
-          global.bgWhiteSmoke,
+          activeSelect === itemId ? global.mainBgColor : global.bgWhiteSmoke,
           {
-            //   flex: 1,
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 100,
@@ -35,7 +43,15 @@ const CustomCategory = ({ title, icon, onPress }) => {
         />
       </View>
 
-      <Text style={{ fontSize: 12, marginTop: 5, textTransform: "capitalize" }}>
+      <Text
+        style={{
+          flex: 1,
+          fontSize: 12,
+          marginTop: 5,
+          textTransform: "capitalize",
+          textAlign: "center",
+        }}
+      >
         {title}
       </Text>
     </TouchableOpacity>

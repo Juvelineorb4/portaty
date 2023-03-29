@@ -25,6 +25,7 @@ import styles from "@/utils/styles/Home.module.css";
 import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
 import { productsHome } from "@/utils/constants/products";
+import CustomFloatButton from "@/components/CustomFloatButton";
 
 const Home = ({ data, navigation }) => {
   // console.log(data[0]);

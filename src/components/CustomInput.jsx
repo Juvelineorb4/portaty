@@ -48,7 +48,7 @@ const CustomInput = ({
                 <Icon name={securityChange ? "eye-off-outline" : "eye-outline"} color={icon.color} size={icon.size} type={icon.type} />
               </TouchableOpacity>
               :
-              iconRight && <Icon name={iconRight.name} color={iconRight.color} size={iconRight.size} type={icon.type}
+              iconRight && <Icon name={iconRight.name} color={iconRight.color} size={iconRight.size} type={iconRight.type}
               />}
           </View>
           {error && <Text style={{ color: "red" }}>{error.message || "Error"}</Text>}
