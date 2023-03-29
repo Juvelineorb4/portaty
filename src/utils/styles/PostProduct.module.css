@@ -1,0 +1,39 @@
+.container {
+  flex: 1;
+}
+.form {
+  flex: 1;
+  padding: 20px;
+}
+.both {
+  flex: 1;
+  flex-direction: row;
+}
+.images,
+.buttonImage {
+  margin-top: 15px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.textButton {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #404040;
+}
+.publish {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffa424;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+.textPublish {
+  text-align: center;
+  font-weight: 700;
+  color: white;
+  font-size: 14px;
+}

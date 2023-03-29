@@ -37,7 +37,6 @@ const HomeNavigator = ({ route, navigation }) => {
       "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getAll",
       "GET"
     );
-    // console.log(navigation.getParent("Home2"))
   }, []);
   return (
     <Stack.Navigator id="Home_Stack" initialRouteName={`Home`}>
