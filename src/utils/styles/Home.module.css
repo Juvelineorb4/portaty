@@ -15,10 +15,12 @@
 .textTrendingPopular, .textTrendingBrand {
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 .textMain,
 .textAll {
-  font-weight: 700;
+  font-family: 'semibold';
+  /* font-weight: 700; */
   font-size: 16px;
 }
 .productsTopTrendingPopular, .productsBotTrendingPopular {

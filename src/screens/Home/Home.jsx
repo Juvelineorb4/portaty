@@ -129,8 +129,8 @@ const Home = ({ data, navigation }) => {
       </View>
       <View style={styles.trendingPopular}>
         <View style={styles.textTrendingPopular}>
-          <Text style={[styles.textMain, global.black]}>Trending Phones</Text>
-          <Text style={[styles.textAll, global.black]}>All</Text>
+          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>Trending Phones</Text>
+          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
           <View style={styles.productsTopTrendingPopular}>
@@ -162,10 +162,10 @@ const Home = ({ data, navigation }) => {
       </ScrollView>
       <View style={styles.trendingBrand}>
         <View style={styles.textTrendingBrand}>
-          <Text style={[styles.textMain, global.black]}>
+          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>
             Trending Apple Products
           </Text>
-          <Text style={[styles.textAll, global.black]}>All</Text>
+          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
           <View style={styles.productsTopTrendingPopular}>

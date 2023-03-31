@@ -18,16 +18,19 @@
   margin-bottom: 15px;
 }
 .labelInput {
-  font-style: normal;
-  font-weight: 500;
+  /* font-style: normal; */
+  /* font-weight: 500; */
+  font-family: 'regular';
   font-size: 14px;
   margin-bottom: 5px;
 }
 .textInput {
+  font-family: 'regular';
   width: 90%;
   margin-left: 15px;
 }
 .textInputPassword {
+  font-family: 'regular';
   width: 80%;
   margin-left: 15px;
 }
@@ -42,8 +45,9 @@
   border-radius: 16px;
 }
 .textContinue {
+  font-family: 'medium';
   text-align: center;
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 14px;
 }
 
@@ -56,7 +60,8 @@
 }
 
 .title {
-  font-weight: 100;
+  /* font-weight: 100; */
+  font-family: 'thin';
   font-size: 30px;
   /* color: #1f1f1f; */
   text-align: center;
@@ -68,7 +73,8 @@
 .subtitle,
 .timer,
 .code {
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-family: 'regular';
   font-size: 16px;
   text-align: center;
   color: #404040;
@@ -81,12 +87,14 @@
   margin: 0px 0px 20px;
 }
 .textRules {
-  font-weight: 400;
+  /* font-weight: 400; */
+  font-family: 'regular';
   font-size: 14px;
   color: #9d9d9d;
 }
 .emailText,
 .timer {
+  font-family: 'medium';
   color: #1f1f1f;
-  font-weight: 700;
+  /* font-weight: 700; */
 }

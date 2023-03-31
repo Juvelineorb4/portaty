@@ -17,8 +17,9 @@
   justify-content: center;
 }
 .textButton {
-  font-style: normal;
-  font-weight: 700;
+  /* font-style: normal; */
+  font-family: 'semibold';
+  /* font-weight: 700; */
   font-size: 14px;
   color: #404040;
 }
@@ -32,8 +33,9 @@
 }
 
 .textPublish {
+  font-family: 'semibold';
   text-align: center;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: white;
   font-size: 14px;
 }
