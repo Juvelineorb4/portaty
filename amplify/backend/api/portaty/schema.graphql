@@ -1,0 +1,35 @@
+type ADCategory @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  image: String!
+  products: [ADProduct] @hasMany(indexName: "byCategory", fields: ["id"])
+}
+
+type ADBrand @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  image: String!
+  products: [ADProduct] @hasMany(indexName: "byBrand", fields: ["id"])
+}
+
+type ADProduct @model @auth(rules: [
+   { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
+  id: ID!
+  name: String!
+  images: [String!]!
+  suggestedPrice: Float!
+  categoryID: ID! @index(name: "byCategory", sortKeyFields: ["name"])
+  brandID: ID! @index(name: "byBrand", sortKeyFields: ["name"])
+} 
+
+type Todo @model @auth(rules: [
+  { allow: owner },
+  { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
+  id: ID!
+  name: String
+  description: String
+}

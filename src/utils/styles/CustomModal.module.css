@@ -1,0 +1,80 @@
+.modalContainer {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(52, 52, 52, 0.5);
+}
+.modalTop {
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modalText {
+  /* font-weight: 600; */
+  font-family: 'regular';
+  font-size: 16px;
+  margin-left: 5px;
+}
+.modalContent {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  height: 400px;
+}
+.modalTextSelect {
+  font-family: 'regular';
+  /* font-weight: 500; */
+  font-size: 16px;
+  color: #8c9199;
+  text-transform: capitalize;
+}
+.inputContainer {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.labelInput {
+  /* font-style: normal; */
+  /* font-weight: 700; */
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+}
+.textInput {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainerBoth {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 90%;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+
+.labelInputBoth {
+  /* font-style: normal; */
+  /* font-weight: 700; */
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+.textInputBoth {
+  flex: 1;
+  margin-left: 10px;
+  width: 100%;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}

@@ -71,9 +71,12 @@ const CustomProductCard = ({ product = {} }) => {
         style={[
           {
             fontSize: 16,
-            fontWeight: "bold",
+            // fontWeight: "bold",
             paddingTop: 5,
             textTransform: "capitalize",
+            fontFamily: 'medium',
+            letterSpacing: -0.5,
+            marginBottom: 1
           },
         ]}
       >
@@ -85,6 +88,7 @@ const CustomProductCard = ({ product = {} }) => {
           justifyContent: "space-between",
           alignItems: "center",
           width: 110,
+          marginBottom: 1
         }}
       >
         <View
@@ -105,7 +109,7 @@ const CustomProductCard = ({ product = {} }) => {
           <Text
             style={[
               global.black,
-              { fontSize: 12, fontStyle: "italic", marginLeft: 3 },
+              { fontSize: 12, marginLeft: 3, fontFamily: 'thinItalic', marginRight: 5 },
             ]}
           >
             {product.avgRating || product.reviews}
@@ -115,16 +119,16 @@ const CustomProductCard = ({ product = {} }) => {
         <View
           style={[
             global.bgWhiteSmoke,
-            { paddingHorizontal: 5, borderRadius: 7 },
+            { paddingHorizontal: 5, borderRadius: 7, marginLeft: 5 },
           ]}
         >
-          <Text style={[global.black, { fontSize: 12, fontStyle: "italic" }]}>
+          <Text style={[global.black, { fontSize: 12, fontFamily: 'thinItalic' }]}>
             {product.solds} solds
           </Text>
         </View>
       </View>
 
-      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+      <Text style={{ fontSize: 16, fontFamily: 'semibold' }}>
         ${product.maxPrice || product.price}
       </Text>
     </TouchableOpacity>

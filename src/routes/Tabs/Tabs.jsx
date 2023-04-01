@@ -12,7 +12,6 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 
-
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
@@ -42,8 +41,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/orders.png"),
-              inActiveIcon: require("@/utils/images/orders.png"),
+              activeIcon: require("@/utils/images/cart.gif"),
+              inActiveIcon: require("@/utils/images/cart.png"),
             },
             tabBarLabel: "Orders",
           }}
@@ -54,8 +53,8 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/cart.gif"),
-              inActiveIcon: require("@/utils/images/cart.png"),
+              activeIcon: require("@/utils/images/orders.png"),
+              inActiveIcon: require("@/utils/images/orders.png"),
             },
             tabBarLabel: "Sell",
           }}
@@ -103,9 +102,8 @@ const AnimatedTabBar = ({
     };
   });
 
-
   return (
-    <View style={[styles.tabBar, { paddingBottom: 10 }]}>
+    <View style={[styles.tabBar, { paddingBottom: 5 }]}>
       <AnimatedSvg
         width={110}
         height={60}
@@ -158,36 +156,71 @@ const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
   });
 
   return (
-    <Pressable onPress={() => {
-      onPress()
-      // console.log(route)
-    }} onLayout={onLayout}>
-      <Animated.View
-        style={[animatedComponentCircleStyles]}
-      />
-      <Animated.View
-        style={[styles.component, animatedIconContainerStyles, { backgroundColor: active ? '#ffa424' : 'transparent' }]}
-      >
-        {active ? (
-          <Image
-            style={{
-              width: 33,
-              height: 33,
-              resizeMode: "contain",
-            }}
-            source={options.tabBarIcon.activeIcon}
-          />
-        ) : (
-          <Image
-            style={{
-              width: 33,
-              height: 33,
-              resizeMode: "contain",
-            }}
-            source={options.tabBarIcon.inActiveIcon}
-          />
-        )}
-      </Animated.View>
+    <Pressable
+      onPress={() => {
+        onPress();
+        // console.log(route)
+      }}
+      onLayout={onLayout}
+    >
+      <Animated.View style={[animatedComponentCircleStyles]} />
+      {active ? (
+        <Animated.View
+          style={[
+            styles.component,
+            animatedIconContainerStyles,
+            { backgroundColor: "#ffa424" },
+          ]}
+        >
+          {active ? (
+            <Image
+              style={{
+                width: 33,
+                height: 33,
+                resizeMode: "contain",
+              }}
+              source={options.tabBarIcon.activeIcon}
+            />
+          ) : (
+            <Image
+              style={{
+                width: 27,
+                height: 27,
+                resizeMode: "contain",
+              }}
+              source={options.tabBarIcon.inActiveIcon}
+            />
+          )}
+        </Animated.View>
+      ) : (
+        <Animated.View
+          style={[
+            styles.componentinActive,
+            animatedIconContainerStyles,
+            { backgroundColor: "#ffa424" },
+          ]}
+        >
+          {active ? (
+            <Image
+              style={{
+                width: 33,
+                height: 33,
+                resizeMode: "contain",
+              }}
+              source={options.tabBarIcon.activeIcon}
+            />
+          ) : (
+            <Image
+              style={{
+                width: 27,
+                height: 27,
+                resizeMode: "contain",
+              }}
+              source={options.tabBarIcon.inActiveIcon}
+            />
+          )}
+        </Animated.View>
+      )}
     </Pressable>
   );
 };
@@ -206,9 +239,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffa424",
   },
   activeBackground: {
-
     position: "absolute",
-    zIndex: -100
+    zIndex: -100,
   },
   tabBarContainer: {
     flexDirection: "row",
@@ -216,18 +248,28 @@ const styles = StyleSheet.create({
   },
   component: {
     position: "relative",
-    zIndex: 1,
+    zIndex: 2,
     height: 60,
     width: 60,
     borderRadius: 30,
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginTop: -5,
   },
+  componentinActive: {
+    position: "relative",
+    zIndex: 2,
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 0,
+  },
   componentCircle: {
-    // flex: 1,
-    // borderRadius: 30,
-    // backgroundColor: "#ffa424",
+    flex: 1,
+    borderRadius: 30,
+    backgroundColor: "#ffa424",
   },
   iconContainer: {
     // position: "absolute",
@@ -236,7 +278,6 @@ const styles = StyleSheet.create({
     // left: 0,
     // right: 0,
     // bottom: 0,
-
   },
 });
 export default Tabs;

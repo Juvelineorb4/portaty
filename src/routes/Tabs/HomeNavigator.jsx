@@ -12,6 +12,9 @@ import Header from './HeaderTabs/index'
 // Hooks
 import useHeaderScroll from '@/hooks/useHeaderScroll'
 
+// graphql
+import { API, graphqlOperation, Auth } from 'aws-amplify'
+import * as queries from '@/graphql/queries'
 
 
 const Stack = createNativeStackNavigator();
@@ -32,12 +35,12 @@ const HomeNavigator = ({ route, navigation }) => {
       });
   }
 
+
   useEffect(() => {
     getData(
       "https://2f2lpcsj7h.execute-api.us-east-1.amazonaws.com/dev/getAll",
       "GET"
     );
-    // console.log(navigation.getParent("Home2"))
   }, []);
   return (
     <Stack.Navigator id="Home_Stack" initialRouteName={`Home`}>
