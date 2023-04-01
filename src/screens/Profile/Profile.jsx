@@ -5,9 +5,21 @@ import CustomButton from "@/components/CustomButton";
 import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
 
+// amplify
+import { Auth } from 'aws-amplify'
+
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { buttons } = settings;
+  const onHandleLogout = async () => {
+    await Auth.signOut();
+
+    setTimeout(() => {
+      navigation.navigate("Login_Welcome")
+    }, 500);
+
+
+  }
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -72,7 +84,7 @@ const Profile = ({ navigation }) => {
             {button.route ? (
               <TouchableOpacity
                 activeOpacity={1}
-                onPress={() => navigation.navigate(button.route)}
+                onPress={onHandleLogout}
               >
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
@@ -93,7 +105,7 @@ const Profile = ({ navigation }) => {
                 />
               </TouchableOpacity>
             ) : (
-              <View>
+              <TouchableOpacity onPress={() => Auth.signOut()}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -111,7 +123,7 @@ const Profile = ({ navigation }) => {
                   icon={button.icon}
                   toogle={button.toogle}
                 />
-              </View>
+              </TouchableOpacity>
             )}
           </View>
         ))}
