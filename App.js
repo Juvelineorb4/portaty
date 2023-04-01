@@ -5,6 +5,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
 
+// amplify 
+import { Amplify } from 'aws-amplify';
+import awsconfig from '@/aws-exports';
+Amplify.configure(awsconfig);
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     thin: require("@/utils/fonts/Montserrat-Thin.ttf"),

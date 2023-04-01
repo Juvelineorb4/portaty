@@ -12,6 +12,9 @@ import Header from './HeaderTabs/index'
 // Hooks
 import useHeaderScroll from '@/hooks/useHeaderScroll'
 
+// graphql
+import { API, graphqlOperation, Auth } from 'aws-amplify'
+import * as queries from '@/graphql/queries'
 
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +34,7 @@ const HomeNavigator = ({ route, navigation }) => {
         console.error(JSON.stringify(error));
       });
   }
+
 
   useEffect(() => {
     getData(
