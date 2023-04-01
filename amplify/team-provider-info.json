@@ -15,6 +15,12 @@
       "auth": {
         "portaty": {},
         "userPoolGroups": {}
+      },
+      "api": {
+        "portaty": {}
+      },
+      "storage": {
+        "s3portaty": {}
       }
     }
   }

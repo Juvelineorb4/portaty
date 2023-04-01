@@ -7,12 +7,14 @@
   margin-bottom: 10px;
 }
 .title {
-  font-weight: 100;
+  font-family: 'light';
+  /* font-weight: 100; */
   font-size: 24px;
   margin-bottom: 10px;
 }
 .subtitle {
-  font-weight: 400;
+  font-family: 'extralight';
+  /* font-weight: 400; */
   font-size: 14px;
 }
 .containerSelect {
@@ -25,11 +27,13 @@
   width: 75%;
 }
 .textTitleSelect {
-  font-weight: 100;
+  font-family: 'light';
+  /* font-weight: 100; */
   font-size: 18px;
 }
 .textSubtitleSelect {
-  font-weight: 400;
+  font-family: 'extralight';
+  /* font-weight: 400; */
   font-size: 12px;
 }
 .line {

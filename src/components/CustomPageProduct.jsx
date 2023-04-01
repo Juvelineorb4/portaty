@@ -153,7 +153,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                   buttonStyles={[styles.buy, global.mainBgColor]}
                 />
                 <View style={styles.seller}>
-                  <Text>Christopher Alvarez</Text>
+                  <Text style={{fontFamily: 'regular'}}>Christopher Alvarez</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -193,7 +193,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                   buttonStyles={[styles.buy, global.mainBgColor]}
                 />
                 <View style={styles.seller}>
-                  <Text>Luis Aranguren</Text>
+                  <Text style={{fontFamily: 'regular'}}>Luis Aranguren</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -233,7 +233,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                   buttonStyles={[styles.buy, global.mainBgColor]}
                 />
                 <View style={styles.seller}>
-                  <Text>Manolito</Text>
+                  <Text style={{fontFamily: 'regular'}}>Manolito</Text>
                 </View>
               </View>
             </TouchableOpacity>

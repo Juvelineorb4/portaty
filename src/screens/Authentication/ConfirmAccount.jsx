@@ -7,11 +7,16 @@ import CustomText from "@/components/CustomText";
 import EnterCode from "@/components/EnterCode";
 import CustomButton from "@/components/CustomButton";
 
+// amplify
+import { Auth } from 'aws-amplify'
+
 const ConfirmAccount = () => {
   const global = require("@/utils/styles/global.js");
   const navigation = useNavigation();
+  const route = useRoute();
   const { control, handleSubmit } = useForm({
     defaultValues: {
+      email: route.params?.email,
       code: ["", "", "", "", "", ""],
     },
   });
@@ -32,6 +37,23 @@ const ConfirmAccount = () => {
   //     }
   //   }
 
+  const onHandleConfirm = async (data) => {
+    const { code, email } = data
+    let newCode = ""
+    code.forEach(item => {
+      newCode = newCode + item
+    });
+    try {
+      if (!code.lenght === 6) return Alert.alert("Error en ingresar codigo")
+      await Auth.confirmSignUp(email, newCode, {
+        forceAliasCreation: false,
+        clientMetadata: {}
+      })
+      navigation.navigate("Login")
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <View style={[styles.content, global.bgWhite]}>
       <CustomText
@@ -63,7 +85,7 @@ const ConfirmAccount = () => {
       />
       <CustomButton
         text={`Confirm Account`}
-        // handlePress={handleSubmit(omHandleConfirm)}
+        handlePress={handleSubmit(onHandleConfirm)}
         textStyles={[styles.textContinue, global.white]}
         buttonStyles={[styles.continue, global.mainBgColor]}
       />
