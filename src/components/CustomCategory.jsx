@@ -50,6 +50,7 @@ const CustomCategory = ({
           marginTop: 5,
           textTransform: "capitalize",
           textAlign: "center",
+          fontFamily: 'medium'
         }}
       >
         {title}
