@@ -37,6 +37,16 @@ export const listADCategories = /* GraphQL */ `
         name
         image
         products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -82,6 +92,16 @@ export const listADBrands = /* GraphQL */ `
         name
         image
         products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
