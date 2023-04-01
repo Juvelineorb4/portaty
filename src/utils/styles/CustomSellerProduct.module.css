@@ -1,0 +1,127 @@
+.container {
+  flex: 1;
+}
+.containerImages {
+  flex: 1;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  padding: 10px 20px;
+}
+.containerTitle {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-family: 'medium';
+  font-size: 18px;
+  text-transform: capitalize;
+  /* font-weight: 700; */
+}
+.containerInfo,
+.containerReviews {
+  flex-direction: row;
+  align-items: center;
+}
+.containerInfo {
+  margin-top: 5px;
+}
+.containerReviews {
+  margin-left: 7px;
+}
+.textReviews {
+  margin-left: 5px;
+  font-family: 'thinItalic';
+  /* font-style: italic; */
+}
+.line {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0px 10px;
+}
+.descriptionText {
+  font-size: 13px;
+  font-family: 'thinItalic';
+  margin: 7px 0px;
+  /* font-style: italic; */
+  /* font-weight: 100; */
+}
+.feature {
+  margin: 10px 5px;
+  flex-direction: row;
+  align-items: center;
+}
+.featureText {
+  margin-left: 5px;
+}
+
+.topInfo,
+.mediumInfo,
+.botInfo {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.price {
+  text-align: right;
+  font-family: 'medium';
+  font-size: 50px;
+  /* font-weight: 700; */
+}
+.textBuy {
+  font-family: 'medium';
+  font-size: 18px;
+  /* font-weight: 700; */
+}
+.buy {
+  border-radius: 16px;
+  padding: 10px 20px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+.reportedContainer {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.reported {
+  font-family: 'regular';
+  margin-right: 5px;
+  font-size: 16px;
+}
+.containerOptions {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.stars {
+  flex-direction: row;
+}
+.containerSeller {
+  flex-direction: row;
+  margin-top: 8px;
+  align-items: center;
+}
+.textSeller {
+  margin-left: 5px;
+  font-family: 'medium';
+  font-size: 17px;
+  /* font-weight: 700; */
+}
+.productsList {
+  flex: 1;
+}
+.product {
+    margin-right: 20px;
+}
+.textOthersProducts {
+  text-align: center;
+  font-family: 'medium';
+  font-size: 16px;
+  /* font-weight: 700; */
+  margin: 15px 0px 20px;
+}

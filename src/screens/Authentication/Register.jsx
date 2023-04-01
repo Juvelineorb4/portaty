@@ -7,16 +7,40 @@ import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
+// amplify 
+import { Auth } from 'aws-amplify'
+
+const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
 
 const Register = () => {
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, watch } = useForm();
+  const pwd = watch("password")
   const navigation = useNavigation();
   const [active, setActive] = useState(true);
 
   const onHandleActive = () => {
     setActive(!active);
   };
+
+  const onHandleRegister = async (data) => {
+    const { email, name, password } = data
+    try {
+      const result = await Auth.signUp({
+        username: email.trim(),
+        password: password,
+        attributes: {
+          name: name
+        }
+      })
+      navigation.navigate("ConfirmAccount", {
+        email: email
+      })
+      console.log("REGISTER: ", result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <View style={[styles.content, global.bgWhite]}>
@@ -55,17 +79,9 @@ const Register = () => {
             size: 25,
             type: "MTI",
           }}
-          // rules={{
-          //   required: "Name is required",
-          //   minLength: {
-          //     value: 3,
-          //     message: "Min 3 characters"
-          //   },
-          //   maxLength: {
-          //     value: 24,
-          //     message: "Max 24 characters"
-          //   }
-          // }}
+          rules={{
+            required: "Name is required",
+          }}
         />
         <CustomInput
           control={control}
@@ -83,10 +99,10 @@ const Register = () => {
             size: 25,
             type: "MTI",
           }}
-          // rules={{
-          //   required: "Email is required",
-          //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" }
-          // }}
+          rules={{
+            required: "Email is required",
+            pattern: { value: EMAIL_REGEX, message: "Invalid Email" }
+          }}
         />
         <CustomInput
           control={control}
@@ -105,13 +121,13 @@ const Register = () => {
             type: "MTI",
           }}
           security={true}
-          // rules={{
-          //   required: "Password is required",
-          //   minLength: {
-          //     value: 8,
-          //     message: "Min 8 characters"
-          //   },
-          // }}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Min 8 characters"
+            },
+          }}
         />
         <CustomInput
           control={control}
@@ -130,11 +146,11 @@ const Register = () => {
             type: "MTI",
           }}
           security={true}
-          // rules={{
-          //   required: "Password Repeat is required",
-          //   validate: value =>
-          //     value == pwd || 'Password do not match'
-          // }}
+          rules={{
+            required: "Password Repeat is required",
+            validate: value =>
+              value == pwd || 'Password do not match'
+          }}
         />
         <View style={styles.controls}>
           <View style={styles.check}>
@@ -158,7 +174,7 @@ const Register = () => {
 
           <CustomButton
             text={`Continue`}
-            handlePress={handleSubmit(() => navigation.navigate('ConfirmAccount'))}
+            handlePress={handleSubmit(onHandleRegister)}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
           />

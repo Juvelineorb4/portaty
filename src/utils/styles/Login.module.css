@@ -12,9 +12,10 @@
   justify-content: flex-end;
 }
 .title {
+  font-family: 'semibold';
   margin: 5px;
   text-align: center;
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 35px;
   color: #1f1f1f;
 }
@@ -30,13 +31,15 @@
 
 .labelInput {
   font-style: normal;
-  font-weight: 500;
+  font-family: 'regular';
+  /* font-weight: 500; */
   font-size: 14px;
   color: #404040;
   margin-bottom: 5px;
 }
 
 .textInput {
+  font-family: 'regular';
   flex: 1;
   margin-left: 10px;
 }
@@ -52,7 +55,8 @@
 
 .textLogin {
   text-align: center;
-  font-weight: 700;
+  font-family: 'bold';
+  /* font-weight: 700; */
   color: white;
   font-size: 14px;
 }
@@ -76,25 +80,29 @@
   justify-content: center;
 }
 .dont {
-  font-weight: 100;
+  /* font-weight: 100; */
+  font-family: 'thin';
   color: #c8c8c8;
   font-size: 14px;
 }
 .signupBtn {
+  font-family: 'regular';
   margin-left: 5px;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: #1f1f1f;
   font-size: 14px;
 }
 .continue {
   text-align: center;
-  font-weight: 100;
+  /* font-weight: 100; */
+  font-family: 'thin';
   color: #656565;
   font-size: 14px;
 }
 .forgot {
   text-align: center;
-  font-weight: 700;
+  font-family: 'semibold';
+  /* font-weight: 700; */
   color: #1f1f1f;
   font-size: 14px;
 }
@@ -117,6 +125,7 @@
 .checkText {
   margin-left: 5px;
   text-align: center;
+  font-family: 'regular';
   color: #1f1f1f;
   font-size: 14px;
 }

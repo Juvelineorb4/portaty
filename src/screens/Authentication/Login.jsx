@@ -6,6 +6,11 @@ import { useForm } from "react-hook-form";
 import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
 
+// amplify
+import { Auth } from 'aws-amplify'
+
+const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+
 const Login = ({ navigation }) => {
   const { control, handleSubmit } = useForm();
   const [active, setActive] = useState(true);
@@ -13,6 +18,15 @@ const Login = ({ navigation }) => {
   const onHandleActive = () => {
     setActive(!active);
   };
+
+  const onHandleLogin = async (data) => {
+    const { email, password } = data
+    try {
+      await Auth.signIn(email, password)
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.welcome}>
@@ -43,9 +57,10 @@ const Login = ({ navigation }) => {
               color: "#404040",
               size: 25,
             }}
-          // rules={{
-          //   required: "Email is required",
-          // }}
+            rules={{
+              required: "Email is required",
+              pattern: { value: EMAIL_REGEX, message: "Invalid Email" }
+            }}
           />
           <CustomInput
             control={control}
@@ -65,19 +80,19 @@ const Login = ({ navigation }) => {
               size: 25,
             }}
             security={true}
-          // rules={{
-          //   required: "Password is required",
-          //   minLength: {
-          //     value: 8,
-          //     message: "Min 8 characters",
-          //   },
-          // }}
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Min 8 characters",
+              },
+            }}
           />
         </View>
         <View style={styles.panel}>
           <CustomButton
             text={`Log In`}
-            handlePress={handleSubmit(() => navigation.navigate("Home", { screen: "Home_Tab" }))}
+            handlePress={handleSubmit(onHandleLogin)}
             textStyles={[styles.textLogin, global.white]}
             buttonStyles={[styles.login, global.bgBlack]}
           />

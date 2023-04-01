@@ -4,7 +4,9 @@ import styles from "@/utils/styles/Header.module.css";
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
-
+// Recoil
+import { useRecoilState } from 'recoil'
+import { isFilterShow } from '@/atoms/index'
 const Home = ({ version = 1, onSearchHandler }) => {
     const navigation = useNavigation();
     return (
@@ -43,6 +45,7 @@ const Home = ({ version = 1, onSearchHandler }) => {
 const Search = ({ version, onSearchHandler }) => {
     const global = require("@/utils/styles/global.js");
     const navigation = useNavigation();
+    const [isFilter, setFilter] = useRecoilState(isFilterShow)
     return (
         <View style={[styles.containerSearch]}>
             {
@@ -81,18 +84,22 @@ const Search = ({ version, onSearchHandler }) => {
                     version === 3 &&
                     <TouchableOpacity
                         style={{
-                            height: "100%", paddingRight: 10,
+                            height: "100%",
+                            paddingHorizontal: 10,
                             flexDirection: "row",
-                            alignItems: "center"
+                            alignItems: "center",
                         }}
-                        onPress={() => console.log("Sort & Filter")}
+                        onPress={() => setFilter(!isFilter)}
                     >
+                        {
+                            isFilter ?
+                                <AntDesign name="downcircle" size={24} color="black" />
+                                : <Ionicons name="options-outline" size={24} color="black" />
+                        }
 
-                        <Ionicons name="options-outline" size={24} color="black" />
                     </TouchableOpacity>
                 }
             </TouchableOpacity>
-
         </View >
     )
 }

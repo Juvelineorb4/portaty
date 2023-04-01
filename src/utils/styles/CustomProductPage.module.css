@@ -18,7 +18,8 @@
 .title {
   font-size: 18px;
   text-transform: capitalize;
-  font-weight: 700;
+  font-family: 'medium';
+  /* font-weight: 700; */
 }
 .containerInfo,
 .containerReviews {
@@ -32,8 +33,9 @@
   margin-left: 7px;
 }
 .textReviews {
+  font-family: 'thinItalic';
   margin-left: 5px;
-  font-style: italic;
+  /* font-style: italic; */
 }
 .line {
   width: 100%;
@@ -42,9 +44,10 @@
 }
 .descriptionText {
   font-size: 13px;
+  font-family: 'thinItalic';
   margin: 7px 0px;
-  font-style: italic;
-  font-weight: 100;
+  /* font-style: italic; */
+  /* font-weight: 100; */
 }
 .feature {
   margin: 10px 5px;
@@ -67,12 +70,14 @@
   align-items: center;
 }
 .price {
+  font-family: 'medium';
   font-size: 48px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .textBuy {
-  font-weight: 600;
-  font-size: 20px;
+  font-family: 'bold';
+  /* font-weight: 600; */
+  font-size: 14px;
 }
 .buy {
   border-radius: 16px;
@@ -82,12 +87,14 @@
   align-items: center;
 }
 .name {
-  font-weight: 700;
+  /* font-weight: 700; */
+  font-family: 'medium';
   font-size: 16px;
   text-transform: capitalize;
   margin-left: 11%;
 }
 .priceRef {
-  font-weight: 700;
+  font-family: 'medium';
+  /* font-weight: 700; */
   font-size: 16px;
 }

@@ -1,4 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
+  "api": {
+    "portaty": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
+    }
+  },
   "auth": {
     "portaty": {
       "AppClientID": "string",
@@ -11,6 +17,12 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "userPoolGroups": {
       "adminGroupRole": "string"
+    }
+  },
+  "storage": {
+    "s3portaty": {
+      "BucketName": "string",
+      "Region": "string"
     }
   }
 }

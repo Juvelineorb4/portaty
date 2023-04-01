@@ -55,3 +55,14 @@ export const searchRecent = atom({
   ],
 });
 /* */
+
+// Sort and Filter
+export const isFilterShow = atom({
+  key: "isFilterShowValue",
+  default: false,
+});
+// user auth
+export const userAutenticated = atom({
+  key: "userAutenticatedValue",
+  default: undefined,
+});
