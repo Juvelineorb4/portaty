@@ -16,9 +16,10 @@
   align-items: center;
 }
 .title {
+  font-family: 'medium';
   font-size: 18px;
   text-transform: capitalize;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .containerInfo,
 .containerReviews {
@@ -33,7 +34,8 @@
 }
 .textReviews {
   margin-left: 5px;
-  font-style: italic;
+  font-family: 'thinItalic';
+  /* font-style: italic; */
 }
 .line {
   width: 100%;
@@ -42,9 +44,10 @@
 }
 .descriptionText {
   font-size: 13px;
+  font-family: 'thinItalic';
   margin: 7px 0px;
-  font-style: italic;
-  font-weight: 100;
+  /* font-style: italic; */
+  /* font-weight: 100; */
 }
 .feature {
   margin: 10px 5px;
@@ -64,12 +67,14 @@
 }
 .price {
   text-align: right;
+  font-family: 'medium';
   font-size: 50px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .textBuy {
+  font-family: 'medium';
   font-size: 18px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .buy {
   border-radius: 16px;
@@ -84,6 +89,7 @@
   justify-content: flex-end;
 }
 .reported {
+  font-family: 'regular';
   margin-right: 5px;
   font-size: 16px;
 }
@@ -102,8 +108,9 @@
 }
 .textSeller {
   margin-left: 5px;
+  font-family: 'medium';
   font-size: 17px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 .productsList {
   flex: 1;
@@ -113,7 +120,8 @@
 }
 .textOthersProducts {
   text-align: center;
+  font-family: 'medium';
   font-size: 16px;
-  font-weight: 700;
+  /* font-weight: 700; */
   margin: 15px 0px 20px;
 }
