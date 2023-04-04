@@ -19,6 +19,15 @@ export type AmplifyDependentResourcesAttributes = {
       "adminGroupRole": "string"
     }
   },
+  "function": {
+    "CretaePaymentIntent": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
   "storage": {
     "s3portaty": {
       "BucketName": "string",

@@ -33,3 +33,7 @@ type Todo @model @auth(rules: [
   name: String
   description: String
 }
+
+type Query {
+  echo(msg: String): String @function(name: "CretaePaymentIntent-${env}")
+}
