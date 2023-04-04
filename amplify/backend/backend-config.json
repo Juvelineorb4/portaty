@@ -79,6 +79,31 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
+  "function": {
+    "CretaePaymentIntent": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_CretaePaymentIntent_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CretaePaymentIntent"
+        }
+      ]
+    },
+    "AMPLIFY_function_CretaePaymentIntent_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CretaePaymentIntent"
+        }
+      ]
+    }
+  },
   "storage": {
     "s3portaty": {
       "dependsOn": [],
