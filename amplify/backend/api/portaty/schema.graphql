@@ -1,11 +1,17 @@
-type ADCategory @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
+type ADCategory @model @auth(rules: [
+ { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
   id: ID!
   name: String!
   image: String!
   products: [ADProduct] @hasMany(indexName: "byCategory", fields: ["id"])
 }
 
-type ADBrand @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
+type ADBrand @model @auth(rules: [
+ { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
   id: ID!
   name: String!
   image: String!
