@@ -1,30 +1,30 @@
 import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Sell from "@/screens/Sell/Sell";
 import { useRoute } from "@react-navigation/native";
 
 import Header from './HeaderTabs/index'
+import Cart from "@/screens/Cart/Cart";
 
 
 const Stack = createNativeStackNavigator();
 
-const SellNavigator = () => {
+const CartNavigator = () => {
   const router = useRoute()
   useEffect(() => {
     console.log(router.name);
   }, []);
   return (
     <Stack.Navigator
-      id="Sell_Stack"
-      initialRouteName={`Sell`}
+      id="Cart_Stack"
+      initialRouteName={`Cart`}
     >
       <Stack.Screen
-        name="Sell"
-        component={Sell}
+        name="Cart"
+        component={Cart}
       // options={{ header: (props) => <Header {...props} /> }}
       />
     </Stack.Navigator>
   );
 };
 
-export default SellNavigator;
+export default CartNavigator;

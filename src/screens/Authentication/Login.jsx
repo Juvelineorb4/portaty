@@ -7,9 +7,9 @@ import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
 
 // amplify
-import { Auth } from 'aws-amplify'
+import { Auth } from "aws-amplify";
 
-const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
   const { control, handleSubmit } = useForm();
@@ -20,13 +20,13 @@ const Login = ({ navigation }) => {
   };
 
   const onHandleLogin = async (data) => {
-    const { email, password } = data
+    const { email, password } = data;
     try {
-      await Auth.signIn(email, password)
+      await Auth.signIn(email, password);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.welcome}>
@@ -59,7 +59,7 @@ const Login = ({ navigation }) => {
             }}
             rules={{
               required: "Email is required",
-              pattern: { value: EMAIL_REGEX, message: "Invalid Email" }
+              pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
             }}
           />
           <CustomInput
@@ -156,10 +156,18 @@ const Login = ({ navigation }) => {
           </View>
           <View style={styles.signup}>
             <Text style={styles.dont}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Register_App")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Register_App")}
+            >
               <Text style={styles.signupBtn}>Sign Up</Text>
             </TouchableOpacity>
           </View>
+          <CustomButton
+            text={`Mas rapido`}
+            handlePress={() => navigation.navigate("Home")}
+            textStyles={[styles.textLogin, global.white]}
+            buttonStyles={[styles.login, global.bgBlack]}
+          />
         </View>
       </View>
     </ScrollView>

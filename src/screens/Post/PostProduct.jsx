@@ -1,23 +1,47 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import styles from "@/utils/styles/PostProduct.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "@/components/CustomInput";
 import { useForm } from "react-hook-form";
 import CustomButton from "@/components/CustomButton";
 import CustomModal from "@/components/CustomModal";
+// amplify
+import { API } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import { listBrands, listCategories, listProducts } from "@/atoms";
+import { useRecoilState } from "recoil";
 
-const PostProduct = ({ data }) => {
+const PostProduct = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit } = useForm();
-  const brands = [];
-  const products =[]
-  data.map((item) =>
-    item.brands.map((brand) => {
-      brands.push(brand)
-      brand.products.map((product) => products.push(product))
-    })
-  );
-  console.log(products)
+  const [categoriesValue, setCategoriesValue] = useRecoilState(listCategories);
+  const [brandsValue, setBrandsValue] = useRecoilState(listBrands);
+  const [productsValue, setProductsValue] = useRecoilState(listProducts);
+  const fetchData = async () => {
+    try {
+      const categories = await API.graphql({
+        query: queries.listADCategories,
+        authMode: "AWS_IAM",
+      });
+      const brands = await API.graphql({
+        query: queries.listADBrands,
+        authMode: "AWS_IAM",
+      });
+      const products = await API.graphql({
+        query: queries.listADProducts,
+        authMode: "AWS_IAM",
+      });
+      setCategoriesValue(categories.data.listADCategories.items);
+      setBrandsValue(brands.data.listADBrands.items);
+      setProductsValue(products.data.listADProducts.items);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
       <View style={styles.form}>
@@ -35,7 +59,8 @@ const PostProduct = ({ data }) => {
           modal={{
             text: "Select your type of product",
           }}
-          data={data}
+          data={categoriesValue}
+          dataValue={"categories"}
         />
         <View style={styles.both}>
           <View>
@@ -54,7 +79,8 @@ const PostProduct = ({ data }) => {
               modal={{
                 text: "Select your type of brand",
               }}
-              data={brands}
+              data={brandsValue}
+              dataValue={"brands"}
             />
           </View>
           <View>
@@ -73,7 +99,7 @@ const PostProduct = ({ data }) => {
               modal={{
                 text: "Select your type of model",
               }}
-              data={products}
+              data={productsValue}
             />
           </View>
         </View>
@@ -95,39 +121,47 @@ const PostProduct = ({ data }) => {
         />
         <View style={styles.both}>
           <View>
-            <CustomModal
+            <CustomInput
               control={control}
               name={`location`}
-              placeholder={"Search Location"}
-              both={true}
-              text={`Location`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
+              placeholder={"Enter Location"}
+              styled={{
+                text: styles.textInput,
+                label: [styles.labelInput, global.topGray],
+                error: styles.errorInput,
+                input: [styles.inputContainer, global.bgWhiteSoft],
               }}
-              data={[]}
+              text={`Location`}
             />
           </View>
           <View>
-            <CustomModal
+            <CustomInput
               control={control}
               name={`price`}
               placeholder={"Enter Price"}
-              both={true}
-              text={`Price`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
+              styled={{
+                text: styles.textInput,
+                label: [styles.labelInput, global.topGray],
+                error: styles.errorInput,
+                input: [styles.inputContainer, global.bgWhiteSoft],
               }}
-              data={[]}
+              text={`Price`}
             />
           </View>
         </View>
-        <CustomModal
+        <CustomInput
+          control={control}
+          name={`description`}
+          placeholder={"Write description about your product"}
+          styled={{
+            text: styles.textInputD,
+            label: [styles.labelInputD, global.topGray],
+            error: styles.errorInputD,
+            input: [styles.inputContainerD, global.bgWhiteSoft],
+          }}
+          text={`Description`}
+        />
+        {/* <CustomModal
           control={control}
           name={`description`}
           placeholder={"Write description about your product"}
@@ -139,7 +173,7 @@ const PostProduct = ({ data }) => {
             type: "MTI",
           }}
           data={[]}
-        />
+        /> */}
         <View style={styles.imagesPicker}>
           <View style={styles.images}>
             <Image
@@ -185,6 +219,7 @@ const PostProduct = ({ data }) => {
         </View>
         <CustomButton
           text={`Publish your product`}
+          handlePress={() => navigation.navigate("Post_Complete")}
           textStyles={[styles.textPublish, global.white]}
           buttonStyles={[styles.publish, global.mainBgColor]}
         />

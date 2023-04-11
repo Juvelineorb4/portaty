@@ -4,13 +4,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeNavigator from "./HomeNavigator";
 import OrdersNavigator from "./OrdersNavigator";
 import ProfileNavigator from "./ProfileNavigator";
-import SellNavigator from "./SellNavigator";
 import Svg, { Path } from "react-native-svg";
 import Animated, {
   useAnimatedStyle,
   withTiming,
   useDerivedValue,
 } from "react-native-reanimated";
+import CartNavigator from "./CartNavigator";
 
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
@@ -37,28 +37,28 @@ const Tabs = () => {
           component={HomeNavigator}
         />
         <Tab.Screen
-          name="Orders_Tab"
+          name="Cart_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
               activeIcon: require("@/utils/images/cart.gif"),
               inActiveIcon: require("@/utils/images/cart.png"),
             },
-            tabBarLabel: "Orders",
+            tabBarLabel: "Cart",
           }}
-          component={OrdersNavigator}
+          component={CartNavigator}
         />
         <Tab.Screen
-          name="Sell_Tab"
+          name="Orders_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
               activeIcon: require("@/utils/images/orders.png"),
               inActiveIcon: require("@/utils/images/orders.png"),
             },
-            tabBarLabel: "Sell",
+            tabBarLabel: "Orders",
           }}
-          component={SellNavigator}
+          component={OrdersNavigator}
         />
         <Tab.Screen
           name="Profile_Tab"

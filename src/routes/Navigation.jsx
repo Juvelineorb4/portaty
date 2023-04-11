@@ -52,23 +52,7 @@ const Navigation = () => {
     checkUser()
     return unsubscribe;
   }, [])
-
-  useEffect(() => {
-    fetchAlgo()
-  }, [])
-
-  const fetchAlgo = async () => {
-    try {
-      const result = await API.graphql({
-        query: queries.listADBrands,
-        authMode: "AWS_IAM",
-      })
-      console.log(result.data.listADBrands)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={`Login`}>
