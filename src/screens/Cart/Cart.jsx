@@ -4,7 +4,7 @@ import CustomCardCart from "@/components/CustomCardCart";
 import styles from "@/utils/styles/Cart.module.css";
 import CustomButton from "@/components/CustomButton";
 
-const Cart = () => {
+const Cart = ({navigation}) => {
   const global = require("@/utils/styles/global.js");
   return (
     <View style={[styles.container, global.bgWhite]}>
@@ -16,8 +16,9 @@ const Cart = () => {
       </View>
       <CustomButton
         text={`Checkout`}
+        handlePress={() => navigation.navigate('Checkout')}
         textStyles={[styles.textCheckout, global.white]}
-        buttonStyles={[styles.checkout, global.bgBlack]}
+        buttonStyles={[styles.checkout, global.mainBgColor]}
       />
     </View>
   );

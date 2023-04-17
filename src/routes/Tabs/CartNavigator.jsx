@@ -4,6 +4,7 @@ import { useRoute } from "@react-navigation/native";
 
 import Header from './HeaderTabs/index'
 import Cart from "@/screens/Cart/Cart";
+import Checkout from "@/screens/Cart/Checkout";
 
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,11 @@ const CartNavigator = () => {
       <Stack.Screen
         name="Cart"
         component={Cart}
+      // options={{ header: (props) => <Header {...props} /> }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={Checkout}
       // options={{ header: (props) => <Header {...props} /> }}
       />
     </Stack.Navigator>
