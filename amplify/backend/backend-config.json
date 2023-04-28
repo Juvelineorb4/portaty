@@ -80,26 +80,47 @@
     }
   },
   "function": {
-    "CretaePaymentIntent": {
+    "Prueba": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "portaty11dae80f": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_CretaePaymentIntent_deploymentBucketName": {
+    "AMPLIFY_function_Prueba_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CretaePaymentIntent"
+          "resourceName": "Prueba"
         }
       ]
     },
-    "AMPLIFY_function_CretaePaymentIntent_s3Key": {
+    "AMPLIFY_function_Prueba_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CretaePaymentIntent"
+          "resourceName": "Prueba"
+        }
+      ]
+    },
+    "AMPLIFY_function_portaty11dae80f_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "portaty11dae80f"
+        }
+      ]
+    },
+    "AMPLIFY_function_portaty11dae80f_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "portaty11dae80f"
         }
       ]
     }

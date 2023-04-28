@@ -1,13 +1,64 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import styles from "@/utils/styles/CustomSellerProduct.module.css";
 import CustomButton from "./CustomButton";
 import { productsHome } from "@/utils/constants/products";
 import CustomProductCard from "./CustomProductCard";
 
+// amplify
+import { API, graphqlOperation, Auth } from 'aws-amplify'
+import * as queries from '@/graphql/queries'
+
+// hooks
+import usePayment from '@/hooks/usePayment'
+
+// stripe
+import { initPaymentSheet, presentPaymentSheet } from '@stripe/stripe-react-native'
+
 const CustomSellerProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
+  const [onCreatePaymentIntent] = usePayment();
+
   const { data } = route.params;
+
+
+  const onHandleBuy = async () => {
+
+    // 1. Create a payment intent
+    const response = await onCreatePaymentIntent({
+      amount: Math.floor(data.maxPrice * 100),
+    })
+    if (response.error) {
+      Alert.alert("Ocurrio un Error")
+      return
+    }
+    // 2. Initialize the Payment sheet
+    const initResponse = await initPaymentSheet({
+      merchantDisplayName: "portaty.com",
+      paymentIntentClientSecret: response
+    });
+    if (initResponse.error) {
+      Alert.alert("Error");
+      console.log("Init Error:", initResponse.error)
+      return;
+    }
+    // 3. Present the Payment Sheet from Stripe
+    const paymentResponse = await presentPaymentSheet();
+    if (paymentResponse.error) {
+      Alert.alert(
+        `Error code: ${paymentResponse.error.code}`,
+        paymentResponse.error.message
+      );
+      return
+    }
+    // 4. If payment ok -> create the order
+    onCreateOrder();
+  }
+
+  const onCreateOrder = async () => {
+    Alert.alert("El pedido ha sido enviando")
+  }
+
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>
@@ -112,9 +163,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
           <View style={styles.containerOptions}>
             <CustomButton
               text={`Buy`}
-              handlePress={() =>
-                navigation.navigate("SellerProduct", { data: data })
-              }
+              handlePress={onHandleBuy}
               textStyles={[styles.textBuy, global.white]}
               buttonStyles={[styles.buy, global.mainBgColor]}
             />

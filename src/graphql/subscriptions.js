@@ -22,6 +22,30 @@ export const onCreateADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -43,6 +67,30 @@ export const onUpdateADCategory = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -74,6 +122,30 @@ export const onDeleteADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -93,6 +165,30 @@ export const onCreateADBrand = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -122,6 +218,30 @@ export const onUpdateADBrand = /* GraphQL */ `
         }
         nextToken
       }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -141,6 +261,30 @@ export const onDeleteADBrand = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -208,9 +352,9 @@ export const onCreateTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -223,9 +367,9 @@ export const onUpdateTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -238,9 +382,807 @@ export const onDeleteTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateCustomerShop = /* GraphQL */ `
+  subscription OnCreateCustomerShop(
+    $filter: ModelSubscriptionCustomerShopFilterInput
+    $owner: String
+  ) {
+    onCreateCustomerShop(filter: $filter, owner: $owner) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCustomerShop = /* GraphQL */ `
+  subscription OnUpdateCustomerShop(
+    $filter: ModelSubscriptionCustomerShopFilterInput
+    $owner: String
+  ) {
+    onUpdateCustomerShop(filter: $filter, owner: $owner) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCustomerShop = /* GraphQL */ `
+  subscription OnDeleteCustomerShop(
+    $filter: ModelSubscriptionCustomerShopFilterInput
+    $owner: String
+  ) {
+    onDeleteCustomerShop(filter: $filter, owner: $owner) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCustomerProduct = /* GraphQL */ `
+  subscription OnCreateCustomerProduct(
+    $filter: ModelSubscriptionCustomerProductFilterInput
+    $owner: String
+  ) {
+    onCreateCustomerProduct(filter: $filter, owner: $owner) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const onUpdateCustomerProduct = /* GraphQL */ `
+  subscription OnUpdateCustomerProduct(
+    $filter: ModelSubscriptionCustomerProductFilterInput
+    $owner: String
+  ) {
+    onUpdateCustomerProduct(filter: $filter, owner: $owner) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const onDeleteCustomerProduct = /* GraphQL */ `
+  subscription OnDeleteCustomerProduct(
+    $filter: ModelSubscriptionCustomerProductFilterInput
+    $owner: String
+  ) {
+    onDeleteCustomerProduct(filter: $filter, owner: $owner) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const onCreateCustomerProductStatus = /* GraphQL */ `
+  subscription OnCreateCustomerProductStatus(
+    $filter: ModelSubscriptionCustomerProductStatusFilterInput
+    $owner: String
+  ) {
+    onCreateCustomerProductStatus(filter: $filter, owner: $owner) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCustomerProductStatus = /* GraphQL */ `
+  subscription OnUpdateCustomerProductStatus(
+    $filter: ModelSubscriptionCustomerProductStatusFilterInput
+    $owner: String
+  ) {
+    onUpdateCustomerProductStatus(filter: $filter, owner: $owner) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCustomerProductStatus = /* GraphQL */ `
+  subscription OnDeleteCustomerProductStatus(
+    $filter: ModelSubscriptionCustomerProductStatusFilterInput
+    $owner: String
+  ) {
+    onDeleteCustomerProductStatus(filter: $filter, owner: $owner) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCategoryBrands = /* GraphQL */ `
+  subscription OnCreateCategoryBrands(
+    $filter: ModelSubscriptionCategoryBrandsFilterInput
+  ) {
+    onCreateCategoryBrands(filter: $filter) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCategoryBrands = /* GraphQL */ `
+  subscription OnUpdateCategoryBrands(
+    $filter: ModelSubscriptionCategoryBrandsFilterInput
+  ) {
+    onUpdateCategoryBrands(filter: $filter) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCategoryBrands = /* GraphQL */ `
+  subscription OnDeleteCategoryBrands(
+    $filter: ModelSubscriptionCategoryBrandsFilterInput
+  ) {
+    onDeleteCategoryBrands(filter: $filter) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
