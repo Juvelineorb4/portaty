@@ -52,7 +52,18 @@ const Navigation = () => {
     checkUser()
     return unsubscribe;
   }, [])
-  
+
+  useEffect(() => {
+    fecthalgo();
+  }, [])
+  const fecthalgo = async () => {
+    const result = await API.graphql({
+      query: queries.pruebaE,
+      authMode: "AMAZON_COGNITO_USER_POOLS"
+    })
+    console.log(result)
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={`Login`}>

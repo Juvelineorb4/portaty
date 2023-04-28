@@ -20,7 +20,14 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "CretaePaymentIntent": {
+    "Prueba": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "portaty11dae80f": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

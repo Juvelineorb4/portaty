@@ -1,15 +1,22 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/Profile.module.css";
 import CustomButton from "@/components/CustomButton";
 import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
 
 // amplify
-import { Auth } from 'aws-amplify'
+import { Auth, API } from 'aws-amplify'
+import * as queries from '@/graphql/queries'
+// recoil
+import { useRecoilValue } from 'recoil'
+import { userAutenticated } from '@/atoms'
+
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
+  const userAuth = useRecoilValue(userAutenticated)
+  const [userShop, setUserShop] = useState(undefined)
   const { buttons } = settings;
   const onHandleLogout = async () => {
     await Auth.signOut();
@@ -17,8 +24,19 @@ const Profile = ({ navigation }) => {
     setTimeout(() => {
       navigation.navigate("Login_Welcome")
     }, 500);
+  }
+  useEffect(() => {
+    console.log(userAuth.username)
+    fecthShop();
+  }, [])
 
-
+  const fecthShop = async () => {
+    const result = await API.graphql({
+      query: queries.getCustomerShop,
+      variables: { userID: userAuth.username },
+      authMode: "AMAZON_COGNITO_USER_POOLS"
+    })
+    setUserShop(result.data.getCustomerShop)
   }
 
   return (
@@ -37,10 +55,10 @@ const Profile = ({ navigation }) => {
             }}
           />
         </View>
-        <Text style={[styles.user, global.black]}>Christopher Alvarez</Text>
+        <Text style={[styles.user, global.black]}>{userAuth.attributes.name}</Text>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>My Shop</Text>
+        <Text style={[styles.titleSettings, global.black]}>My Shop: {userShop.name.toUpperCase()}</Text>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => navigation.navigate("Post_Navigator")}
