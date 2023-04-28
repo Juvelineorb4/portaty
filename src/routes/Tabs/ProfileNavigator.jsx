@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native";
 // Header
 import Header from "./HeaderTabs/index";
 import Result from "@/screens/Search/Result";
-import PostProduct from "@/screens/Profile/PostProduct";
+import PostNavigator from "./PostNavigator";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -54,13 +54,13 @@ const ProfileNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="Post_Product"
+        name="Post_Navigator"
+        component={PostNavigator}
         options={{
           animation: "slide_from_right",
+          headerShown: false
         }}
-      >
-        {() => <PostProduct data={data}/>}
-      </Stack.Screen>
+      />
     </Stack.Navigator>
   );
 };

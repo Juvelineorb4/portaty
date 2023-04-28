@@ -23,6 +23,30 @@ export const createADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -45,6 +69,30 @@ export const updateADCategory = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -77,6 +125,30 @@ export const deleteADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      brands {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -99,6 +171,30 @@ export const createADBrand = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -131,6 +227,30 @@ export const updateADBrand = /* GraphQL */ `
         }
         nextToken
       }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -153,6 +273,30 @@ export const deleteADBrand = /* GraphQL */ `
           suggestedPrice
           categoryID
           brandID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      categories {
+        items {
+          id
+          aDCategoryId
+          aDBrandId
+          aDCategory {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
+          aDBrand {
+            id
+            name
+            image
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -223,9 +367,9 @@ export const createTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -238,9 +382,9 @@ export const updateTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -253,9 +397,810 @@ export const deleteTodo = /* GraphQL */ `
       id
       name
       description
+      owner
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createCustomerShop = /* GraphQL */ `
+  mutation CreateCustomerShop(
+    $input: CreateCustomerShopInput!
+    $condition: ModelCustomerShopConditionInput
+  ) {
+    createCustomerShop(input: $input, condition: $condition) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCustomerShop = /* GraphQL */ `
+  mutation UpdateCustomerShop(
+    $input: UpdateCustomerShopInput!
+    $condition: ModelCustomerShopConditionInput
+  ) {
+    updateCustomerShop(input: $input, condition: $condition) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCustomerShop = /* GraphQL */ `
+  mutation DeleteCustomerShop(
+    $input: DeleteCustomerShopInput!
+    $condition: ModelCustomerShopConditionInput
+  ) {
+    deleteCustomerShop(input: $input, condition: $condition) {
+      userID
+      name
+      email
+      description
+      products {
+        items {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCustomerProduct = /* GraphQL */ `
+  mutation CreateCustomerProduct(
+    $input: CreateCustomerProductInput!
+    $condition: ModelCustomerProductConditionInput
+  ) {
+    createCustomerProduct(input: $input, condition: $condition) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const updateCustomerProduct = /* GraphQL */ `
+  mutation UpdateCustomerProduct(
+    $input: UpdateCustomerProductInput!
+    $condition: ModelCustomerProductConditionInput
+  ) {
+    updateCustomerProduct(input: $input, condition: $condition) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const deleteCustomerProduct = /* GraphQL */ `
+  mutation DeleteCustomerProduct(
+    $input: DeleteCustomerProductInput!
+    $condition: ModelCustomerProductConditionInput
+  ) {
+    deleteCustomerProduct(input: $input, condition: $condition) {
+      id
+      customerID
+      category
+      brand
+      productID
+      price
+      images
+      condition
+      description
+      code
+      status {
+        id
+        productID
+        product {
+          id
+          customerID
+          category
+          brand
+          productID
+          price
+          images
+          condition
+          description
+          code
+          status {
+            id
+            productID
+            status
+            owner
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        createdAt
+        updatedAt
+      }
+      phoneFields {
+        carrier
+        imei
+        model
+        storage
+        batery
+      }
+      laptoFields {
+        serial
+      }
+      owner
+      createdAt
+      updatedAt
+      customerProductStatusId
+    }
+  }
+`;
+export const createCustomerProductStatus = /* GraphQL */ `
+  mutation CreateCustomerProductStatus(
+    $input: CreateCustomerProductStatusInput!
+    $condition: ModelCustomerProductStatusConditionInput
+  ) {
+    createCustomerProductStatus(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCustomerProductStatus = /* GraphQL */ `
+  mutation UpdateCustomerProductStatus(
+    $input: UpdateCustomerProductStatusInput!
+    $condition: ModelCustomerProductStatusConditionInput
+  ) {
+    updateCustomerProductStatus(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCustomerProductStatus = /* GraphQL */ `
+  mutation DeleteCustomerProductStatus(
+    $input: DeleteCustomerProductStatusInput!
+    $condition: ModelCustomerProductStatusConditionInput
+  ) {
+    deleteCustomerProductStatus(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        customerID
+        category
+        brand
+        productID
+        price
+        images
+        condition
+        description
+        code
+        status {
+          id
+          productID
+          product {
+            id
+            customerID
+            category
+            brand
+            productID
+            price
+            images
+            condition
+            description
+            code
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          status
+          owner
+          createdAt
+          updatedAt
+        }
+        phoneFields {
+          carrier
+          imei
+          model
+          storage
+          batery
+        }
+        laptoFields {
+          serial
+        }
+        owner
+        createdAt
+        updatedAt
+        customerProductStatusId
+      }
+      status
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCategoryBrands = /* GraphQL */ `
+  mutation CreateCategoryBrands(
+    $input: CreateCategoryBrandsInput!
+    $condition: ModelCategoryBrandsConditionInput
+  ) {
+    createCategoryBrands(input: $input, condition: $condition) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCategoryBrands = /* GraphQL */ `
+  mutation UpdateCategoryBrands(
+    $input: UpdateCategoryBrandsInput!
+    $condition: ModelCategoryBrandsConditionInput
+  ) {
+    updateCategoryBrands(input: $input, condition: $condition) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCategoryBrands = /* GraphQL */ `
+  mutation DeleteCategoryBrands(
+    $input: DeleteCategoryBrandsInput!
+    $condition: ModelCategoryBrandsConditionInput
+  ) {
+    deleteCategoryBrands(input: $input, condition: $condition) {
+      id
+      aDCategoryId
+      aDBrandId
+      aDCategory {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        brands {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      aDBrand {
+        id
+        name
+        image
+        products {
+          items {
+            id
+            name
+            images
+            suggestedPrice
+            categoryID
+            brandID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        categories {
+          items {
+            id
+            aDCategoryId
+            aDBrandId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

@@ -6,16 +6,17 @@ import { SignatureV4 } from '@aws-sdk/signature-v4';
 import { HttpRequest } from '@aws-sdk/protocol-http';
 import { default as fetch, Request } from 'node-fetch';
 
-const GRAPHQL_ENDPOINT = process.env.API_PORTATY_GRAPHQLAPIENDPOINTOUTPUT;
+const GRAPHQL_ENDPOINT = "https://fuzb4c27pzdkfea7mvbjrkq3li.appsync-api.us-east-1.amazonaws.com/graphql";
 const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
 const { Sha256 } = crypto;
 
 const query = /* GraphQL */ `
   query LIST_TODOS {
-    ListADProducts {
+    listTodos {
       items {
         id
         name
+        description
       }
     }
   }
@@ -27,7 +28,7 @@ const query = /* GraphQL */ `
 
 export const handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
-
+  console.log("AUTH: ", JSON.stringify(event.request.headers))
   const endpoint = new URL(GRAPHQL_ENDPOINT);
 
   const signer = new SignatureV4({
@@ -41,7 +42,8 @@ export const handler = async (event) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      host: endpoint.host
+      host: endpoint.host,
+      "authorization": `${event.request.headers.authorization}`
     },
     hostname: endpoint.host,
     body: JSON.stringify({ query }),
@@ -58,7 +60,6 @@ export const handler = async (event) => {
   try {
     response = await fetch(request);
     body = await response.json();
-    console.log(body);
     if (body.errors) statusCode = 400;
   } catch (error) {
     statusCode = 500;
