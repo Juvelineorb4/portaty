@@ -66,3 +66,30 @@ export const userAutenticated = atom({
   key: "userAutenticatedValue",
   default: undefined,
 });
+
+// Post Product Modals Data
+export const listCategories = atom({
+  key: "listCategoriesValue",
+  default: [],
+});
+export const listBrands = atom({
+  key: "listBrandsValue",
+  default: [],
+});
+export const listProducts = atom({
+  key: "listProductsValue",
+  default: [],
+});
+
+export const categoriesId = atom({
+  key: "categoriesIdValue",
+  default: '',
+});
+export const brandsId = atom({
+  key: "brandsIdValue",
+  default: '',
+});
+export const productsId = atom({
+  key: "productsIdValue",
+  default: '',
+});

@@ -61,7 +61,7 @@ const Profile = ({ navigation }) => {
         <Text style={[styles.titleSettings, global.black]}>My Shop: {userShop.name.toUpperCase()}</Text>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => navigation.navigate("Post_Product")}
+          onPress={() => navigation.navigate("Post_Navigator")}
         >
           <View style={[styles.line, global.bgWhiteSmoke]} />
           <CustomSelect

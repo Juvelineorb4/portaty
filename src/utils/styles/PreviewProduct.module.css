@@ -1,0 +1,109 @@
+.container {
+  flex: 1;
+}
+.containerImages {
+  flex: 1;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  padding: 10px 20px;
+}
+.containerTitle {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-family: "medium";
+  /* font-weight: 700; */
+}
+.containerInfo,
+.containerReviews {
+  flex-direction: row;
+  align-items: center;
+}
+.containerInfo {
+  margin-top: 5px;
+}
+.containerReviews {
+  margin-left: 7px;
+}
+.textReviews {
+  font-family: "thinItalic";
+  margin-left: 5px;
+  /* font-style: italic; */
+}
+.line {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0px;
+}
+.descriptionText {
+  font-size: 13px;
+  font-family: "thinItalic";
+  margin: 7px 0px;
+  /* font-style: italic; */
+  /* font-weight: 100; */
+}
+.feature {
+  margin: 10px 5px;
+  flex-direction: row;
+  align-items: center;
+}
+.featureText {
+  margin-left: 5px;
+}
+.containerSeller {
+  padding: 10px;
+  border-radius: 20px;
+  margin: 10px 0px;
+}
+.topInfo,
+.mediumInfo,
+.botInfo {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.price {
+  font-family: "medium";
+  font-size: 48px;
+  /* font-weight: 700; */
+}
+.textBuy {
+  font-family: "bold";
+  /* font-weight: 600; */
+  font-size: 14px;
+}
+.buy {
+  border-radius: 16px;
+  padding: 10px 20px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+.name {
+  /* font-weight: 700; */
+  font-family: "medium";
+  font-size: 16px;
+  text-transform: capitalize;
+  margin-left: 11%;
+}
+.priceRef {
+  font-family: "medium";
+  /* font-weight: 700; */
+  font-size: 16px;
+}
+.containerStatus {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+}
+.textStatus {
+  margin-left: 10px;
+}
