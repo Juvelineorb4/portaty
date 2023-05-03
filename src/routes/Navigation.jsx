@@ -6,8 +6,9 @@ import DrawerNavigator from "./Tabs/Drawer";
 import LoginNavigator from "./Authentication/LoginNavigator";
 
 // amplify
-import { Auth, Hub, API } from 'aws-amplify'
+import { Auth, Hub, API, graphqlOperation } from 'aws-amplify'
 import * as queries from '@/graphql/queries'
+import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilState } from 'recoil'
 import { userAutenticated } from '@/atoms/index'
@@ -54,14 +55,11 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    // fecthalgo();
+
+    fecthalgo();
   }, [])
   const fecthalgo = async () => {
-    const result = await API.graphql({
-      query: queries.pruebaE,
-      authMode: "AMAZON_COGNITO_USER_POOLS"
-    })
-    // console.log(result)
+    
   }
 
   return (

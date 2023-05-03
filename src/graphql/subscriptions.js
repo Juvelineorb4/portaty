@@ -31,6 +31,12 @@ export const onCreateADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -38,6 +44,12 @@ export const onCreateADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -81,6 +93,12 @@ export const onUpdateADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -88,6 +106,12 @@ export const onUpdateADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -131,6 +155,12 @@ export const onDeleteADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -138,6 +168,12 @@ export const onDeleteADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -179,6 +215,12 @@ export const onCreateADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -186,6 +228,12 @@ export const onCreateADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -227,6 +275,12 @@ export const onUpdateADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -234,6 +288,12 @@ export const onUpdateADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -275,6 +335,12 @@ export const onDeleteADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -282,6 +348,12 @@ export const onDeleteADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -413,6 +485,22 @@ export const onCreateCustomerShop = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -466,6 +554,22 @@ export const onUpdateCustomerShop = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -519,6 +623,22 @@ export const onDeleteCustomerShop = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -580,6 +700,22 @@ export const onCreateCustomerProduct = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -655,6 +791,22 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -730,6 +882,22 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -805,6 +973,24 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -870,6 +1056,24 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -935,6 +1139,24 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -997,6 +1219,20 @@ export const onCreateCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -1027,6 +1263,20 @@ export const onCreateCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -1070,6 +1320,20 @@ export const onUpdateCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -1100,6 +1364,20 @@ export const onUpdateCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -1143,6 +1421,20 @@ export const onDeleteCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -1173,6 +1465,20 @@ export const onDeleteCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }

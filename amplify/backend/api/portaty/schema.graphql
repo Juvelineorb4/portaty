@@ -8,6 +8,7 @@ type ADCategory @model @auth(rules: [
   image: String!
   products: [ADProduct] @hasMany(indexName: "byCategory", fields: ["id"])
   brands: [ADBrand] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String!
 }
 
 type ADBrand @model @auth(rules: [
@@ -20,6 +21,7 @@ type ADBrand @model @auth(rules: [
   image: String!
   products: [ADProduct] @hasMany(indexName: "byBrand", fields: ["id"])
   categories: [ADCategory] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String!
 }
 
 
@@ -47,9 +49,9 @@ type Todo @model @auth(rules: [
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
 
-type Query {
-  prueba: String @function(name: "Prueba-${env}")
-  pruebaE: String @function(name: "portaty11dae80f-${env}")
+type Mutation {
+ pruebaE(credentials: String!): String @function(name: "portaty11dae80f-${env}")
+  pruebaFunc(credentials: String!): String @function(name: "portatyPrueba-${env}")
 }
 
 
@@ -71,7 +73,7 @@ type CustomerShop @model @auth(rules:[
     {allow: public, provider: iam, operations: [read]}
   ])
   description: String
-  products: [CustomerProduct] @hasMany(indexName: "byShop", fields: ["userID"])
+  products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
 
@@ -81,15 +83,15 @@ type CustomerProduct @model @auth(rules:[
   { allow: public, provider: iam, operations: [read] },
 ]){
   id: ID!
-  customerID: ID! @index(name: "byShop")
-  category: ID!
-  brand: ID!
+  customerID: ID! @index(name: "byCustomerShop",sortKeyFields: ["code"])
+  categoryID: ID!
+  brandID: ID!
   productID: ID!
+  # 
+  code: String!
   price: Float!
-  images: [String]
   condition: Condition
   description: String
-  code: String
   status: CustomerProductStatus @belongsTo
 # campos personalizado dependiendo del producto
   phoneFields: PhoneFields
