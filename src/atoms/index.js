@@ -108,6 +108,10 @@ export const storageItem = atom({
   key: "storageItemValue",
   default: {},
 });
+export const customerId = atom({
+  key: "customerIdValue",
+  default: '',
+});
 export const categoriesId = atom({
   key: "categoriesIdValue",
   default: '',

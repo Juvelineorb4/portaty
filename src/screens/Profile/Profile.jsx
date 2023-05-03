@@ -18,6 +18,7 @@ import {
   categoriesId,
   categoryItem,
   conditionItem,
+  customerId,
   imagesPost,
   modelItem,
   productItem,
@@ -31,7 +32,7 @@ import {
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
-  const [userShop, setUserShop] = useState("");
+  const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
     await Auth.signOut();
@@ -70,11 +71,7 @@ const Profile = ({ navigation }) => {
       // variables: { id: userAuth.username },
       authMode: "AWS_IAM",
     });
-    setUserShop(result.data.getCustomerShop.userID);
-  };
-  const postCustomerShop = {
-    userID: userAuth.username,
-    description: "Prueba",
+    setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
   const resetPost = () => {
