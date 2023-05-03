@@ -89,6 +89,20 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "portatyPrueba": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "portaty"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -123,11 +137,42 @@
           "resourceName": "portaty11dae80f"
         }
       ]
+    },
+    "AMPLIFY_function_portatyPrueba_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "portatyPrueba"
+        }
+      ]
+    },
+    "AMPLIFY_function_portatyPrueba_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "portatyPrueba"
+        }
+      ]
     }
   },
   "storage": {
     "s3portaty": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "portaty"
+        },
+        {
+          "attributes": [
+            "adminGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }

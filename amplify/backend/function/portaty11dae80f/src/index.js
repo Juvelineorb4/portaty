@@ -1,22 +1,15 @@
+import { AppSyncClient, GetIntrospectionSchemaCommand } from "@aws-sdk/client-appsync"
 
-
-import crypto from '@aws-crypto/sha256-js';
-import { defaultProvider } from '@aws-sdk/credential-provider-node';
-import { SignatureV4 } from '@aws-sdk/signature-v4';
-import { HttpRequest } from '@aws-sdk/protocol-http';
-import { default as fetch, Request } from 'node-fetch';
 
 const GRAPHQL_ENDPOINT = "https://fuzb4c27pzdkfea7mvbjrkq3li.appsync-api.us-east-1.amazonaws.com/graphql";
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
-const { Sha256 } = crypto;
-
-const query = /* GraphQL */ `
+const AWS_REGION = 'us-east-1';
+const APPSYNC_ID = "zajoupn5szdfjfucr7vavz63u4"
+const query = `
   query LIST_TODOS {
     listTodos {
       items {
         id
         name
-        description
       }
     }
   }
@@ -28,57 +21,38 @@ const query = /* GraphQL */ `
 
 export const handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
-  console.log("AUTH: ", JSON.stringify(event.request.headers))
-  const endpoint = new URL(GRAPHQL_ENDPOINT);
+  console.log(`CREDENTIALS: ${event.arguments.credentials}`);
+  const { accessKeyId, secretAccessKey } = JSON.parse(event.arguments.credentials)
+  console.log("KEYID: ", accessKeyId)
+  console.log("SCRECETKEY: ", secretAccessKey)
 
-  const signer = new SignatureV4({
-    credentials: defaultProvider(),
+  // Configurar el cliente de AppSync con la información de configuración de AWS Amplify
+  const client = new AppSyncClient({
     region: AWS_REGION,
-    service: 'appsync',
-    sha256: Sha256
-  });
-
-  const requestToBeSigned = new HttpRequest({
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      host: endpoint.host,
-      "authorization": `${event.request.headers.authorization}`
+    endpoint: GRAPHQL_ENDPOINT,
+    credentials: {
+      accessKeyId: accessKeyId,
+      secretAccessKey: secretAccessKey
     },
-    hostname: endpoint.host,
-    body: JSON.stringify({ query }),
-    path: endpoint.pathname
   });
 
-  const signed = await signer.sign(requestToBeSigned);
-  const request = new Request(endpoint, signed);
+  console.log("CLIENT: ", client)
 
-  let statusCode = 200;
-  let body;
-  let response;
+  const command = new GetIntrospectionSchemaCommand({
+    apiId: APPSYNC_ID,
+    format: "JSON",
+    includeDirectives: true
 
-  try {
-    response = await fetch(request);
-    body = await response.json();
-    if (body.errors) statusCode = 400;
-  } catch (error) {
-    statusCode = 500;
-    body = {
-      errors: [
-        {
-          message: error.message
-        }
-      ]
-    };
-  }
+  })
+  const result = await client.send(command)
+  console.log("Result: ", result)
 
-  return {
-    statusCode,
-    //  Uncomment below to enable CORS requests
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Headers": "*"
-    // }, 
-    body: JSON.stringify(body)
-  };
+  return JSON.stringify({
+    statusCode: 200,
+    body: event.arguments.credentials
+  });
+
+
+
+
 };

@@ -1,5 +1,9 @@
 import React from "react";
-import { MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  SimpleLineIcons,
+  FontAwesome,
+} from "@expo/vector-icons";
 
 const Icon = ({ name, color, size, handlePress, type }) => {
   return (
@@ -9,6 +13,13 @@ const Icon = ({ name, color, size, handlePress, type }) => {
           name={name}
           color={color}
           size={size}
+          onPress={handlePress}
+        />
+      ) : type === "FA" ? (
+        <FontAwesome
+          name={name}
+          size={size}
+          color={color}
           onPress={handlePress}
         />
       ) : (

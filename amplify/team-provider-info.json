@@ -30,7 +30,11 @@
         "lambdaquery": {},
         "portaty11dae80f": {
           "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
-          "s3Key": "amplify-builds/portaty11dae80f-39345064715449456b71-build.zip"
+          "s3Key": "amplify-builds/portaty11dae80f-6c363843576b655a6767-build.zip"
+        },
+        "portatyPrueba": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/portatyPrueba-714d464d5378426b454d-build.zip"
         }
       }
     }
