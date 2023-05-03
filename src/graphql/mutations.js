@@ -48,6 +48,7 @@ export const createADCategory = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -61,6 +62,7 @@ export const createADCategory = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -69,6 +71,7 @@ export const createADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -111,6 +114,7 @@ export const updateADCategory = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -124,6 +128,7 @@ export const updateADCategory = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -132,6 +137,7 @@ export const updateADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -174,6 +180,7 @@ export const deleteADCategory = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -187,6 +194,7 @@ export const deleteADCategory = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -195,6 +203,7 @@ export const deleteADCategory = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -237,6 +246,7 @@ export const createADBrand = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -250,6 +260,7 @@ export const createADBrand = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -258,6 +269,7 @@ export const createADBrand = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -300,6 +312,7 @@ export const updateADBrand = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -313,6 +326,7 @@ export const updateADBrand = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -321,6 +335,7 @@ export const updateADBrand = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -363,6 +378,7 @@ export const deleteADBrand = /* GraphQL */ `
             brands {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -376,6 +392,7 @@ export const deleteADBrand = /* GraphQL */ `
             categories {
               nextToken
             }
+            abreviation
             createdAt
             updatedAt
           }
@@ -384,6 +401,7 @@ export const deleteADBrand = /* GraphQL */ `
         }
         nextToken
       }
+      abreviation
       createdAt
       updatedAt
     }
@@ -499,28 +517,40 @@ export const createCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -568,28 +598,40 @@ export const updateCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -637,28 +679,40 @@ export const deleteCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -700,42 +754,67 @@ export const createCustomerProduct = /* GraphQL */ `
     createCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
-      category
-      brand
+      categoryID
+      categoryFields {
+        name
+        image
+        abreviation
+      }
+      brandID
+      brandFields {
+        name
+        image
+        abreviation
+      }
       productID
+      productFields {
+        name
+        images
+      }
+      code
       price
-      images
       condition
       description
-      code
       status {
         id
         productID
         product {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -791,42 +870,67 @@ export const updateCustomerProduct = /* GraphQL */ `
     updateCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
-      category
-      brand
+      categoryID
+      categoryFields {
+        name
+        image
+        abreviation
+      }
+      brandID
+      brandFields {
+        name
+        image
+        abreviation
+      }
       productID
+      productFields {
+        name
+        images
+      }
+      code
       price
-      images
       condition
       description
-      code
       status {
         id
         productID
         product {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -882,42 +986,67 @@ export const deleteCustomerProduct = /* GraphQL */ `
     deleteCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
-      category
-      brand
+      categoryID
+      categoryFields {
+        name
+        image
+        abreviation
+      }
+      brandID
+      brandFields {
+        name
+        image
+        abreviation
+      }
       productID
+      productFields {
+        name
+        images
+      }
+      code
       price
-      images
       condition
       description
-      code
       status {
         id
         productID
         product {
           id
           customerID
-          category
-          brand
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
           productID
+          productFields {
+            name
+            images
+          }
+          code
           price
-          images
           condition
           description
-          code
           status {
             id
             productID
             product {
               id
               customerID
-              category
-              brand
+              categoryID
+              brandID
               productID
+              code
               price
-              images
               condition
               description
-              code
               owner
               createdAt
               updatedAt
@@ -976,28 +1105,54 @@ export const createCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
-        category
-        brand
+        categoryID
+        categoryFields {
+          name
+          image
+          abreviation
+        }
+        brandID
+        brandFields {
+          name
+          image
+          abreviation
+        }
         productID
+        productFields {
+          name
+          images
+        }
+        code
         price
-        images
         condition
         description
-        code
         status {
           id
           productID
           product {
             id
             customerID
-            category
-            brand
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
             productID
+            productFields {
+              name
+              images
+            }
+            code
             price
-            images
             condition
             description
-            code
             status {
               id
               productID
@@ -1059,28 +1214,54 @@ export const updateCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
-        category
-        brand
+        categoryID
+        categoryFields {
+          name
+          image
+          abreviation
+        }
+        brandID
+        brandFields {
+          name
+          image
+          abreviation
+        }
         productID
+        productFields {
+          name
+          images
+        }
+        code
         price
-        images
         condition
         description
-        code
         status {
           id
           productID
           product {
             id
             customerID
-            category
-            brand
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
             productID
+            productFields {
+              name
+              images
+            }
+            code
             price
-            images
             condition
             description
-            code
             status {
               id
               productID
@@ -1142,28 +1323,54 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
-        category
-        brand
+        categoryID
+        categoryFields {
+          name
+          image
+          abreviation
+        }
+        brandID
+        brandFields {
+          name
+          image
+          abreviation
+        }
         productID
+        productFields {
+          name
+          images
+        }
+        code
         price
-        images
         condition
         description
-        code
         status {
           id
           productID
           product {
             id
             customerID
-            category
-            brand
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
             productID
+            productFields {
+              name
+              images
+            }
+            code
             price
-            images
             condition
             description
-            code
             status {
               id
               productID
@@ -1249,6 +1456,7 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1256,6 +1464,7 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1264,6 +1473,7 @@ export const createCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }
@@ -1293,6 +1503,7 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1300,6 +1511,7 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1308,6 +1520,7 @@ export const createCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }
@@ -1351,6 +1564,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1358,6 +1572,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1366,6 +1581,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }
@@ -1395,6 +1611,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1402,6 +1619,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1410,6 +1628,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }
@@ -1453,6 +1672,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1460,6 +1680,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1468,6 +1689,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }
@@ -1497,6 +1719,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1504,6 +1727,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              abreviation
               createdAt
               updatedAt
             }
@@ -1512,6 +1736,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           }
           nextToken
         }
+        abreviation
         createdAt
         updatedAt
       }

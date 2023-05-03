@@ -26,9 +26,11 @@ import {
   supplierItem,
   storageItem,
   serialItem,
+  customerId,
 } from "@/atoms";
 import { TouchableOpacity } from "react-native-gesture-handler";
-const PostProduct = ({ navigation }) => {
+const PostProduct = ({ navigation, route }) => {
+  // console.log(route.params.userID)e
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit } = useForm();
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
@@ -43,12 +45,11 @@ const PostProduct = ({ navigation }) => {
   const [selectItemProduct, setSelectItemProduct] = useRecoilState(productItem);
   const [selectItemCondition, setSelectItemCondition] =
     useRecoilState(conditionItem);
-    const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
-    const [selectItemSupplier, setSelectItemSupplier] = useRecoilState(supplierItem);
-    const [selectItemStorage, setSelectItemStorage] =
-      useRecoilState(storageItem);
-
-
+  const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
+  const [selectItemSupplier, setSelectItemSupplier] =
+    useRecoilState(supplierItem);
+  const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
+  const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
 
   /* Images Picker */
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
@@ -70,11 +71,10 @@ const PostProduct = ({ navigation }) => {
   };
 
   const onHandleSubmit = (data) => {
-
-    const { price, description, model, imei, supplier, storage, serial } = data
+    const { price, description, imei, serial } = data;
 
     const dataItem = {
-      customerID: '',
+      customerID: selectCustomerId,
       category: selectItemCategory,
       brand: selectItemBrand,
       product: selectItemProduct,
@@ -89,11 +89,11 @@ const PostProduct = ({ navigation }) => {
         storage: selectItemStorage,
       },
       laptoFields: {
-        serial: serial
-      }
-    }
-    navigation.navigate("Post_Complete", {data: dataItem})
-  }
+        serial: serial,
+      },
+    };
+    navigation.navigate("Post_Complete", { data: dataItem });
+  };
   const fetchData = async () => {
     try {
       const categories = await API.graphql({
@@ -123,27 +123,33 @@ const PostProduct = ({ navigation }) => {
   ];
 
   const models = [
-    { title: "A1452", id: 'model-1' },
-    { title: "A3645", id: 'model-2' },
-    { title: "A5858", id: 'model-3' },
-  ]
+    { title: "A1452", id: "model-1" },
+    { title: "A3645", id: "model-2" },
+    { title: "A5858", id: "model-3" },
+  ];
   const suppliers = [
-    { title: "AT&T", id: 'supplier-1' },
-    { title: "CLARO", id: 'supplier-2' },
-    { title: "MOVISTAR", id: 'supplier-3' },
-  ]
+    { title: "AT&T", id: "supplier-1" },
+    { title: "CLARO", id: "supplier-2" },
+    { title: "MOVISTAR", id: "supplier-3" },
+  ];
 
   const storages = [
-    { title: "16GB", id: 'storage-1' },
-    { title: "32GB", id: 'storage-2' },
-    { title: "64GB", id: 'storage-3' },
-  ]
+    { title: "16GB", id: "storage-1" },
+    { title: "32GB", id: "storage-2" },
+    { title: "64GB", id: "storage-3" },
+  ];
 
   useEffect(() => {
     fetchData();
     dataUpdate();
-  }, [imagesPostSelect, dataBrands, categoriesSelect, brandsSelect, productsSelect]);
-  
+  }, [
+    imagesPostSelect,
+    dataBrands,
+    categoriesSelect,
+    brandsSelect,
+    productsSelect,
+  ]);
+
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
       <View style={styles.form}>
@@ -540,7 +546,6 @@ const PostProduct = ({ navigation }) => {
         <CustomButton
           text={`Publish your product`}
           handlePress={handleSubmit(onHandleSubmit)}
-
           textStyles={[styles.textPublish, global.white]}
           buttonStyles={[styles.publish, global.mainBgColor]}
         />

@@ -34,7 +34,7 @@
         },
         "portatyPrueba": {
           "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
-          "s3Key": "amplify-builds/portatyPrueba-714d464d5378426b454d-build.zip"
+          "s3Key": "amplify-builds/portatyPrueba-51347079586341665976-build.zip"
         }
       }
     }
