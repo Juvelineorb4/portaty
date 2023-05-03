@@ -132,3 +132,7 @@ export const imagesPost = atom({
   key: "imagesPostValue",
   default: []
 })
+export const blobsPost = atom({
+  key: "blobsPostValue",
+  default: []
+})
