@@ -1,12 +1,40 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import styles from "@/utils/styles/PostComplete.module.css";
+import { API, Storage } from "aws-amplify";
+import * as queries from "@/graphql/queries";
 
 const PostComplete = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
-  const { data } = route.params
-  console.log(data)
+  const [preview, setPreview] = useState({});
+  const { customerProductStatusID } = route.params;
+
+  const fetchData = async () => {
+    try {
+      const categories = await API.graphql({
+        query: queries.getCustomerProductStatus,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        variables: { id: customerProductStatusID },
+      });
+
+      Storage.list(`product/${categories.data.getCustomerProductStatus.product.code}/`,{ level: 'protected', pageSize: 10 }).then((data) => {
+        data.results.map(async (image) => {
+          const imageResult = await Storage.get(image.key, {
+            level: "protected",
+          });
+        })
+      })
+
+      setPreview(categories);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [customerProductStatusID]);
+
   return (
     <View style={[styles.container, global.bgWhite]}>
       <View style={styles.imageContent}>
