@@ -114,7 +114,7 @@ export const listADCategories = /* GraphQL */ `
           }
           nextToken
         }
-        abreviation
+        
         createdAt
         updatedAt
       }

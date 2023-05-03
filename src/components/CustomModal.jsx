@@ -161,6 +161,7 @@ const CustomModal = ({
                             setSelectItemCategory(item);
                             setSelectId(item.id);
                             setCategoriesSelect(item.id);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -268,6 +269,7 @@ const CustomModal = ({
                             setSelectItemBrand(item);
                             setSelectId(item.aDBrandId);
                             setBrandsSelect(item.aDBrandId);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -383,6 +385,7 @@ const CustomModal = ({
                               setSelectId(item.id);
                               setProductSelect(item.id);
                               setProductBrandSelect(item.brandID);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -491,6 +494,7 @@ const CustomModal = ({
                             onPress={() => {
                               setSelectItemModel(item);
                               setSelectId(item.id);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -599,6 +603,7 @@ const CustomModal = ({
                             onPress={() => {
                               setSelectItemSupplier(item);
                               setSelectId(item.id);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -707,6 +712,7 @@ const CustomModal = ({
                             onPress={() => {
                               setSelectItemStorage(item);
                               setSelectId(item.id);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -811,6 +817,7 @@ const CustomModal = ({
                           onPress={() => {
                             setSelectId(item.id);
                             setSelectItemCondition(item);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
