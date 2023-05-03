@@ -85,10 +85,13 @@ type CustomerProduct @model @auth(rules:[
   id: ID!
   customerID: ID! @index(name: "byCustomerShop",sortKeyFields: ["code"])
   categoryID: ID!
+  categoryFields: CategoryFields
   brandID: ID!
+  brandFields: BrandFields
   productID: ID!
+  productFields: ProductFields
   # 
-  code: String!
+  code: String
   price: Float!
   condition: Condition
   description: String
@@ -97,6 +100,20 @@ type CustomerProduct @model @auth(rules:[
   phoneFields: PhoneFields
   laptoFields: LaptoFields
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+type CategoryFields{
+  name: String!
+  image: String!
+  abreviation: String!
+}
+type BrandFields{
+  name: String!
+  image: String!
+  abreviation: String!
+}
+type ProductFields{
+  name: String!
+  images: String!
 }
 
 type CustomerProductStatus @model @auth(rules:[
