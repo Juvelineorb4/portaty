@@ -6,18 +6,9 @@ import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
 
 // amplify
-<<<<<<< HEAD
-import { Auth, API } from 'aws-amplify'
-import * as queries from '@/graphql/queries'
-import * as mutations from '@/graphql/mutations'
-// recoil
-import { useRecoilValue } from 'recoil'
-import { userAutenticated } from '@/atoms'
-=======
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
->>>>>>> a1dd307db5b8ef49c324cb8bb2a66dce80f641fe
 
 // recoil
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -105,12 +96,8 @@ const Profile = ({ navigation }) => {
     fecthShop();
   }, []);
 
- 
-
-
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
-      {console.log(userShop)}
       <View style={styles.profile}>
         <View style={styles.containerImage}>
           <View style={styles.image}></View>
@@ -125,12 +112,6 @@ const Profile = ({ navigation }) => {
             }}
           />
         </View>
-<<<<<<< HEAD
-        <Text style={[styles.user, global.black]}></Text>
-      </View>
-      <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>My Shop: </Text>
-=======
         <Text style={[styles.user, global.black]}>
           {/*{userAuth.attributes.name}*/}
         </Text>
@@ -139,7 +120,6 @@ const Profile = ({ navigation }) => {
         <Text style={[styles.titleSettings, global.black]}>
           My Shop: {/*{userShop.name.toUpperCase()}*/}
         </Text>
->>>>>>> a1dd307db5b8ef49c324cb8bb2a66dce80f641fe
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
