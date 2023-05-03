@@ -37,7 +37,9 @@ module.exports = StyleSheet.create({
   mainBgColor: {
     backgroundColor: '#ffa424'
   },
-
+  inputColor: {
+    color: '#8c9199cb'
+  }
 
   /* Fonts */
 

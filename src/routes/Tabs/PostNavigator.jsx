@@ -12,10 +12,6 @@ import PreviewProduct from "@/screens/Post/PreviewProduct";
 const Stack = createNativeStackNavigator();
 
 const PostNavigator = () => {
-  const router = useRoute()
-  useEffect(() => {
-    console.log(router.name);
-  }, []);
   return (
     <Stack.Navigator
       id="Post_Main"
