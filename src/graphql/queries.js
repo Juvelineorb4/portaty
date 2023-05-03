@@ -79,7 +79,7 @@ export const listADCategories = /* GraphQL */ `
             images
             suggestedPrice
             categoryID
-            brandID
+            brandID 
             createdAt
             updatedAt
           }

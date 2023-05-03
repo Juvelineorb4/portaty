@@ -15,7 +15,9 @@ const CustomInput = ({
   icon = {},
   text,
   iconRight = {},
-  placeholderTextColor = {}
+  placeholderTextColor = {},
+  area = false,
+  lines= 1
 }) => {
   const [securityChange, setSecurityChange] = useState(true)
   return (
@@ -41,6 +43,8 @@ const CustomInput = ({
               style={styled.text}
               secureTextEntry={security && securityChange}
               defaultValue={defaultValue}
+              multiline={area ? true : false}
+              numberOfLines={lines}
             />
             {/* si es de seguridad por defecto se colcoa el ojito */}
             {security ? iconRight &&
