@@ -8,6 +8,7 @@ import CustomSelect from "@/components/CustomSelect";
 // amplify
 import { Auth, API } from 'aws-amplify'
 import * as queries from '@/graphql/queries'
+import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilValue } from 'recoil'
 import { userAutenticated } from '@/atoms'
@@ -39,8 +40,12 @@ const Profile = ({ navigation }) => {
     setUserShop(result.data.getCustomerShop)
   }
 
+ 
+
+
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
+      {console.log(userShop)}
       <View style={styles.profile}>
         <View style={styles.containerImage}>
           <View style={styles.image}></View>
@@ -55,10 +60,10 @@ const Profile = ({ navigation }) => {
             }}
           />
         </View>
-        <Text style={[styles.user, global.black]}>{userAuth.attributes.name}</Text>
+        <Text style={[styles.user, global.black]}></Text>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>My Shop: {userShop.name.toUpperCase()}</Text>
+        <Text style={[styles.titleSettings, global.black]}>My Shop: </Text>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => navigation.navigate("Post_Navigator")}

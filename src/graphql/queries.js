@@ -1,21 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const prueba = /* GraphQL */ `
-  query Prueba {
-    prueba
-  }
-`;
-export const createPaymentIntent = /* GraphQL */ `
-  query CreatePaymentIntent {
-    createPaymentIntent
-  }
-`;
-export const pruebaE = /* GraphQL */ `
-  query PruebaE {
-    pruebaE
-  }
-`;
 export const getADCategory = /* GraphQL */ `
   query GetADCategory($id: ID!) {
     getADCategory(id: $id) {
@@ -44,6 +29,12 @@ export const getADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -51,6 +42,12 @@ export const getADCategory = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -93,6 +90,20 @@ export const listADCategories = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -133,6 +144,12 @@ export const getADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            brands {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -140,6 +157,12 @@ export const getADBrand = /* GraphQL */ `
             id
             name
             image
+            products {
+              nextToken
+            }
+            categories {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -182,6 +205,20 @@ export const listADBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -344,6 +381,22 @@ export const getCustomerShop = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -404,6 +457,24 @@ export const listCustomerShops = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -449,6 +520,22 @@ export const getCustomerProduct = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -527,6 +614,24 @@ export const listCustomerProducts = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -596,6 +701,24 @@ export const customerProductsByCustomerID = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -655,6 +778,24 @@ export const getCustomerProductStatus = /* GraphQL */ `
             condition
             description
             code
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
             owner
             createdAt
             updatedAt
@@ -715,6 +856,22 @@ export const listCustomerProductStatuses = /* GraphQL */ `
           status {
             id
             productID
+            product {
+              id
+              customerID
+              category
+              brand
+              productID
+              price
+              images
+              condition
+              description
+              code
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
             status
             owner
             createdAt
@@ -772,6 +929,20 @@ export const getCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -802,6 +973,20 @@ export const getCategoryBrands = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDCategory {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
+            aDBrand {
+              id
+              name
+              image
+              createdAt
+              updatedAt
+            }
             createdAt
             updatedAt
           }
@@ -831,9 +1016,26 @@ export const listCategoryBrands = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           brands {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
@@ -844,9 +1046,26 @@ export const listCategoryBrands = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           categories {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
@@ -883,9 +1102,26 @@ export const categoryBrandsByADCategoryId = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           brands {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
@@ -896,9 +1132,26 @@ export const categoryBrandsByADCategoryId = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           categories {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
@@ -935,9 +1188,26 @@ export const categoryBrandsByADBrandId = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           brands {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
@@ -948,9 +1218,26 @@ export const categoryBrandsByADBrandId = /* GraphQL */ `
           name
           image
           products {
+            items {
+              id
+              name
+              images
+              suggestedPrice
+              categoryID
+              brandID
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           categories {
+            items {
+              id
+              aDCategoryId
+              aDBrandId
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           createdAt
