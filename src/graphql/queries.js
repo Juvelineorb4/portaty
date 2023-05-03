@@ -82,7 +82,7 @@ export const listADCategories = /* GraphQL */ `
             images
             suggestedPrice
             categoryID
-            brandID
+            brandID 
             createdAt
             updatedAt
           }
@@ -93,6 +93,10 @@ export const listADCategories = /* GraphQL */ `
             id
             aDCategoryId
             aDBrandId
+            aDBrand {
+              name
+              image
+            }
             createdAt
             updatedAt
           }

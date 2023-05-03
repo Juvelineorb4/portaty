@@ -31,7 +31,16 @@
 }
 .inputContainer {
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafa;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.inputContainerText {
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   background-color: #fafafa;
   padding: 15px 10px 15px 5px;
@@ -49,6 +58,7 @@
   flex: 1;
   margin-left: 10px;
   color: #8c9199cb;
+  flex-direction: row;
   text-transform: capitalize;
 }
 .inputContainerBoth {
@@ -75,6 +85,8 @@
   flex: 1;
   margin-left: 10px;
   width: 100%;
+  flex-direction: row;
+  align-items: center;
   color: #8c9199cb;
   text-transform: capitalize;
 }

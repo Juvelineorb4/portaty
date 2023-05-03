@@ -3,8 +3,10 @@ import React from "react";
 import CustomButton from "@/components/CustomButton";
 import styles from "@/utils/styles/PostComplete.module.css";
 
-const PostComplete = ({ navigation }) => {
+const PostComplete = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
+  const { data } = route.params
+  console.log(data)
   return (
     <View style={[styles.container, global.bgWhite]}>
       <View style={styles.imageContent}>

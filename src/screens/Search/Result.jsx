@@ -7,7 +7,7 @@ import SortFilter from './SortFilter'
 const Result = ({ navigation, route }) => {
     const [search, setSearch] = useState(route.params?.search)
     useEffect(() => {
-        console.log(route.params)
+        // console.log(route.params)
     }, [])
 
     return (

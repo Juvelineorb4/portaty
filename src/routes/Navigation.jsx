@@ -54,14 +54,14 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    fecthalgo();
+    // fecthalgo();
   }, [])
   const fecthalgo = async () => {
     const result = await API.graphql({
       query: queries.pruebaE,
       authMode: "AMAZON_COGNITO_USER_POOLS"
     })
-    console.log(result)
+    // console.log(result)
   }
 
   return (
