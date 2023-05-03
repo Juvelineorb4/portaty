@@ -75,9 +75,23 @@ const PostProduct = ({ navigation, route }) => {
 
     const dataItem = {
       customerID: selectCustomerId,
-      category: selectItemCategory,
-      brand: selectItemBrand,
-      product: selectItemProduct,
+      categoryID: selectItemCategory.id,
+      categoryFields: {
+        name: selectItemCategory.name,
+        image: selectItemCategory.image,
+        abreviation: '',
+      },
+      brandID: selectItemBrand.aDBrandId,
+      brandFields: {
+        name: selectItemBrand.name,
+        image: selectItemBrand.image,
+        abreviation: '',
+      },
+      productID: selectItemProduct.id,
+      productFields: {
+        name: selectItemProduct.name,
+        images: selectItemProduct.images[0]
+      },
       price: price,
       description: description,
       condition: selectItemCondition,
@@ -142,6 +156,8 @@ const PostProduct = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
     dataUpdate();
+    console.log('brand', brandsSelect)
+    console.log('product', dataProducts)
   }, [
     imagesPostSelect,
     dataBrands,
