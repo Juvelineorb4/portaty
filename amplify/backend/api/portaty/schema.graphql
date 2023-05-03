@@ -118,7 +118,7 @@ type ProductFields{
 
 type CustomerProductStatus @model @auth(rules:[
   {allow: groups, groups:["admin"]},
-  {allow: owner, operations: [read, delete]}
+  {allow: owner, operations: [read, create ,delete]}
 ]){
   id: ID!
   productID: ID
