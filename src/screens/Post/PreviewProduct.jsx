@@ -5,7 +5,7 @@ import styles from "@/utils/styles/PreviewProduct.module.css";
 
 const PreviewProduct = ({ data = {} }) => {
   const global = require("@/utils/styles/global.js");
-
+  
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>

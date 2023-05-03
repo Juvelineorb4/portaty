@@ -13,6 +13,7 @@ import * as mutations from "@/graphql/mutations";
 // recoil
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  blobsPost,
   brandItem,
   brandsId,
   categoriesId,
@@ -58,7 +59,8 @@ const Profile = ({ navigation }) => {
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
-    const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [blobImages, setBlobImages] = useRecoilState(blobsPost);
 
   const fecthShop = async () => {
     const result = await API.graphql({
@@ -86,7 +88,8 @@ const Profile = ({ navigation }) => {
     setBrandsSelect("");
     setProductSelect("");
     setProductBrandSelect("");
-    setImagesPostSelect([])
+    setImagesPostSelect([]);
+    setBlobImages([]);
   };
 
   useEffect(() => {

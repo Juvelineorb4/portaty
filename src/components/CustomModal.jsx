@@ -428,7 +428,7 @@ const CustomModal = ({
                         },
                       ]}
                     >
-                      {selectItemModel
+                      {selectItemModel.title
                         ? selectItemModel.title
                         : placeholder}
                     </Text>
@@ -489,7 +489,7 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemModel(item);
@@ -537,7 +537,7 @@ const CustomModal = ({
                         },
                       ]}
                     >
-                      {selectItemSupplier
+                      {selectItemSupplier.title
                         ? selectItemSupplier.title
                         : placeholder}
                     </Text>
@@ -598,7 +598,7 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemSupplier(item);
@@ -646,8 +646,8 @@ const CustomModal = ({
                         },
                       ]}
                     >
-                      {selectItemStorage
-                        ? selectItemStorage.name
+                      {selectItemStorage.title
+                        ? selectItemStorage.title
                         : placeholder}
                     </Text>
                     {selectItemStorage ? (
@@ -707,7 +707,7 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemStorage(item);

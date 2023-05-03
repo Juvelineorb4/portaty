@@ -7,8 +7,9 @@ import CustomButton from "@/components/CustomButton";
 import CustomModal from "@/components/CustomModal";
 import * as ImagePicker from "expo-image-picker";
 // amplify
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as mutations from "@/graphql/mutations";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   brandsId,
@@ -27,6 +28,7 @@ import {
   storageItem,
   serialItem,
   customerId,
+  blobsPost,
 } from "@/atoms";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const PostProduct = ({ navigation, route }) => {
@@ -53,6 +55,7 @@ const PostProduct = ({ navigation, route }) => {
 
   /* Images Picker */
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [blobImages, setBlobImages] = useRecoilState(blobsPost);
   const [image, setImage] = useState(null);
   const pickImage = async () => {
     ImagePicker.getPendingResultAsync;
@@ -64,14 +67,32 @@ const PostProduct = ({ navigation, route }) => {
     });
     if (!result.canceled) {
       const { uri } = result.assets[0];
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      setBlobImages([...blobImages, blob]);
       setImagesPostSelect([...imagesPostSelect, result.assets[0].uri]);
-      // uriSelect(uri);
       setImage(result.assets[0].uri);
     }
   };
 
-  const onHandleSubmit = (data) => {
+  const onHandleSubmit = async (data) => {
     const { price, description, imei, serial } = data;
+
+    /* Ramdon Code */
+    const ramdonCode = `${selectItemCategory.abreviation}-${
+      selectItemBrand.aDBrand.abreviation
+    }-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    const resultCode = await API.graphql({
+      query: queries.listCustomerProducts,
+      variables: {
+        filter: {
+          code: {
+            eq: ramdonCode,
+          },
+        },
+      },
+    });
 
     const dataItem = {
       customerID: selectCustomerId,
@@ -79,34 +100,94 @@ const PostProduct = ({ navigation, route }) => {
       categoryFields: {
         name: selectItemCategory.name,
         image: selectItemCategory.image,
-        abreviation: '',
+        abreviation: selectItemCategory.abreviation,
       },
       brandID: selectItemBrand.aDBrandId,
       brandFields: {
-        name: selectItemBrand.name,
-        image: selectItemBrand.image,
-        abreviation: '',
+        name: selectItemBrand.aDBrand.name,
+        image: selectItemBrand.aDBrand.image,
+        abreviation: selectItemBrand.aDBrand.abreviation,
       },
       productID: selectItemProduct.id,
       productFields: {
         name: selectItemProduct.name,
-        images: selectItemProduct.images[0]
+        images: selectItemProduct.images[0],
       },
       price: price,
       description: description,
-      condition: selectItemCondition,
-      images: imagesPostSelect,
+      condition: "GOOD",
       phoneFields: {
         imei: imei,
-        supplier: selectItemSupplier,
+        carrier: selectItemSupplier,
         model: selectItemModel,
         storage: selectItemStorage,
+        batery: "",
       },
-      laptoFields: {
-        serial: serial,
-      },
+      // laptoFields: {
+      //   serial: serial,
+      // },
+      code: ramdonCode,
     };
-    navigation.navigate("Post_Complete", { data: dataItem });
+
+    const resultData = await API.graphql({
+      query: mutations.createCustomerProduct,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      variables: {
+        input: {
+          customerID: selectCustomerId,
+          categoryID: selectItemCategory.id,
+          categoryFields: {
+            name: selectItemCategory.name,
+            image: selectItemCategory.image,
+            abreviation: selectItemCategory.abreviation,
+          },
+          brandID: selectItemBrand.aDBrandId,
+          brandFields: {
+            name: selectItemBrand.aDBrand.name,
+            image: selectItemBrand.aDBrand.image,
+            abreviation: selectItemBrand.aDBrand.abreviation,
+          },
+          productID: selectItemProduct.id,
+          productFields: {
+            name: selectItemProduct.name,
+            images: selectItemProduct.images[0],
+          },
+          price: price,
+          description: description,
+          condition: "GOOD",
+          phoneFields: {
+            imei: imei,
+            carrier: selectItemSupplier,
+            model: selectItemModel,
+            storage: selectItemStorage,
+            batery: "",
+          },
+          // laptoFields: {
+          //   serial: serial,
+          // },
+          code: ramdonCode,
+        },
+      },
+    });
+    const resultStatus = await API.graphql({
+      query: mutations.createCustomerProductStatus,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      variables: {
+        input: {
+          productID: resultData.data.createCustomerProduct.id,
+        },
+      },
+    });
+
+    // const uploadImage = async () => {
+    blobImages.map((image, index) => {
+      Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
+        level: 'protected',
+        contentType: 'image/jpeg',
+      }) //.then((result) => console.log(result))
+    })
+
+    navigation.navigate("Post_Complete", { customerProductStatusID: resultStatus.data.createCustomerProductStatus.id });
   };
   const fetchData = async () => {
     try {
@@ -131,9 +212,10 @@ const PostProduct = ({ navigation, route }) => {
     });
   };
   const conditions = [
-    { title: "good", id: "perfect", bgCondition: "#35BF05" },
-    { title: "nice", id: "nice", bgCondition: "#FFC700" },
-    { title: "bad", id: "bad", bgCondition: "#F60A0A" },
+    { title: "NEW", id: "new", bgCondition: "#35BF05" },
+    { title: "PERFECT", id: "perfect", bgCondition: "#FFC700" },
+    { title: "GOOD", id: "good", bgCondition: "#F60A0A" },
+    { title: "USED", id: "used", bgCondition: "#F60A0A" },
   ];
 
   const models = [
@@ -156,14 +238,14 @@ const PostProduct = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
     dataUpdate();
-    console.log('brand', brandsSelect)
-    console.log('product', dataProducts)
+    console.log(JSON.stringify(blobImages));
   }, [
     imagesPostSelect,
     dataBrands,
     categoriesSelect,
     brandsSelect,
     productsSelect,
+    blobImages,
   ]);
 
   return (
@@ -480,7 +562,7 @@ const PostProduct = ({ navigation, route }) => {
                   text: "Select model of your phone",
                 }}
                 data={models}
-                dataValue={""}
+                dataValue={"model"}
               />
               <CustomModal
                 control={control}
@@ -498,7 +580,7 @@ const PostProduct = ({ navigation, route }) => {
                   text: "Select supplier of your phone",
                 }}
                 data={suppliers}
-                dataValue={""}
+                dataValue={"supplier"}
               />
             </View>
             <View style={styles.both}>
@@ -533,7 +615,7 @@ const PostProduct = ({ navigation, route }) => {
                   text: "Select storage of your phone",
                 }}
                 data={storages}
-                dataValue={""}
+                dataValue={"storage"}
               />
             </View>
           </View>
