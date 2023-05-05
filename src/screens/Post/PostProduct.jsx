@@ -79,9 +79,8 @@ const PostProduct = ({ navigation, route }) => {
     const { price, description, imei, serial } = data;
 
     /* Ramdon Code */
-    const ramdonCode = `${selectItemCategory.abreviation}-${
-      selectItemBrand.aDBrand.abreviation
-    }-${Math.floor(100000 + Math.random() * 900000)}`;
+    const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
+      }-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const resultCode = await API.graphql({
       query: queries.listCustomerProducts,
@@ -180,14 +179,15 @@ const PostProduct = ({ navigation, route }) => {
     });
 
     // const uploadImage = async () => {
-    blobImages.map((image, index) => {
+    await Promise.all(blobImages.map((image, index) => (
       Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
         level: 'protected',
         contentType: 'image/jpeg',
-      }) //.then((result) => console.log(result))
-    })
-
-    navigation.navigate("Post_Complete", { customerProductStatusID: resultStatus.data.createCustomerProductStatus.id });
+      })
+    )))
+    console.log("Archivo Subidos")
+    console.log(resultStatus)
+    navigation.navigate("Post_Complete", { productPreview: resultStatus });
   };
   const fetchData = async () => {
     try {
