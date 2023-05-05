@@ -157,9 +157,9 @@ const PostProduct = ({ navigation, route }) => {
           condition: "GOOD",
           phoneFields: {
             imei: imei,
-            carrier: selectItemSupplier,
-            model: selectItemModel,
-            storage: selectItemStorage,
+            carrier: selectItemSupplier.title,
+            model: selectItemModel.title,
+            storage: selectItemStorage.title,
             batery: "",
           },
           // laptoFields: {
@@ -187,7 +187,7 @@ const PostProduct = ({ navigation, route }) => {
       }) //.then((result) => console.log(result))
     })
 
-    navigation.navigate("Post_Complete", { customerProductStatusID: resultStatus.data.createCustomerProductStatus.id });
+    navigation.navigate("Post_Complete", { product: resultStatus.data.createCustomerProductStatus });
   };
   const fetchData = async () => {
     try {
@@ -238,7 +238,6 @@ const PostProduct = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
     dataUpdate();
-    console.log(JSON.stringify(blobImages));
   }, [
     imagesPostSelect,
     dataBrands,

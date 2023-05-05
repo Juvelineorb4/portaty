@@ -2,12 +2,10 @@
   flex: 1;
 }
 .containerImages {
-  flex: 1;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
+  padding: 20px 20px 0px;
 }
 .content {
+  flex: 1;
   padding: 10px 20px;
 }
 .containerTitle {
@@ -15,88 +13,35 @@
   justify-content: space-between;
   align-items: center;
 }
-.title {
-  font-size: 18px;
+
+.titleProduct {
+  margin: 5px 0px;
+  font-size: 20px;
   text-transform: capitalize;
-  font-family: "medium";
-  /* font-weight: 700; */
+  font-family: "light";
 }
-.containerInfo,
-.containerReviews {
-  flex-direction: row;
-  align-items: center;
-}
-.containerInfo {
-  margin-top: 5px;
-}
-.containerReviews {
-  margin-left: 7px;
-}
-.textReviews {
-  font-family: "thinItalic";
-  margin-left: 5px;
-  /* font-style: italic; */
+.title {
+  margin: 5px 0px;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-family: "light";
 }
 .line {
   width: 100%;
   height: 1px;
-  margin: 20px 0px;
+  margin: 5px 0px;
+}
+.description {
+  /* height: 200px; */
 }
 .descriptionText {
   font-size: 13px;
   font-family: "thinItalic";
   margin: 7px 0px;
-  /* font-style: italic; */
-  /* font-weight: 100; */
 }
-.feature {
-  margin: 10px 5px;
-  flex-direction: row;
-  align-items: center;
-}
+
 .featureText {
   margin-left: 5px;
-}
-.containerSeller {
-  padding: 10px;
-  border-radius: 20px;
-  margin: 10px 0px;
-}
-.topInfo,
-.mediumInfo,
-.botInfo {
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.price {
-  font-family: "medium";
-  font-size: 48px;
-  /* font-weight: 700; */
-}
-.textBuy {
-  font-family: "bold";
-  /* font-weight: 600; */
-  font-size: 14px;
-}
-.buy {
-  border-radius: 16px;
-  padding: 10px 20px;
-  width: 150px;
-  justify-content: center;
-  align-items: center;
-}
-.name {
-  /* font-weight: 700; */
-  font-family: "medium";
-  font-size: 16px;
-  text-transform: capitalize;
-  margin-left: 11%;
-}
-.priceRef {
-  font-family: "medium";
-  /* font-weight: 700; */
-  font-size: 16px;
 }
 .containerStatus {
   flex-direction: row;
@@ -106,4 +51,97 @@
 }
 .textStatus {
   margin-left: 10px;
+}
+.features,
+.abouts {
+  flex: 1;
+}
+.bothFeatures,
+.bothAbout {
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.feature,
+.about {
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+}
+
+.leftFeatures,
+.leftAbout {
+  flex: 1;
+}
+.rightFeatures,
+.rightAbout {
+  flex: 1;
+}
+.labelFeature,
+.labelAbout {
+  width: 50px;
+  margin-right: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.labelTextFeature,
+.labelTextAbout {
+  font-family: "thin";
+  font-size: 10px;
+}
+.textFeature,
+.textAbout {
+  font-family: "light";
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.lineBot {
+  width: 100%;
+  height: 1px;
+  margin: 15px 0px 0px;
+}
+.textStatus {
+  font-family: "light";
+  font-size: 13px;
+}
+.button {
+  margin: 0px 0px 0px;
+  text-align: center;
+  border: 2px solid #ffa424;
+  padding: 20px;
+  border-radius: 7px;
+}
+.textButton {
+  text-align: center;
+  font-family: "medium";
+  color: white;
+  font-size: 14px;
+}
+.containerPrice {
+  padding: 7px 7px;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.titlePrice {
+  font-family: "light";
+  font-size: 18px;
+}
+.price {
+  margin-left: 5px;
+  font-family: "thin";
+  font-size: 40px;
+  margin-bottom: -6px;
+}
+.containerEnd {
+  flex: 1;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
