@@ -98,15 +98,15 @@ export const conditionItem = atom({
 });
 export const modelItem = atom({
   key: "modelItemValue",
-  default: {},
+  default: '',
 });
 export const supplierItem = atom({
   key: "supplierItemValue",
-  default: {},
+  default: '',
 });
 export const storageItem = atom({
   key: "storageItemValue",
-  default: {},
+  default: '',
 });
 export const customerId = atom({
   key: "customerIdValue",
@@ -134,5 +134,9 @@ export const imagesPost = atom({
 })
 export const blobsPost = atom({
   key: "blobsPostValue",
+  default: []
+})
+export const imagesResult = atom({
+  key: "imagesResultValue",
   default: []
 })

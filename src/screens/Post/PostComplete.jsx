@@ -7,36 +7,7 @@ import * as queries from "@/graphql/queries";
 
 const PostComplete = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
-  const [preview, setPreview] = useState({});
-  const [images, setImages] = useState([])
-  const { productPreview } = route.params;
-
-  const fetchData = async () => {
-    try {
-
-
-      Storage.list(`product/${productPreview.data.createCustomerProductStatus.product.code}/`, { level: 'protected', pageSize: 10 }).then(async (data) => {
-
-        const promises = await Promise.all(data.results.map(async (image) => {
-          const imageResult = await Storage.get(image.key, {
-            level: "protected",
-          });
-          return imageResult
-        }))
-        console.log("Count Prtomises: ", promises.length)
-        setImages(promises)
-      })
-
-      setPreview(productPreview);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useLayoutEffect(() => {
-    fetchData();
-  }, [])
-
+  const { product } = route.params;
   return (
     <View style={[styles.container, global.bgWhite]}>
       <View style={styles.imageContent}>
@@ -78,9 +49,9 @@ const PostComplete = ({ navigation, route }) => {
       </View>
       <CustomButton
         text={`Preview of your product`}
-        handlePress={() => navigation.navigate("Preview_Product")}
+        handlePress={() => navigation.navigate("Preview_Product", { product: product })}
         textStyles={[styles.textPreview, global.white]}
-        buttonStyles={[styles.preview, global.bgBlack]}
+        buttonStyles={[styles.preview, global.mainBgColor]}
       />
     </View>
   );

@@ -156,9 +156,9 @@ const PostProduct = ({ navigation, route }) => {
           condition: "GOOD",
           phoneFields: {
             imei: imei,
-            carrier: selectItemSupplier,
-            model: selectItemModel,
-            storage: selectItemStorage,
+            carrier: selectItemSupplier.title,
+            model: selectItemModel.title,
+            storage: selectItemStorage.title,
             batery: "",
           },
           // laptoFields: {
@@ -183,11 +183,10 @@ const PostProduct = ({ navigation, route }) => {
       Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
         level: 'protected',
         contentType: 'image/jpeg',
-      })
-    )))
-    console.log("Archivo Subidos")
-    console.log(resultStatus)
-    navigation.navigate("Post_Complete", { productPreview: resultStatus });
+      }) //.then((result) => console.log(result))
+    })
+
+    navigation.navigate("Post_Complete", { product: resultStatus.data.createCustomerProductStatus });
   };
   const fetchData = async () => {
     try {
@@ -238,7 +237,6 @@ const PostProduct = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
     dataUpdate();
-    console.log(JSON.stringify(blobImages));
   }, [
     imagesPostSelect,
     dataBrands,
