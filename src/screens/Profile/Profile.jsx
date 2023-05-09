@@ -20,6 +20,7 @@ import {
   categoryItem,
   conditionItem,
   customerId,
+  errorPostProduct,
   imagesPost,
   modelItem,
   productItem,
@@ -61,6 +62,8 @@ const Profile = ({ navigation }) => {
     useRecoilState(productsBrandId);
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
   const [blobImages, setBlobImages] = useRecoilState(blobsPost);
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
     const result = await API.graphql({
@@ -90,6 +93,7 @@ const Profile = ({ navigation }) => {
     setProductBrandSelect("");
     setImagesPostSelect([]);
     setBlobImages([]);
+    setSelectErrorPostProduct(false)
   };
 
   useEffect(() => {

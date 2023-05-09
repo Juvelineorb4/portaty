@@ -113,3 +113,31 @@
   width: 50%;
   height: 1px;
 }
+
+/*  */
+.textInputPrice {
+  flex: 1;
+  /* margin-left: 10px; */
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainerPrice {
+  /* flex: 1; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 93%;
+  padding: 14px 10px 14px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.placeholderPrice {
+  font-size: 13px;
+}
+.labelInputPrice {
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}

@@ -19,6 +19,7 @@ import {
   categoriesId,
   categoryItem,
   conditionItem,
+  errorPostProduct,
   modelItem,
   productItem,
   productsBrandId,
@@ -43,6 +44,8 @@ const CustomModal = ({
 
   /* Estaticos */
   const [selectId, setSelectId] = useState("");
+
+  const [selectError, setSelectError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   /* Guardar valor por item seleccionado */
@@ -52,11 +55,10 @@ const CustomModal = ({
   const [selectItemProduct, setSelectItemProduct] = useRecoilState(productItem);
   const [selectItemCondition, setSelectItemCondition] =
     useRecoilState(conditionItem);
-    const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
-    const [selectItemSupplier, setSelectItemSupplier] = useRecoilState(supplierItem);
-    const [selectItemStorage, setSelectItemStorage] =
-      useRecoilState(storageItem);
-
+  const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
+  const [selectItemSupplier, setSelectItemSupplier] =
+    useRecoilState(supplierItem);
+  const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
 
   /* Guardar ids de items seleccionados independientes */
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
@@ -64,8 +66,10 @@ const CustomModal = ({
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
-    
 
+  /* Error */
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
   useEffect(() => {}, [productBrandSelect, selectItemProduct]);
 
   return (
@@ -83,7 +87,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !categoriesSelect
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -121,6 +131,11 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct && !categoriesSelect ? (
+                    <Text style={styles.errorCategory}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -182,13 +197,25 @@ const CustomModal = ({
             </>
           ) : dataValue === "brands" ? (
             <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (categoriesSelect) setModalVisible(!modalVisible);
+                  if (!categoriesSelect) setSelectError(true);
+                }}
+              >
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    (selectError || selectErrorPostProduct) &&
+                    (!brandsSelect || !categoriesSelect)
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -229,6 +256,17 @@ const CustomModal = ({
                     type={icon.type}
                   />
                 </View>
+                {selectErrorPostProduct || selectError ? (
+                  !categoriesSelect ? (
+                    <Text style={styles.errorBrand}>Select category first</Text>
+                  ) : !brandsSelect ? (
+                    <Text style={styles.errorBrand}>Required</Text>
+                  ) : (
+                    ""
+                  )
+                ) : (
+                  ""
+                )}
               </TouchableOpacity>
               <Modal
                 animationType="none"
@@ -269,6 +307,7 @@ const CustomModal = ({
                             setSelectItemBrand(item);
                             setSelectId(item.aDBrandId);
                             setBrandsSelect(item.aDBrandId);
+                            setSelectError(false);
                             setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
@@ -293,13 +332,25 @@ const CustomModal = ({
             </>
           ) : dataValue === "products" ? (
             <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (brandsSelect) setModalVisible(!modalVisible);
+                  if (!brandsSelect) setSelectError(true);
+                }}
+              >
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    (selectError || selectErrorPostProduct) &&
+                    (!brandsSelect || !productSelect)
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -343,6 +394,19 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct || selectError ? (
+                    !brandsSelect ? (
+                      <Text style={styles.errorBoth}>
+                        Select category first
+                      </Text>
+                    ) : !productSelect ? (
+                      <Text style={styles.errorProduct}>Required</Text>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -385,6 +449,7 @@ const CustomModal = ({
                               setSelectId(item.id);
                               setProductSelect(item.id);
                               setProductBrandSelect(item.brandID);
+                              setSelectError(false);
                               setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
@@ -414,7 +479,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemModel.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -454,6 +525,11 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct && !selectItemModel.title ? (
+                    <Text style={styles.errorBoth}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -494,6 +570,7 @@ const CustomModal = ({
                             onPress={() => {
                               setSelectItemModel(item);
                               setSelectId(item.id);
+                              setSelectError(false);
                               setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
@@ -523,7 +600,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemSupplier.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -563,6 +646,11 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct && !selectItemSupplier.title ? (
+                    <Text style={styles.errorBoth}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -632,7 +720,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemStorage.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -672,6 +766,11 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct && !selectItemStorage.title ? (
+                    <Text style={styles.errorBoth}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -741,7 +840,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemCondition.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -777,6 +882,11 @@ const CustomModal = ({
                     size={icon.size}
                     type={icon.type}
                   />
+                  {selectErrorPostProduct && !selectItemCondition.title ? (
+                    <Text style={styles.errorBoth}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
