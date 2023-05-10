@@ -6,7 +6,7 @@
 .headerProfile {
     justify-content: center;
     align-items: center;
-    padding: 10px 15px;
+    padding: 15px 20px 20px;
     background-color: white;
 
 }
@@ -16,18 +16,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.userIcon {
-    border: 1px solid #929292;
-    border-radius: 100px;
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-}
+/* .userIcon {
+} */
 
 .icon {
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -56,11 +52,10 @@
 
 .contentSearch {
     flex: 1;
-    background-color: #494949;
     border-radius: 8px;
     flex-direction: row;
     align-items: center;
-    padding: 0px 0px 0px 10px;
+    padding: 10px;
 }
 
 .contentInput {
@@ -68,7 +63,7 @@
 }
 
 .inputSearch {
-    padding: 8px 10px;
+    font-family: 'light';
 }
 .contentBack {
     justify-content: center;

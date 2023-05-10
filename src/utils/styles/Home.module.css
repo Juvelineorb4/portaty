@@ -19,8 +19,8 @@
 }
 .textMain,
 .textAll {
-  font-family: 'semibold';
-  /* font-weight: 700; */
+  font-family: 'light';
+  margin-bottom: 5px;
   font-size: 16px;
 }
 .productsTopTrendingPopular, .productsBotTrendingPopular {

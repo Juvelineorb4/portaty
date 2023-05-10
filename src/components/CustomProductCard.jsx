@@ -9,7 +9,7 @@ const CustomProductCard = ({ product = {} }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
-      style={{ justifyContent: "center", marginBottom: 20 }}
+      style={{ justifyContent: "center", marginBottom: 50 }}
       onPress={() =>
         navigation.navigate(`${product.brand}_${product.id}`, {
           data: product,
@@ -58,8 +58,8 @@ const CustomProductCard = ({ product = {} }) => {
         >
           <Image
             style={{
-              width: 12,
-              height: 12,
+              width: 25,
+              height: 25,
               resizeMode: "contain",
             }}
             source={require("@/utils/images/favorites.png")}
@@ -70,65 +70,19 @@ const CustomProductCard = ({ product = {} }) => {
       <Text
         style={[
           {
-            fontSize: 16,
+            fontSize: 14,
             // fontWeight: "bold",
             paddingTop: 5,
             textTransform: "capitalize",
-            fontFamily: 'medium',
+            fontFamily: 'light',
             letterSpacing: -0.5,
-            marginBottom: 1
+            marginBottom: 3
           },
         ]}
       >
         {product.name || product.title}
       </Text>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: 110,
-          marginBottom: 1
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{
-              width: 13,
-              height: 13,
-              resizeMode: "contain",
-            }}
-            source={require("@/utils/images/star.png")}
-          />
-          <Text
-            style={[
-              global.black,
-              { fontSize: 12, marginLeft: 3, fontFamily: 'thinItalic', marginRight: 5 },
-            ]}
-          >
-            {product.avgRating || product.reviews}
-          </Text>
-        </View>
-        <Text>|</Text>
-        <View
-          style={[
-            global.bgWhiteSmoke,
-            { paddingHorizontal: 5, borderRadius: 7, marginLeft: 5 },
-          ]}
-        >
-          <Text style={[global.black, { fontSize: 12, fontFamily: 'thinItalic' }]}>
-            {product.solds} solds
-          </Text>
-        </View>
-      </View>
-
-      <Text style={{ fontSize: 16, fontFamily: 'semibold' }}>
+      <Text style={{ fontSize: 16, fontFamily: 'regular', }}>
         ${product.maxPrice || product.price}
       </Text>
     </TouchableOpacity>

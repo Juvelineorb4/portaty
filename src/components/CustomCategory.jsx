@@ -52,11 +52,11 @@ const CustomCategory = ({
       <Text
         style={{
           flex: 1,
-          fontSize: 12,
+          fontSize: 13,
           marginTop: 5,
           textTransform: "capitalize",
           textAlign: "center",
-          fontFamily: "medium",
+          fontFamily: "light",
         }}
       >
         {title}
