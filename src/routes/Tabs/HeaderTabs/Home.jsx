@@ -77,7 +77,7 @@ const Search = ({ version, onSearchHandler }) => {
         </TouchableOpacity>
       )}
       <TouchableOpacity
-        style={[styles.contentSearch, global.bgWhiteSmoke]}
+        style={[styles.contentSearch, global.bgWhiteSoft]}
         activeOpacity={1}
         onPress={() => {
           onSearchHandler();
@@ -99,6 +99,16 @@ const Search = ({ version, onSearchHandler }) => {
             style={styles.inputSearch}
             editable={false}
           />
+          <TouchableOpacity>
+            <Image
+              style={{
+                width: 27,
+                height: 27,
+                resizeMode: "cover",
+              }}
+              source={require("@/utils/images/filter.png")}
+            />
+          </TouchableOpacity>
         </View>
         {/* icon */}
 

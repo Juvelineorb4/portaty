@@ -25,7 +25,7 @@ const CustomCategory = ({
     >
       <View
         style={[
-          activeSelect === itemId ? global.mainBgColor : global.bgWhiteSmoke,
+          activeSelect === itemId ? global.mainBgColor : {borderColor: '#404040', borderWidth: 0.4},
           {
             justifyContent: "center",
             alignItems: "center",
@@ -50,14 +50,14 @@ const CustomCategory = ({
       </View>
 
       <Text
-        style={{
+        style={[global.topGray ,{
           flex: 1,
           fontSize: 13,
           marginTop: 5,
           textTransform: "capitalize",
           textAlign: "center",
-          fontFamily: "light",
-        }}
+          fontFamily: "regular",
+        }]}
       >
         {title}
       </Text>

@@ -29,8 +29,8 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
           style={[
             styles.headerProfile,
             {
-              shadowColor: "#000",
-              elevation: 5,
+              shadowColor: "#00000",
+              elevation: 1,
             },
           ]}
         >
