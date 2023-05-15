@@ -22,6 +22,9 @@ module.exports = StyleSheet.create({
   midGray: {
     color: '#9d9d9d'
   },
+  bgMidGray: {
+    backgroundColor: '#9d9d9d'
+  },
   topGray: {
     color: '#404040'
   },

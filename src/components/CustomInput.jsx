@@ -18,31 +18,10 @@ const CustomInput = ({
   area = false,
   lines = 1,
   numeric,
-  errorPost
+  errorPost = false
 }) => {
   const [securityChange, setSecurityChange] = useState(true);
   const [errorState, setErrorState] = useState(false);
-  // const handleInputChange = (text) => {
-  //   const filteredText = text.replace(/\D/gm, "");
-
-  //   if (filteredText !== text) {
-  //     // set state text to the current TextInput value, to trigger
-  //     // TextInput update.
-  //     this.setState({ text: text });
-
-  //     // buys us some time until the above setState finish execution
-  //     setTimeout(() => {
-  //       this.setState((previousState) => {
-  //         return {
-  //           ...previousState,
-  //           text: previousState.text.replace(/\D/gm, ""),
-  //         };
-  //       });
-  //     }, 0);
-  //   } else {
-  //     this.setState({ text: filteredText });
-  //   }
-  // };
   return (
     <Controller
       control={control}
@@ -57,7 +36,7 @@ const CustomInput = ({
           <View
             style={[
               styled.input,
-              error || errorPost && errorState && { borderColor: "red", borderWidth: 1 },
+              (error || errorPost) && errorState && { borderColor: "red", borderWidth: 1 },
             ]}
           >
             {icon && (
@@ -70,19 +49,16 @@ const CustomInput = ({
             )}
             <TextInput
               value={value}
-              onChangeText={() => onChange(setErrorState(true))}
+              onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
               placeholderTextColor={placeholderTextColor}
-              {...styled.placeholder}
-              style={styled.text}
+              style={value ? styled.text : styled.placeholder}
               secureTextEntry={security && securityChange}
               defaultValue={defaultValue}
               multiline={area ? true : false}
               numberOfLines={lines}
-              keyboardType="number-pad"
             />
-            {/* si es de seguridad por defecto se colcoa el ojito */}
             {security
               ? iconRight && (
                   <TouchableOpacity

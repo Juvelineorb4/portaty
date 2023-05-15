@@ -1,12 +1,41 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
 
-const CustomButton = ({ text, handlePress, textStyles, buttonStyles, icon={} }) => {
+const CustomButton = ({
+  text,
+  handlePress,
+  textStyles,
+  buttonStyles,
+  icon = {},
+  image = {},
+}) => {
   return (
-    <TouchableOpacity style={buttonStyles} onPress={handlePress} activeOpacity={1}>
+    <TouchableOpacity
+      style={buttonStyles}
+      onPress={handlePress}
+      activeOpacity={1}
+    >
       {text && <Text style={textStyles}>{text}</Text>}
-      {icon.status && <Icon name={icon.name} color={icon.color} size={icon.size} type={icon.type} />}
+      {icon.status && (
+        <Icon
+          name={icon.name}
+          color={icon.color}
+          size={icon.size}
+          type={icon.type}
+        />
+      )}
+      {image && (
+        <Image
+          style={{
+            width: 25,
+            height: 25,
+            resizeMode: "contain",
+            alignSelf: "center",
+          }}
+          source={image}
+        />
+      )}
     </TouchableOpacity>
   );
 };

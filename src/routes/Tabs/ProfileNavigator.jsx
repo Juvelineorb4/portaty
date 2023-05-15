@@ -8,6 +8,7 @@ import { useRoute } from "@react-navigation/native";
 import Header from "./HeaderTabs/index";
 import Result from "@/screens/Search/Result";
 import PostNavigator from "./PostNavigator";
+import LeftHeader from "./HeaderTabs/LeftHeader";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -43,6 +44,7 @@ const ProfileNavigator = () => {
         component={Permissions}
         options={{
           animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
       <Stack.Screen
@@ -58,7 +60,7 @@ const ProfileNavigator = () => {
         component={PostNavigator}
         options={{
           animation: "slide_from_right",
-          headerShown: false
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

@@ -4,18 +4,8 @@ export const settings = {
       title: "App permissions",
       subtitle: "Set which permissions the app has access to.",
       icon: {
-        left: {
-          name: "lock-outline",
-          size: 20,
-          color: "white",
-          type: 'MTI'
-        },
-        right: {
-          name: "arrow-right",
-          size: 24,
-          color: "#404040",
-          type: 'MTI'
-        },
+        left: require("@/utils/images/lock.png"),
+        right: require("@/utils/images/arrow_right.png"),
       },
       route: "Permissions",
       // routePush: true,
@@ -24,18 +14,8 @@ export const settings = {
       title: "Introduction",
       subtitle: "Was guided through our new app.",
       icon: {
-        left: {
-          name: "crosshairs-question",
-          size: 20,
-          color: "white",
-          type: 'MTI'
-        },
-        right: {
-          name: "arrow-right",
-          size: 24,
-          color: "#404040",
-          type: 'MTI'
-        },
+        left: require("@/utils/images/question.png"),
+        right: require("@/utils/images/arrow_right.png"),
       },
       route: "Introduction",
       // routePush: true,
@@ -44,18 +24,8 @@ export const settings = {
       title: "Privacy & Policy",
       subtitle: "See details of our policy",
       icon: {
-        left: {
-          name: "file-document-outline",
-          size: 20,
-          color: "white",
-          type: 'MTI'
-        },
-        right: {
-          name: "arrow-right",
-          size: 24,
-          color: "#404040",
-          type: 'MTI'
-        },
+        left: require("@/utils/images/folder.png"),
+        right: require("@/utils/images/arrow_right.png"),
       },
       route: "Terms",
       // routePush: true,
@@ -64,18 +34,8 @@ export const settings = {
       title: "App specs",
       subtitle: "See details about the app",
       icon: {
-        left: {
-          name: "information-outline",
-          size: 20,
-          color: "white",
-          type: 'MTI'
-        },
-        right: {
-          name: "arrow-right",
-          size: 24,
-          color: "#404040",
-          type: 'MTI'
-        },
+        left: require("@/utils/images/info_white.png"),
+        right: require("@/utils/images/arrow_right.png"),
       },
       route: "About",
       // routePush: true,
@@ -83,14 +43,9 @@ export const settings = {
     {
       title: "Logout",
       icon: {
-        left: {
-          name: "logout",
-          size: 20,
-          color: "white",
-          type: 'MTI'
-        },
+        left: require("@/utils/images/exit.png"),
       },
-      route: "Welcome",
+      // route: "Welcome",
       // routePush: true,
     },
   ],

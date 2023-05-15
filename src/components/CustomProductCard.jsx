@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CustomProductCard = ({ product = {} }) => {
   const navigation = useNavigation();
-  const [favorites, setFavorites] = useState(false)
+  const [favorites, setFavorites] = useState(false);
   const global = require("@/utils/styles/global.js");
   return (
     <TouchableOpacity
@@ -57,36 +57,45 @@ const CustomProductCard = ({ product = {} }) => {
           ]}
           onPress={() => setFavorites(!favorites)}
         >
-          {favorites ? <Image
-            style={{
-              width: 30,
-              height: 30,
-              height: 30,
-              resizeMode: "contain",
-            }}
-            source={require("@/utils/images/favorites_active.png")}
-          /> : <Image
-          style={{
-            width: 30,
-            height: 30,
-            height: 30,
-            resizeMode: "contain",
-          }}
-          source={require("@/utils/images/favorites.png")}
-        />}
+          {favorites ? (
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                height: 30,
+                resizeMode: "contain",
+              }}
+              source={require("@/utils/images/favorites_active.png")}
+            />
+          ) : (
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                height: 30,
+                resizeMode: "contain",
+              }}
+              source={require("@/utils/images/favorites_white.png")}
+            />
+          )}
         </TouchableOpacity>
       </View>
-      <View style={[ {
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
-        flex: 1,
-        borderWidth: 0.5,
-        padding: 5,
-        borderColor: "#404040",
-        // backgroundColor: 'rgba(255, 164, 36, 0.8)'
-      }]}>
+      <View
+        style={[
+          {
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8,
+            flex: 1,
+            borderWidth: 0.5,
+            padding: 5,
+            borderColor: "#404040",
+            // backgroundColor: 'rgba(255, 164, 36, 0.8)'
+          },
+        ]}
+      >
         <Text
-          style={[ global.topGray,
+          style={[
+            global.topGray,
             {
               fontSize: 12,
               textTransform: "capitalize",
@@ -99,21 +108,31 @@ const CustomProductCard = ({ product = {} }) => {
           Venezuela, Lara
         </Text>
         <Text
-          style={[ global.topGray,
+          style={[
+            global.topGray,
             {
               fontSize: 13,
-              // fontWeight: "bold",
-              // paddingTop: 5,
-              textTransform: 'uppercase',
+              textTransform: "uppercase",
               fontFamily: "regular",
               letterSpacing: -1,
               marginBottom: 4,
+              width: 120
             },
           ]}
         >
           {product.name || product.title}
         </Text>
-        <Text style={[global.topGray, { fontSize: 18, fontFamily: "regular", letterSpacing: -0.6, textAlign: 'right'}]}>
+        <Text
+          style={[
+            global.topGray,
+            {
+              fontSize: 18,
+              fontFamily: "regular",
+              letterSpacing: -0.6,
+              textAlign: "right",
+            },
+          ]}
+        >
           ${product.maxPrice || product.price}
         </Text>
       </View>

@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
   useDerivedValue,
 } from "react-native-reanimated";
-import CartNavigator from "./CartNavigator";
+import CartNavigator from "./FavoritesNavigator";
 
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);

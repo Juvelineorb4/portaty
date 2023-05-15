@@ -272,12 +272,6 @@ const PostProduct = ({ navigation, route }) => {
               placeholder={"Select Category"}
               both={true}
               text={`Category`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
               modal={{
                 text: "Select your type of category",
               }}
@@ -292,12 +286,6 @@ const PostProduct = ({ navigation, route }) => {
               placeholder={"Select Brand"}
               both={true}
               text={`Brand`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
               modal={{
                 text: "Select your type of brand",
               }}
@@ -313,12 +301,6 @@ const PostProduct = ({ navigation, route }) => {
             name={`product`}
             placeholder={"Select Product"}
             text={`Product`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
             modal={{
               text: "Select your type of product",
             }}
@@ -333,12 +315,6 @@ const PostProduct = ({ navigation, route }) => {
             placeholder={"Select Condition"}
             both={true}
             text={`Condition`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
             modal={{
               text: "Select condition of your product",
             }}
@@ -352,18 +328,18 @@ const PostProduct = ({ navigation, route }) => {
               placeholder={"Enter Price"}
               styled={{
                 text: styles.textInputPrice,
-                label: [styles.labelInputPrice, global.topGray],
+                label: [styles.labelInputPrice],
                 error: styles.errorInputPrice,
-                input: [styles.inputContainerPrice, global.bgWhiteSoft],
+                input: [styles.inputContainerPrice],
                 placeholder: styles.placeholderPrice,
               }}
               text={`Price`}
-              iconRight={{
-                name: "dollar",
-                size: 14,
-                color: "#8c9199cb",
-                type: "FA",
-              }}
+              // iconRight={{
+              //   name: "dollar",
+              //   size: 14,
+              //   color: "#8c9199cb",
+              //   type: "FA",
+              // }}
               numeric={true}
               errorPost={selectErrorPostProduct}
               rules={{
@@ -378,9 +354,9 @@ const PostProduct = ({ navigation, route }) => {
           placeholder={"Write description about your product"}
           styled={{
             text: styles.textInputD,
-            label: [styles.labelInputD, global.topGray],
+            label: [styles.labelInputD],
             error: styles.errorInputD,
-            input: [styles.inputContainerD, global.bgWhiteSoft],
+            input: [styles.inputContainerD],
             placeholder: styles.placeholder,
           }}
           text={`Description`}
@@ -612,11 +588,11 @@ const PostProduct = ({ navigation, route }) => {
                   name={`imei`}
                   placeholder={"Enter IMEI"}
                   styled={{
-                    text: styles.textInput,
-                    label: [styles.labelInputIMEI, global.topGray],
-                    error: styles.errorInput,
-                    input: [styles.inputContainer, global.bgWhiteSoft],
-                    placeholder: styles.placeholder,
+                    text: styles.textInputIMEI,
+                    label: [styles.labelInputIMEI],
+                    error: styles.errorInputIMEI,
+                    input: [styles.inputContainerIMEI],
+                    placeholder: styles.placeholderIMEI,
                   }}
                   text={`IMEI`}
                   numeric={true}

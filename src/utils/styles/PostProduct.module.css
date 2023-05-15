@@ -4,6 +4,8 @@
 .form {
   flex: 1;
   padding: 20px;
+  padding-bottom: 80px;
+
 }
 .both {
   flex: 1;
@@ -17,7 +19,7 @@
   justify-content: center;
 }
 .textButton {
-  font-family: 'semibold';
+  font-family: 'medium';
   font-size: 14px;
   color: #404040;
 }
@@ -54,10 +56,15 @@
   margin: 3px 0px 10px;
 }
 .placeholder {
-  font-size: 13px;
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-family: 'light';
+  font-size: 12px;
 }
 .labelInput {
-  font-family: 'medium';
+  font-family: 'regular';
   font-size: 14px;
   color: #404040;
   text-transform: capitalize;
@@ -66,6 +73,7 @@
   flex: 1;
   margin-left: 10px;
   color: #8c9199cb;
+
   /* text-transform: capitalize; */
 }
 .inputContainerD {
@@ -81,24 +89,19 @@
 }
 
 .labelInputD {
-  font-family: 'medium';
+  font-family: 'regular';
   font-size: 14px;
   color: #404040;
   text-transform: capitalize;
 }
 .othersText {
-  font-family: 'semibold';
+  font-family: 'regular';
   font-size: 14px;
   color: #404040;
   text-align: center;
   padding: 25px 0;
 }
-.labelInputIMEI {
-  font-family: 'medium';
-  font-size: 14px;
-  color: #404040;
-  text-transform: uppercase;
-}
+
 .line {
   width: 100%;
   height: 1px;
@@ -117,27 +120,69 @@
 /*  */
 .textInputPrice {
   flex: 1;
-  /* margin-left: 10px; */
+  margin-left: 10px;
   color: #8c9199cb;
   text-transform: capitalize;
 }
 .inputContainerPrice {
-  /* flex: 1; */
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fafafa;
-  width: 93%;
-  padding: 14px 10px 14px 5px;
+  border: none;
+  width: 94%;
+  padding: 11px 10px 11px 5px;
   border-radius: 16px;
   margin: 3px 0px 10px;
+
 }
 .placeholderPrice {
-  font-size: 13px;
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-family: 'light';
 }
 .labelInputPrice {
-  font-family: 'medium';
+  font-family: 'regular';
   font-size: 14px;
   color: #404040;
   text-transform: capitalize;
+}
+
+/* IMEI */
+
+.textInputIMEI {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainerIMEI {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 90%;
+  padding: 11px 10px 11px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+  margin-right: 10px;
+}
+.placeholderIMEI {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-family: 'light';
+  font-size: 12px;
+}
+.labelInputIMEI {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-transform: uppercase;
 }

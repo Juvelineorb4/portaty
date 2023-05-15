@@ -1,9 +1,9 @@
 .container {
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 8px;
     flex-direction: row;
-    border: 1px solid #E5E5E5;
-    margin-bottom: 10px;
+    border: 0.4px solid #404040;
+    /* margin-bottom: 10px; */
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

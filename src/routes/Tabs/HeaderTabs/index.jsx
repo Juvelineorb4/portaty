@@ -53,7 +53,7 @@ const headerSwitch = (route, navigation, onSearchHandler) => {
       return <Header_Home version={3} onSearchHandler={onSearchHandler} />;
     case "Orders":
       return <Header_Home onSearchHandler={onSearchHandler} />;
-    case "Cart":
+    case "Favorites":
       return <Header_Home onSearchHandler={onSearchHandler} />;
     case "Search_Recent":
       return <CustomSearch navigation={navigation} route={route} />;

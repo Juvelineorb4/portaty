@@ -7,15 +7,9 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
-import { Controller } from "react-hook-form";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 
 import styles from "@/utils/styles/NavSearch.module.css";
-import { AntDesign } from "@expo/vector-icons";
 
 // Reoil
 import { useRecoilState } from "recoil";
@@ -26,7 +20,7 @@ const CustomNavSearch = ({ navigation, route }) => {
 
   const inputRef = useRef(null);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+  // const [isFocus, setIsFocus] = useState(false);
   const [search, setSearch] = useRecoilState(searchGlobal);
 
   // useEffect(() => {
@@ -35,8 +29,8 @@ const CustomNavSearch = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      inputRef.current.focus();
-      setIsFocus(true);
+      // inputRef.current.focus();
+      // setIsFocus(true);
 
       let prevStatus = undefined;
       if (prevStatus === undefined && AppState.currentState === "active")
@@ -44,15 +38,12 @@ const CustomNavSearch = ({ navigation, route }) => {
       const AppStateListener = AppState.addEventListener(
         "change",
         (nextState) => {
-          // console.log("State Act ", nextState)
-          // console.log("Prev State", prevStatus)
           if (prevStatus === "active" && nextState === "background") {
             prevStatus = nextState;
           }
         }
       );
       const KeyBoardHide = Keyboard.addListener("keyboardDidHide", () => {
-        // console.log("Teclado Cerrado")
         setKeyboardVisible(false);
         if (prevStatus === "active") {
           navigation.goBack();
@@ -70,14 +61,12 @@ const CustomNavSearch = ({ navigation, route }) => {
 
       return () => {
         prevStatus = undefined;
-        setIsFocus(false);
         setKeyboardVisible(false);
         AppStateListener.remove();
         KeyBoardHide.remove();
         KeyBoardShow.remove();
-        // console.log("se elimino algo")
       };
-    }, [isFocus])
+    }, [])
   );
 
   const onHandlePressEnter = () => {
@@ -107,14 +96,9 @@ const CustomNavSearch = ({ navigation, route }) => {
           />
         </TouchableOpacity>
       )}
-      <TouchableOpacity
-        style={[styles.contentSearch, global.bgWhiteSmoke]}
-        onPress={() => {
-          inputRef.current.focus();
-        }}
-        activeOpacity={1}
-      >
-           <Image
+      <View style={[styles.contentSearch, global.bgWhiteSoft]}>
+        <TouchableOpacity activeOpacity={1}>
+          <Image
             style={{
               width: 30,
               height: 30,
@@ -122,32 +106,36 @@ const CustomNavSearch = ({ navigation, route }) => {
             }}
             source={require("@/utils/images/search.png")}
           />
+        </TouchableOpacity>
+
         <View style={styles.contentInput}>
           <TextInput
             value={search}
             onChangeText={setSearch}
             onSubmitEditing={onHandlePressEnter}
-            autoFocus={true}
-            onFocus={() => {
-              setIsFocus(true);
-            }}
-            onBlur={() => setIsFocus(false)}
+            // autoFocus={true}
             placeholder={"Search"}
             style={styles.inputSearch}
             ref={inputRef}
             blurOnSubmit={false}
           />
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              style={{
+                width: 27,
+                height: 27,
+                resizeMode: "contain",
+              }}
+              source={require("@/utils/images/filter.png")}
+            />
+          </TouchableOpacity>
         </View>
-        {/* <TouchableOpacity
-                    style={{
-                        height: "100%", paddingRight: 10,
-                        flexDirection: "row",
-                        alignItems: "center"
-                    }}
-                >
-                    <Ionicons name="options-outline" size={24} color="black" />
-                </TouchableOpacity> */}
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };

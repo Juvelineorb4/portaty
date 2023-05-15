@@ -24,7 +24,7 @@ const Home = ({ version = 1, onSearchHandler }) => {
             />
           </TouchableOpacity>
 
-          <View style={styles.icon}>
+          {/* <View style={styles.icon}>
             <Image
               style={{
                 width: 35,
@@ -46,7 +46,7 @@ const Home = ({ version = 1, onSearchHandler }) => {
                 source={require("@/utils/images/hearth_default.png")}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
       )}
       <Search version={version} onSearchHandler={onSearchHandler} />

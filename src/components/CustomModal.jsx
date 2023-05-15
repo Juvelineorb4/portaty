@@ -103,7 +103,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -125,11 +126,13 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !categoriesSelect ? (
                     <Text style={styles.errorCategory}>Required</Text>
@@ -225,7 +228,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -248,12 +252,13 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                 </View>
                 {selectErrorPostProduct || selectError ? (
@@ -360,7 +365,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -388,11 +394,13 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct || selectError ? (
                     !brandsSelect ? (
@@ -495,7 +503,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -519,11 +528,13 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemModel.title ? (
                     <Text style={styles.errorBoth}>Required</Text>
@@ -616,7 +627,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -640,11 +652,13 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemSupplier.title ? (
                     <Text style={styles.errorBoth}>Required</Text>
@@ -736,7 +750,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -760,11 +775,13 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemStorage.title ? (
                     <Text style={styles.errorBoth}>Required</Text>
@@ -856,7 +873,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -875,12 +893,13 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemCondition.title ? (
                     <Text style={styles.errorBoth}>Required</Text>
