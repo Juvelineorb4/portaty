@@ -140,3 +140,7 @@ export const imagesResult = atom({
   key: "imagesResultValue",
   default: []
 })
+export const errorPostProduct = atom({
+  key: "errorPostProductValue",
+  default: false,
+});

@@ -57,10 +57,10 @@ const Login = ({ navigation }) => {
               color: "#404040",
               size: 25,
             }}
-            rules={{
-              required: "Email is required",
-              pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-            }}
+            // rules={{
+            //   required: "Email is required",
+            //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
+            // }}
           />
           <CustomInput
             control={control}
@@ -80,13 +80,13 @@ const Login = ({ navigation }) => {
               size: 25,
             }}
             security={true}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Min 8 characters",
-              },
-            }}
+            // rules={{
+            //   required: "Password is required",
+            //   minLength: {
+            //     value: 8,
+            //     message: "Min 8 characters",
+            //   },
+            // }}
           />
         </View>
         <View style={styles.panel}>

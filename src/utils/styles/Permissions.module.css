@@ -3,7 +3,7 @@
   position: relative;
 }
 .textContainer {
-  padding: 20px;
+  padding: 10px 20px 20px;
   margin-bottom: 10px;
 }
 .title {
@@ -18,22 +18,23 @@
   font-size: 14px;
 }
 .containerSelect {
-  padding: 20px;
+  flex: 1;
+  padding: 20px 20px 20px 0px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 .textContainerSelect {
   width: 75%;
+  margin-right: -30px;
 }
 .textTitleSelect {
   font-family: 'light';
-  /* font-weight: 100; */
   font-size: 18px;
 }
 .textSubtitleSelect {
   font-family: 'extralight';
-  /* font-weight: 400; */
+  /* width: 55%; */
   font-size: 12px;
 }
 .line {
