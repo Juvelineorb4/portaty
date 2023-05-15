@@ -488,6 +488,17 @@ export const onCreateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -569,6 +580,17 @@ export const onUpdateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -650,6 +672,17 @@ export const onDeleteCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -718,6 +751,51 @@ export const onDeleteCustomerShop = /* GraphQL */ `
       owner
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateCartItem = /* GraphQL */ `
+  subscription OnCreateCartItem(
+    $filter: ModelSubscriptionCartItemFilterInput
+    $owner: String
+  ) {
+    onCreateCartItem(filter: $filter, owner: $owner) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCartItem = /* GraphQL */ `
+  subscription OnUpdateCartItem(
+    $filter: ModelSubscriptionCartItemFilterInput
+    $owner: String
+  ) {
+    onUpdateCartItem(filter: $filter, owner: $owner) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCartItem = /* GraphQL */ `
+  subscription OnDeleteCartItem(
+    $filter: ModelSubscriptionCartItemFilterInput
+    $owner: String
+  ) {
+    onDeleteCartItem(filter: $filter, owner: $owner) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

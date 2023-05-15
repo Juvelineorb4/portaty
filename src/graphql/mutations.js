@@ -513,6 +513,17 @@ export const createCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -594,6 +605,17 @@ export const updateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -675,6 +697,17 @@ export const deleteCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -743,6 +776,51 @@ export const deleteCustomerShop = /* GraphQL */ `
       owner
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createCartItem = /* GraphQL */ `
+  mutation CreateCartItem(
+    $input: CreateCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    createCartItem(input: $input, condition: $condition) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCartItem = /* GraphQL */ `
+  mutation UpdateCartItem(
+    $input: UpdateCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    updateCartItem(input: $input, condition: $condition) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCartItem = /* GraphQL */ `
+  mutation DeleteCartItem(
+    $input: DeleteCartItemInput!
+    $condition: ModelCartItemConditionInput
+  ) {
+    deleteCartItem(input: $input, condition: $condition) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

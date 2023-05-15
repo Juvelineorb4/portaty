@@ -28,6 +28,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
     const response = await onCreatePaymentIntent({
       amount: Math.floor(data.maxPrice * 100),
     })
+    console.log(response)
     if (response.error) {
       Alert.alert("Ocurrio un Error")
       return
@@ -44,6 +45,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
     }
     // 3. Present the Payment Sheet from Stripe
     const paymentResponse = await presentPaymentSheet();
+    console.log(paymentResponse)
     if (paymentResponse.error) {
       Alert.alert(
         `Error code: ${paymentResponse.error.code}`,
@@ -51,6 +53,8 @@ const CustomSellerProduct = ({ route, navigation }) => {
       );
       return
     }
+
+
     // 4. If payment ok -> create the order
     onCreateOrder();
   }

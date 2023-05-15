@@ -73,8 +73,18 @@ type CustomerShop @model @auth(rules:[
     {allow: public, provider: iam, operations: [read]}
   ])
   description: String
+  shoppingCart: [CartItem] @hasMany(indexName: "byCustomerShopCartItem", fields: ["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type CartItem @model @auth(rules:[
+  {allow: owner},
+  {allow: groups, groups: ["admin"], operations:[read]}
+]){
+  id: ID!
+  productID: ID!
+  customerShopID: ID! @index(name: "byCustomerShopCartItem")
 }
 
 type CustomerProduct @model @auth(rules:[
@@ -101,6 +111,7 @@ type CustomerProduct @model @auth(rules:[
   laptoFields: LaptoFields
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
+
 type CategoryFields{
   name: String!
   image: String!
@@ -150,4 +161,29 @@ type PhoneFields {
 
 type LaptoFields {
   serial: String!
+}
+
+type OrdesDetails{
+  id
+  userID
+  paymentID
+  shipping 
+  items: []
+  total: string 
+  createATdate
+  updateAtDate
+}
+shipping{
+  country
+dsjpdsjds
+}
+item{
+  id 
+  orderId
+  productID
+}
+paymentDetais{
+  id
+  stripePaymentID
+  metadata: 
 }

@@ -378,6 +378,17 @@ export const getCustomerShop = /* GraphQL */ `
       name
       email
       description
+      shoppingCart {
+        items {
+          id
+          productID
+          customerShopID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
@@ -469,6 +480,17 @@ export const listCustomerShops = /* GraphQL */ `
         name
         email
         description
+        shoppingCart {
+          items {
+            id
+            productID
+            customerShopID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         products {
           items {
             id
@@ -522,6 +544,64 @@ export const listCustomerShops = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCartItem = /* GraphQL */ `
+  query GetCartItem($id: ID!) {
+    getCartItem(id: $id) {
+      id
+      productID
+      customerShopID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCartItems = /* GraphQL */ `
+  query ListCartItems(
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCartItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productID
+        customerShopID
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const cartItemsByCustomerShopID = /* GraphQL */ `
+  query CartItemsByCustomerShopID(
+    $customerShopID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    cartItemsByCustomerShopID(
+      customerShopID: $customerShopID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productID
+        customerShopID
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

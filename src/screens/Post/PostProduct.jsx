@@ -79,8 +79,9 @@ const PostProduct = ({ navigation, route }) => {
     const { price, description, imei, serial } = data;
 
     /* Ramdon Code */
-    const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
-      }-${Math.floor(100000 + Math.random() * 900000)}`;
+    const ramdonCode = `${selectItemCategory.abreviation}-${
+      selectItemBrand.aDBrand.abreviation
+    }-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const resultCode = await API.graphql({
       query: queries.listCustomerProducts,
@@ -179,7 +180,7 @@ const PostProduct = ({ navigation, route }) => {
     });
 
     // const uploadImage = async () => {
-    await Promise.all(blobImages.map((image, index) => (
+    blobImages.map((image, index) => {
       Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
         level: 'protected',
         contentType: 'image/jpeg',
