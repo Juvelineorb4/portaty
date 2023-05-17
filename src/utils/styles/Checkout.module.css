@@ -10,11 +10,27 @@
   margin-bottom: 20px;
 }
 .section {
-  padding: 0px 20px 20px;
+  padding: 0px 20px 0px;
   /* margin-bottom: 10px; */
 }
 .title {
   font-family: "thinItalic";
   font-size: 20px;
   margin-bottom: 10px;
+}
+.complete {
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  height: 60px;
+  /* background-color: #ffa424; */
+  border-radius: 12px;
+}
+.textComplete {
+  text-align: center;
+  font-family: "bold";
+  /* font-weight: 700; */
+  color: white;
+  font-size: 14px;
 }

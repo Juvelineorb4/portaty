@@ -20,6 +20,7 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
         mainRoute: navigation.getParent(getId()).getState().routeNames[0],
       },
     });
+    console.log(navigation.getParent(getId()).getState().routeNames[0])
   };
 
   return (
@@ -51,7 +52,7 @@ const headerSwitch = (route, navigation, onSearchHandler) => {
       return <Header_Home onSearchHandler={onSearchHandler} />;
     case "Result_Profile":
       return <Header_Home version={3} onSearchHandler={onSearchHandler} />;
-    case "Orders":
+    case "Notifications":
       return <Header_Home onSearchHandler={onSearchHandler} />;
     case "Favorites":
       return <Header_Home onSearchHandler={onSearchHandler} />;

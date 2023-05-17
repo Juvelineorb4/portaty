@@ -114,7 +114,7 @@ const CustomNavSearch = ({ navigation, route }) => {
             onChangeText={setSearch}
             onSubmitEditing={onHandlePressEnter}
             // autoFocus={true}
-            placeholder={"Search"}
+            placeholder={"Buscar"}
             style={styles.inputSearch}
             ref={inputRef}
             blurOnSubmit={false}

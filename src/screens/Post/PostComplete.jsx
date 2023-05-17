@@ -4,6 +4,7 @@ import CustomButton from "@/components/CustomButton";
 import styles from "@/utils/styles/PostComplete.module.css";
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import { es } from "@/utils/constants/lenguage";
 
 const PostComplete = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
@@ -20,12 +21,11 @@ const PostComplete = ({ navigation, route }) => {
           source={require("@/utils/images/check.png")}
         />
         <Text style={styles.textComplete}>
-          Your product is under review, we will notify you once we review it,
-          normally it takes 24 hours to review
+          {es.post.complete.text}
         </Text>
       </View>
       <CustomButton
-        text={`Preview of your product`}
+        text={es.post.complete.button}
         handlePress={() => navigation.navigate("Preview_Product", { product: product })}
         textStyles={[styles.textPreview, global.white]}
         buttonStyles={[styles.preview, global.mainBgColor]}

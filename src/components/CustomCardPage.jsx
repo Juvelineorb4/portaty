@@ -1,13 +1,12 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import styles from "@/utils/styles/CustomCardList.module.css";
+import styles from "@/utils/styles/CustomCardPage.module.css";
 import { es } from "@/utils/constants/lenguage";
 
-const CustomCardList = () => {
+const CustomCardPage = ({onHandlePress}) => {
   const global = require("@/utils/styles/global.js");
-  const [deleteCard, setDeleteCard] = useState(true);
-
-  return deleteCard ? (
+  const [save, setSave] = useState(false)
+  return (
     <View style={[styles.container]}>
       <View style={styles.image}>
         <Image
@@ -36,7 +35,7 @@ const CustomCardList = () => {
             }}
             source={require("@/utils/images/available.png")}
           />
-          <Text style={[styles.available, global.topGray]}>{es.favorites.card.available}</Text>
+          <Text style={[styles.available, global.topGray]}>{es.page.card.available}</Text>
         </View>
       </View>
       <View style={styles.content}>
@@ -44,46 +43,44 @@ const CustomCardList = () => {
         <Text style={[styles.price, global.topGray]}>$999.99</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          {es.favorites.card.message} Christopher
+          {es.page.card.message} Christopher
         </Text>
 
         <View style={styles.options}>
           <TouchableOpacity
-            // onPress={() => setDeleteCard(false)}
-            style={styles.option}
+            onPress={() => setSave(!save)}
+            style={styles.save}
           >
-            <Image
+            {save ? <Image
               style={{
-                width: 19,
-                height: 19,
+                width: 27,
+                height: 27,
                 resizeMode: "contain",
                 alignSelf: "center",
               }}
-              source={require("@/utils/images/info.png")}
-            />
-            <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.details}</Text>
+              source={require("@/utils/images/favorites_active.png")}
+            /> : <Image
+            style={{
+              width: 27,
+              height: 27,
+              resizeMode: "contain",
+              alignSelf: "center",
+            }}
+            source={require("@/utils/images/favorites_white.png")}
+          />}
+            
+            <Text style={[styles.textSave, global.topGray]}>{es.page.card.favorites}</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setDeleteCard(false)}
-            style={styles.option}
+            onPress={onHandlePress}
+            style={[styles.buy, global.mainBgColor]}
           >
-            <Image
-              style={{
-                width: 18,
-                height: 18,
-                resizeMode: "contain",
-                alignSelf: "center",
-              }}
-              source={require("@/utils/images/delete.png")}
-            />
-            <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.delete}</Text>
+            <Text style={[styles.textBuy, global.white]}>{es.page.card.buy}</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
-  ) : (
-    <View></View>
-  );
+  )
 };
 
-export default CustomCardList;
+export default CustomCardPage;
