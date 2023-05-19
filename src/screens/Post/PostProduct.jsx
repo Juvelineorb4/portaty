@@ -254,7 +254,6 @@ const PostProduct = ({ navigation, route }) => {
   useEffect(() => {
     fetchData();
     dataUpdate();
-    console.log(dataCategories)
   }, [
     imagesPostSelect,
     dataBrands,

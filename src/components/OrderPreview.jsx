@@ -8,7 +8,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const OrderPreview = () => {
   const global = require("@/utils/styles/global.js");
   return (
-    <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 30 }]}>
+    <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
       <CustomCardOrder />
       <View style={[styles.line, global.bgWhiteSmoke]} />
@@ -167,7 +167,7 @@ const OrderPreview = () => {
         </View>
       </View>
       <View style={[styles.line, global.bgWhiteSmoke]} />
-      <View style={{marginBottom: 120}}>
+      <View style={{marginBottom: 95}}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
           <Text style={styles.numberOrder}>Precio del producto: 100.00$</Text>

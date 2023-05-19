@@ -35,7 +35,7 @@ const NotificationsNavigator = ({ route }) => {
         component={OrderPreview}
         options={{ 
           animation: "slide_from_right",
-          headerShown: false, }}
+          header: (props) => <LeftHeader {...props} />, }}
       />
     </Stack.Navigator>
   );

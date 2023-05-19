@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import CustomCardList from "@/components/CustomCardList";
-import styles from "@/utils/styles/Cart.module.css";
+import styles from "@/utils/styles/Favorites.module.css";
 import CustomButton from "@/components/CustomButton";
 import { es } from "@/utils/constants/lenguage";
 

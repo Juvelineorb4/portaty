@@ -74,9 +74,10 @@ const Profile = ({ navigation }) => {
     });
     const result2 = await API.graphql({
       query: queries.listADCategories,
-      // variables: { id: userAuth.username },
+      // variables: { id: 'ee42c686-bb2c-4217-a971-37a9102e36b0' },
       authMode: "AWS_IAM",
     });
+    console.log(result2.data.listADCategories.items[7].products)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
@@ -146,8 +147,10 @@ const Profile = ({ navigation }) => {
             }}
             toogle={false}
           />
-          <View style={[styles.line, global.bgWhiteSmoke]} />
+        </TouchableOpacity>
 
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts")}>
           <CustomSelect
             title={es.profile.shop.products.title}
             subtitle={es.profile.shop.products.subtitle}
@@ -167,8 +170,10 @@ const Profile = ({ navigation }) => {
             }}
             toogle={false}
           />
-          <View style={[styles.line, global.bgWhiteSmoke]} />
+        </TouchableOpacity>
 
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders")}>
           <CustomSelect
             title={es.profile.shop.orders.title}
             subtitle={es.profile.shop.orders.subtitle}
@@ -191,7 +196,9 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>{es.profile.settings.title}</Text>
+        <Text style={[styles.titleSettings, global.black]}>
+          {es.profile.settings.title}
+        </Text>
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
