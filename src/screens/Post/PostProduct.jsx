@@ -169,10 +169,10 @@ const PostProduct = ({ navigation, route }) => {
           description: description,
           condition: "GOOD",
           phoneFields: {
-            imei: imei,
-            carrier: selectItemSupplier.title,
-            model: selectItemModel.title,
-            storage: selectItemStorage.title,
+            imei: imei ? imei : '',
+            carrier: selectItemSupplier.title ? selectItemSupplier.title : '',
+            model: selectItemModel.title ? selectItemModel.title : '',
+            storage: selectItemStorage.title ? selectItemStorage.title : '',
             batery: "",
           },
           // laptoFields: {
@@ -182,7 +182,7 @@ const PostProduct = ({ navigation, route }) => {
         },
       },
     });
-    console.log(dataItem)
+    console.log(dataItem);
     const resultStatus = await API.graphql({
       query: mutations.createCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -323,9 +323,7 @@ const PostProduct = ({ navigation, route }) => {
             data={conditions}
             dataValue={""}
           />
-          <View>
-            <View style={{flex: 1}}>
-
+          <View style={{ flex: 1 }}>
             <CustomInput
               control={control}
               name={`price`}
@@ -350,8 +348,6 @@ const PostProduct = ({ navigation, route }) => {
               //   required: "Required",
               // }}
             />
-            </View>
-
           </View>
         </View>
         <CustomInput
@@ -531,7 +527,6 @@ const PostProduct = ({ navigation, route }) => {
             style={styles.buttonImage}
             activeOpacity={1}
             onPress={pickImage}
-
           >
             <Image
               style={{
@@ -542,7 +537,9 @@ const PostProduct = ({ navigation, route }) => {
               }}
               source={require("@/utils/images/picker.png")}
             />
-            <Text style={styles.textButton}>{es.post.product.images.title}</Text>
+            <Text style={styles.textButton}>
+              {es.post.product.images.title}
+            </Text>
           </TouchableOpacity>
         </View>
         {selectItemCategory.name === "phone" ? (
@@ -589,7 +586,7 @@ const PostProduct = ({ navigation, route }) => {
               />
             </View>
             <View style={styles.both}>
-              <View style={{flex: 1}}>
+              <View style={{ flex: 1 }}>
                 <CustomInput
                   control={control}
                   name={`imei`}
@@ -630,7 +627,6 @@ const PostProduct = ({ navigation, route }) => {
                 dataValue={"storage"}
               />
               {/* </View> */}
-
             </View>
           </View>
         ) : selectItemCategory.name === "lapto" ? (

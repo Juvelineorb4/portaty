@@ -72,12 +72,11 @@ const Profile = ({ navigation }) => {
       variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const result2 = await API.graphql({
-      query: queries.listADCategories,
-      // variables: { id: 'ee42c686-bb2c-4217-a971-37a9102e36b0' },
-      authMode: "AWS_IAM",
+    const listProducts = await API.graphql({
+      query: queries.listCustomerProductStatuses,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log(result2.data.listADCategories.items[7].products)
+    console.log('soy yo', listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
