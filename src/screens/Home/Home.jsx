@@ -26,6 +26,7 @@ import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
 import { productsHome } from "@/utils/constants/products";
 import CustomFloatButton from "@/components/CustomFloatButton";
+import { es } from "@/utils/constants/lenguage";
 
 const Home = ({ data, navigation }) => {
   // console.log(data[0]);
@@ -84,7 +85,7 @@ const Home = ({ data, navigation }) => {
         let position = await Location.getCurrentPositionAsync({});
         setLocation(position);
         /* Location */
-        let text = "Waiting..";
+        let text = "Cargando..";
         if (errorMsg) {
           text = errorMsg;
         } else if (location) {
@@ -129,8 +130,8 @@ const Home = ({ data, navigation }) => {
       </View>
       <View style={styles.trendingPopular}>
         <View style={styles.textTrendingPopular}>
-          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>Trending Phones</Text>
-          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
+          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>{es.home.trending.product}</Text>
+          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>{es.home.trending.all}</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
           <View style={styles.productsTopTrendingPopular}>
@@ -163,9 +164,9 @@ const Home = ({ data, navigation }) => {
       <View style={styles.trendingBrand}>
         <View style={styles.textTrendingBrand}>
           <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>
-            Trending Apple Products
+          {es.home.trending.brand}
           </Text>
-          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
+          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>{es.home.trending.all}</Text>
         </View>
         <View style={styles.productsTrendingPopular}>
           <View style={styles.productsTopTrendingPopular}>
@@ -177,41 +178,6 @@ const Home = ({ data, navigation }) => {
             <CustomProductCard product={productsHome[3]} />
           </View>
         </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 20,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => setSettings(true)}
-          style={{
-            backgroundColor: "blue",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Open Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login_Welcome")}
-          style={{
-            backgroundColor: "orange",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Salir</Text>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

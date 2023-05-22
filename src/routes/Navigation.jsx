@@ -6,11 +6,13 @@ import DrawerNavigator from "./Tabs/Drawer";
 import LoginNavigator from "./Authentication/LoginNavigator";
 
 // amplify
-import { Auth, Hub, API } from 'aws-amplify'
+import { Auth, Hub, API, graphqlOperation } from 'aws-amplify'
 import * as queries from '@/graphql/queries'
+import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilState } from 'recoil'
 import { userAutenticated } from '@/atoms/index'
+import Tabs from "./Tabs/Tabs";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -54,19 +56,11 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    fetchAlgo()
-  }, [])
 
-  const fetchAlgo = async () => {
-    try {
-      const result = await API.graphql({
-        query: queries.listADBrands,
-        authMode: "AWS_IAM",
-      })
-      console.log(result.data.listADBrands)
-    } catch (error) {
-      console.error(error)
-    }
+    fecthalgo();
+  }, [])
+  const fecthalgo = async () => {
+    
   }
 
   return (
@@ -80,8 +74,8 @@ const Navigation = () => {
           }}
         />}
         <Stack.Screen
-          name={`Home`}
-          component={DrawerNavigator}
+          name={`Navigator`}
+          component={Tabs}
           options={{
             headerShown: false,
           }}

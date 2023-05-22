@@ -4,10 +4,13 @@
 .form {
   flex: 1;
   padding: 20px;
+  padding-bottom: 80px;
+
 }
 .both {
   flex: 1;
   flex-direction: row;
+  justify-content: space-between;
 }
 .images,
 .buttonImage {
@@ -17,9 +20,7 @@
   justify-content: center;
 }
 .textButton {
-  /* font-style: normal; */
-  font-family: 'semibold';
-  /* font-weight: 700; */
+  font-family: 'medium';
   font-size: 14px;
   color: #404040;
 }
@@ -27,15 +28,164 @@
   text-align: center;
   width: 100%;
   padding: 20px;
+  height: 60px;
   background-color: #ffa424;
   border-radius: 16px;
   margin-top: 20px;
 }
 
 .textPublish {
-  font-family: 'semibold';
+  font-family: 'medium';
   text-align: center;
-  /* font-weight: 700; */
   color: white;
   font-size: 14px;
+}
+.textInput {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainer {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 95%;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.placeholder {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-family: 'light';
+  font-size: 12px;
+}
+.labelInput {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+.textInputD {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+
+  /* text-transform: capitalize; */
+}
+.inputContainerD {
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #fafafa;
+  width: 100%;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+
+.labelInputD {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+.othersText {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-align: center;
+  padding: 25px 0;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+
+}
+.lineTwo {
+  margin-bottom: 15px;
+  flex: 1;
+  position: relative;
+  left: 25%;
+  width: 50%;
+  height: 1px;
+}
+
+/*  */
+.textInputPrice {
+  /* flex: 1; */
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  height: 50px;
+}
+.inputContainerPrice {
+  flex: 1;
+  height: 50px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  border: none;
+  width: 150px;
+  padding: 11px 10px 11px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+
+}
+.placeholderPrice {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-family: 'light';
+}
+.labelInputPrice {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+
+/* IMEI */
+
+.textInputIMEI {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainerIMEI {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 100%;
+  padding: 11px 10px 11px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.placeholderIMEI {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+  font-family: 'light';
+  font-size: 12px;
+}
+.labelInputIMEI {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #404040;
+  text-transform: uppercase;
 }

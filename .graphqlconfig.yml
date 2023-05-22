@@ -2,7 +2,7 @@ projects:
   portaty:
     schemaPath: src/graphql/schema.json
     includes:
-      - src/graphql/**/*.js
+      - src/graphql/
     excludes:
       - ./amplify/**
     extensions:
@@ -10,7 +10,7 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-        maxDepth: 4
+        maxDepth: 5
 extensions:
   amplify:
     version: 3

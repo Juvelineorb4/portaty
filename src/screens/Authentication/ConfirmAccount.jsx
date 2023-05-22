@@ -9,6 +9,7 @@ import CustomButton from "@/components/CustomButton";
 
 // amplify
 import { Auth } from 'aws-amplify'
+import { es } from "@/utils/constants/lenguage";
 
 const ConfirmAccount = () => {
   const global = require("@/utils/styles/global.js");
@@ -62,8 +63,8 @@ const ConfirmAccount = () => {
           subtitle: styles.subtitle,
           container: styles.textContainer,
         }}
-        title={`Enter code`}
-        subtitle={`We have sent you a confirmation code on the email ''`}
+        title={es.authentication.account.entercode.title}
+        subtitle={es.authentication.account.entercode.subtitle}
       />
       <Image
         style={{
@@ -76,15 +77,15 @@ const ConfirmAccount = () => {
         source={require("@/utils/images/code.png")}
       />
       <EnterCode
-        title={`Didn't you get your code?`}
-        subtitle={"Send the code again"}
+        title={es.authentication.account.code.title}
+        subtitle={es.authentication.account.code.subtitle}
         styled={{
           container: styles.enterCode,
         }}
         control={control}
       />
       <CustomButton
-        text={`Confirm Account`}
+        text={es.authentication.account.button}
         handlePress={handleSubmit(onHandleConfirm)}
         textStyles={[styles.textContinue, global.white]}
         buttonStyles={[styles.continue, global.mainBgColor]}

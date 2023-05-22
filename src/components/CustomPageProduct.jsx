@@ -2,242 +2,238 @@ import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "@/utils/styles/CustomProductPage.module.css";
 import CustomButton from "./CustomButton";
+import { es } from "@/utils/constants/lenguage";
+import { FlatList } from "react-native";
+import CustomCardList from "./CustomCardList";
+import CustomCardPage from "./CustomCardPage";
 
 const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
+  const handleNavigation = () => navigation.navigate("SellerProduct")
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>
-        <View style={[global.bgWhiteSmoke, styles.containerImages]}>
+        <View style={styles.containerImages}>
           <Image
             style={{
               width: 300,
-              height: 300,
+              height: 250,
+              marginRight: 10,
               resizeMode: "contain",
+              borderRadius: 8,
             }}
-            source={
-              data.images
-                ? { uri: data.images }
-                : require("@/utils/images/notimage.png")
-            }
+            source={require("@/utils/images/notimage.png")}
           />
         </View>
         <View style={styles.content}>
           <View style={styles.containerTitle}>
-            <Text style={[styles.title, global.black]}>
-              {data.name} - {data.brand}
-            </Text>
-            <Image
-              style={{
-                width: 20,
-                height: 20,
-                resizeMode: "contain",
-              }}
-              source={require("@/utils/images/favorites-black.png")}
-            />
-          </View>
-          <View style={styles.containerInfo}>
-            <View style={styles.containerSolds}>
-              <Text>{data.solds ? data.solds : "7430"} sold |</Text>
-            </View>
-            <View style={styles.containerReviews}>
-              <Image
-                style={{
-                  width: 13,
-                  height: 13,
-                  resizeMode: "contain",
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Text style={styles.textReviews}>
-                {data.reviews ? data.reviews : "(4.9) (5389 reviews)"}
-              </Text>
-            </View>
+            <Text style={[styles.titleProduct, global.black]}>N/T</Text>
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
 
           <View style={styles.containerDetails}>
             <View style={styles.description}>
-              <Text style={[styles.title, global.black]}>Description</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.description}
+              </Text>
               <Text style={[styles.descriptionText, global.midGray]}>
-                {data.description
-                  ? data.description
-                  : "Lorem ipsum dolor sit amet consectetur adipiscing elit tempus lacus cras, nunc et convallis arcu in vivamus rhoncus lobortis ultrices, mollis aliquet at gravida eu euismod est tortor pharetra. Urna pretium eu placerat dis"}
+                {data.product.description
+                  ? data.product.description
+                  : "Lorem ipsum dolor sit amet consectetur adipiscing elit tempus lacus cras, nunc et convallis arcu in vivamus rhoncus lobortis ultrices, mollis aliquet at gravida eu euismod est tortor pharetra. Urna pretium eu placerat dis"}N/T
               </Text>
             </View>
             <View style={styles.features}>
-              <Text style={[styles.title, global.black]}>Features</Text>
-              <View style={styles.featuresBubbles}>
-                <View style={styles.feature}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/cpu.png")}
-                  />
-                  <Text style={styles.featureText}>A15 Bionic</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.features}
+              </Text>
+              <View style={styles.bothFeatures}>
+                <View style={styles.leftFeatures}>
+                  <View style={styles.feature}>
+                    <View style={styles.labelFeature}>
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/carrier.png")}
+                      />
+                      <Text style={styles.labelTextFeature}>
+                        {es.post.preview.carrier}
+                      </Text>
+                    </View>
+                    <Text style={styles.textFeature}>
+                      {es.post.preview.none}
+                    </Text>
+                  </View>
+                  <View style={styles.feature}>
+                    <View
+                      style={{
+                        width: 50,
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/imei.png")}
+                      />
+                      <Text style={styles.labelTextFeature}>
+                        {es.post.preview.imei}
+                      </Text>
+                    </View>
+                    <Text style={styles.textFeature}>
+                      {es.post.preview.none}
+                    </Text>
+                  </View>
+
+                  <View style={styles.feature}>
+                    <View style={styles.labelFeature}>
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/batery.png")}
+                      />
+                      <Text style={styles.labelTextFeature}>
+                        {es.post.preview.batery}
+                      </Text>
+                    </View>
+                    <Text style={styles.textFeature}>
+                      {es.post.preview.none}
+                    </Text>
+                  </View>
                 </View>
-                <View style={styles.feature}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/storage.png")}
-                  />
-                  <Text style={styles.featureText}>128 GB</Text>
-                </View>
-                <View style={styles.feature}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/camera-feature.png")}
-                  />
-                  <Text style={styles.featureText}>48MP + 12MP</Text>
-                </View>
-                <View style={styles.feature}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/color.png")}
-                  />
-                  <Text style={styles.featureText}>Midnight</Text>
+                <View style={styles.rightFeatures}>
+                  <View style={styles.feature}>
+                    <View style={styles.labelFeature}>
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/model.png")}
+                      />
+                      <Text style={styles.labelTextFeature}>
+                        {es.post.preview.model}
+                      </Text>
+                    </View>
+                    <Text style={styles.textFeature}>
+                      {es.post.preview.none}
+                    </Text>
+                  </View>
+
+                  <View style={styles.feature}>
+                    <View style={styles.labelFeature}>
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/storage.png")}
+                      />
+                      <Text style={styles.labelTextFeature}>
+                        {es.post.preview.storage}
+                      </Text>
+                    </View>
+                    <Text style={styles.textFeature}>
+                      {es.post.preview.none}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
+
+            <View style={styles.abouts}>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.about}
+              </Text>
+              <View style={styles.bothAbout}>
+                <View style={styles.leftAbout}>
+                  <View style={styles.about}>
+                    <View style={styles.labelAbout}>
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/question.png")}
+                      />
+                      <Text style={styles.labelTextAbout}>
+                        {es.post.preview.condition}
+                      </Text>
+                    </View>
+                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                  </View>
+                  <View style={styles.about}>
+                    <View style={styles.labelAbout}>
+                      <Text style={styles.labelTextAbout}>
+                        {es.post.preview.category}
+                      </Text>
+                    </View>
+                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                  </View>
+                </View>
+                <View style={styles.rightAbout}>
+                  <View style={styles.about}>
+                    <View
+                      style={{
+                        width: 40,
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Image
+                        style={{
+                          width: 25,
+                          height: 25,
+                          resizeMode: "contain",
+                        }}
+                        source={require("@/utils/images/id.png")}
+                      />
+                      <Text style={styles.labelTextAbout}>
+                        {es.post.preview.id}
+                      </Text>
+                    </View>
+                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                  </View>
+                  <View style={styles.about}>
+                    <View
+                      style={{
+                        width: 40,
+                        flexDirection: "column",
+                        marginRight: 18,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text style={styles.labelTextAbout}>
+                        {es.post.preview.brand}
+                      </Text>
+                    </View>
+                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
-          <View style={styles.containerSellers}>
-            <TouchableOpacity
-              style={[styles.containerSeller, global.bgWhiteSmoke]}
-              activeOpacity={1}
-            >
-              <View style={styles.topInfo}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text style={[styles.priceRef, global.midGray]}>
-                  ${data.maxPrice} ref.
-                </Text>
-              </View>
-              <View style={styles.mediumInfo}>
-                <Image
-                  style={{
-                    width: 100,
-                    height: 100,
-                    resizeMode: "contain",
-                    marginLeft: "7%",
-                  }}
-                  source={
-                    data.images
-                      ? { uri: data.images }
-                      : require("@/utils/images/notimage.png")
-                  }
-                />
-                <Text style={styles.price}>${data.maxPrice}</Text>
-              </View>
-              <View style={styles.botInfo}>
-                <CustomButton
-                  text={`Buy`}
-                  handlePress={() =>
-                    navigation.navigate("SellerProduct", { data: data })
-                  }
-                  textStyles={[styles.textBuy, global.white]}
-                  buttonStyles={[styles.buy, global.mainBgColor]}
-                />
-                <View style={styles.seller}>
-                  <Text style={{fontFamily: 'regular'}}>Christopher Alvarez</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.containerSeller, global.bgWhiteSmoke]}
-              activeOpacity={1}
-            >
-              <View style={styles.topInfo}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text style={[styles.priceRef, global.midGray]}>
-                  ${data.maxPrice} ref.
-                </Text>
-              </View>
-              <View style={styles.mediumInfo}>
-                <Image
-                  style={{
-                    width: 100,
-                    height: 100,
-                    resizeMode: "contain",
-                    marginLeft: "7%",
-                  }}
-                  source={
-                    data.images
-                      ? { uri: data.images }
-                      : require("@/utils/images/notimage.png")
-                  }
-                />
-                <Text style={styles.price}>${data.maxPrice}</Text>
-              </View>
-              <View style={styles.botInfo}>
-                <CustomButton
-                  text={`Buy`}
-                  handlePress={() =>
-                    navigation.navigate("SellerProduct", { data: data })
-                  }
-                  textStyles={[styles.textBuy, global.white]}
-                  buttonStyles={[styles.buy, global.mainBgColor]}
-                />
-                <View style={styles.seller}>
-                  <Text style={{fontFamily: 'regular'}}>Luis Aranguren</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.containerSeller, global.bgWhiteSmoke]}
-              activeOpacity={1}
-            >
-              <View style={styles.topInfo}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text style={[styles.priceRef, global.midGray]}>
-                  ${data.maxPrice} ref.
-                </Text>
-              </View>
-              <View style={styles.mediumInfo}>
-                <Image
-                  style={{
-                    width: 100,
-                    height: 100,
-                    resizeMode: "contain",
-                    marginLeft: "7%",
-                  }}
-                  source={
-                    data.images
-                      ? { uri: data.images }
-                      : require("@/utils/images/notimage.png")
-                  }
-                />
-                <Text style={styles.price}>${data.maxPrice}</Text>
-              </View>
-              <View style={styles.botInfo}>
-                <CustomButton
-                  text={`Buy`}
-                  handlePress={() =>
-                    navigation.navigate("SellerProduct", { data: data })
-                  }
-                  textStyles={[styles.textBuy, global.white]}
-                  buttonStyles={[styles.buy, global.mainBgColor]}
-                />
-                <View style={styles.seller}>
-                  <Text style={{fontFamily: 'regular'}}>Manolito</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
+          <CustomCardPage onHandlePress={() => handleNavigation()}/>
+          <CustomCardPage onHandlePress={() => handleNavigation()}/>
+          <CustomCardPage onHandlePress={() => handleNavigation()}/>
+          <CustomCardPage onHandlePress={() => handleNavigation()}/>
         </View>
       </View>
     </ScrollView>
