@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Alert,
+  TouchableHighlight,
+} from "react-native";
 import styles from "@/utils/styles/PostProduct.module.css";
 import React, { useEffect, useState } from "react";
 import CustomInput from "@/components/CustomInput";
@@ -29,12 +36,13 @@ import {
   serialItem,
   customerId,
   blobsPost,
+  errorPostProduct,
 } from "@/atoms";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const PostProduct = ({ navigation, route }) => {
   // console.log(route.params.userID)e
   const global = require("@/utils/styles/global.js");
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, watch } = useForm();
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
   const [brandsSelect, setBrandsSelect] = useRecoilState(brandsId);
   const [productsSelect, setProductsSelect] = useRecoilState(productsId);
@@ -52,6 +60,8 @@ const PostProduct = ({ navigation, route }) => {
     useRecoilState(supplierItem);
   const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
 
   /* Images Picker */
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
@@ -74,6 +84,8 @@ const PostProduct = ({ navigation, route }) => {
       setImage(result.assets[0].uri);
     }
   };
+  const { price, description, imei, serial } = control;
+  // const { price, description, imei, serial } = watch;
 
   const onHandleSubmit = async (data) => {
     const { price, description, imei, serial } = data;
@@ -182,12 +194,14 @@ const PostProduct = ({ navigation, route }) => {
     // const uploadImage = async () => {
     blobImages.map((image, index) => {
       Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
-        level: 'protected',
-        contentType: 'image/jpeg',
-      }) //.then((result) => console.log(result))
-    })
+        level: "protected",
+        contentType: "image/jpeg",
+      }); //.then((result) => console.log(result))
+    });
 
-    navigation.navigate("Post_Complete", { product: resultStatus.data.createCustomerProductStatus });
+    navigation.navigate("Post_Complete", {
+      product: resultStatus.data.createCustomerProductStatus,
+    });
   };
   const fetchData = async () => {
     try {
@@ -258,12 +272,6 @@ const PostProduct = ({ navigation, route }) => {
               placeholder={"Select Category"}
               both={true}
               text={`Category`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
               modal={{
                 text: "Select your type of category",
               }}
@@ -278,12 +286,6 @@ const PostProduct = ({ navigation, route }) => {
               placeholder={"Select Brand"}
               both={true}
               text={`Brand`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
               modal={{
                 text: "Select your type of brand",
               }}
@@ -299,12 +301,6 @@ const PostProduct = ({ navigation, route }) => {
             name={`product`}
             placeholder={"Select Product"}
             text={`Product`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
             modal={{
               text: "Select your type of product",
             }}
@@ -319,12 +315,6 @@ const PostProduct = ({ navigation, route }) => {
             placeholder={"Select Condition"}
             both={true}
             text={`Condition`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
             modal={{
               text: "Select condition of your product",
             }}
@@ -337,18 +327,23 @@ const PostProduct = ({ navigation, route }) => {
               name={`price`}
               placeholder={"Enter Price"}
               styled={{
-                text: styles.textInput,
-                label: [styles.labelInput, global.topGray],
-                error: styles.errorInput,
-                input: [styles.inputContainer, global.bgWhiteSoft],
-                placeholder: styles.placeholder,
+                text: styles.textInputPrice,
+                label: [styles.labelInputPrice],
+                error: styles.errorInputPrice,
+                input: [styles.inputContainerPrice],
+                placeholder: styles.placeholderPrice,
               }}
               text={`Price`}
-              iconRight={{
-                name: "dollar",
-                size: 14,
-                color: "#8c9199cb",
-                type: "FA",
+              // iconRight={{
+              //   name: "dollar",
+              //   size: 14,
+              //   color: "#8c9199cb",
+              //   type: "FA",
+              // }}
+              numeric={true}
+              errorPost={selectErrorPostProduct}
+              rules={{
+                required: "Required",
               }}
             />
           </View>
@@ -359,14 +354,18 @@ const PostProduct = ({ navigation, route }) => {
           placeholder={"Write description about your product"}
           styled={{
             text: styles.textInputD,
-            label: [styles.labelInputD, global.topGray],
+            label: [styles.labelInputD],
             error: styles.errorInputD,
-            input: [styles.inputContainerD, global.bgWhiteSoft],
+            input: [styles.inputContainerD],
             placeholder: styles.placeholder,
           }}
           text={`Description`}
           area={true}
           lines={6}
+          errorPost={selectErrorPostProduct}
+          rules={{
+            required: "Required",
+          }}
         />
         <View style={styles.imagesPicker}>
           <View style={styles.images}>
@@ -589,13 +588,18 @@ const PostProduct = ({ navigation, route }) => {
                   name={`imei`}
                   placeholder={"Enter IMEI"}
                   styled={{
-                    text: styles.textInput,
-                    label: [styles.labelInputIMEI, global.topGray],
-                    error: styles.errorInput,
-                    input: [styles.inputContainer, global.bgWhiteSoft],
-                    placeholder: styles.placeholder,
+                    text: styles.textInputIMEI,
+                    label: [styles.labelInputIMEI],
+                    error: styles.errorInputIMEI,
+                    input: [styles.inputContainerIMEI],
+                    placeholder: styles.placeholderIMEI,
                   }}
                   text={`IMEI`}
+                  numeric={true}
+                  errorPost={selectErrorPostProduct}
+                  rules={{
+                    required: "Required",
+                  }}
                 />
               </View>
               <CustomModal
@@ -642,7 +646,21 @@ const PostProduct = ({ navigation, route }) => {
         )}
         <CustomButton
           text={`Publish your product`}
-          handlePress={handleSubmit(onHandleSubmit)}
+          handlePress={
+            !selectItemCategory.name ||
+            !selectItemBrand.name ||
+            !selectItemModel.title ||
+            !selectItemProduct.name ||
+            !selectItemCondition.title ||
+            !selectItemStorage.title ||
+            !selectItemSupplier.title ||
+            !price ||
+            !description ||
+            !imei ||
+            !serial
+              ? () => setSelectErrorPostProduct(true)
+              : handleSubmit(onHandleSubmit)
+          }
           textStyles={[styles.textPublish, global.white]}
           buttonStyles={[styles.publish, global.mainBgColor]}
         />

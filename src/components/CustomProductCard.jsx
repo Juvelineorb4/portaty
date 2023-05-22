@@ -1,15 +1,15 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import styles from "@/utils/styles/Home.module.css";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const CustomProductCard = ({ product = {} }) => {
   const navigation = useNavigation();
+  const [favorites, setFavorites] = useState(false);
   const global = require("@/utils/styles/global.js");
   return (
     <TouchableOpacity
       activeOpacity={1}
-      style={{ justifyContent: "center", marginBottom: 20 }}
+      style={{ justifyContent: "center", marginBottom: 30 }}
       onPress={() =>
         navigation.navigate(`${product.brand}_${product.id}`, {
           data: product,
@@ -18,12 +18,16 @@ const CustomProductCard = ({ product = {} }) => {
     >
       <View
         style={[
-          global.bgWhiteSmoke,
+          // global.bgWhiteSmoke,
           {
-            borderRadius: 12,
+            // borderRadius: 12,
+            borderTopRightRadius: 8,
+            borderTopLeftRadius: 8,
             height: 145,
             width: 145,
             flex: 1,
+            borderWidth: 0.5,
+            borderColor: "#404040",
             justifyContent: "center",
             alignItems: "center",
           },
@@ -41,13 +45,9 @@ const CustomProductCard = ({ product = {} }) => {
               : require("@/utils/images/notimage.png")
           }
         />
-        <View
+        <TouchableOpacity
           style={[
-            global.bgBlack,
             {
-              borderRadius: 50,
-              height: 30,
-              width: 30,
               alignItems: "center",
               justifyContent: "center",
               position: "absolute",
@@ -55,82 +55,87 @@ const CustomProductCard = ({ product = {} }) => {
               right: 10,
             },
           ]}
+          onPress={() => setFavorites(!favorites)}
         >
-          <Image
-            style={{
-              width: 12,
-              height: 12,
-              resizeMode: "contain",
-            }}
-            source={require("@/utils/images/favorites.png")}
-          />
-        </View>
+          {favorites ? (
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                height: 30,
+                resizeMode: "contain",
+              }}
+              source={require("@/utils/images/favorites_active.png")}
+            />
+          ) : (
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                height: 30,
+                resizeMode: "contain",
+              }}
+              source={require("@/utils/images/favorites_white.png")}
+            />
+          )}
+        </TouchableOpacity>
       </View>
-
-      <Text
+      <View
         style={[
           {
-            fontSize: 16,
-            // fontWeight: "bold",
-            paddingTop: 5,
-            textTransform: "capitalize",
-            fontFamily: 'medium',
-            letterSpacing: -0.5,
-            marginBottom: 1
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8,
+            flex: 1,
+            borderWidth: 0.5,
+            padding: 5,
+            borderColor: "#404040",
+            // backgroundColor: 'rgba(255, 164, 36, 0.8)'
           },
         ]}
       >
-        {product.name || product.title}
-      </Text>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: 110,
-          marginBottom: 1
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{
-              width: 13,
-              height: 13,
-              resizeMode: "contain",
-            }}
-            source={require("@/utils/images/star.png")}
-          />
-          <Text
-            style={[
-              global.black,
-              { fontSize: 12, marginLeft: 3, fontFamily: 'thinItalic', marginRight: 5 },
-            ]}
-          >
-            {product.avgRating || product.reviews}
-          </Text>
-        </View>
-        <Text>|</Text>
-        <View
+        <Text
           style={[
-            global.bgWhiteSmoke,
-            { paddingHorizontal: 5, borderRadius: 7, marginLeft: 5 },
+            global.topGray,
+            {
+              fontSize: 12,
+              textTransform: "capitalize",
+              fontFamily: "regular",
+              letterSpacing: -1,
+              marginBottom: 2,
+            },
           ]}
         >
-          <Text style={[global.black, { fontSize: 12, fontFamily: 'thinItalic' }]}>
-            {product.solds} solds
-          </Text>
-        </View>
+          Venezuela, Lara
+        </Text>
+        <Text
+          style={[
+            global.topGray,
+            {
+              fontSize: 13,
+              textTransform: "uppercase",
+              fontFamily: "regular",
+              letterSpacing: -1,
+              marginBottom: 4,
+              width: 120
+            },
+          ]}
+        >
+          {product.name || product.title}
+        </Text>
+        <Text
+          style={[
+            global.topGray,
+            {
+              fontSize: 18,
+              fontFamily: "regular",
+              letterSpacing: -0.6,
+              textAlign: "right",
+            },
+          ]}
+        >
+          ${product.maxPrice || product.price}
+        </Text>
       </View>
-
-      <Text style={{ fontSize: 16, fontFamily: 'semibold' }}>
-        ${product.maxPrice || product.price}
-      </Text>
     </TouchableOpacity>
   );
 };

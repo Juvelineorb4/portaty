@@ -178,41 +178,6 @@ const Home = ({ data, navigation }) => {
           </View>
         </View>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 20,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => setSettings(true)}
-          style={{
-            backgroundColor: "blue",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Open Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login_Welcome")}
-          style={{
-            backgroundColor: "orange",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Salir</Text>
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   );
 };

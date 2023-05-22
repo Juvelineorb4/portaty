@@ -1,35 +1,165 @@
-import React, { useReducer, useRef } from "react";
-import { Pressable, StatusBar, StyleSheet, View, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  StyleSheet,
+  Animated,
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import styles from "@/utils/styles/Tabs.module.css";
 import HomeNavigator from "./HomeNavigator";
 import OrdersNavigator from "./OrdersNavigator";
 import ProfileNavigator from "./ProfileNavigator";
-import Svg, { Path } from "react-native-svg";
-import Animated, {
-  useAnimatedStyle,
-  withTiming,
-  useDerivedValue,
-} from "react-native-reanimated";
-import CartNavigator from "./CartNavigator";
+import FavoritesNavigator from "./FavoritesNavigator";
 
 const Tab = createBottomTabNavigator();
-const AnimatedSvg = Animated.createAnimatedComponent(Svg);
+const global = require('@/utils/styles/global.js');
+const { width } = Dimensions.get("window");
+const MARGIN = 0;
+const TAB_BAR_WIDTH = width - 2 * MARGIN;
+const TAB_WIDTH = TAB_BAR_WIDTH / 4;
 
-const Tabs = () => {
+function MyTabBar({ state, descriptors, navigation }) {
+  const [translateX] = useState(new Animated.Value(0));
+
+  const translateTab = (index) => {
+    Animated.spring(translateX, {
+      toValue: index * TAB_WIDTH,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    translateTab(state.index);
+  }, [state.index]);
+  return (
+    <View
+      style={[styles.tabBarContainer, global.mainBgColor, { width: TAB_BAR_WIDTH, bottom: MARGIN }]}
+    >
+      <View
+        style={{
+          width: TAB_WIDTH,
+          ...StyleSheet.absoluteFillObject,
+          alignItems: "center",
+        }}
+      >
+        <Animated.View
+          style={[styles.slidingTab, global.mainBgColor, { transform: [{ translateX }] }]}
+        />
+      </View>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: "tabPress",
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate({ name: route.name, merge: true });
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: "tabLongPress",
+            target: route.key,
+          });
+        };
+        const tabBarIcon = options.tabBarIcon;
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            key={index}
+            style={{ flex: 1, alignItems: "center" }}
+          >
+            <TabIcon
+              tabIcon={tabBarIcon}
+              isFocused={isFocused}
+              label={label}
+              index={state.index}
+            />
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+const TabIcon = ({ isFocused, tabIcon, label, index }) => {
+  const [translateY] = useState(new Animated.Value(0));
+
+  const translateIcon = (val) => {
+    Animated.spring(translateY, {
+      toValue: val,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    if (isFocused) {
+      translateIcon(-15);
+    } else {
+      translateIcon(0);
+    }
+  }, [index]);
   return (
     <>
-      <StatusBar barStyle="light-content" />
-      <Tab.Navigator
-        id="Tabs_1"
-        tabBar={(props) => <AnimatedTabBar {...props} />}
-        initialRouteName={`Home_Tab`}
+      <Animated.View style={{ transform: [{ translateY }] }}>
+        <Image
+          style={{
+            width: 25,
+            height: 25,
+            resizeMode: "contain",
+          }}
+          source={isFocused ? tabIcon.activeIcon : tabIcon.activeIcon}
+        />
+      </Animated.View>
+      <Text
+        style={{
+          color: isFocused ? "#ffffff" : "#ffffff",
+          fontSize: 12,
+          fontFamily: isFocused ? "regular" : 'regular',
+        }}
       >
+        {label}
+      </Text>
+    </>
+  );
+};
+const Tabs = () => {
+  return (
+    <Tab.Navigator
+      tabBar={(props) => <MyTabBar {...props} />}
+      initialRouteName={`Home_Tab`}
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
         <Tab.Screen
           name="Home_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/home.gif"),
+              activeIcon: require("@/utils/images/home.png"),
               inActiveIcon: require("@/utils/images/home.png"),
             },
             tabBarLabel: "Home",
@@ -37,26 +167,26 @@ const Tabs = () => {
           component={HomeNavigator}
         />
         <Tab.Screen
-          name="Cart_Tab"
+          name="Favorites_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/cart.gif"),
-              inActiveIcon: require("@/utils/images/cart.png"),
+              activeIcon: require("@/utils/images/favorites.png"),
+              inActiveIcon: require("@/utils/images/favorites.png"),
             },
-            tabBarLabel: "Cart",
+            tabBarLabel: "Favorites",
           }}
-          component={CartNavigator}
+          component={FavoritesNavigator}
         />
         <Tab.Screen
           name="Orders_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/orders.png"),
-              inActiveIcon: require("@/utils/images/orders.png"),
+              activeIcon: require("@/utils/images/notification.png"),
+              inActiveIcon: require("@/utils/images/notification.png"),
             },
-            tabBarLabel: "Orders",
+            tabBarLabel: "Notifications",
           }}
           component={OrdersNavigator}
         />
@@ -65,219 +195,15 @@ const Tabs = () => {
           options={{
             headerShown: false,
             tabBarIcon: {
-              activeIcon: require("@/utils/images/add.gif"),
-              inActiveIcon: require("@/utils/images/add.png"),
+              activeIcon: require("@/utils/images/profile.png"),
+              inActiveIcon: require("@/utils/images/profile.png"),
             },
-            tabBarLabel: "Settings",
+            tabBarLabel: "Profile",
           }}
           component={ProfileNavigator}
         />
-      </Tab.Navigator>
-    </>
+    </Tab.Navigator>
   );
 };
 
-const AnimatedTabBar = ({
-  state: { index: activeIndex, routes },
-  navigation,
-  descriptors,
-}) => {
-  const reducer = (state, action = { x, index }) => {
-    return [...state, { x: action.x, index: action.index }];
-  };
-
-  const [layout, dispatch] = useReducer(reducer, []);
-
-  const handleLayout = (event, index) => {
-    dispatch({ x: event.nativeEvent.layout.x, index });
-  };
-  const xOffset = useDerivedValue(() => {
-    if (layout.length !== routes.length) return 0;
-    return [...layout].find(({ index }) => index === activeIndex).x - 25;
-  }, [activeIndex, layout]);
-
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: withTiming(xOffset.value, { duration: 250 }) }],
-    };
-  });
-
-  return (
-    <View style={[styles.tabBar, { paddingBottom: 5 }]}>
-      <AnimatedSvg
-        width={110}
-        height={60}
-        viewBox="0 0 110 60"
-        style={[styles.activeBackground, animatedStyles]}
-      >
-        <Path
-          fill="#FFFFFF"
-          d="M20 0H0c11.046 0 20 8.953 20 20v5c0 19.33 15.67 35 35 35s35-15.67 35-35v-5c0-11.045 8.954-20 20-20H20z"
-        />
-      </AnimatedSvg>
-
-      <View style={styles.tabBarContainer}>
-        {routes.map((route, index) => {
-          const active = index === activeIndex;
-          const { options } = descriptors[route.key];
-          return (
-            <TabBarComponent
-              key={route.key}
-              active={active}
-              options={options}
-              onLayout={(e) => handleLayout(e, index)}
-              onPress={() => navigation.navigate(route.name)}
-              route={route.name}
-            />
-          );
-        })}
-      </View>
-    </View>
-  );
-};
-
-const TabBarComponent = ({ active, options, onLayout, onPress, route }) => {
-  const ref = useRef(null);
-
-  const animatedComponentCircleStyles = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          scale: withTiming(active ? 1 : 0, { duration: 250 }),
-        },
-      ],
-    };
-  });
-
-  const animatedIconContainerStyles = useAnimatedStyle(() => {
-    return {
-      opacity: withTiming(active ? 1 : 1, { duration: 250 }),
-    };
-  });
-
-  return (
-    <Pressable
-      onPress={() => {
-        onPress();
-        // console.log(route)
-      }}
-      onLayout={onLayout}
-    >
-      <Animated.View style={[animatedComponentCircleStyles]} />
-      {active ? (
-        <Animated.View
-          style={[
-            styles.component,
-            animatedIconContainerStyles,
-            { backgroundColor: "#ffa424" },
-          ]}
-        >
-          {active ? (
-            <Image
-              style={{
-                width: 33,
-                height: 33,
-                resizeMode: "contain",
-              }}
-              source={options.tabBarIcon.activeIcon}
-            />
-          ) : (
-            <Image
-              style={{
-                width: 27,
-                height: 27,
-                resizeMode: "contain",
-              }}
-              source={options.tabBarIcon.inActiveIcon}
-            />
-          )}
-        </Animated.View>
-      ) : (
-        <Animated.View
-          style={[
-            styles.componentinActive,
-            animatedIconContainerStyles,
-            { backgroundColor: "#ffa424" },
-          ]}
-        >
-          {active ? (
-            <Image
-              style={{
-                width: 33,
-                height: 33,
-                resizeMode: "contain",
-              }}
-              source={options.tabBarIcon.activeIcon}
-            />
-          ) : (
-            <Image
-              style={{
-                width: 27,
-                height: 27,
-                resizeMode: "contain",
-              }}
-              source={options.tabBarIcon.inActiveIcon}
-            />
-          )}
-        </Animated.View>
-      )}
-    </Pressable>
-  );
-};
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#7FF5DF0",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-  },
-  tabBar: {
-    backgroundColor: "#ffa424",
-  },
-  activeBackground: {
-    position: "absolute",
-    zIndex: -100,
-  },
-  tabBarContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-  },
-  component: {
-    position: "relative",
-    zIndex: 2,
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: -5,
-  },
-  componentinActive: {
-    position: "relative",
-    zIndex: 2,
-    height: 60,
-    width: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 0,
-  },
-  componentCircle: {
-    flex: 1,
-    borderRadius: 30,
-    backgroundColor: "#ffa424",
-  },
-  iconContainer: {
-    // position: "absolute",
-    // zIndex: 0,
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
-  },
-});
 export default Tabs;

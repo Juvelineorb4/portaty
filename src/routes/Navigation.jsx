@@ -12,6 +12,7 @@ import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilState } from 'recoil'
 import { userAutenticated } from '@/atoms/index'
+import Tabs from "./Tabs/Tabs";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -73,8 +74,8 @@ const Navigation = () => {
           }}
         />}
         <Stack.Screen
-          name={`Home`}
-          component={DrawerNavigator}
+          name={`Navigator`}
+          component={Tabs}
           options={{
             headerShown: false,
           }}

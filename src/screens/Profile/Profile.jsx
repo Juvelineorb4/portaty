@@ -20,6 +20,7 @@ import {
   categoryItem,
   conditionItem,
   customerId,
+  errorPostProduct,
   imagesPost,
   modelItem,
   productItem,
@@ -61,6 +62,8 @@ const Profile = ({ navigation }) => {
     useRecoilState(productsBrandId);
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
   const [blobImages, setBlobImages] = useRecoilState(blobsPost);
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
     const result = await API.graphql({
@@ -90,6 +93,7 @@ const Profile = ({ navigation }) => {
     setProductBrandSelect("");
     setImagesPostSelect([]);
     setBlobImages([]);
+    setSelectErrorPostProduct(false);
   };
 
   useEffect(() => {
@@ -103,13 +107,7 @@ const Profile = ({ navigation }) => {
           <View style={styles.image}></View>
           <CustomButton
             buttonStyles={[styles.edit, global.bgBlack]}
-            icon={{
-              status: true,
-              name: "image-edit-outline",
-              size: 20,
-              color: "#ffffff",
-              type: `MTI`,
-            }}
+            image={require("@/utils/images/capture.png")}
           />
         </View>
         <Text style={[styles.user, global.black]}>
@@ -142,18 +140,50 @@ const Profile = ({ navigation }) => {
               iconRight: styles.iconRight,
             }}
             icon={{
-              left: {
-                name: "plus-box-outline",
-                size: 20,
-                color: "white",
-                type: "MTI",
+              left: require("@/utils/images/post.png"),
+              right: require("@/utils/images/arrow_right.png"),
+            }}
+            toogle={false}
+          />
+          <View style={[styles.line, global.bgWhiteSmoke]} />
+
+          <CustomSelect
+            title={"Products"}
+            subtitle={"List of yours products"}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
               },
-              right: {
-                name: "arrow-right",
-                size: 24,
-                color: "#404040",
-                type: "MTI",
+              container: styles.containerSelect,
+              iconLeft: [styles.iconLeft, global.mainBgColor],
+              iconRight: styles.iconRight,
+            }}
+            icon={{
+              left: require("@/utils/images/product.png"),
+              right: require("@/utils/images/arrow_right.png"),
+            }}
+            toogle={false}
+          />
+          <View style={[styles.line, global.bgWhiteSmoke]} />
+
+          <CustomSelect
+            title={"Orders"}
+            subtitle={"List of your orders"}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
               },
+              container: styles.containerSelect,
+              iconLeft: [styles.iconLeft, global.mainBgColor],
+              iconRight: styles.iconRight,
+            }}
+            icon={{
+              left: require("@/utils/images/order.png"),
+              right: require("@/utils/images/arrow_right.png"),
             }}
             toogle={false}
           />
@@ -164,7 +194,10 @@ const Profile = ({ navigation }) => {
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
-              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => navigation.navigate(button.route)}
+              >
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -184,7 +217,7 @@ const Profile = ({ navigation }) => {
                 />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity onPress={() => Auth.signOut()}>
+              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -196,7 +229,7 @@ const Profile = ({ navigation }) => {
                       subtitle: [styles.textSubtitleSelect, global.topGray],
                     },
                     container: styles.containerSelect,
-                    iconLeft: [styles.iconLeft, global.bgBlack],
+                    iconLeft: [styles.iconLeft, global.mainBgColor],
                     iconRight: styles.iconRight,
                   }}
                   icon={button.icon}

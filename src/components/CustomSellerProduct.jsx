@@ -91,7 +91,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
                 height: 20,
                 resizeMode: "contain",
               }}
-              source={require("@/utils/images/favorites-black.png")}
+              source={require("@/utils/images/favorites_white.png")}
             />
           </View>
           <View style={styles.containerInfo}>

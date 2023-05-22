@@ -20,14 +20,41 @@ export const createADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -42,6 +69,7 @@ export const createADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -49,6 +77,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -56,6 +85,7 @@ export const createADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -63,6 +93,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -72,6 +103,7 @@ export const createADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -86,14 +118,41 @@ export const updateADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -108,6 +167,7 @@ export const updateADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -115,6 +175,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -122,6 +183,7 @@ export const updateADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -129,6 +191,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -138,6 +201,7 @@ export const updateADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -152,14 +216,41 @@ export const deleteADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -174,6 +265,7 @@ export const deleteADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -181,6 +273,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -188,6 +281,7 @@ export const deleteADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -195,6 +289,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -204,6 +299,7 @@ export const deleteADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -218,14 +314,41 @@ export const createADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -240,6 +363,7 @@ export const createADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -247,6 +371,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -254,6 +379,7 @@ export const createADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -261,6 +387,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -270,6 +397,7 @@ export const createADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -284,14 +412,41 @@ export const updateADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -306,6 +461,7 @@ export const updateADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -313,6 +469,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -320,6 +477,7 @@ export const updateADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -327,6 +485,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -336,6 +495,7 @@ export const updateADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -350,14 +510,41 @@ export const deleteADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          createdBy
           createdAt
           updatedAt
         }
@@ -372,6 +559,7 @@ export const deleteADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -379,6 +567,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -386,6 +575,7 @@ export const deleteADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -393,6 +583,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            createdBy
             createdAt
             updatedAt
           }
@@ -402,6 +593,7 @@ export const deleteADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      createdBy
       createdAt
       updatedAt
     }
@@ -416,9 +608,35 @@ export const createADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      createdBy
       createdAt
       updatedAt
     }
@@ -433,9 +651,35 @@ export const updateADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      createdBy
       createdAt
       updatedAt
     }
@@ -450,9 +694,35 @@ export const deleteADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      createdBy
       createdAt
       updatedAt
     }
@@ -1512,14 +1782,26 @@ export const createCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1534,7 +1816,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1542,7 +1826,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1552,6 +1838,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
@@ -1559,14 +1846,26 @@ export const createCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1581,7 +1880,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1589,7 +1890,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1599,6 +1902,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
@@ -1620,14 +1924,26 @@ export const updateCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1642,7 +1958,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1650,7 +1968,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1660,6 +1980,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
@@ -1667,14 +1988,26 @@ export const updateCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1689,7 +2022,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1697,7 +2032,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1707,6 +2044,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
@@ -1728,14 +2066,26 @@ export const deleteCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1750,7 +2100,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1758,7 +2110,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1768,6 +2122,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
@@ -1775,14 +2130,26 @@ export const deleteCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1797,7 +2164,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1805,7 +2174,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              createdBy
               createdAt
               updatedAt
             }
@@ -1815,6 +2186,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        createdBy
         createdAt
         updatedAt
       }
