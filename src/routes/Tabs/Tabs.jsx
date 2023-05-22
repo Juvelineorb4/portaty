@@ -11,9 +11,9 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "@/utils/styles/Tabs.module.css";
 import HomeNavigator from "./HomeNavigator";
-import OrdersNavigator from "./OrdersNavigator";
 import ProfileNavigator from "./ProfileNavigator";
 import FavoritesNavigator from "./FavoritesNavigator";
+import NotificationsNavigator from "./NotificationsNavigator";
 
 const Tab = createBottomTabNavigator();
 const global = require('@/utils/styles/global.js');
@@ -162,7 +162,7 @@ const Tabs = () => {
               activeIcon: require("@/utils/images/home.png"),
               inActiveIcon: require("@/utils/images/home.png"),
             },
-            tabBarLabel: "Home",
+            tabBarLabel: "Inicio",
           }}
           component={HomeNavigator}
         />
@@ -174,21 +174,21 @@ const Tabs = () => {
               activeIcon: require("@/utils/images/favorites.png"),
               inActiveIcon: require("@/utils/images/favorites.png"),
             },
-            tabBarLabel: "Favorites",
+            tabBarLabel: "Favoritos",
           }}
           component={FavoritesNavigator}
         />
         <Tab.Screen
-          name="Orders_Tab"
+          name="Notifications_Tab"
           options={{
             headerShown: false,
             tabBarIcon: {
               activeIcon: require("@/utils/images/notification.png"),
               inActiveIcon: require("@/utils/images/notification.png"),
             },
-            tabBarLabel: "Notifications",
+            tabBarLabel: "Notificaciones",
           }}
-          component={OrdersNavigator}
+          component={NotificationsNavigator}
         />
         <Tab.Screen
           name="Profile_Tab"
@@ -198,7 +198,7 @@ const Tabs = () => {
               activeIcon: require("@/utils/images/profile.png"),
               inActiveIcon: require("@/utils/images/profile.png"),
             },
-            tabBarLabel: "Profile",
+            tabBarLabel: "Mi Tienda",
           }}
           component={ProfileNavigator}
         />

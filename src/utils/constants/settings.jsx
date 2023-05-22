@@ -1,8 +1,8 @@
 export const settings = {
   buttons: [
     {
-      title: "App permissions",
-      subtitle: "Set which permissions the app has access to.",
+      title: "Permisos de la aplicación",
+      subtitle: "Establezca a qué permisos tiene acceso la aplicación.",
       icon: {
         left: require("@/utils/images/lock.png"),
         right: require("@/utils/images/arrow_right.png"),
@@ -11,8 +11,8 @@ export const settings = {
       // routePush: true,
     },
     {
-      title: "Introduction",
-      subtitle: "Was guided through our new app.",
+      title: "Introducción",
+      subtitle: "Guía de nuestra aplicación.",
       icon: {
         left: require("@/utils/images/question.png"),
         right: require("@/utils/images/arrow_right.png"),
@@ -21,8 +21,8 @@ export const settings = {
       // routePush: true,
     },
     {
-      title: "Privacy & Policy",
-      subtitle: "See details of our policy",
+      title: "Política de privacidad",
+      subtitle: "Ver detalles de nuestra política.",
       icon: {
         left: require("@/utils/images/folder.png"),
         right: require("@/utils/images/arrow_right.png"),
@@ -31,8 +31,8 @@ export const settings = {
       // routePush: true,
     },
     {
-      title: "App specs",
-      subtitle: "See details about the app",
+      title: "Especificaciones de la aplicación",
+      subtitle: "Ver detalles sobre la aplicación",
       icon: {
         left: require("@/utils/images/info_white.png"),
         right: require("@/utils/images/arrow_right.png"),
@@ -41,7 +41,7 @@ export const settings = {
       // routePush: true,
     },
     {
-      title: "Logout",
+      title: "Cerrar sesión",
       icon: {
         left: require("@/utils/images/exit.png"),
       },

@@ -95,7 +95,7 @@ const Search = ({ version, onSearchHandler }) => {
         {/* TextInput */}
         <View style={styles.contentInput}>
           <TextInput
-            placeholder={"Search"}
+            placeholder={"Buscar"}
             style={styles.inputSearch}
             editable={false}
           />

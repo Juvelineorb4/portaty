@@ -11,8 +11,20 @@ type ADCategory @model @auth(rules: [
   ])
   image: String
   path: String
+  id: ID! 
+  name: String! @auth(rules:[
+    { allow: groups, groups: ["admin"] },
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, provider: iam, operations: [read] },
+  ])
+  image: String
+  path: String
   products: [ADProduct] @hasMany(indexName: "byCategory", fields: ["id"])
   brands: [ADBrand] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String
+  createdBy: ID @auth(rules:[
+    {allow: groups, groups:["admin"], operations:[read, create, delete]}
+  ])
   abreviation: String
   createdBy: ID @auth(rules:[
     {allow: groups, groups:["admin"], operations:[read, create, delete]}
@@ -32,8 +44,19 @@ type ADBrand @model @auth(rules: [
   ])
   image: String
   path: String
+   name: String! @auth(rules:[
+    { allow: groups, groups: ["admin"] },
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, provider: iam, operations: [read] },
+  ])
+  image: String
+  path: String
   products: [ADProduct] @hasMany(indexName: "byBrand", fields: ["id"])
   categories: [ADCategory] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String
+  createdBy: ID @auth(rules:[
+    {allow: groups, groups:["admin"], operations:[read, create, delete]}
+  ])
   abreviation: String
   createdBy: ID @auth(rules:[
     {allow: groups, groups:["admin"], operations:[read, create, delete]}
@@ -130,8 +153,18 @@ type CustomerShop @model @auth(rules:[
   ])
   description: String
   shoppingCart: [CartItem] @hasMany(indexName: "byCustomerShopCartItem", fields: ["userID"])
+  shoppingCart: [CartItem] @hasMany(indexName: "byCustomerShopCartItem", fields: ["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type CartItem @model @auth(rules:[
+  {allow: owner},
+  {allow: groups, groups: ["admin"], operations:[read]}
+]){
+  id: ID!
+  productID: ID!
+  customerShopID: ID! @index(name: "byCustomerShopCartItem")
 }
 
 type CartItem @model @auth(rules:[
@@ -168,6 +201,7 @@ type CustomerProduct @model @auth(rules:[
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
 
+
 type CategoryFields{
   name: String!
   image: String!
@@ -185,6 +219,7 @@ type ProductFields{
 
 type CustomerProductStatus @model @auth(rules:[
   {allow: groups, groups:["admin"]},
+  {allow: owner, operations: [read, create ,delete]}
   {allow: owner, operations: [read, create ,delete]}
 ]){
   id: ID!
@@ -218,6 +253,31 @@ type PhoneFields {
 type LaptoFields {
   serial: String!
 }
+
+# type OrdesDetails{
+#   id
+#   userID
+#   paymentID
+#   shipping 
+#   items: []
+#   total: string 
+#   createATdate
+#   updateAtDate
+# }
+# shipping{
+#   country
+# dsjpdsjds
+# }
+# item{
+#   id 
+#   orderId
+#   productID
+# }
+# paymentDetais{
+#   id
+#   stripePaymentID
+#   metadata: 
+# }
 
 # type OrdesDetails{
 #   id

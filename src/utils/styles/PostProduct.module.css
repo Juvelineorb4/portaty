@@ -10,6 +10,7 @@
 .both {
   flex: 1;
   flex-direction: row;
+  justify-content: space-between;
 }
 .images,
 .buttonImage {
@@ -27,13 +28,14 @@
   text-align: center;
   width: 100%;
   padding: 20px;
+  height: 60px;
   background-color: #ffa424;
   border-radius: 16px;
   margin-top: 20px;
 }
 
 .textPublish {
-  font-family: 'semibold';
+  font-family: 'medium';
   text-align: center;
   color: white;
   font-size: 14px;
@@ -119,19 +121,21 @@
 
 /*  */
 .textInputPrice {
-  flex: 1;
+  /* flex: 1; */
   margin-left: 10px;
   color: #8c9199cb;
   text-transform: capitalize;
+  height: 50px;
 }
 .inputContainerPrice {
   flex: 1;
+  height: 50px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fafafa;
   border: none;
-  width: 94%;
+  width: 150px;
   padding: 11px 10px 11px 5px;
   border-radius: 16px;
   margin: 3px 0px 10px;
@@ -166,11 +170,10 @@
   justify-content: center;
   align-items: center;
   background-color: #fafafa;
-  width: 90%;
+  width: 100%;
   padding: 11px 10px 11px 5px;
   border-radius: 16px;
   margin: 3px 0px 10px;
-  margin-right: 10px;
 }
 .placeholderIMEI {
   flex: 1;

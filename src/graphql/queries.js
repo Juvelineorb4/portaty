@@ -41,7 +41,6 @@ export const getADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           createdAt
           updatedAt
         }
@@ -126,7 +125,6 @@ export const listADCategories = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             createdAt
             updatedAt
           }
@@ -211,7 +209,6 @@ export const getADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           createdAt
           updatedAt
         }
@@ -296,7 +293,6 @@ export const listADBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             createdAt
             updatedAt
           }
@@ -375,7 +371,6 @@ export const getADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
       createdAt
       updatedAt
     }
@@ -420,7 +415,6 @@ export const listADProducts = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         createdAt
         updatedAt
       }
@@ -477,7 +471,6 @@ export const aDProductsByCategoryIDAndName = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         createdAt
         updatedAt
       }
@@ -534,7 +527,6 @@ export const aDProductsByBrandIDAndName = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         createdAt
         updatedAt
       }
@@ -1366,7 +1358,6 @@ export const getCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             createdAt
             updatedAt
           }
@@ -1430,7 +1421,6 @@ export const getCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             createdAt
             updatedAt
           }

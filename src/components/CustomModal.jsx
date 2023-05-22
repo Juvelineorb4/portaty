@@ -159,11 +159,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -191,7 +191,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemCategory.name || ""}
+                        Seleccionaste: {selectItemCategory.name || ""}
                       </Text>
                     </View>
                   </View>
@@ -263,9 +263,9 @@ const CustomModal = ({
                 </View>
                 {selectErrorPostProduct || selectError ? (
                   !categoriesSelect ? (
-                    <Text style={styles.errorBrand}>Select category first</Text>
+                    <Text style={styles.errorBrand}>Selecciona la categoría antes</Text>
                   ) : !brandsSelect ? (
-                    <Text style={styles.errorBrand}>Required</Text>
+                    <Text style={styles.errorBrand}>Requerido</Text>
                   ) : (
                     ""
                   )
@@ -291,11 +291,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -325,7 +325,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected:{" "}
+                      Seleccionaste:{" "}
                         {selectItemBrand.aDCategoryId === categoriesSelect
                           ? selectItemBrand.aDBrand.name
                           : ""}
@@ -405,10 +405,10 @@ const CustomModal = ({
                   {selectErrorPostProduct || selectError ? (
                     !brandsSelect ? (
                       <Text style={styles.errorBoth}>
-                        Select category first
+                        Selecciona la marca primero
                       </Text>
                     ) : !productSelect ? (
-                      <Text style={styles.errorProduct}>Required</Text>
+                      <Text style={styles.errorProduct}>Requerido</Text>
                     ) : (
                       ""
                     )
@@ -435,11 +435,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -472,7 +472,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemProduct.name || ""}
+                        Seleccionaste: {selectItemProduct.name || ""}
                       </Text>
                     </View>
                   </View>
@@ -537,7 +537,7 @@ const CustomModal = ({
                     source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemModel.title ? (
-                    <Text style={styles.errorBoth}>Required</Text>
+                    <Text style={styles.errorBoth}>Requerido</Text>
                   ) : (
                     ""
                   )}
@@ -561,11 +561,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -596,7 +596,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemModel.title || ""}
+                        Seleccionaste: {selectItemModel.title || ""}
                       </Text>
                     </View>
                   </View>
@@ -661,7 +661,7 @@ const CustomModal = ({
                     source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemSupplier.title ? (
-                    <Text style={styles.errorBoth}>Required</Text>
+                    <Text style={styles.errorBoth}>Requerido</Text>
                   ) : (
                     ""
                   )}
@@ -808,11 +808,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -842,7 +842,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemStorage.title || ""}
+                        Seleccionaste: {selectItemStorage.title || ""}
                       </Text>
                     </View>
                   </View>
@@ -902,7 +902,7 @@ const CustomModal = ({
                     source={require("@/utils/images/arrow_down.png")}
                   />
                   {selectErrorPostProduct && !selectItemCondition.title ? (
-                    <Text style={styles.errorBoth}>Required</Text>
+                    <Text style={styles.errorBoth}>Requerido</Text>
                   ) : (
                     ""
                   )}
@@ -926,11 +926,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -958,7 +958,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemCondition.title || ""}
+                        Seleccionaste: {selectItemCondition.title || ""}
                       </Text>
                     </View>
                   </View>

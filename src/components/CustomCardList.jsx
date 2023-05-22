@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import styles from "@/utils/styles/CustomCardList.module.css";
+import { es } from "@/utils/constants/lenguage";
 
 const CustomCardList = () => {
   const global = require("@/utils/styles/global.js");
@@ -35,7 +36,7 @@ const CustomCardList = () => {
             }}
             source={require("@/utils/images/available.png")}
           />
-          <Text style={[styles.available, global.topGray]}>Available</Text>
+          <Text style={[styles.available, global.topGray]}>{es.favorites.card.available}</Text>
         </View>
       </View>
       <View style={styles.content}>
@@ -43,7 +44,7 @@ const CustomCardList = () => {
         <Text style={[styles.price, global.topGray]}>$999.99</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          Shipped and sold by Christopher
+          {es.favorites.card.message} Christopher
         </Text>
 
         <View style={styles.options}>
@@ -60,7 +61,7 @@ const CustomCardList = () => {
               }}
               source={require("@/utils/images/info.png")}
             />
-            <Text style={[styles.textOption, global.topGray]}>Details</Text>
+            <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.details}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setDeleteCard(false)}
@@ -75,7 +76,7 @@ const CustomCardList = () => {
               }}
               source={require("@/utils/images/delete.png")}
             />
-            <Text style={[styles.textOption, global.topGray]}>Delete</Text>
+            <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.delete}</Text>
           </TouchableOpacity>
         </View>
       </View>

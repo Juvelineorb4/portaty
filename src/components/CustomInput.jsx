@@ -18,7 +18,7 @@ const CustomInput = ({
   area = false,
   lines = 1,
   numeric,
-  errorPost = false
+  errorPost = false,
 }) => {
   const [securityChange, setSecurityChange] = useState(true);
   const [errorState, setErrorState] = useState(false);
@@ -36,29 +36,33 @@ const CustomInput = ({
           <View
             style={[
               styled.input,
-              (error || errorPost) && errorState && { borderColor: "red", borderWidth: 1 },
+              (error || errorPost) &&
+                errorState && { borderColor: "red", borderWidth: 1 },
             ]}
           >
-            {icon && (
-              <Icon
-                name={icon.name}
-                color={icon.color}
-                size={icon.size}
-                type={icon.type}
+            <View style={{flexDirection: 'row'}}>
+              {icon && (
+                <Icon
+                  name={icon.name}
+                  color={icon.color}
+                  size={icon.size}
+                  type={icon.type}
+                />
+              )}
+              <TextInput
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder={placeholder}
+                placeholderTextColor={placeholderTextColor}
+                style={value ? styled.text : styled.placeholder}
+                secureTextEntry={security && securityChange}
+                defaultValue={defaultValue}
+                multiline={area ? true : false}
+                numberOfLines={lines}
               />
-            )}
-            <TextInput
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              placeholder={placeholder}
-              placeholderTextColor={placeholderTextColor}
-              style={value ? styled.text : styled.placeholder}
-              secureTextEntry={security && securityChange}
-              defaultValue={defaultValue}
-              multiline={area ? true : false}
-              numberOfLines={lines}
-            />
+            </View>
+
             {security
               ? iconRight && (
                   <TouchableOpacity
@@ -85,7 +89,19 @@ const CustomInput = ({
             <Text style={{ color: "red" }}>{error.message || "Required"}</Text>
           )}
           {errorPost && (
-            <Text style={{ color: "red", position: "absolute", right: 10, bottom: -5, fontFamily: 'medium', fontSize: 10, textTransform: 'capitalize' }}>Required</Text>
+            <Text
+              style={{
+                color: "red",
+                position: "absolute",
+                right: 10,
+                bottom: -5,
+                fontFamily: "medium",
+                fontSize: 10,
+                textTransform: "capitalize",
+              }}
+            >
+              Required
+            </Text>
           )}
         </View>
       )}

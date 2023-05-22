@@ -9,6 +9,10 @@ import Header from "./HeaderTabs/index";
 import Result from "@/screens/Search/Result";
 import PostNavigator from "./PostNavigator";
 import LeftHeader from "./HeaderTabs/LeftHeader";
+import ListProducts from "@/screens/Profile/ListProducts";
+import ListOrders from "@/screens/Profile/ListOrders";
+import CustomPageListProduct from "@/components/CustomPageListProduct";
+import OrderPreview from "@/components/OrderPreview";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -61,6 +65,38 @@ const ProfileNavigator = () => {
         options={{
           animation: "slide_from_right",
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ListProducts"
+        component={ListProducts}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ListOrders"
+        component={ListOrders}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="EditListProduct"
+        component={CustomPageListProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ViewOrder"
+        component={OrderPreview}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
     </Stack.Navigator>

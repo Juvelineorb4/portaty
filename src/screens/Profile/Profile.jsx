@@ -30,6 +30,7 @@ import {
   supplierItem,
   userAutenticated,
 } from "@/atoms";
+import { es } from "@/utils/constants/lenguage";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
@@ -71,11 +72,11 @@ const Profile = ({ navigation }) => {
       variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const result2 = await API.graphql({
-      query: queries.listADCategories,
-      // variables: { id: userAuth.username },
-      authMode: "AWS_IAM",
+    const listProducts = await API.graphql({
+      query: queries.listCustomerProductStatuses,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    console.log('soy yo', listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
@@ -116,7 +117,7 @@ const Profile = ({ navigation }) => {
       </View>
       <View style={styles.content}>
         <Text style={[styles.titleSettings, global.black]}>
-          My Shop: {/*{userShop.name.toUpperCase()}*/}
+          {es.profile.shop.title}
         </Text>
         <TouchableOpacity
           activeOpacity={1}
@@ -127,8 +128,8 @@ const Profile = ({ navigation }) => {
         >
           <View style={[styles.line, global.bgWhiteSmoke]} />
           <CustomSelect
-            title={"Post"}
-            subtitle={"Post a product for your shop"}
+            title={es.profile.shop.post.title}
+            subtitle={es.profile.shop.post.subtitle}
             styled={{
               text: {
                 container: styles.textContainerSelect,
@@ -145,11 +146,13 @@ const Profile = ({ navigation }) => {
             }}
             toogle={false}
           />
-          <View style={[styles.line, global.bgWhiteSmoke]} />
+        </TouchableOpacity>
 
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts")}>
           <CustomSelect
-            title={"Products"}
-            subtitle={"List of yours products"}
+            title={es.profile.shop.products.title}
+            subtitle={es.profile.shop.products.subtitle}
             styled={{
               text: {
                 container: styles.textContainerSelect,
@@ -166,11 +169,13 @@ const Profile = ({ navigation }) => {
             }}
             toogle={false}
           />
-          <View style={[styles.line, global.bgWhiteSmoke]} />
+        </TouchableOpacity>
 
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders")}>
           <CustomSelect
-            title={"Orders"}
-            subtitle={"List of your orders"}
+            title={es.profile.shop.orders.title}
+            subtitle={es.profile.shop.orders.subtitle}
             styled={{
               text: {
                 container: styles.textContainerSelect,
@@ -190,7 +195,9 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>Settings</Text>
+        <Text style={[styles.titleSettings, global.black]}>
+          {es.profile.settings.title}
+        </Text>
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
