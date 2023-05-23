@@ -8,8 +8,10 @@ import Icon from "@/components/Icon";
 
 // amplify
 import { Auth } from "aws-amplify";
-import { es } from "@/utils/constants/lenguage";
-
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
+// web browser
+import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
@@ -28,11 +30,23 @@ const Login = ({ navigation }) => {
       console.error(error);
     }
   };
+
+  const onHandleSignInGoogle = async () => {
+    console.log("GOOGLE")
+    try {
+      await Auth.federatedSignIn({
+        provider: CognitoHostedUIIdentityProvider.Google,
+      })
+    } catch (error) {
+      console.error(error);
+    }
+    // WebBrowser.openBrowserAsync('https://expo.dev')
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.welcome}>
         <View style={styles.content}>
-          <Text style={styles.title}>{es.authentication.login.title}</Text>
+          <Text style={styles.title}>Welcome to Portaty</Text>
           <Image
             style={{
               width: 300,
@@ -44,7 +58,7 @@ const Login = ({ navigation }) => {
           <CustomInput
             control={control}
             name={`email`}
-            placeholder={es.authentication.login.email.placeholder}
+            placeholder={"Email"}
             styled={{
               text: styles.textInput,
               label: [styles.labelInput, global.topGray],
@@ -58,15 +72,15 @@ const Login = ({ navigation }) => {
               color: "#404040",
               size: 25,
             }}
-            // rules={{
-            //   required: "Email is required",
-            //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-            // }}
+            rules={{
+              required: "Email is required",
+              pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
+            }}
           />
           <CustomInput
             control={control}
             name={`password`}
-            placeholder={es.authentication.login.password.placeholder}
+            placeholder={"Password"}
             styled={{
               text: styles.textInput,
               label: [styles.labelInput, global.topGray],
@@ -81,18 +95,18 @@ const Login = ({ navigation }) => {
               size: 25,
             }}
             security={true}
-            // rules={{
-            //   required: "Password is required",
-            //   minLength: {
-            //     value: 8,
-            //     message: "Min 8 characters",
-            //   },
-            // }}
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Min 8 characters",
+              },
+            }}
           />
         </View>
         <View style={styles.panel}>
           <CustomButton
-            text={es.authentication.login.button}
+            text={`Log In`}
             handlePress={handleSubmit(onHandleLogin)}
             textStyles={[styles.textLogin, global.white]}
             buttonStyles={[styles.login, global.bgBlack]}
@@ -117,16 +131,16 @@ const Login = ({ navigation }) => {
                   onPress={onHandleActive}
                 ></TouchableOpacity>
               )}
-              <Text style={styles.checkText}>{es.authentication.login.remember}</Text>
+              <Text style={styles.checkText}>Remember Me</Text>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Forgot_App")}>
-              <Text style={styles.forgot}>{es.authentication.login.forgot}</Text>
+              <Text style={styles.forgot}>Forgot the password?</Text>
             </TouchableOpacity>
           </View>
 
           <View>
             <View style={styles.line} />
-            <Text style={styles.continue}>{es.authentication.login.continue}</Text>
+            <Text style={styles.continue}>or continue with</Text>
           </View>
 
           <View style={styles.social}>
@@ -143,7 +157,7 @@ const Login = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <View style={styles.iconSocial}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onHandleSignInGoogle}>
                 <Image
                   style={{
                     width: 28,
@@ -156,13 +170,19 @@ const Login = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.signup}>
-            <Text style={styles.dont}>{es.authentication.login.question}</Text>
+            <Text style={styles.dont}>Don't have an account?</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("Register_App")}
             >
-              <Text style={styles.signupBtn}>{es.authentication.login.register}</Text>
+              <Text style={styles.signupBtn}>Sign Up</Text>
             </TouchableOpacity>
           </View>
+          <CustomButton
+            text={`Mas rapido`}
+            handlePress={() => navigation.navigate("Home")}
+            textStyles={[styles.textLogin, global.white]}
+            buttonStyles={[styles.login, global.bgBlack]}
+          />
         </View>
       </View>
     </ScrollView>

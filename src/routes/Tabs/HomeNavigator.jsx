@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
-import Result from "@/screens/Search/Result";
+import Result from '@/screens/Search/Result'
 import CustomSearch from "@/components/CustomSearch";
 import CustomPageProduct from "@/components/CustomPageProduct";
 import CustomSellerProduct from "@/components/CustomSellerProduct";
-import { useNavigationState } from "@react-navigation/native";
+import { useNavigationState } from '@react-navigation/native';
 // Header
-import Header from "./HeaderTabs/index";
+import Header from './HeaderTabs/index'
 
 // Hooks
-import useHeaderScroll from "@/hooks/useHeaderScroll";
+import useHeaderScroll from '@/hooks/useHeaderScroll'
 
 // graphql
-import { API, graphqlOperation, Auth } from "aws-amplify";
-import * as queries from "@/graphql/queries";
-// import LeftHeader from "./HeaderTabs/LeftHeader";
-import CustomNavSearch from "@/components/CustomNavSearch";
+import { API, graphqlOperation, Auth } from 'aws-amplify'
+import * as queries from '@/graphql/queries'
+
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = ({ route, navigation }) => {
-  const state = useNavigationState((state) => state);
-  const { translateY, headerHeight, handleScroll, handleSnap } =
-    useHeaderScroll({ headerHeight: 128 });
+  const state = useNavigationState(state => state)
+  const { translateY, headerHeight, handleScroll, handleSnap } = useHeaderScroll({ headerHeight: 128 })
   const [data, setData] = useState([]);
+
 
   function getData(url, method) {
     fetch(url, { method: method })
@@ -35,6 +34,7 @@ const HomeNavigator = ({ route, navigation }) => {
         console.error(JSON.stringify(error));
       });
   }
+
 
   useEffect(() => {
     getData(
@@ -57,7 +57,6 @@ const HomeNavigator = ({ route, navigation }) => {
           key={index}
           options={{
             animation: "slide_from_right",
-            header: (props) => <CustomNavSearch {...props} />,
           }}
         />
       ))}
@@ -69,7 +68,6 @@ const HomeNavigator = ({ route, navigation }) => {
             key={index}
             options={{
               animation: "slide_from_right",
-              header: (props) => <CustomNavSearch {...props} />,
             }}
           />;
         })
@@ -83,7 +81,6 @@ const HomeNavigator = ({ route, navigation }) => {
               key={index}
               options={{
                 animation: "slide_from_right",
-                header: (props) => <CustomNavSearch {...props} />,
               }}
             />
           ))
@@ -94,7 +91,6 @@ const HomeNavigator = ({ route, navigation }) => {
         component={CustomSellerProduct}
         options={{
           animation: "slide_from_right",
-          header: (props) => <CustomNavSearch {...props} />,
         }}
       />
       <Stack.Screen
@@ -102,7 +98,7 @@ const HomeNavigator = ({ route, navigation }) => {
         component={Result}
         options={{
           animation: "slide_from_right",
-          header: (props) => <Header {...props} />,
+          header: (props) => <Header {...props} />
         }}
       />
     </Stack.Navigator>

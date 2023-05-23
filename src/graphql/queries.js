@@ -41,6 +41,7 @@ export const getADCategory = /* GraphQL */ `
               usb
             }
           }
+          createdBy
           createdAt
           updatedAt
         }
@@ -125,6 +126,7 @@ export const listADCategories = /* GraphQL */ `
               depth
               weight
             }
+            createdBy
             createdAt
             updatedAt
           }
@@ -209,6 +211,7 @@ export const getADBrand = /* GraphQL */ `
               usb
             }
           }
+          createdBy
           createdAt
           updatedAt
         }
@@ -293,6 +296,7 @@ export const listADBrands = /* GraphQL */ `
               depth
               weight
             }
+            createdBy
             createdAt
             updatedAt
           }
@@ -371,6 +375,7 @@ export const getADProduct = /* GraphQL */ `
           usb
         }
       }
+      createdBy
       createdAt
       updatedAt
     }
@@ -415,6 +420,7 @@ export const listADProducts = /* GraphQL */ `
             usb
           }
         }
+        createdBy
         createdAt
         updatedAt
       }
@@ -471,6 +477,7 @@ export const aDProductsByCategoryIDAndName = /* GraphQL */ `
             usb
           }
         }
+        createdBy
         createdAt
         updatedAt
       }
@@ -527,6 +534,7 @@ export const aDProductsByBrandIDAndName = /* GraphQL */ `
             usb
           }
         }
+        createdBy
         createdAt
         updatedAt
       }
@@ -587,6 +595,21 @@ export const getCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            shoppingCart {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -689,6 +712,15 @@ export const listCustomerShops = /* GraphQL */ `
           items {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -806,6 +838,85 @@ export const getCustomerProduct = /* GraphQL */ `
     getCustomerProduct(id: $id) {
       id
       customerID
+      customer {
+        userID
+        name
+        email
+        description
+        shoppingCart {
+          items {
+            id
+            productID
+            customerShopID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        products {
+          items {
+            id
+            customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
+            productID
+            productFields {
+              name
+              images
+            }
+            code
+            price
+            condition
+            description
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          nextToken
+        }
+        owner
+        createdAt
+        updatedAt
+      }
       categoryID
       categoryFields {
         name
@@ -833,6 +944,21 @@ export const getCustomerProduct = /* GraphQL */ `
         product {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            shoppingCart {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -928,6 +1054,44 @@ export const listCustomerProducts = /* GraphQL */ `
       items {
         id
         customerID
+        customer {
+          userID
+          name
+          email
+          description
+          shoppingCart {
+            items {
+              id
+              productID
+              customerShopID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          products {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          owner
+          createdAt
+          updatedAt
+        }
         categoryID
         categoryFields {
           name
@@ -955,6 +1119,15 @@ export const listCustomerProducts = /* GraphQL */ `
           product {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -1043,6 +1216,44 @@ export const customerProductsByCustomerIDAndCode = /* GraphQL */ `
       items {
         id
         customerID
+        customer {
+          userID
+          name
+          email
+          description
+          shoppingCart {
+            items {
+              id
+              productID
+              customerShopID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          products {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          owner
+          createdAt
+          updatedAt
+        }
         categoryID
         categoryFields {
           name
@@ -1070,6 +1281,15 @@ export const customerProductsByCustomerIDAndCode = /* GraphQL */ `
           product {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -1146,6 +1366,44 @@ export const getCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
+        customer {
+          userID
+          name
+          email
+          description
+          shoppingCart {
+            items {
+              id
+              productID
+              customerShopID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          products {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          owner
+          createdAt
+          updatedAt
+        }
         categoryID
         categoryFields {
           name
@@ -1173,6 +1431,15 @@ export const getCustomerProductStatus = /* GraphQL */ `
           product {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -1261,6 +1528,21 @@ export const listCustomerProductStatuses = /* GraphQL */ `
         product {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            shoppingCart {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -1358,6 +1640,7 @@ export const getCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
+            createdBy
             createdAt
             updatedAt
           }
@@ -1421,6 +1704,7 @@ export const getCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
+            createdBy
             createdAt
             updatedAt
           }

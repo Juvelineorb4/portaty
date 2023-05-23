@@ -13,14 +13,12 @@ import * as mutations from "@/graphql/mutations";
 // recoil
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  blobsPost,
   brandItem,
   brandsId,
   categoriesId,
   categoryItem,
   conditionItem,
   customerId,
-  errorPostProduct,
   imagesPost,
   modelItem,
   productItem,
@@ -30,7 +28,6 @@ import {
   supplierItem,
   userAutenticated,
 } from "@/atoms";
-import { es } from "@/utils/constants/lenguage";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
@@ -61,10 +58,7 @@ const Profile = ({ navigation }) => {
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
-  const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
-  const [blobImages, setBlobImages] = useRecoilState(blobsPost);
-  const [selectErrorPostProduct, setSelectErrorPostProduct] =
-    useRecoilState(errorPostProduct);
+    const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
 
   const fecthShop = async () => {
     const result = await API.graphql({
@@ -72,11 +66,11 @@ const Profile = ({ navigation }) => {
       variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const listProducts = await API.graphql({
-      query: queries.listCustomerProductStatuses,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
+    const result2 = await API.graphql({
+      query: queries.listADCategories,
+      // variables: { id: userAuth.username },
+      authMode: "AWS_IAM",
     });
-    console.log('soy yo', listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
@@ -92,9 +86,7 @@ const Profile = ({ navigation }) => {
     setBrandsSelect("");
     setProductSelect("");
     setProductBrandSelect("");
-    setImagesPostSelect([]);
-    setBlobImages([]);
-    setSelectErrorPostProduct(false);
+    setImagesPostSelect([])
   };
 
   useEffect(() => {
@@ -108,7 +100,13 @@ const Profile = ({ navigation }) => {
           <View style={styles.image}></View>
           <CustomButton
             buttonStyles={[styles.edit, global.bgBlack]}
-            image={require("@/utils/images/capture.png")}
+            icon={{
+              status: true,
+              name: "image-edit-outline",
+              size: 20,
+              color: "#ffffff",
+              type: `MTI`,
+            }}
           />
         </View>
         <Text style={[styles.user, global.black]}>
@@ -117,7 +115,7 @@ const Profile = ({ navigation }) => {
       </View>
       <View style={styles.content}>
         <Text style={[styles.titleSettings, global.black]}>
-          {es.profile.shop.title}
+          My Shop: {/*{userShop.name.toUpperCase()}*/}
         </Text>
         <TouchableOpacity
           activeOpacity={1}
@@ -128,8 +126,8 @@ const Profile = ({ navigation }) => {
         >
           <View style={[styles.line, global.bgWhiteSmoke]} />
           <CustomSelect
-            title={es.profile.shop.post.title}
-            subtitle={es.profile.shop.post.subtitle}
+            title={"Post"}
+            subtitle={"Post a product for your shop"}
             styled={{
               text: {
                 container: styles.textContainerSelect,
@@ -141,70 +139,29 @@ const Profile = ({ navigation }) => {
               iconRight: styles.iconRight,
             }}
             icon={{
-              left: require("@/utils/images/post.png"),
-              right: require("@/utils/images/arrow_right.png"),
-            }}
-            toogle={false}
-          />
-        </TouchableOpacity>
-
-        <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts")}>
-          <CustomSelect
-            title={es.profile.shop.products.title}
-            subtitle={es.profile.shop.products.subtitle}
-            styled={{
-              text: {
-                container: styles.textContainerSelect,
-                title: [styles.textTitleSelect, global.black],
-                subtitle: [styles.textSubtitleSelect, global.topGray],
+              left: {
+                name: "plus-box-outline",
+                size: 20,
+                color: "white",
+                type: "MTI",
               },
-              container: styles.containerSelect,
-              iconLeft: [styles.iconLeft, global.mainBgColor],
-              iconRight: styles.iconRight,
-            }}
-            icon={{
-              left: require("@/utils/images/product.png"),
-              right: require("@/utils/images/arrow_right.png"),
-            }}
-            toogle={false}
-          />
-        </TouchableOpacity>
-
-        <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders")}>
-          <CustomSelect
-            title={es.profile.shop.orders.title}
-            subtitle={es.profile.shop.orders.subtitle}
-            styled={{
-              text: {
-                container: styles.textContainerSelect,
-                title: [styles.textTitleSelect, global.black],
-                subtitle: [styles.textSubtitleSelect, global.topGray],
+              right: {
+                name: "arrow-right",
+                size: 24,
+                color: "#404040",
+                type: "MTI",
               },
-              container: styles.containerSelect,
-              iconLeft: [styles.iconLeft, global.mainBgColor],
-              iconRight: styles.iconRight,
-            }}
-            icon={{
-              left: require("@/utils/images/order.png"),
-              right: require("@/utils/images/arrow_right.png"),
             }}
             toogle={false}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>
-          {es.profile.settings.title}
-        </Text>
+        <Text style={[styles.titleSettings, global.black]}>Settings</Text>
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={() => navigation.navigate(button.route)}
-              >
+              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -224,7 +181,7 @@ const Profile = ({ navigation }) => {
                 />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
+              <TouchableOpacity onPress={() => Auth.signOut()}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -236,7 +193,7 @@ const Profile = ({ navigation }) => {
                       subtitle: [styles.textSubtitleSelect, global.topGray],
                     },
                     container: styles.containerSelect,
-                    iconLeft: [styles.iconLeft, global.mainBgColor],
+                    iconLeft: [styles.iconLeft, global.bgBlack],
                     iconRight: styles.iconRight,
                   }}
                   icon={button.icon}

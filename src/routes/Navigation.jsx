@@ -12,7 +12,9 @@ import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilState } from 'recoil'
 import { userAutenticated } from '@/atoms/index'
-import Tabs from "./Tabs/Tabs";
+
+
+
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -32,9 +34,10 @@ const Navigation = () => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
       console.log("HUB: ", event)
+      console.log("EVENT HUB: ", data)
       switch (event) {
         case "signIn":
-          checkUser()
+          setUserAuth(data)
           break;
         case "signOut":
           setUserAuth(undefined)
@@ -60,7 +63,7 @@ const Navigation = () => {
     fecthalgo();
   }, [])
   const fecthalgo = async () => {
-    
+
   }
 
   return (
@@ -74,8 +77,8 @@ const Navigation = () => {
           }}
         />}
         <Stack.Screen
-          name={`Navigator`}
-          component={Tabs}
+          name={`Home`}
+          component={DrawerNavigator}
           options={{
             headerShown: false,
           }}

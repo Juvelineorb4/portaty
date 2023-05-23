@@ -1,7 +1,5 @@
 .container {
     flex-direction: row;
-    background-color: white;
-    padding: 40px 20px 10px;
 }
 
 .contentArrow {
@@ -19,15 +17,11 @@
 }
 
 .contentInput {
-    flex: 1;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 10px 10px 0px;
+    flex: 1
 }
 
 .inputSearch {
-    flex: 1;
-    font-family: 'light';
+    padding: 8px 10px;
 }
 
 .contentBack {

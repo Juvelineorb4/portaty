@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "white",
-    padding: 20,
-    marginBottom: 40
+    padding: 20
   },
 });
 

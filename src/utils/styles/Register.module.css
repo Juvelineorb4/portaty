@@ -10,7 +10,7 @@
 
 .inputContainer {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 15px 20px;
   border-radius: 16px;

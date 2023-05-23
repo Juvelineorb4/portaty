@@ -1,51 +1,96 @@
 export const settings = {
   buttons: [
     {
-      title: "Permisos de la aplicación",
-      subtitle: "Establezca a qué permisos tiene acceso la aplicación.",
+      title: "App permissions",
+      subtitle: "Set which permissions the app has access to.",
       icon: {
-        left: require("@/utils/images/lock.png"),
-        right: require("@/utils/images/arrow_right.png"),
+        left: {
+          name: "lock-outline",
+          size: 20,
+          color: "white",
+          type: 'MTI'
+        },
+        right: {
+          name: "arrow-right",
+          size: 24,
+          color: "#404040",
+          type: 'MTI'
+        },
       },
       route: "Permissions",
       // routePush: true,
     },
     {
-      title: "Introducción",
-      subtitle: "Guía de nuestra aplicación.",
+      title: "Introduction",
+      subtitle: "Was guided through our new app.",
       icon: {
-        left: require("@/utils/images/question.png"),
-        right: require("@/utils/images/arrow_right.png"),
+        left: {
+          name: "crosshairs-question",
+          size: 20,
+          color: "white",
+          type: 'MTI'
+        },
+        right: {
+          name: "arrow-right",
+          size: 24,
+          color: "#404040",
+          type: 'MTI'
+        },
       },
       route: "Introduction",
       // routePush: true,
     },
     {
-      title: "Política de privacidad",
-      subtitle: "Ver detalles de nuestra política.",
+      title: "Privacy & Policy",
+      subtitle: "See details of our policy",
       icon: {
-        left: require("@/utils/images/folder.png"),
-        right: require("@/utils/images/arrow_right.png"),
+        left: {
+          name: "file-document-outline",
+          size: 20,
+          color: "white",
+          type: 'MTI'
+        },
+        right: {
+          name: "arrow-right",
+          size: 24,
+          color: "#404040",
+          type: 'MTI'
+        },
       },
       route: "Terms",
       // routePush: true,
     },
     {
-      title: "Especificaciones de la aplicación",
-      subtitle: "Ver detalles sobre la aplicación",
+      title: "App specs",
+      subtitle: "See details about the app",
       icon: {
-        left: require("@/utils/images/info_white.png"),
-        right: require("@/utils/images/arrow_right.png"),
+        left: {
+          name: "information-outline",
+          size: 20,
+          color: "white",
+          type: 'MTI'
+        },
+        right: {
+          name: "arrow-right",
+          size: 24,
+          color: "#404040",
+          type: 'MTI'
+        },
       },
       route: "About",
       // routePush: true,
     },
     {
-      title: "Cerrar sesión",
+      title: "Logout",
       icon: {
-        left: require("@/utils/images/exit.png"),
+        left: {
+          name: "logout",
+          size: 20,
+          color: "white",
+          type: 'MTI'
+        },
       },
-      // route: "Welcome",
+      route: "Welcome",
       // routePush: true,
     },
   ],

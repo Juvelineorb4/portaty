@@ -19,8 +19,8 @@
 }
 .textMain,
 .textAll {
-  font-family: 'regular';
-  margin-bottom: 5px;
+  font-family: 'semibold';
+  /* font-weight: 700; */
   font-size: 16px;
 }
 .productsTopTrendingPopular, .productsBotTrendingPopular {
@@ -40,7 +40,4 @@
 }
 .bubbleBrand {
   padding: 20px 20px 20px 0px;
-}
-.trendingBrand {
-  margin-bottom: 70px;
 }

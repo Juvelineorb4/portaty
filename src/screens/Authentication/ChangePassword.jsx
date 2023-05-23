@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import CustomTimer from "@/components/CustomTimer";
 import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
-import { es } from "@/utils/constants/lenguage";
 
 const ChangePassword = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
@@ -27,7 +26,7 @@ const ChangePassword = ({ navigation, route }) => {
                 title: [styles.title, global.black],
                 container: styles.textContainer,
               }}
-              title={es.authentication.password.create}
+              title={`Create password`}
             />
             <Image
               style={{
@@ -44,7 +43,7 @@ const ChangePassword = ({ navigation, route }) => {
             <CustomInput
               control={control}
               name={`password`}
-              placeholder={es.authentication.password.new.placeholder}
+              placeholder={"Write your new password..."}
               styled={{
                 text: styles.textInputPassword,
                 label: [styles.labelInput, global.topGray],
@@ -73,7 +72,7 @@ const ChangePassword = ({ navigation, route }) => {
             <CustomInput
               control={control}
               name={`password-confirm`}
-              placeholder={es.authentication.password.confirm.placeholder}
+              placeholder={"Please confirm your password..."}
               styled={{
                 text: styles.textInputPassword,
                 label: [styles.labelInput, global.topGray],
@@ -95,8 +94,9 @@ const ChangePassword = ({ navigation, route }) => {
             />
           </View>
           <Text style={[styles.code, global.topGray]}>
-            {es.authentication.password.code.email}{" "}
-            <Text style={styles.emailText}>{route.params?.email}</Text> {es.authentication.password.code.expire}{" "}
+            We send you a 6-digit security code to your email:{" "}
+            <Text style={styles.emailText}>{route.params?.email}</Text> .The
+            code will expire in:{" "}
             {route.params?.email && (
               <CustomTimer
                 styled={{
@@ -110,15 +110,15 @@ const ChangePassword = ({ navigation, route }) => {
             )}
           </Text>
           <EnterCode
-            title={es.authentication.password.entercode.title}
-            subtitle={es.authentication.password.entercode.subtitle}
+            title={`Didn't you get your code?`}
+            subtitle={"Send the code again"}
             styled={{
               container: styles.enterCode,
             }}
             control={control}
           />
           <CustomButton
-            text={es.authentication.password.button}
+            text={`Confirm New Password`}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
           />

@@ -5,7 +5,6 @@ import CustomText from "@/components/CustomText";
 import { permissions } from "@/utils/constants/permissions";
 import CustomSelect from "@/components/CustomSelect";
 import { ScrollView } from "react-native-gesture-handler";
-import { es } from "@/utils/constants/lenguage";
 
 const Permissions = () => {
   const global = require('@/utils/styles/global.js');
@@ -14,8 +13,8 @@ const Permissions = () => {
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
       <CustomText
-        title={es.profile.permissions.title}
-        subtitle={es.profile.permissions.subtitle}
+        title={`Permits`}
+        subtitle={`We collect data in the app to make your journey as smooth as possible.`}
         styled={{
           title: [styles.title, global.black],
           subtitle: styles.subtitle,

@@ -19,7 +19,6 @@ import {
   categoriesId,
   categoryItem,
   conditionItem,
-  errorPostProduct,
   modelItem,
   productItem,
   productsBrandId,
@@ -44,8 +43,6 @@ const CustomModal = ({
 
   /* Estaticos */
   const [selectId, setSelectId] = useState("");
-
-  const [selectError, setSelectError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   /* Guardar valor por item seleccionado */
@@ -55,10 +52,11 @@ const CustomModal = ({
   const [selectItemProduct, setSelectItemProduct] = useRecoilState(productItem);
   const [selectItemCondition, setSelectItemCondition] =
     useRecoilState(conditionItem);
-  const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
-  const [selectItemSupplier, setSelectItemSupplier] =
-    useRecoilState(supplierItem);
-  const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
+    const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
+    const [selectItemSupplier, setSelectItemSupplier] = useRecoilState(supplierItem);
+    const [selectItemStorage, setSelectItemStorage] =
+      useRecoilState(storageItem);
+
 
   /* Guardar ids de items seleccionados independientes */
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
@@ -66,10 +64,8 @@ const CustomModal = ({
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
+    
 
-  /* Error */
-  const [selectErrorPostProduct, setSelectErrorPostProduct] =
-    useRecoilState(errorPostProduct);
   useEffect(() => {}, [productBrandSelect, selectItemProduct]);
 
   return (
@@ -87,13 +83,7 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    selectErrorPostProduct && !categoriesSelect
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
+                    both ? styles.inputContainerBoth : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -103,8 +93,7 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
+                          fontSize: 13,
                         },
                       ]}
                     >
@@ -126,19 +115,12 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
                   />
-                  {selectErrorPostProduct && !categoriesSelect ? (
-                    <Text style={styles.errorCategory}>Required</Text>
-                  ) : (
-                    ""
-                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -159,11 +141,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow_back.png")}
+                          source={require("@/utils/images/arrow-back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -179,7 +161,6 @@ const CustomModal = ({
                             setSelectItemCategory(item);
                             setSelectId(item.id);
                             setCategoriesSelect(item.id);
-                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -191,7 +172,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Seleccionaste: {selectItemCategory.name || ""}
+                        Your selected: {selectItemCategory.name || ""}
                       </Text>
                     </View>
                   </View>
@@ -200,25 +181,13 @@ const CustomModal = ({
             </>
           ) : dataValue === "brands" ? (
             <>
-              <TouchableOpacity
-                onPress={() => {
-                  if (categoriesSelect) setModalVisible(!modalVisible);
-                  if (!categoriesSelect) setSelectError(true);
-                }}
-              >
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    (selectError || selectErrorPostProduct) &&
-                    (!brandsSelect || !categoriesSelect)
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
+                    both ? styles.inputContainerBoth : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -228,8 +197,7 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
+                          fontSize: 13,
                         },
                       ]}
                     >
@@ -252,26 +220,14 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
+
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
                   />
                 </View>
-                {selectErrorPostProduct || selectError ? (
-                  !categoriesSelect ? (
-                    <Text style={styles.errorBrand}>Selecciona la categoría antes</Text>
-                  ) : !brandsSelect ? (
-                    <Text style={styles.errorBrand}>Requerido</Text>
-                  ) : (
-                    ""
-                  )
-                ) : (
-                  ""
-                )}
               </TouchableOpacity>
               <Modal
                 animationType="none"
@@ -291,11 +247,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow_back.png")}
+                          source={require("@/utils/images/arrow-back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -312,8 +268,6 @@ const CustomModal = ({
                             setSelectItemBrand(item);
                             setSelectId(item.aDBrandId);
                             setBrandsSelect(item.aDBrandId);
-                            setSelectError(false);
-                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -325,7 +279,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                      Seleccionaste:{" "}
+                        Your selected:{" "}
                         {selectItemBrand.aDCategoryId === categoriesSelect
                           ? selectItemBrand.aDBrand.name
                           : ""}
@@ -337,25 +291,13 @@ const CustomModal = ({
             </>
           ) : dataValue === "products" ? (
             <>
-              <TouchableOpacity
-                onPress={() => {
-                  if (brandsSelect) setModalVisible(!modalVisible);
-                  if (!brandsSelect) setSelectError(true);
-                }}
-              >
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    (selectError || selectErrorPostProduct) &&
-                    (!brandsSelect || !productSelect)
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
+                    both ? styles.inputContainerBoth : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -365,8 +307,7 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
+                          fontSize: 13,
                         },
                       ]}
                     >
@@ -394,277 +335,12 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
                   />
-                  {selectErrorPostProduct || selectError ? (
-                    !brandsSelect ? (
-                      <Text style={styles.errorBoth}>
-                        Selecciona la marca primero
-                      </Text>
-                    ) : !productSelect ? (
-                      <Text style={styles.errorProduct}>Requerido</Text>
-                    ) : (
-                      ""
-                    )
-                  ) : (
-                    ""
-                  )}
-                </View>
-              </TouchableOpacity>
-              <Modal
-                animationType="none"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <View style={styles.modalContainer}>
-                  <View style={styles.modalContent}>
-                    <View style={styles.modalTop}>
-                      <Pressable
-                        onPress={() => {
-                          setModalVisible(!modalVisible);
-                        }}
-                      >
-                        <Image
-                          style={{
-                            width: 25,
-                            height: 25,
-                            resizeMode: "contain",
-                          }}
-                          source={require("@/utils/images/arrow_back.png")}
-                        />
-                      </Pressable>
-                      <Text style={styles.modalText}>{modal.text}</Text>
-                    </View>
-                    <FlatList
-                      data={data}
-                      renderItem={
-                        ({ item }) => (
-                          <CustomCategory
-                            title={item.title || item.name}
-                            icon={item.images[0]}
-                            itemId={item.id}
-                            onPress={() => {
-                              setSelectItemProduct(item);
-                              setSelectId(item.id);
-                              setProductSelect(item.id);
-                              setProductBrandSelect(item.brandID);
-                              setSelectError(false);
-                              setModalVisible(!modalVisible);
-                            }}
-                            activeSelect={selectId}
-                          />
-                        )
-                        // )
-                      }
-                      numColumns={3}
-                      keyExtractor={(item, index) => index}
-                      showsVerticalScrollIndicator={false}
-                      columnWrapperStyle={{ justifyContent: "space-between" }}
-                    />
-                    <View style={styles.modalBot}>
-                      <Text style={styles.modalTextSelect}>
-                        Seleccionaste: {selectItemProduct.name || ""}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </Modal>
-            </>
-          ) : dataValue === "model" ? (
-            <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={both ? styles.labelInputBoth : styles.labelInput}>
-                  {text}
-                </Text>
-                <View
-                  style={
-                    selectErrorPostProduct && !selectItemModel.title
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
-                  }
-                >
-                  <View style={both ? styles.textInputBoth : styles.textInput}>
-                    <Text
-                      style={[
-                        global.inputColor,
-                        {
-                          textTransform: "capitalize",
-                          marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
-                        },
-                      ]}
-                    >
-                      {selectItemModel.title
-                        ? selectItemModel.title
-                        : placeholder}
-                    </Text>
-                    {selectItemModel ? (
-                      <View>
-                        {/* <Image
-                          style={{
-                            width: 18,
-                            height: 18,
-                            resizeMode: "contain",
-                          }}
-                          source={{ uri: selectItemProduct.images[0] }}
-                        /> */}
-                      </View>
-                    ) : (
-                      ""
-                    )}
-                  </View>
-
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
-                  />
-                  {selectErrorPostProduct && !selectItemModel.title ? (
-                    <Text style={styles.errorBoth}>Requerido</Text>
-                  ) : (
-                    ""
-                  )}
-                </View>
-              </TouchableOpacity>
-              <Modal
-                animationType="none"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <View style={styles.modalContainer}>
-                  <View style={styles.modalContent}>
-                    <View style={styles.modalTop}>
-                      <Pressable
-                        onPress={() => {
-                          setModalVisible(!modalVisible);
-                        }}
-                      >
-                        <Image
-                          style={{
-                            width: 25,
-                            height: 25,
-                            resizeMode: "contain",
-                          }}
-                          source={require("@/utils/images/arrow_back.png")}
-                        />
-                      </Pressable>
-                      <Text style={styles.modalText}>{modal.text}</Text>
-                    </View>
-                    <FlatList
-                      data={data}
-                      renderItem={
-                        ({ item }) => (
-                          <CustomCategory
-                            title={item.title || item.name}
-                            // icon={item.images[0]}
-                            itemId={item.id}
-                            onPress={() => {
-                              setSelectItemModel(item);
-                              setSelectId(item.id);
-                              setSelectError(false);
-                              setModalVisible(!modalVisible);
-                            }}
-                            activeSelect={selectId}
-                          />
-                        )
-                        // )
-                      }
-                      numColumns={3}
-                      keyExtractor={(item, index) => index}
-                      showsVerticalScrollIndicator={false}
-                      columnWrapperStyle={{ justifyContent: "space-between" }}
-                    />
-                    <View style={styles.modalBot}>
-                      <Text style={styles.modalTextSelect}>
-                        Seleccionaste: {selectItemModel.title || ""}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </Modal>
-            </>
-          ) : dataValue === "supplier" ? (
-            <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={both ? styles.labelInputBoth : styles.labelInput}>
-                  {text}
-                </Text>
-                <View
-                  style={
-                    selectErrorPostProduct && !selectItemSupplier.title
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
-                  }
-                >
-                  <View style={both ? styles.textInputBoth : styles.textInput}>
-                    <Text
-                      style={[
-                        global.inputColor,
-                        {
-                          textTransform: "capitalize",
-                          marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
-                        },
-                      ]}
-                    >
-                      {selectItemSupplier.title
-                        ? selectItemSupplier.title
-                        : placeholder}
-                    </Text>
-                    {selectItemSupplier ? (
-                      <View>
-                        {/* <Image
-                          style={{
-                            width: 18,
-                            height: 18,
-                            resizeMode: "contain",
-                          }}
-                          source={{ uri: selectItemProduct.images[0] }}
-                        /> */}
-                      </View>
-                    ) : (
-                      ""
-                    )}
-                  </View>
-
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
-                  />
-                  {selectErrorPostProduct && !selectItemSupplier.title ? (
-                    <Text style={styles.errorBoth}>Requerido</Text>
-                  ) : (
-                    ""
-                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -700,12 +376,229 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            // icon={item.images[0]}
+                            icon={item.images[0]}
+                            itemId={item.id}
+                            onPress={() => {
+                              setSelectItemProduct(item);
+                              setSelectId(item.id);
+                              setProductSelect(item.id);
+                              setProductBrandSelect(item.brandID);
+                            }}
+                            activeSelect={selectId}
+                          />
+                        )
+                        // )
+                      }
+                      numColumns={3}
+                      keyExtractor={(item, index) => index}
+                      showsVerticalScrollIndicator={false}
+                      columnWrapperStyle={{ justifyContent: "space-between" }}
+                    />
+                    <View style={styles.modalBot}>
+                      <Text style={styles.modalTextSelect}>
+                        Your selected: {selectItemProduct.name || ""}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+            </>
+          ) : dataValue === "model" ? (
+            <>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={both ? styles.labelInputBoth : styles.labelInput}>
+                  {text}
+                </Text>
+                <View
+                  style={
+                    both ? styles.inputContainerBoth : styles.inputContainer
+                  }
+                >
+                  <View style={both ? styles.textInputBoth : styles.textInput}>
+                    <Text
+                      style={[
+                        global.inputColor,
+                        {
+                          textTransform: "capitalize",
+                          marginRight: 3,
+                          fontSize: 13,
+                        },
+                      ]}
+                    >
+                      {selectItemModel
+                        ? selectItemModel.title
+                        : placeholder}
+                    </Text>
+                    {selectItemModel ? (
+                      <View>
+                        {/* <Image
+                          style={{
+                            width: 18,
+                            height: 18,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: selectItemProduct.images[0] }}
+                        /> */}
+                      </View>
+                    ) : (
+                      ""
+                    )}
+                  </View>
+
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
+                  />
+                </View>
+              </TouchableOpacity>
+              <Modal
+                animationType="none"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalContent}>
+                    <View style={styles.modalTop}>
+                      <Pressable
+                        onPress={() => {
+                          setModalVisible(!modalVisible);
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/arrow-back.png")}
+                        />
+                      </Pressable>
+                      <Text style={styles.modalText}>{modal.text}</Text>
+                    </View>
+                    <FlatList
+                      data={data}
+                      renderItem={
+                        ({ item }) => (
+                          <CustomCategory
+                            title={item.title || item.name}
+                            icon={item.images[0]}
+                            itemId={item.id}
+                            onPress={() => {
+                              setSelectItemModel(item);
+                              setSelectId(item.id);
+                            }}
+                            activeSelect={selectId}
+                          />
+                        )
+                        // )
+                      }
+                      numColumns={3}
+                      keyExtractor={(item, index) => index}
+                      showsVerticalScrollIndicator={false}
+                      columnWrapperStyle={{ justifyContent: "space-between" }}
+                    />
+                    <View style={styles.modalBot}>
+                      <Text style={styles.modalTextSelect}>
+                        Your selected: {selectItemModel.title || ""}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+            </>
+          ) : dataValue === "supplier" ? (
+            <>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={both ? styles.labelInputBoth : styles.labelInput}>
+                  {text}
+                </Text>
+                <View
+                  style={
+                    both ? styles.inputContainerBoth : styles.inputContainer
+                  }
+                >
+                  <View style={both ? styles.textInputBoth : styles.textInput}>
+                    <Text
+                      style={[
+                        global.inputColor,
+                        {
+                          textTransform: "capitalize",
+                          marginRight: 3,
+                          fontSize: 13,
+                        },
+                      ]}
+                    >
+                      {selectItemSupplier
+                        ? selectItemSupplier.title
+                        : placeholder}
+                    </Text>
+                    {selectItemSupplier ? (
+                      <View>
+                        {/* <Image
+                          style={{
+                            width: 18,
+                            height: 18,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: selectItemProduct.images[0] }}
+                        /> */}
+                      </View>
+                    ) : (
+                      ""
+                    )}
+                  </View>
+
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
+                  />
+                </View>
+              </TouchableOpacity>
+              <Modal
+                animationType="none"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalContent}>
+                    <View style={styles.modalTop}>
+                      <Pressable
+                        onPress={() => {
+                          setModalVisible(!modalVisible);
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/arrow-back.png")}
+                        />
+                      </Pressable>
+                      <Text style={styles.modalText}>{modal.text}</Text>
+                    </View>
+                    <FlatList
+                      data={data}
+                      renderItem={
+                        ({ item }) => (
+                          <CustomCategory
+                            title={item.title || item.name}
+                            icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemSupplier(item);
                               setSelectId(item.id);
-                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -734,13 +627,7 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    selectErrorPostProduct && !selectItemStorage.title
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
+                    both ? styles.inputContainerBoth : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -750,13 +637,12 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
+                          fontSize: 13,
                         },
                       ]}
                     >
-                      {selectItemStorage.title
-                        ? selectItemStorage.title
+                      {selectItemStorage
+                        ? selectItemStorage.name
                         : placeholder}
                     </Text>
                     {selectItemStorage ? (
@@ -775,19 +661,12 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
                   />
-                  {selectErrorPostProduct && !selectItemStorage.title ? (
-                    <Text style={styles.errorBoth}>Required</Text>
-                  ) : (
-                    ""
-                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -808,11 +687,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow_back.png")}
+                          source={require("@/utils/images/arrow-back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -823,12 +702,11 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            // icon={item.images[0]}
+                            icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemStorage(item);
                               setSelectId(item.id);
-                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -842,7 +720,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Seleccionaste: {selectItemStorage.title || ""}
+                        Your selected: {selectItemStorage.title || ""}
                       </Text>
                     </View>
                   </View>
@@ -857,13 +735,7 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    selectErrorPostProduct && !selectItemCondition.title
-                      ? both
-                        ? styles.inputContainerBothError
-                        : styles.inputContainerError
-                      : both
-                      ? styles.inputContainerBoth
-                      : styles.inputContainer
+                    both ? styles.inputContainerBoth : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -873,8 +745,7 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 12,
-                          fontFamily: "light",
+                          fontSize: 13,
                         },
                       ]}
                     >
@@ -893,19 +764,13 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-                  <Image
-                    style={{
-                      width: 20,
-                      height: 20,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/arrow_down.png")}
+
+                  <Icon
+                    name={icon.name}
+                    color={icon.color}
+                    size={icon.size}
+                    type={icon.type}
                   />
-                  {selectErrorPostProduct && !selectItemCondition.title ? (
-                    <Text style={styles.errorBoth}>Requerido</Text>
-                  ) : (
-                    ""
-                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -926,11 +791,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 25,
-                            height: 25,
+                            width: 20,
+                            height: 20,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow_back.png")}
+                          source={require("@/utils/images/arrow-back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -946,7 +811,6 @@ const CustomModal = ({
                           onPress={() => {
                             setSelectId(item.id);
                             setSelectItemCondition(item);
-                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -958,7 +822,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Seleccionaste: {selectItemCondition.title || ""}
+                        Your selected: {selectItemCondition.title || ""}
                       </Text>
                     </View>
                   </View>

@@ -1,23 +1,28 @@
 export const permissions = {
   permits: [
     {
-      title: "Notificaciones",
-      subtitle: "Permítanos guardar estadísticas sobre su uso de la aplicación.",
+      title: "Notifications",
+      subtitle: "Let us save statistics about your use of the app.",
       toogle: "notification",
     },
     {
-      title: "Ubicación",
-      subtitle: "Permítanos acceder a su ubicación.",
+      title: "Location",
+      subtitle: "Allow us to access your location.",
       toogle: "location",
     },
     {
-      title: "Contactos",
-      subtitle: "Permítanos acceder a su lista de contactos.",
+      title: "Contact",
+      subtitle: "Use your contacts' address in the from/to field.",
       toogle: "contact",
     },
     {
-      title: "Cámara",
-      subtitle: "Permítanos acceder a su cámara.",
+      title: "Calendar",
+      subtitle: "Save planned routes directly to your calendar.",
+      toogle: "calendar",
+    },
+    {
+      title: "Camera",
+      subtitle: "Take photos of your favourite routes.",
       toogle: "camera",
     },
   ],

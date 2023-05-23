@@ -32,6 +32,9 @@
       },
       "storage": {
         "s3portaty": {}
+      },
+      "api": {
+        "portaty": {}
       }
     }
   }

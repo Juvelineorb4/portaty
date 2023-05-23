@@ -9,7 +9,6 @@ import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
 // amplify 
 import { Auth } from 'aws-amplify'
-import { es } from "@/utils/constants/lenguage";
 
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
 
@@ -52,7 +51,7 @@ const Register = () => {
             subtitle: styles.subtitle,
             container: styles.textContainer,
           }}
-          title={es.authentication.register.title}
+          title={`Create New Account`}
         />
         <Image
           style={{
@@ -67,7 +66,7 @@ const Register = () => {
         <CustomInput
           control={control}
           name={`name`}
-          placeholder={es.authentication.register.name.placeholder}
+          placeholder={"Write your username..."}
           styled={{
             text: styles.textInput,
             label: styles.labelInput,
@@ -81,13 +80,13 @@ const Register = () => {
             type: "MTI",
           }}
           rules={{
-            required: es.authentication.register.name.rules,
+            required: "Name is required",
           }}
         />
         <CustomInput
           control={control}
           name={`email`}
-          placeholder={es.authentication.register.email.placeholder}
+          placeholder={"Write your email..."}
           styled={{
             text: styles.textInput,
             label: styles.labelInput,
@@ -101,14 +100,14 @@ const Register = () => {
             type: "MTI",
           }}
           rules={{
-            required: es.authentication.register.email.rules,
-            pattern: { value: EMAIL_REGEX, message: "Inválido" }
+            required: "Email is required",
+            pattern: { value: EMAIL_REGEX, message: "Invalid Email" }
           }}
         />
         <CustomInput
           control={control}
           name={`password`}
-          placeholder={es.authentication.register.password.placeholder}
+          placeholder={"Write your password..."}
           styled={{
             text: styles.textInput,
             label: styles.labelInput,
@@ -123,17 +122,17 @@ const Register = () => {
           }}
           security={true}
           rules={{
-            required: es.authentication.register.password.rules,
+            required: "Password is required",
             minLength: {
               value: 8,
-              message: "Mínimo 8 caracteres"
+              message: "Min 8 characters"
             },
           }}
         />
         <CustomInput
           control={control}
           name={`password-repeat`}
-          placeholder={es.authentication.register.repeat.placeholder}
+          placeholder={"Write your password again..."}
           styled={{
             text: styles.textInput,
             label: styles.labelInput,
@@ -148,9 +147,9 @@ const Register = () => {
           }}
           security={true}
           rules={{
-            required: es.authentication.register.repeat.rules,
+            required: "Password Repeat is required",
             validate: value =>
-              value == pwd || 'No coincide'
+              value == pwd || 'Password do not match'
           }}
         />
         <View style={styles.controls}>
@@ -169,12 +168,12 @@ const Register = () => {
               ></TouchableOpacity>
             )}
             <Text style={styles.terms}>
-              {es.authentication.register.terms}
+              I accept the Terms and Privacy Policy
             </Text>
           </View>
 
           <CustomButton
-            text={es.authentication.register.button}
+            text={`Continue`}
             handlePress={handleSubmit(onHandleRegister)}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
