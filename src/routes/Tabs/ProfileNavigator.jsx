@@ -13,6 +13,7 @@ import ListProducts from "@/screens/Profile/ListProducts";
 import ListOrders from "@/screens/Profile/ListOrders";
 import CustomPageListProduct from "@/components/CustomPageListProduct";
 import OrderPreview from "@/components/OrderPreview";
+import Notifications from "@/screens/Notifications/Notifications";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -99,6 +100,14 @@ const ProfileNavigator = () => {
           header: (props) => <LeftHeader {...props} />,
         }}
       />
+      <Stack.Screen
+      name="Notifications_Profile"
+      component={Notifications}
+      options={{
+        animation: "slide_from_right",
+        header: (props) => <LeftHeader {...props} />,
+      }}
+    />
     </Stack.Navigator>
   );
 };

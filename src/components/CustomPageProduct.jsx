@@ -1,18 +1,41 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/CustomProductPage.module.css";
 import CustomButton from "./CustomButton";
 import { es } from "@/utils/constants/lenguage";
 import { FlatList } from "react-native";
 import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
+import { API, Storage } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import * as mutations from "@/graphql/mutations";
 
 const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
-  const handleNavigation = () => navigation.navigate("SellerProduct")
+  const [items, setItems] = useState([]);
+  const fetchData = async () => {
+    try {
+      const products = await API.graphql({
+        query: queries.listCustomerProductStatuses,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      let listItems = [];
+      products.data.listCustomerProductStatuses.items.map((item, index) => {
+        if (item.product.productID === data.id) listItems.push(item);
+      });
+      setItems(listItems);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}>
       <View style={styles.container}>
         <View style={styles.containerImages}>
           <Image
@@ -23,7 +46,11 @@ const CustomPageProduct = ({ route, navigation }) => {
               resizeMode: "contain",
               borderRadius: 8,
             }}
-            source={require("@/utils/images/notimage.png")}
+            source={
+              data.images[0]
+                ? { uri: data.images[0] }
+                : require("@/utils/images/notimage.png")
+            }
           />
         </View>
         <View style={styles.content}>
@@ -38,9 +65,10 @@ const CustomPageProduct = ({ route, navigation }) => {
                 {es.post.preview.description}
               </Text>
               <Text style={[styles.descriptionText, global.midGray]}>
-                {data.product.description
-                  ? data.product.description
-                  : "Lorem ipsum dolor sit amet consectetur adipiscing elit tempus lacus cras, nunc et convallis arcu in vivamus rhoncus lobortis ultrices, mollis aliquet at gravida eu euismod est tortor pharetra. Urna pretium eu placerat dis"}N/T
+                {data.description
+                  ? data.description
+                  : "Lorem ipsum dolor sit amet consectetur adipiscing elit tempus lacus cras, nunc et convallis arcu in vivamus rhoncus lobortis ultrices, mollis aliquet at gravida eu euismod est tortor pharetra. Urna pretium eu placerat dis"}
+                N/T
               </Text>
             </View>
             <View style={styles.features}>
@@ -168,7 +196,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                           height: 25,
                           resizeMode: "contain",
                         }}
-                        source={require("@/utils/images/question.png")}
+                        source={require("@/utils/images/question_black.png")}
                       />
                       <Text style={styles.labelTextAbout}>
                         {es.post.preview.condition}
@@ -230,10 +258,15 @@ const CustomPageProduct = ({ route, navigation }) => {
             </View>
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
-          <CustomCardPage onHandlePress={() => handleNavigation()}/>
-          <CustomCardPage onHandlePress={() => handleNavigation()}/>
-          <CustomCardPage onHandlePress={() => handleNavigation()}/>
-          <CustomCardPage onHandlePress={() => handleNavigation()}/>
+          {items.map((item, index) => (
+            <CustomCardPage
+              key={index}
+              data={item.product}
+              onHandlePress={() =>
+                navigation.navigate("SellerProduct", { product: item.product })
+              }
+            />
+          ))}
         </View>
       </View>
     </ScrollView>

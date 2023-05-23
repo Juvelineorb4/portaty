@@ -161,7 +161,7 @@ export const es = {
   home: {
     trending: {
       product: "Teléfonos en tendencia",
-      brand: "Productos de Apple en tendencia",
+      brand: "Productos Xiaomi en tendencia",
       all: "Todos",
     },
   },

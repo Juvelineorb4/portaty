@@ -1250,6 +1250,9 @@ export const listCustomerProductStatuses = /* GraphQL */ `
           id
           customerID
           categoryID
+          customer {
+            name
+          }
           categoryFields {
             name
             image

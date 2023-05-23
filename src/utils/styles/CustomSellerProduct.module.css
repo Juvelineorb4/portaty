@@ -149,6 +149,16 @@
   font-family: 'light';
   padding-bottom: 20px;
 }
-.product {
-  margin-right: 20px;
+.productsList {
+  flex: 1;
+  flex-direction: row;
+}
+.price {
+  /* height: 100px; */
+  padding: 10px 0px 15px;
+}
+.priceText {
+  font-size: 26px;
+  font-family: "thinItalic";
+  margin: 0px 0px 10px;
 }

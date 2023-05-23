@@ -1,230 +1,459 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
-import styles from "@/utils/styles/CustomProductPage.module.css";
-import CustomButton from "./CustomButton";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import styles from "@/utils/styles/PreviewProduct.module.css";
+import { API, Storage } from "aws-amplify";
+import CustomButton from "@/components/CustomButton";
 import { es } from "@/utils/constants/lenguage";
-import { FlatList } from "react-native";
-import CustomCardList from "./CustomCardList";
-import CustomCardPage from "./CustomCardPage";
 
-const CustomPageListProduct = ({ route, navigation }) => {
+const PreviewProduct = ({ data = {}, route }) => {
   const global = require("@/utils/styles/global.js");
+  const [keyImages, setKeyImages] = useState([]);
+  const { product } = route.params;
+  const getImages = async () => {
+    try {
+      Storage.list(`product/${product.code}/`, {
+        level: "protected",
+        pageSize: 10,
+      }).then(async (data) => {
+        const promises = await Promise.all(
+          data.results.map(async (image) => {
+            const imageResult = await Storage.get(image.key, {
+              level: "protected",
+            });
+            return imageResult;
+          })
+        );
+        console.log("rango", promises.length);
+        setKeyImages(promises);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useLayoutEffect(() => {
+    getImages();
+  }, []);
+
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>
         <View style={styles.containerImages}>
-          <Image
-            style={{
-              width: 300,
-              height: 250,
-              marginRight: 10,
-              resizeMode: "contain",
-              borderRadius: 8,
-            }}
-            source={require("@/utils/images/notimage.png")}
-          />
+          {console.log(product)}
+          {!keyImages.length <= 0 && (
+            <FlatList
+              data={keyImages}
+              keyExtractor={(__, index) => index.toString()}
+              horizontal={true}
+              renderItem={({ item, index }) => (
+                <Image
+                  key={index}
+                  style={{
+                    width: 300,
+                    height: 250,
+                    marginRight: 10,
+                    resizeMode: "contain",
+                    borderRadius: 8,
+                  }}
+                  source={{
+                    uri: item,
+                  }}
+                />
+              )}
+            />
+          )}
         </View>
+
         <View style={styles.content}>
           <View style={styles.containerTitle}>
-            <Text style={[styles.titleProduct, global.black]}>N/T</Text>
+            <Text style={[styles.titleProduct, global.black]}>
+              {product.productFields.name}
+            </Text>
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
 
           <View style={styles.containerDetails}>
             <View style={styles.description}>
-              <Text style={[styles.title, global.black]}>
-                {es.post.preview.description}
-              </Text>
+              <Text style={[styles.title, global.black]}>{es.post.preview.description}</Text>
               <Text style={[styles.descriptionText, global.midGray]}>
-                N/T
+                {product.description
+                  ? product.description
+                  : "Lorem ipsum dolor sit amet consectetur adipiscing elit tempus lacus cras, nunc et convallis arcu in vivamus rhoncus lobortis ultrices, mollis aliquet at gravida eu euismod est tortor pharetra. Urna pretium eu placerat dis"}
+              </Text>
+            </View>
+            <View style={styles.price}>
+              <Text style={[styles.title, global.black]}>Precio</Text>
+              <Text style={[styles.priceText, global.midGray]}>
+                ${product.price}.00
               </Text>
             </View>
             <View style={styles.features}>
-              <Text style={[styles.title, global.black]}>
-                {es.post.preview.features}
-              </Text>
+              <Text style={[styles.title, global.black]}>{es.post.preview.features}</Text>
               <View style={styles.bothFeatures}>
                 <View style={styles.leftFeatures}>
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/carrier.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.carrier}
+                  {product.phoneFields.carrier ? (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/carrier.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>
+                        {product.phoneFields.carrier}
                       </Text>
                     </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
-                  <View style={styles.feature}>
-                    <View
-                      style={{
-                        width: 50,
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
+                  ) : (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/carrier.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+                  {product.phoneFields.imei ? (
+                    <View style={styles.feature}>
+                      <View
                         style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
+                          width: 50,
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
-                        source={require("@/utils/images/imei.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.imei}
+                      >
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/imei.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>
+                        {product.phoneFields.imei}
                       </Text>
                     </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
-
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
+                  ) : (
+                    <View style={styles.feature}>
+                      <View
                         style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
+                          width: 50,
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
-                        source={require("@/utils/images/batery.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.batery}
+                      >
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/imei.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+                  {product.phoneFields.batery ? (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/batery.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>
+                        {product.phoneFields.batery}
                       </Text>
                     </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
+                  ) : (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/batery.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
                 </View>
                 <View style={styles.rightFeatures}>
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/model.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.model}
+                  {product.phoneFields.model ? (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/model.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>
+                        {product.phoneFields.model}
                       </Text>
                     </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
-
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/storage.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.storage}
+                  ) : (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/model.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+                  {product.phoneFields.storage ? (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/storage.png")}
+                        />
+                        <Text style={styles.labelTextFeatureStorage}>{es.post.preview.storage}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>
+                        {product.phoneFields.storage}
                       </Text>
                     </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
+                  ) : (
+                    <View style={styles.feature}>
+                      <View style={styles.labelFeature}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/storage.png")}
+                        />
+                        <Text style={styles.labelTextFeature}>{es.post.preview.storage}</Text>
+                      </View>
+                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </View>
 
             <View style={styles.abouts}>
-              <Text style={[styles.title, global.black]}>
-                {es.post.preview.about}
-              </Text>
+              <Text style={[styles.title, global.black]}>{es.post.preview.about}</Text>
               <View style={styles.bothAbout}>
                 <View style={styles.leftAbout}>
-                  <View style={styles.about}>
-                    <View style={styles.labelAbout}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/question.png")}
-                      />
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.condition}
+                  {product.condition ? (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/question_black.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>
+                        {product.condition}
                       </Text>
                     </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                  <View style={styles.about}>
-                    <View style={styles.labelAbout}>
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.category}
+                  ) : (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/question_black.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+
+                  {product.categoryFields.name ? (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.categoryFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>
+                        {product.categoryFields.name}
                       </Text>
                     </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
+                  ) : (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.categoryFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
                 </View>
                 <View style={styles.rightAbout}>
-                  <View style={styles.about}>
-                    <View
-                      style={{
-                        width: 40,
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
+                  {product.code ? (
+                    <View style={styles.about}>
+                      <View
                         style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
+                          width: 40,
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
-                        source={require("@/utils/images/id.png")}
-                      />
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.id}
+                      >
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/id.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                      </View>
+                      <Text style={{ fontSize: 10, fontFamily: "light" }}>
+                        {product.code}
                       </Text>
                     </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                  <View style={styles.about}>
-                    <View
-                      style={{
-                        width: 40,
-                        flexDirection: "column",
-                        marginRight: 18,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.brand}
+                  ) : (
+                    <View style={styles.about}>
+                      <View
+                        style={{
+                          width: 40,
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/id.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+                  {product.brandFields.name ? (
+                    <View style={styles.about}>
+                      <View
+                        style={{
+                          width: 40,
+                          flexDirection: "column",
+                          marginRight: 18,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.brandFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>
+                        {product.brandFields.name}
                       </Text>
                     </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
+                  ) : (
+                    <View style={styles.about}>
+                      <View
+                        style={{
+                          width: 40,
+                          flexDirection: "column",
+                          marginRight: 18,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.brandFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </View>
-            <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
         </View>
       </View>
@@ -232,4 +461,4 @@ const CustomPageListProduct = ({ route, navigation }) => {
   );
 };
 
-export default CustomPageListProduct;
+export default PreviewProduct;

@@ -9,9 +9,9 @@ const CustomProductCard = ({ product = {} }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
-      style={{ justifyContent: "center", marginBottom: 30 }}
+      style={{justifyContent: "center", marginBottom: 30, width: '50%', alignItems: 'center' }}
       onPress={() =>
-        navigation.navigate(`${product.brand}_${product.id}`, {
+        navigation.navigate(`PageProduct`, {
           data: product,
         })
       }
@@ -41,8 +41,8 @@ const CustomProductCard = ({ product = {} }) => {
           }}
           source={
             product.images || product.image
-              ? product.images || product.image
-              : require("@/utils/images/notimage.png")
+              ? {uri: product.images[0]} || {uri: product.image[0]} 
+             : require("@/utils/images/notimage.png")
           }
         />
         <TouchableOpacity
@@ -89,6 +89,7 @@ const CustomProductCard = ({ product = {} }) => {
             borderWidth: 0.5,
             padding: 5,
             borderColor: "#404040",
+            width: 145
             // backgroundColor: 'rgba(255, 164, 36, 0.8)'
           },
         ]}
@@ -133,7 +134,7 @@ const CustomProductCard = ({ product = {} }) => {
             },
           ]}
         >
-          ${product.maxPrice || product.price}
+          ${product.suggestedPrice || product.price}
         </Text>
       </View>
     </TouchableOpacity>

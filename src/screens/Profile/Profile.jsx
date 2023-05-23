@@ -35,6 +35,7 @@ import { es } from "@/utils/constants/lenguage";
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
+  const [items, setItems] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
@@ -76,7 +77,7 @@ const Profile = ({ navigation }) => {
       query: queries.listCustomerProductStatuses,
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log('soy yo', listProducts.data.listCustomerProductStatuses.items)
+    setItems(listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
@@ -99,7 +100,7 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     fecthShop();
-  }, []);
+  }, [items]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -149,7 +150,9 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts")}>
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts", {
+          data: items
+        })}>
           <CustomSelect
             title={es.profile.shop.products.title}
             subtitle={es.profile.shop.products.subtitle}

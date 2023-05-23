@@ -12,7 +12,7 @@ import { API, Storage } from "aws-amplify";
 import CustomButton from "@/components/CustomButton";
 import { es } from "@/utils/constants/lenguage";
 
-const PreviewProduct = ({ data = {}, route }) => {
+const PreviewProduct = ({ data = {}, route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const [keyImages, setKeyImages] = useState([]);
   const { product } = route.params;
@@ -43,7 +43,7 @@ const PreviewProduct = ({ data = {}, route }) => {
 
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: 30}]}>
         <View style={styles.containerImages}>
           {console.log(product)}
           {!keyImages.length <= 0 && (
@@ -289,7 +289,7 @@ const PreviewProduct = ({ data = {}, route }) => {
                             height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/question.png")}
+                          source={require("@/utils/images/question_black.png")}
                         />
                         <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
                       </View>
@@ -306,7 +306,7 @@ const PreviewProduct = ({ data = {}, route }) => {
                             height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/question.png")}
+                          source={require("@/utils/images/question_black.png")}
                         />
                         <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
                       </View>
@@ -466,15 +466,15 @@ const PreviewProduct = ({ data = {}, route }) => {
           </View>
           <View style={styles.containerEnd}>
             <View style={styles.containerPrice}>
-              <Text style={[styles.titlePrice, global.black]}>{es.post.preview.price}</Text>
-              <Text style={[styles.price, global.mainColor]}>{product.product.price}$</Text>
+              <Text style={[styles.titlePriceButton, global.black]}>{es.post.preview.price}</Text>
+              <Text style={[styles.priceButton, global.mainColor]}>{product.product.price}$</Text>
             </View>
             <View>
               <CustomButton
                 text={es.post.preview.button}
-                // handlePress={() =>
-                //   navigation.navigate("Preview_Product", { product: product })
-                // }
+                handlePress={() =>
+                  navigation.replace("Profile")
+                }
                 textStyles={[styles.textButton, global.white]}
                 buttonStyles={[styles.button, global.mainBgColor]}
               />

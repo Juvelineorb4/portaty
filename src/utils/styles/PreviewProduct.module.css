@@ -1,10 +1,10 @@
 .container {
   flex: 1;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   margin-bottom: 60px;
 }
 .containerImages {
-  padding: 20px 20px 0px;
+  padding: 10px 20px 0px;
 }
 .content {
   flex: 1;
@@ -41,7 +41,16 @@
   font-family: "thinItalic";
   margin: 7px 0px;
 }
-
+.price {
+  /* height: 100px; */
+  padding: 10px 0px 15px;
+  margin-left: -10px;
+}
+.priceText {
+  font-size: 26px;
+  font-family: "thinItalic";
+  margin: 0px 0px 10px;
+}
 .featureText {
   margin-left: 5px;
 }
@@ -151,4 +160,14 @@
 .labelTextFeatureStorage {
   font-family: "thin";
   font-size: 10px;
+}
+.titlePriceButton {
+  font-family: "light";
+  font-size: 18px;
+}
+.priceButton {
+  margin-left: 5px;
+  font-family: "thin";
+  font-size: 40px;
+  margin-bottom: -6px;
 }
