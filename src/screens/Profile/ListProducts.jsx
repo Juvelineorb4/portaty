@@ -25,6 +25,7 @@ const ListProducts = ({ navigation, route }) => {
         <View style={[styles.line, global.bgWhiteSmoke]} />
         <Text style={styles.title}>{es.list.pending.title}</Text>
         {/* <CustomCardProductPending /> */}
+        {/*  */}
         {/* <CustomCardProductPending /> */}
       </View>
     </ScrollView>
