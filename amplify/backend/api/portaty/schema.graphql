@@ -110,8 +110,6 @@ type Mutation {
   pruebaFunc(credentials: String!): String @function(name: "portatyPrueba-${env}")
 }
 
-
-
 type CustomerShop @model @auth(rules:[
   { allow: owner},
   { allow: private, provider: iam, operations: [read] },
@@ -129,18 +127,22 @@ type CustomerShop @model @auth(rules:[
     {allow: public, provider: iam, operations: [read]}
   ])
   description: String
-  shoppingCart: [CartItem] @hasMany(indexName: "byCustomerShopCartItem", fields: ["userID"])
+  favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
+  salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
+  purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
 
-type CartItem @model @auth(rules:[
-  {allow: owner},
+type FavoriteItem @model @auth(rules:[
+  {allow: owner, operations: [read, create, delete]},
   {allow: groups, groups: ["admin"], operations:[read]}
 ]){
   id: ID!
-  productID: ID!
-  customerShopID: ID! @index(name: "byCustomerShopCartItem")
+  itemID: ID! @index(name: "byCustomerProductStatusFavoriteItem")
+  item: CustomerProductStatus @belongsTo(fields:["itemID"])
+  customerShopID: ID! @index(name: "byCustomerShopFavoriteItem")
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
 }
 
 type CustomerProduct @model @auth(rules:[
@@ -193,8 +195,51 @@ type CustomerProductStatus @model @auth(rules:[
   product: CustomerProduct @hasOne(fields: ["productID"])
   status: ProductStatusValue @default(value: "PUBLISHED")
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  favoriteItems: [FavoriteItem] @hasMany(indexName: "byCustomerProductStatusFavoriteItem", fields: ["id"])
+ 
 }
 
+type OrderDetail @model @auth(rules:[
+  {allow: owner, operations:[read, create]},
+  {allow: groups, groups:["admin"], operations:[read]},
+  {allow: private, provider: iam, operations: [read]}
+]){
+  id: ID!
+  purchaseUser: ID! @index(name: "byCustomerShopPurchaseOrder")
+  salesUser: ID! @index(name: "byCustomerShopSaleOrder")
+  total: Float!
+  items: [OrderItem] @hasMany(indexName: "byOrderDetailItem", fields: ["id"])
+  paymentID: ID!
+  payment: PaymentStripe @hasOne(fields: ["paymentID"])
+  shippingAddress: ShippingAddress
+}
+
+type ShippingAddress{
+  country: String
+  postal: String
+  city: String
+  address: String
+  phoneNumber: String
+}
+
+type OrderItem @model @auth(rules:[
+  {allow: owner, operations: [read, create]},
+  {allow: groups, groups: ["admin"], operations:[read, update]}
+]){
+  id: ID!
+  orderID: ID! @index(name: "byOrderDetailItem")
+  itemID: ID! 
+  item: CustomerProductStatus @hasOne(fields:["itemID"])
+}
+
+type PaymentStripe @model @auth(rules:[
+  {allow: owner, operations:[read, create]},
+  {allow: groups, groups:["admin"]}
+]){
+  id: ID!
+  paymentStripeID: String!
+  metadata: String
+}
 enum ProductStatusValue {
   PUBLISHED
   PENDING
@@ -219,28 +264,3 @@ type PhoneFields {
 type LaptoFields {
   serial: String!
 }
-
-# type OrdesDetails{
-#   id
-#   userID
-#   paymentID
-#   shipping 
-#   items: []
-#   total: string 
-#   createATdate
-#   updateAtDate
-# }
-# shipping{
-#   country
-# dsjpdsjds
-# }
-# item{
-#   id 
-#   orderId
-#   productID
-# }
-# paymentDetais{
-#   id
-#   stripePaymentID
-#   metadata: 
-# }

@@ -24,7 +24,6 @@ const isLocalHost = Boolean(__DEV__);
 
 const [localRedirectSignIn, productionRedirectSignIn] =
   awsconfig.oauth.redirectSignIn.split(",");
-  
 console.log(localRedirectSignIn)
 const [localRedirectSignOut, productionRedirectSignOut] =
   awsconfig.oauth.redirectSignOut.split(",");
