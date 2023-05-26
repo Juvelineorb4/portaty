@@ -7,8 +7,7 @@ import { FlatList } from "react-native";
 import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
 import { API, Storage } from "aws-amplify";
-import * as queries from "@/graphql/queries";
-import * as mutations from "@/graphql/mutations";
+import * as customHome from "@/graphql/CustomQueries/Home";
 
 const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
@@ -17,8 +16,8 @@ const CustomPageProduct = ({ route, navigation }) => {
   const fetchData = async () => {
     try {
       const products = await API.graphql({
-        query: queries.listCustomerProductStatuses,
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: customHome.listCustomerProductStatus,
+        authMode: "AWS_IAM",
       });
       let listItems = [];
       products.data.listCustomerProductStatuses.items.map((item, index) => {

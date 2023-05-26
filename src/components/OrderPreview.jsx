@@ -6,13 +6,13 @@ import CustomTimeOrderCard from "./CustomTimeOrderCard";
 import { ScrollView } from "react-native-gesture-handler";
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
 const OrderPreview = ({route}) => {
   const global = require("@/utils/styles/global.js");
   const { product, order, images } = route.params
   const [customerShop, setCustomerShop] = useState('')
-  console.log(product)
   const fetchOrder = async () => {
 
     const orderDetail = await API.graphql({
@@ -27,6 +27,12 @@ const OrderPreview = ({route}) => {
       variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    const productItem = await API.graphql({
+      query: customHome.getADProductPrueba,
+      variables: { id: shop.data.getCustomerShop.purchaseOrders.items[0].items.items[0].item.product.productID },
+      authMode: "AWS_IAM",
+    });
+    console.log(productItem)
     // // setCustomerShop()/*  */
   }
   useEffect(() => {

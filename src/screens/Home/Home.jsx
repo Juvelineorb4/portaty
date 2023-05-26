@@ -29,6 +29,7 @@ import CustomFloatButton from "@/components/CustomFloatButton";
 import { es } from "@/utils/constants/lenguage";
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
 const Home = ({ data, navigation }) => {
@@ -66,16 +67,16 @@ const Home = ({ data, navigation }) => {
   const fetchData = async () => {
     try {
       const categories = await API.graphql({
-        query: queries.listADCategories,
+        query: customHome.listADCategories,
         authMode: "AWS_IAM",
       });
       const brands = await API.graphql({
-        query: queries.listADBrands,
+        query: customHome.listADBrands,
         authMode: "AWS_IAM",
       });
       const products = await API.graphql({
-        query: queries.listCustomerProductStatuses,
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: customHome.listCustomerProductStatus,
+        authMode: "AWS_IAM",
       });
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);

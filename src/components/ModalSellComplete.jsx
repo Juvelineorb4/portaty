@@ -27,7 +27,6 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
   const navigation = useNavigation()
   const [modalVisible, setModalVisible] = useState(false);
   const [detail, setDetail] = useState({});
-  console.log(item)
   const global = require("@/utils/styles/global.js");
   const [onCreatePaymentIntent] = usePayment();
   const onHandleBuy = async () => {
@@ -87,8 +86,8 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       query: mutations.createOrderDetail,
       variables: {
         input: {
-          purchaseUser: attributes.sub,
-          salesUser: item.product.customerID,
+          purchaseUserID: attributes.sub,
+          salesUserID: item.product.customerID,
           total: item.product.price,
           shippingAddress: {
             country: "",
@@ -114,16 +113,16 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
-    // const statusItem = await API.graphql({
-    //   query: mutations.updateCustomerProductStatus,
-    //   variables: {
-    //     id: item.id,
-    //     input: {
-    //       status: 'UNPUBLISHED'
-    //     },
-    //   },
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    // });
+    const statusItem = await API.graphql({
+      query: mutations.updateCustomerProductStatus,
+      variables: {
+        input: {
+          status: 'SOLD',
+          id: item.product.status.id,
+        },
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
     setModalVisible(!modalVisible)
     setDetail(orderDetail.data.createOrderDetail.id)
   };
