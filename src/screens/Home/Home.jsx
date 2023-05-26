@@ -79,7 +79,6 @@ const Home = ({ data, navigation }) => {
       });
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);
-      console.log(categories.data.listADCategories.items[0].products.items[1].id === products.data.listCustomerProductStatuses.items[0].product.productID)
     } catch (error) {
       console.error(error);
     }

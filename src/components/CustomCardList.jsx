@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import styles from "@/utils/styles/CustomCardList.module.css";
 import { es } from "@/utils/constants/lenguage";
 
-const CustomCardList = () => {
+const CustomCardList = ({item = {}}) => {
   const global = require("@/utils/styles/global.js");
   const [deleteCard, setDeleteCard] = useState(true);
-
   return deleteCard ? (
     <View style={[styles.container]}>
       <View style={styles.image}>
@@ -17,7 +16,7 @@ const CustomCardList = () => {
             resizeMode: "contain",
             alignSelf: "center",
           }}
-          source={require("@/utils/images/iphone-14-pro-max.png")}
+          source={{uri: item.images[0]}}
         />
         <View
           style={{
@@ -40,15 +39,15 @@ const CustomCardList = () => {
         </View>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.name, global.topGray]}>Iphone 14 Pro Max</Text>
-        <Text style={[styles.price, global.topGray]}>$999.99</Text>
+        <Text style={[styles.name, global.topGray]}>{item.product.productFields.name}</Text>
+        <Text style={[styles.price, global.topGray]}>${item.product.price}.00</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          {es.favorites.card.message} Christopher
+          {es.favorites.card.message} {item.product.customer.name}
         </Text>
 
         <View style={styles.options}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             // onPress={() => setDeleteCard(false)}
             style={styles.option}
           >
@@ -62,8 +61,8 @@ const CustomCardList = () => {
               source={require("@/utils/images/info.png")}
             />
             <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.details}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity> */}
+          {/* <TouchableOpacity
             onPress={() => setDeleteCard(false)}
             style={styles.option}
           >
@@ -77,7 +76,7 @@ const CustomCardList = () => {
               source={require("@/utils/images/delete.png")}
             />
             <Text style={[styles.textOption, global.topGray]}>{es.favorites.card.delete}</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

@@ -8,10 +8,14 @@ import CustomShippingCard from "@/components/CustomShippingCard";
 import { es } from "@/utils/constants/lenguage";
 import ModalSellComplete from "@/components/ModalSellComplete";
 
-const Checkout = ({ navigation }) => {
+
+const Checkout = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
+  const { data, images } = route.params
+  /* Navegaciones */
   const onHandlePress = () => navigation.navigate("Address_Edit");
-  const onHandlePreview = () => navigation.navigate("Order_Preview");
+  // const onHandlePreview = () => navigation.navigate("Order_Preview", { item: data});
+  
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
       <View style={styles.section}>
@@ -27,11 +31,14 @@ const Checkout = ({ navigation }) => {
       </View>
 
       <View style={styles.section}>
-        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <View style={[styles.line, global.bgWhiteSmoke, { marginTop: 20}]} />
 
-        <Text style={styles.title}>{es.checkout.order.title}</Text>
+        <Text style={styles.title}>{es.checkout.item.title}</Text>
 
-        <CustomCardList />
+        <CustomCardList item={{
+          product: data,
+          images: images
+        }} />
         {/* <CustomCardList /> */}
         {/* <CustomCardList /> */}
       </View>
@@ -44,8 +51,11 @@ const Checkout = ({ navigation }) => {
             title: "Estándar",
             text: "Fecha estimada: Lunes 17 Abril",
           }}
-        />
-       <ModalSellComplete onHandlePress={() => onHandlePreview()} />
+        />  
+       <ModalSellComplete item={{
+          product: data,
+          images: images
+        }}  />
       </View>
     </ScrollView>
   );

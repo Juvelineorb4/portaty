@@ -12,8 +12,8 @@ const Favorites = ({navigation}) => {
       <View>
         <Text style={styles.title}>{es.favorites.title}</Text>
         <View style={[styles.line, global.bgWhiteSmoke]} />
-        <CustomCardList />
-        <CustomCardList />
+        {/* <CustomCardList /> */}
+        {/* <CustomCardList /> */}
       </View>
       {/* <CustomButton
         text={`Checkout`}

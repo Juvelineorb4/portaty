@@ -17,22 +17,12 @@ import CustomProductCard from "./CustomProductCard";
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
-// hooks
-import usePayment from "@/hooks/usePayment";
 
-// stripe
-import {
-  initPaymentSheet,
-  presentPaymentSheet,
-} from "@stripe/stripe-react-native";
 import { es } from "@/utils/constants/lenguage";
 
 const CustomSellerProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
-  const [onCreatePaymentIntent] = usePayment();
-
   const { product } = route.params;
-
   const [keyImages, setKeyImages] = useState([]);
   const getImages = async () => {
     try {
@@ -54,46 +44,12 @@ const CustomSellerProduct = ({ route, navigation }) => {
       console.error(error);
     }
   };
+  const onHandleNavigation = () =>
+  navigation.navigate("Payment_Navigator", { data: product, images: keyImages });
 
   useLayoutEffect(() => {
-
     getImages();
   }, []);
-  const onHandleBuy = async () => {
-    // 1. Create a payment intent
-    const response = await onCreatePaymentIntent({
-      amount: Math.floor(100 * 100),
-    });
-    if (response.error) {
-      Alert.alert("Ocurrio un Error");
-      return;
-    }
-    // 2. Initialize the Payment sheet
-    const initResponse = await initPaymentSheet({
-      merchantDisplayName: "portaty.com",
-      paymentIntentClientSecret: response,
-    });
-    if (initResponse.error) {
-      Alert.alert("Error");
-      console.log("Init Error:", initResponse.error);
-      return;
-    }
-    // 3. Present the Payment Sheet from Stripe
-    const paymentResponse = await presentPaymentSheet();
-    if (paymentResponse.error) {
-      Alert.alert(
-        `Error code: ${paymentResponse.error.code}`,
-        paymentResponse.error.message
-      );
-      return;
-    }
-    // 4. If payment ok -> create the order
-    onCreateOrder();
-  };
-
-  const onCreateOrder = async () => {
-    Alert.alert("El pedido ha sido enviando");
-  };
 
   return (
     <ScrollView style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}>
@@ -133,7 +89,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
 
           <View style={styles.containerDetails}>
             <View style={styles.description}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.description}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.description}
+              </Text>
               <Text style={[styles.descriptionText, global.midGray]}>
                 {product.description
                   ? product.description
@@ -142,12 +100,45 @@ const CustomSellerProduct = ({ route, navigation }) => {
             </View>
             <View style={styles.price}>
               <Text style={[styles.title, global.black]}>Precio</Text>
-              <Text style={[styles.priceText, global.midGray]}>
-                ${product.price}.00
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: 'center'
+                }}
+              >
+                <Text style={[styles.priceText, global.midGray]}>
+                  ${product.price}.00
+                </Text>
+                <TouchableOpacity
+                  onPress={onHandleNavigation}
+                  style={[
+                    global.mainBgColor,
+                    {
+                      padding: 15,
+                      width: 150,
+                      borderRadius: 8,
+                      opacity: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      global.white,
+                      { fontFamily: "medium", fontSize: 14 },
+                    ]}
+                  >
+                    Comprar
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
             <View style={styles.features}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.features}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.features}
+              </Text>
               <View style={styles.bothFeatures}>
                 <View style={styles.leftFeatures}>
                   {product.phoneFields.carrier ? (
@@ -161,7 +152,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/carrier.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.carrier}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.carrier}
@@ -178,9 +171,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/carrier.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.carrier}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.imei ? (
@@ -201,7 +198,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/imei.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.imei}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.imei}
@@ -225,9 +224,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/imei.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.imei}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.batery ? (
@@ -241,7 +244,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/batery.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.batery}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.batery}
@@ -258,9 +263,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/batery.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.batery}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -276,7 +285,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/model.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.model}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.model}
@@ -293,9 +304,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/model.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.model}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.storage ? (
@@ -309,7 +324,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/storage.png")}
                         />
-                        <Text style={styles.labelTextFeatureStorage}>{es.post.preview.storage}</Text>
+                        <Text style={styles.labelTextFeatureStorage}>
+                          {es.post.preview.storage}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.storage}
@@ -326,9 +343,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/storage.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.storage}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.storage}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -336,7 +357,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
             </View>
 
             <View style={styles.abouts}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.about}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.about}
+              </Text>
               <View style={styles.bothAbout}>
                 <View style={styles.leftAbout}>
                   {product.condition ? (
@@ -350,11 +373,11 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/question_black.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.condition}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>
-                        {product.condition}
-                      </Text>
+                      <Text style={styles.textAbout}>{product.condition}</Text>
                     </View>
                   ) : (
                     <View style={styles.about}>
@@ -367,9 +390,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/question_black.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.condition}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
 
@@ -384,7 +411,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={{ uri: product.categoryFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.category}
+                        </Text>
                       </View>
                       <Text style={styles.textAbout}>
                         {product.categoryFields.name}
@@ -401,9 +430,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={{ uri: product.categoryFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.category}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -426,7 +459,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/id.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.id}
+                        </Text>
                       </View>
                       <Text style={{ fontSize: 10, fontFamily: "light" }}>
                         {product.code}
@@ -450,9 +485,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={require("@/utils/images/id.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.id}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.brandFields.name ? (
@@ -474,7 +513,9 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={{ uri: product.brandFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.brand}
+                        </Text>
                       </View>
                       <Text style={styles.textAbout}>
                         {product.brandFields.name}
@@ -499,9 +540,13 @@ const CustomSellerProduct = ({ route, navigation }) => {
                           }}
                           source={{ uri: product.brandFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.brand}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -510,19 +555,21 @@ const CustomSellerProduct = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-
-
-      <View style={styles.containerOthersProduct}>
-        <Text style={[styles.textOthersProducts, global.black, {marginTop: 5}]}>
+      <View
+        style={[styles.containerOthersProduct, { marginBottom: 60, flex: 1 }]}
+      >
+        <Text
+          style={[styles.textOthersProducts, global.black, { marginTop: 5 }]}
+        >
           Otros productos de {product.customer.name}
         </Text>
-        <ScrollView style={styles.productsList} horizontal>
+        {/* <ScrollView style={styles.productsList} horizontal>
           <CustomProductCard product={product} />
           <View style={{ marginLeft: 40 }}>
             <CustomProductCard product={product} />
           </View>
-        </ScrollView>
-        <Image
+        </ScrollView> */}
+        {/* <Image
           style={{
             width: 50,
             height: 50,
@@ -532,7 +579,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
             top: "-10%",
           }}
           source={require("@/utils/images/arrow_right.png")}
-        />
+        /> */}
       </View>
     </ScrollView>
   );

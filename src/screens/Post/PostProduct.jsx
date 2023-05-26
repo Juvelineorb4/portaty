@@ -169,10 +169,10 @@ const PostProduct = ({ navigation, route }) => {
           description: description,
           condition: "GOOD",
           phoneFields: {
-            imei: imei ? imei : '',
-            carrier: selectItemSupplier.title ? selectItemSupplier.title : '',
-            model: selectItemModel.title ? selectItemModel.title : '',
-            storage: selectItemStorage.title ? selectItemStorage.title : '',
+            imei: imei ? imei : "",
+            carrier: selectItemSupplier.title ? selectItemSupplier.title : "",
+            model: selectItemModel.title ? selectItemModel.title : "",
+            storage: selectItemStorage.title ? selectItemStorage.title : "",
             batery: "",
           },
           // laptoFields: {
@@ -192,7 +192,16 @@ const PostProduct = ({ navigation, route }) => {
         },
       },
     });
-
+    const updateStatus = await API.graphql({
+      query: mutations.updateCustomerProduct,
+      variables: {
+        input: {
+          id: resultData.data.createCustomerProduct.id,
+          customerProductStatusId:
+            resultStatus.data.createCustomerProductStatus.id,
+        },
+      },
+    });
     // const uploadImage = async () => {
     blobImages.map((image, index) => {
       Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
@@ -221,9 +230,11 @@ const PostProduct = ({ navigation, route }) => {
     dataCategories.map((item) => {
       if (categoriesSelect === item.id) setDataBrands(item.brands.items);
       if (categoriesSelect === item.id) {
-        item.products.items.map((product) => {
-          if (brandsSelect === product.brandID) setDataProducts([product]);
+        let listItems = [];
+        item.products.items.map((product, index) => {
+          if (brandsSelect === product.brandID) listItems.push(product);
         });
+        setDataProducts(listItems);
       }
     });
   };

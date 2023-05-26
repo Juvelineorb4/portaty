@@ -36,11 +36,12 @@ const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([])
+  const [purchaseOrders, setPurchaseOrders] = useState([])
+  const [salesOrders, setSalesOrders] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
     await Auth.signOut();
-
     setTimeout(() => {
       navigation.navigate("Login_Welcome");
     }, 500);
@@ -79,6 +80,8 @@ const Profile = ({ navigation }) => {
     });
     setItems(listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
+    setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)
+    setSalesOrders(result.data.getCustomerShop.salesOrders.items)
   };
 
   const resetPost = () => {
@@ -100,7 +103,7 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     fecthShop();
-  }, [items]);
+  }, []);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -175,7 +178,10 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders")}>
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders", {
+          purchase: purchaseOrders,
+          sales: salesOrders
+        })}>
           <CustomSelect
             title={es.profile.shop.orders.title}
             subtitle={es.profile.shop.orders.subtitle}

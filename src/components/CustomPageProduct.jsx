@@ -31,6 +31,7 @@ const CustomPageProduct = ({ route, navigation }) => {
   };
 
   useEffect(() => {
+    console.log(data)
     fetchData();
   }, []);
 
@@ -55,7 +56,7 @@ const CustomPageProduct = ({ route, navigation }) => {
         </View>
         <View style={styles.content}>
           <View style={styles.containerTitle}>
-            <Text style={[styles.titleProduct, global.black]}>N/T</Text>
+            <Text style={[styles.titleProduct, global.black]}>{data.name}</Text>
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
 

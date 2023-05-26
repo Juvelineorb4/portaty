@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CustomCardOrder from "./CustomCardOrder";
 import styles from "@/utils/styles/OrderPreview.module.css";
 import CustomTimeOrderCard from "./CustomTimeOrderCard";
@@ -8,35 +8,14 @@ import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
 
-const OrderPreview = ({route}) => {
+const OrderPreviewList = ({route}) => {
   const global = require("@/utils/styles/global.js");
-  const { product, order, images } = route.params
-  const [customerShop, setCustomerShop] = useState('')
-  console.log(product)
-  const fetchOrder = async () => {
-
-    const orderDetail = await API.graphql({
-      query: queries.getOrderDetail,
-      variables: {
-        id: order,
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    const shop = await API.graphql({
-      query: queries.getCustomerShop,
-      variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    // // setCustomerShop()/*  */
-  }
-  useEffect(() => {
-    fetchOrder()
-  }, [])
-  
+  const { product, images, shop } = route.params
+  console.log(product.owner)
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={product} image={images[0]}/>
+      <CustomCardOrder item={product} image={images[0]} customer={shop}/>
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
@@ -196,7 +175,7 @@ const OrderPreview = ({route}) => {
       <View style={{marginBottom: 95}}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
-        <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
+          <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
           <Text style={styles.numberOrder}>Impuestos: $10.00</Text>
           <Text style={styles.numberOrder}>Envio: $10.00</Text>
           <Text style={styles.numberOrder}>Comision: $10.00</Text>
@@ -208,4 +187,4 @@ const OrderPreview = ({route}) => {
   );
 };
 
-export default OrderPreview;
+export default OrderPreviewList;
