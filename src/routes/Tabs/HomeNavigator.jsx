@@ -5,17 +5,17 @@ import Result from '@/screens/Search/Result'
 import CustomSearch from "@/components/CustomSearch";
 import CustomPageProduct from "@/components/CustomPageProduct";
 import CustomSellerProduct from "@/components/CustomSellerProduct";
-import { useNavigationState } from '@react-navigation/native';
+
 // Header
 import Header from './HeaderTabs/index'
 
 // Hooks
-import useHeaderScroll from '@/hooks/useHeaderScroll'
 
 // graphql
-import { API, graphqlOperation, Auth } from 'aws-amplify'
-import * as queries from '@/graphql/queries'
 
+// import LeftHeader from "./HeaderTabs/LeftHeader";
+import CustomNavSearch from "@/components/CustomNavSearch";
+import PaymentNavigator from "./PaymentNavigator";
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = ({ route, navigation }) => {
@@ -55,9 +55,16 @@ const HomeNavigator = ({ route, navigation }) => {
         component={Result}
         options={{
           animation: "slide_from_right",
-          header: (props) => <Header {...props} />
+          header: (props) => <Header {...props} />,
         }}
       />
+      <Stack.Screen
+          name={`Payment_Navigator`}
+          component={PaymentNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
     </Stack.Navigator>
   );
 };

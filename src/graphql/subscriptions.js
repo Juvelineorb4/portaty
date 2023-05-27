@@ -1449,7 +1449,6 @@ export const onCreateCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -1711,7 +1710,6 @@ export const onUpdateCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -1973,7 +1971,6 @@ export const onDeleteCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -1998,7 +1995,6 @@ export const onCreateCustomerShippingAddress = /* GraphQL */ `
     onCreateCustomerShippingAddress(filter: $filter, owner: $owner) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2017,7 +2013,6 @@ export const onUpdateCustomerShippingAddress = /* GraphQL */ `
     onUpdateCustomerShippingAddress(filter: $filter, owner: $owner) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2036,7 +2031,6 @@ export const onDeleteCustomerShippingAddress = /* GraphQL */ `
     onDeleteCustomerShippingAddress(filter: $filter, owner: $owner) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2682,7 +2676,6 @@ export const onCreateCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -3153,7 +3146,6 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -3624,7 +3616,6 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -4000,7 +3991,6 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
             items {
               id
               customerID
-              title
               country
               postal
               city
@@ -4312,7 +4302,6 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
             items {
               id
               customerID
-              title
               country
               postal
               city
@@ -4624,7 +4613,6 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
             items {
               id
               customerID
-              title
               country
               postal
               city

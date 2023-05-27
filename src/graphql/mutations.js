@@ -1474,7 +1474,6 @@ export const createCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -1736,7 +1735,6 @@ export const updateCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -1998,7 +1996,6 @@ export const deleteCustomerShop = /* GraphQL */ `
         items {
           id
           customerID
-          title
           country
           postal
           city
@@ -2023,7 +2020,6 @@ export const createCustomerShippingAddress = /* GraphQL */ `
     createCustomerShippingAddress(input: $input, condition: $condition) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2042,7 +2038,6 @@ export const updateCustomerShippingAddress = /* GraphQL */ `
     updateCustomerShippingAddress(input: $input, condition: $condition) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2061,7 +2056,6 @@ export const deleteCustomerShippingAddress = /* GraphQL */ `
     deleteCustomerShippingAddress(input: $input, condition: $condition) {
       id
       customerID
-      title
       country
       postal
       city
@@ -2707,7 +2701,6 @@ export const createCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -3178,7 +3171,6 @@ export const updateCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -3649,7 +3641,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
           items {
             id
             customerID
-            title
             country
             postal
             city
@@ -4025,7 +4016,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
             items {
               id
               customerID
-              title
               country
               postal
               city
@@ -4333,21 +4323,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
             }
             nextToken
           }
-          shippingAddress {
-            items {
-              id
-              customerID
-              title
-              country
-              postal
-              city
-              address
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           owner
           createdAt
           updatedAt
@@ -4649,7 +4624,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
             items {
               id
               customerID
-              title
               country
               postal
               city
@@ -5145,30 +5119,6 @@ export const createOrderItem = /* GraphQL */ `
             abreviation
           }
           productID
-          adproduct {
-            id
-            name
-            images
-            paths
-            description
-            suggestedPrice
-            categoryID
-            brandID
-            phone {
-              colors
-              storage
-              width
-              height
-              depth
-              weight
-            }
-            createdBy
-            customerProduct {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
           productFields {
             name
             images

@@ -9,9 +9,7 @@ import { FlatList } from "react-native";
 import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
 import { API, Storage } from "aws-amplify";
-import * as queries from "@/graphql/queries";
-import * as mutations from "@/graphql/mutations";
->>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
+import * as customHome from "@/graphql/CustomQueries/Home";
 
 const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
@@ -22,8 +20,8 @@ const CustomPageProduct = ({ route, navigation }) => {
   const fetchData = async () => {
     try {
       const products = await API.graphql({
-        query: queries.listCustomerProductStatuses,
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: customHome.listCustomerProductStatus,
+        authMode: "AWS_IAM",
       });
       let listItems = [];
       products.data.listCustomerProductStatuses.items.map((item, index) => {
@@ -36,6 +34,7 @@ const CustomPageProduct = ({ route, navigation }) => {
   };
 
   useEffect(() => {
+    console.log(data)
     fetchData();
   }, []);
 
@@ -64,35 +63,7 @@ const CustomPageProduct = ({ route, navigation }) => {
         </View>
         <View style={styles.content}>
           <View style={styles.containerTitle}>
-            <Text style={[styles.title, global.black]}>
-              {data.name} - {data.brand}
-            </Text>
-            <Image
-              style={{
-                width: 20,
-                height: 20,
-                resizeMode: "contain",
-              }}
-              source={require("@/utils/images/favorites-black.png")}
-            />
-          </View>
-          <View style={styles.containerInfo}>
-            <View style={styles.containerSolds}>
-              <Text>{data.solds ? data.solds : "7430"} sold |</Text>
-            </View>
-            <View style={styles.containerReviews}>
-              <Image
-                style={{
-                  width: 13,
-                  height: 13,
-                  resizeMode: "contain",
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Text style={styles.textReviews}>
-                {data.reviews ? data.reviews : "(4.9) (5389 reviews)"}
-              </Text>
-            </View>
+            <Text style={[styles.titleProduct, global.black]}>{data.name}</Text>
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
 
