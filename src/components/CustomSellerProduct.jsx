@@ -19,8 +19,11 @@ import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
 
 import { es } from "@/utils/constants/lenguage";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userAutenticated } from "@/atoms";
 
 const CustomSellerProduct = ({ route, navigation }) => {
+  const user = useRecoilValue(userAutenticated);
   const global = require("@/utils/styles/global.js");
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
@@ -45,7 +48,10 @@ const CustomSellerProduct = ({ route, navigation }) => {
     }
   };
   const onHandleNavigation = () =>
-  navigation.navigate("Payment_Navigator", { data: product, images: keyImages });
+    navigation.navigate("Payment_Navigator", {
+      data: product,
+      images: keyImages,
+    });
 
   useLayoutEffect(() => {
     getImages();
@@ -84,6 +90,23 @@ const CustomSellerProduct = ({ route, navigation }) => {
             <Text style={[styles.titleProduct, global.black]}>
               {product.productFields.name}
             </Text>
+            {user.attributes.sub === product.customerID && (
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image
+                  style={{
+                    width: 17,
+                    height: 17,
+                    resizeMode: "contain",
+                    alignSelf: "center",
+                    marginRight: 2
+                  }}
+                  source={require("@/utils/images/available.png")}
+                />
+                <Text style={[{ fontFamily: "thinItalic",  }, global.black]}>
+                  Propietario
+                </Text>
+              </View>
+            )}
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
 
@@ -104,35 +127,37 @@ const CustomSellerProduct = ({ route, navigation }) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  alignItems: 'center'
+                  alignItems: "center",
                 }}
               >
                 <Text style={[styles.priceText, global.midGray]}>
                   ${product.price}.00
                 </Text>
-                <TouchableOpacity
-                  onPress={onHandleNavigation}
-                  style={[
-                    global.mainBgColor,
-                    {
-                      padding: 15,
-                      width: 150,
-                      borderRadius: 8,
-                      opacity: 1,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    },
-                  ]}
-                >
-                  <Text
+                {user.attributes.sub !== product.customerID && (
+                  <TouchableOpacity
+                    onPress={onHandleNavigation}
                     style={[
-                      global.white,
-                      { fontFamily: "medium", fontSize: 14 },
+                      global.mainBgColor,
+                      {
+                        padding: 15,
+                        width: 150,
+                        borderRadius: 8,
+                        opacity: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
                     ]}
                   >
-                    Comprar
-                  </Text>
-                </TouchableOpacity>
+                    <Text
+                      style={[
+                        global.white,
+                        { fontFamily: "medium", fontSize: 14 },
+                      ]}
+                    >
+                      Comprar
+                    </Text>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
             <View style={styles.features}>

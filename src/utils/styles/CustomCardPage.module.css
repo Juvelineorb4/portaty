@@ -47,6 +47,19 @@
     font-size: 12px;
     margin-left: 0px;
 }
+.see {
+    /* border: 0.5px solid #404040; */
+    padding: 8px 25px;
+    border-radius: 5px;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 18px;
+}
+.textSee {
+    font-family: 'regular';
+    font-size: 12px;
+    margin-left: 0px;
+}
 .content {
     /* padding: 10px; */
 }

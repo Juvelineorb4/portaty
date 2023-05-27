@@ -8,10 +8,13 @@ import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
 import { API, Storage } from "aws-amplify";
 import * as customHome from "@/graphql/CustomQueries/Home";
+import { useRecoilValue } from "recoil";
+import { userAutenticated } from "@/atoms";
 
 const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
+  const user = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([]);
   const fetchData = async () => {
     try {
@@ -30,7 +33,6 @@ const CustomPageProduct = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    console.log(data)
     fetchData();
   }, []);
 
@@ -259,14 +261,26 @@ const CustomPageProduct = ({ route, navigation }) => {
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
           {items.map((item, index) => (
-            <CustomCardPage
-              key={index}
-              data={item.product}
-              onHandlePress={() =>
-                navigation.navigate("SellerProduct", { product: item.product })
-              }
-            />
+            item.status === 'PUBLISHED' && item.product.customerID !== user.attributes.sub ? <CustomCardPage
+            key={index}
+            data={item.product}
+            onHandlePress={() =>
+              navigation.navigate("SellerProduct", {
+                product: item.product,
+              })
+            }
+          /> : item.status === 'PUBLISHED' && item.product.customerID === user.attributes.sub ? <CustomCardPage
+          key={index}
+          data={item.product}
+          owner
+          onHandlePress={() =>
+            navigation.navigate("SellerProduct", {
+              product: item.product,
+            })
+          }
+        /> : ''
           ))}
+          {items.length <= 0 ? <Text style={{fontFamily: 'light', textAlign: 'center', fontSize: 24}}>N/T</Text> : ''}
         </View>
       </View>
     </ScrollView>

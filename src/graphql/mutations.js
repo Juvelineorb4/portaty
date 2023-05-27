@@ -54,7 +54,7 @@ export const createADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -95,7 +95,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -111,7 +111,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -121,7 +121,7 @@ export const createADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -170,7 +170,7 @@ export const updateADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -211,7 +211,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -227,7 +227,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -237,7 +237,7 @@ export const updateADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -286,7 +286,7 @@ export const deleteADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -327,7 +327,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -343,7 +343,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -353,7 +353,7 @@ export const deleteADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -402,7 +402,7 @@ export const createADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -443,7 +443,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -459,7 +459,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -469,7 +469,7 @@ export const createADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -518,7 +518,7 @@ export const updateADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -559,7 +559,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -575,7 +575,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -585,7 +585,7 @@ export const updateADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -634,7 +634,7 @@ export const deleteADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -675,7 +675,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -691,7 +691,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -701,7 +701,7 @@ export const deleteADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -744,7 +744,7 @@ export const createADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -803,7 +803,7 @@ export const createADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -903,7 +903,7 @@ export const updateADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -962,7 +962,7 @@ export const updateADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1062,7 +1062,7 @@ export const deleteADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -1121,7 +1121,6 @@ export const deleteADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1412,7 +1411,7 @@ export const createCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1673,7 +1672,7 @@ export const updateCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1934,7 +1933,7 @@ export const deleteCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2134,7 +2133,7 @@ export const createFavoriteItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2289,7 +2288,7 @@ export const updateFavoriteItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2444,7 +2443,7 @@ export const deleteFavoriteItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2651,19 +2650,6 @@ export const createCustomerProduct = /* GraphQL */ `
               abreviation
             }
             productID
-            adproduct {
-              id
-              name
-              images
-              paths
-              description
-              suggestedPrice
-              categoryID
-              brandID
-              createdBy
-              createdAt
-              updatedAt
-            }
             productFields {
               name
               images
@@ -2728,114 +2714,6 @@ export const createCustomerProduct = /* GraphQL */ `
         abreviation
       }
       productID
-      adproduct {
-        id
-        name
-        images
-        paths
-        description
-        suggestedPrice
-        categoryID
-        brandID
-        phone {
-          colors
-          storage
-          width
-          height
-          depth
-          weight
-          display {
-            resolution
-            screenSize
-            ppi
-          }
-          camera {
-            primary
-            secondary
-            resolution
-          }
-          battery {
-            capacity
-            duration
-            usb
-          }
-        }
-        createdBy
-        customerProduct {
-          items {
-            id
-            customerID
-            customer {
-              userID
-              name
-              email
-              description
-              owner
-              createdAt
-              updatedAt
-            }
-            categoryID
-            categoryFields {
-              name
-              image
-              abreviation
-            }
-            brandID
-            brandFields {
-              name
-              image
-              abreviation
-            }
-            productID
-            adproduct {
-              id
-              name
-              images
-              paths
-              description
-              suggestedPrice
-              categoryID
-              brandID
-              createdBy
-              createdAt
-              updatedAt
-            }
-            productFields {
-              name
-              images
-            }
-            code
-            price
-            condition
-            description
-            status {
-              id
-              productID
-              status
-              owner
-              createdAt
-              updatedAt
-            }
-            phoneFields {
-              carrier
-              imei
-              model
-              storage
-              batery
-            }
-            laptoFields {
-              serial
-            }
-            owner
-            createdAt
-            updatedAt
-            customerProductStatusId
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       productFields {
         name
         images
@@ -2887,30 +2765,6 @@ export const createCustomerProduct = /* GraphQL */ `
             abreviation
           }
           productID
-          adproduct {
-            id
-            name
-            images
-            paths
-            description
-            suggestedPrice
-            categoryID
-            brandID
-            phone {
-              colors
-              storage
-              width
-              height
-              depth
-              weight
-            }
-            createdBy
-            customerProduct {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
           productFields {
             name
             images
@@ -3121,19 +2975,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               abreviation
             }
             productID
-            adproduct {
-              id
-              name
-              images
-              paths
-              description
-              suggestedPrice
-              categoryID
-              brandID
-              createdBy
-              createdAt
-              updatedAt
-            }
             productFields {
               name
               images
@@ -3198,114 +3039,6 @@ export const updateCustomerProduct = /* GraphQL */ `
         abreviation
       }
       productID
-      adproduct {
-        id
-        name
-        images
-        paths
-        description
-        suggestedPrice
-        categoryID
-        brandID
-        phone {
-          colors
-          storage
-          width
-          height
-          depth
-          weight
-          display {
-            resolution
-            screenSize
-            ppi
-          }
-          camera {
-            primary
-            secondary
-            resolution
-          }
-          battery {
-            capacity
-            duration
-            usb
-          }
-        }
-        createdBy
-        customerProduct {
-          items {
-            id
-            customerID
-            customer {
-              userID
-              name
-              email
-              description
-              owner
-              createdAt
-              updatedAt
-            }
-            categoryID
-            categoryFields {
-              name
-              image
-              abreviation
-            }
-            brandID
-            brandFields {
-              name
-              image
-              abreviation
-            }
-            productID
-            adproduct {
-              id
-              name
-              images
-              paths
-              description
-              suggestedPrice
-              categoryID
-              brandID
-              createdBy
-              createdAt
-              updatedAt
-            }
-            productFields {
-              name
-              images
-            }
-            code
-            price
-            condition
-            description
-            status {
-              id
-              productID
-              status
-              owner
-              createdAt
-              updatedAt
-            }
-            phoneFields {
-              carrier
-              imei
-              model
-              storage
-              batery
-            }
-            laptoFields {
-              serial
-            }
-            owner
-            createdAt
-            updatedAt
-            customerProductStatusId
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       productFields {
         name
         images
@@ -3357,30 +3090,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             abreviation
           }
           productID
-          adproduct {
-            id
-            name
-            images
-            paths
-            description
-            suggestedPrice
-            categoryID
-            brandID
-            phone {
-              colors
-              storage
-              width
-              height
-              depth
-              weight
-            }
-            createdBy
-            customerProduct {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
           productFields {
             name
             images
@@ -3600,7 +3309,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -3700,7 +3409,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
+        
         customerProduct {
           items {
             id
@@ -3736,7 +3445,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -3844,7 +3553,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -4043,60 +3752,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
           abreviation
         }
         productID
-        adproduct {
-          id
-          name
-          images
-          paths
-          description
-          suggestedPrice
-          categoryID
-          brandID
-          phone {
-            colors
-            storage
-            width
-            height
-            depth
-            weight
-            display {
-              resolution
-              screenSize
-              ppi
-            }
-            camera {
-              primary
-              secondary
-              resolution
-            }
-            battery {
-              capacity
-              duration
-              usb
-            }
-          }
-          createdBy
-          customerProduct {
-            items {
-              id
-              customerID
-              categoryID
-              brandID
-              productID
-              code
-              price
-              condition
-              description
-              owner
-              createdAt
-              updatedAt
-              customerProductStatusId
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
         productFields {
           name
           images
@@ -4142,7 +3797,7 @@ export const createCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -4616,7 +4271,7 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -4683,7 +4338,7 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5200,7 +4855,7 @@ export const updateOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5355,7 +5010,7 @@ export const deleteOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5518,7 +5173,7 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5538,7 +5193,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5548,7 +5203,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5558,7 +5213,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5585,7 +5240,7 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5605,7 +5260,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5615,7 +5270,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5625,7 +5280,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5666,7 +5321,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5686,7 +5341,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5696,7 +5351,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5706,7 +5361,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5733,7 +5388,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5753,7 +5408,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5763,7 +5418,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5773,7 +5428,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5814,7 +5469,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5834,7 +5489,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5844,7 +5499,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5854,7 +5509,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5881,7 +5536,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5901,7 +5556,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5911,7 +5566,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5921,7 +5576,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
