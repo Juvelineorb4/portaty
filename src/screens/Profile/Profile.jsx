@@ -32,6 +32,7 @@ import {
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
+  const [items, setItems] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
@@ -71,6 +72,7 @@ const Profile = ({ navigation }) => {
       // variables: { id: userAuth.username },
       authMode: "AWS_IAM",
     });
+    setItems(listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
   };
 
@@ -91,7 +93,7 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     fecthShop();
-  }, []);
+  }, [items]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -139,11 +141,25 @@ const Profile = ({ navigation }) => {
               iconRight: styles.iconRight,
             }}
             icon={{
-              left: {
-                name: "plus-box-outline",
-                size: 20,
-                color: "white",
-                type: "MTI",
+              left: require("@/utils/images/post.png"),
+              right: require("@/utils/images/arrow_right.png"),
+            }}
+            toogle={false}
+          />
+        </TouchableOpacity>
+
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts", {
+          data: items
+        })}>
+          <CustomSelect
+            title={es.profile.shop.products.title}
+            subtitle={es.profile.shop.products.subtitle}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
               },
               right: {
                 name: "arrow-right",

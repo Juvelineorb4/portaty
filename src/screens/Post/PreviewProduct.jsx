@@ -3,25 +3,36 @@ import React from "react";
 import CustomButton from "@/components/CustomButton";
 import styles from "@/utils/styles/PreviewProduct.module.css";
 
-const PreviewProduct = ({ data = {} }) => {
+const PreviewProduct = ({ data = {}, route, navigation }) => {
   const global = require("@/utils/styles/global.js");
 
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
-      <View style={styles.container}>
-        <View style={[global.bgWhiteSmoke, styles.containerImages]}>
-          <Image
-            style={{
-              width: 300,
-              height: 300,
-              resizeMode: "contain",
-            }}
-            source={
-              data.images
-                ? { uri: data.images }
-                : require("@/utils/images/notimage.png")
-            }
-          />
+      <View style={[styles.container, { paddingTop: 30}]}>
+        <View style={styles.containerImages}>
+          {console.log(product)}
+          {!keyImages.length <= 0 && (
+            <FlatList
+              data={keyImages}
+              keyExtractor={(__, index) => index.toString()}
+              horizontal={true}
+              renderItem={({ item, index }) => (
+                <Image
+                  key={index}
+                  style={{
+                    width: 300,
+                    height: 250,
+                    marginRight: 10,
+                    resizeMode: "contain",
+                    borderRadius: 8,
+                  }}
+                  source={{
+                    uri: item,
+                  }}
+                />
+              )}
+            />
+          )}
         </View>
         <View style={styles.content}>
           <View style={styles.containerTitle}>
@@ -91,16 +102,80 @@ const PreviewProduct = ({ data = {} }) => {
                   />
                   <Text style={styles.featureText}>128 GB</Text>
                 </View>
-                <View style={styles.feature}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      resizeMode: "contain",
-                    }}
-                    source={require("@/utils/images/camera-feature.png")}
-                  />
-                  <Text style={styles.featureText}>48MP + 12MP</Text>
+              </View>
+            </View>
+
+            <View style={styles.abouts}>
+              <Text style={[styles.title, global.black]}>{es.post.preview.about}</Text>
+              <View style={styles.bothAbout}>
+                <View style={styles.leftAbout}>
+                  {product.product.condition ? (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/question_black.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>
+                        {product.product.condition}
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 25,
+                            height: 25,
+                            resizeMode: "contain",
+                          }}
+                          source={require("@/utils/images/question_black.png")}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
+
+                  {product.product.categoryFields.name ? (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.product.categoryFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>
+                        {product.product.categoryFields.name}
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={styles.about}>
+                      <View style={styles.labelAbout}>
+                        <Image
+                          style={{
+                            width: 20,
+                            height: 20,
+                            resizeMode: "contain",
+                          }}
+                          source={{ uri: product.product.categoryFields.image }}
+                        />
+                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                      </View>
+                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                    </View>
+                  )}
                 </View>
                 <View style={styles.feature}>
                   <Image
@@ -128,6 +203,22 @@ const PreviewProduct = ({ data = {} }) => {
             <Text style={styles.textStatus}>
               Pending review, we will notify you
             </Text>
+          </View>
+          <View style={styles.containerEnd}>
+            <View style={styles.containerPrice}>
+              <Text style={[styles.titlePriceButton, global.black]}>{es.post.preview.price}</Text>
+              <Text style={[styles.priceButton, global.mainColor]}>{product.product.price}$</Text>
+            </View>
+            <View>
+              <CustomButton
+                text={es.post.preview.button}
+                handlePress={() =>
+                  navigation.replace("Profile")
+                }
+                textStyles={[styles.textButton, global.white]}
+                buttonStyles={[styles.button, global.mainBgColor]}
+              />
+            </View>
           </View>
         </View>
       </View>

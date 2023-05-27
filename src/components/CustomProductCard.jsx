@@ -9,9 +9,13 @@ const CustomProductCard = ({ product = {} }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
+<<<<<<< HEAD
       style={{ justifyContent: "center", marginBottom: 20 }}
+=======
+      style={{justifyContent: "center", marginBottom: 30, width: '50%', alignItems: 'center' }}
+>>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
       onPress={() =>
-        navigation.navigate(`${product.brand}_${product.id}`, {
+        navigation.navigate(`PageProduct`, {
           data: product,
         })
       }
@@ -37,8 +41,8 @@ const CustomProductCard = ({ product = {} }) => {
           }}
           source={
             product.images || product.image
-              ? product.images || product.image
-              : require("@/utils/images/notimage.png")
+              ? {uri: product.images[0]} || {uri: product.image[0]} 
+             : require("@/utils/images/notimage.png")
           }
         />
         <View
@@ -70,6 +74,7 @@ const CustomProductCard = ({ product = {} }) => {
       <Text
         style={[
           {
+<<<<<<< HEAD
             fontSize: 16,
             // fontWeight: "bold",
             paddingTop: 5,
@@ -77,6 +82,16 @@ const CustomProductCard = ({ product = {} }) => {
             fontFamily: 'medium',
             letterSpacing: -0.5,
             marginBottom: 1
+=======
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8,
+            flex: 1,
+            borderWidth: 0.5,
+            padding: 5,
+            borderColor: "#404040",
+            width: 145
+            // backgroundColor: 'rgba(255, 164, 36, 0.8)'
+>>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
           },
         ]}
       >
@@ -122,10 +137,15 @@ const CustomProductCard = ({ product = {} }) => {
             { paddingHorizontal: 5, borderRadius: 7, marginLeft: 5 },
           ]}
         >
+<<<<<<< HEAD
           <Text style={[global.black, { fontSize: 12, fontFamily: 'thinItalic' }]}>
             {product.solds} solds
           </Text>
         </View>
+=======
+          ${product.suggestedPrice || product.price}
+        </Text>
+>>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
       </View>
 
       <Text style={{ fontSize: 16, fontFamily: 'semibold' }}>
