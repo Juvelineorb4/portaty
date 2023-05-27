@@ -1,25 +1,99 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/Profile.module.css";
 import CustomButton from "@/components/CustomButton";
 import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
 
 // amplify
-import { Auth } from 'aws-amplify'
+import { Auth, API } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import * as mutations from "@/graphql/mutations";
+
+// recoil
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  brandItem,
+  brandsId,
+  categoriesId,
+  categoryItem,
+  conditionItem,
+  customerId,
+  imagesPost,
+  modelItem,
+  productItem,
+  productsBrandId,
+  productsId,
+  storageItem,
+  supplierItem,
+  userAutenticated,
+} from "@/atoms";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
+  const userAuth = useRecoilValue(userAutenticated);
+  const [items, setItems] = useState([])
+  const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
     await Auth.signOut();
 
     setTimeout(() => {
-      navigation.navigate("Login_Welcome")
+      navigation.navigate("Login_Welcome");
     }, 500);
+  };
 
+  /* Reset */
+  const [selectItemCategory, setSelectItemCategory] =
+    useRecoilState(categoryItem);
+  const [selectItemBrand, setSelectItemBrand] = useRecoilState(brandItem);
+  const [selectItemProduct, setSelectItemProduct] = useRecoilState(productItem);
+  const [selectItemCondition, setSelectItemCondition] =
+    useRecoilState(conditionItem);
+  const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
+  const [selectItemSupplier, setSelectItemSupplier] =
+    useRecoilState(supplierItem);
+  const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
+  const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
+  const [brandsSelect, setBrandsSelect] = useRecoilState(brandsId);
+  const [productSelect, setProductSelect] = useRecoilState(productsId);
+  const [productBrandSelect, setProductBrandSelect] =
+    useRecoilState(productsBrandId);
+    const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
 
-  }
+  const fecthShop = async () => {
+    const result = await API.graphql({
+      query: queries.getCustomerShop,
+      variables: { userID: userAuth.username },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    const result2 = await API.graphql({
+      query: queries.listADCategories,
+      // variables: { id: userAuth.username },
+      authMode: "AWS_IAM",
+    });
+    setItems(listProducts.data.listCustomerProductStatuses.items)
+    setSelectCustomerId(result.data.getCustomerShop.userID);
+  };
+
+  const resetPost = () => {
+    setSelectItemCategory({});
+    setSelectItemBrand({});
+    setSelectItemProduct({});
+    setSelectItemCondition({});
+    setSelectItemModel({});
+    setSelectItemSupplier({});
+    setSelectItemStorage({});
+    setCategoriesSelect("");
+    setBrandsSelect("");
+    setProductSelect("");
+    setProductBrandSelect("");
+    setImagesPostSelect([])
+  };
+
+  useEffect(() => {
+    fecthShop();
+  }, [items]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -37,13 +111,20 @@ const Profile = ({ navigation }) => {
             }}
           />
         </View>
-        <Text style={[styles.user, global.black]}>Christopher Alvarez</Text>
+        <Text style={[styles.user, global.black]}>
+          {/*{userAuth.attributes.name}*/}
+        </Text>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>My Shop</Text>
+        <Text style={[styles.titleSettings, global.black]}>
+          My Shop: {/*{userShop.name.toUpperCase()}*/}
+        </Text>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => navigation.navigate("Post_Product")}
+          onPress={() => {
+            resetPost();
+            navigation.navigate("Post_Navigator");
+          }}
         >
           <View style={[styles.line, global.bgWhiteSmoke]} />
           <CustomSelect
@@ -60,11 +141,25 @@ const Profile = ({ navigation }) => {
               iconRight: styles.iconRight,
             }}
             icon={{
-              left: {
-                name: "plus-box-outline",
-                size: 20,
-                color: "white",
-                type: "MTI",
+              left: require("@/utils/images/post.png"),
+              right: require("@/utils/images/arrow_right.png"),
+            }}
+            toogle={false}
+          />
+        </TouchableOpacity>
+
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts", {
+          data: items
+        })}>
+          <CustomSelect
+            title={es.profile.shop.products.title}
+            subtitle={es.profile.shop.products.subtitle}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
               },
               right: {
                 name: "arrow-right",
@@ -82,10 +177,7 @@ const Profile = ({ navigation }) => {
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={onHandleLogout}
-              >
+              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}

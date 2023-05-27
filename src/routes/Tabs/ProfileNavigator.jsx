@@ -7,7 +7,13 @@ import { useRoute } from "@react-navigation/native";
 // Header
 import Header from "./HeaderTabs/index";
 import Result from "@/screens/Search/Result";
-import PostProduct from "@/screens/Profile/PostProduct";
+import PostNavigator from "./PostNavigator";
+import LeftHeader from "./HeaderTabs/LeftHeader";
+import ListProducts from "@/screens/Profile/ListProducts";
+import ListOrders from "@/screens/Profile/ListOrders";
+import CustomPageListProduct from "@/components/CustomPageListProduct";
+import OrderPreview from "@/components/OrderPreview";
+import Notifications from "@/screens/Notifications/Notifications";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -54,13 +60,53 @@ const ProfileNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="Post_Product"
+        name="Post_Navigator"
+        component={PostNavigator}
         options={{
           animation: "slide_from_right",
+          headerShown: false,
         }}
-      >
-        {() => <PostProduct data={data}/>}
-      </Stack.Screen>
+      />
+      <Stack.Screen
+        name="ListProducts"
+        component={ListProducts}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ListOrders"
+        component={ListOrders}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="EditListProduct"
+        component={CustomPageListProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ViewOrder"
+        component={OrderPreview}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+      name="Notifications_Profile"
+      component={Notifications}
+      options={{
+        animation: "slide_from_right",
+        header: (props) => <LeftHeader {...props} />,
+      }}
+    />
     </Stack.Navigator>
   );
 };

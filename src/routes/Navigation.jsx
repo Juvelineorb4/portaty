@@ -6,11 +6,15 @@ import DrawerNavigator from "./Tabs/Drawer";
 import LoginNavigator from "./Authentication/LoginNavigator";
 
 // amplify
-import { Auth, Hub, API } from 'aws-amplify'
+import { Auth, Hub, API, graphqlOperation } from 'aws-amplify'
 import * as queries from '@/graphql/queries'
+import * as mutations from '@/graphql/mutations'
 // recoil
 import { useRecoilState } from 'recoil'
 import { userAutenticated } from '@/atoms/index'
+
+
+
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -30,9 +34,10 @@ const Navigation = () => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
       console.log("HUB: ", event)
+      console.log("EVENT HUB: ", data)
       switch (event) {
         case "signIn":
-          checkUser()
+          setUserAuth(data)
           break;
         case "signOut":
           setUserAuth(undefined)
@@ -54,19 +59,11 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    fetchAlgo()
-  }, [])
 
-  const fetchAlgo = async () => {
-    try {
-      const result = await API.graphql({
-        query: queries.listADBrands,
-        authMode: "AWS_IAM",
-      })
-      console.log(result.data.listADBrands)
-    } catch (error) {
-      console.error(error)
-    }
+    fecthalgo();
+  }, [])
+  const fecthalgo = async () => {
+
   }
 
   return (

@@ -93,5 +93,15 @@ export const settings = {
       route: "Welcome",
       // routePush: true,
     },
+    {
+      title: "Notificaciones",
+      subtitle: "",
+      icon: {
+        left: require("@/utils/images/info_white.png"),
+        right: require("@/utils/images/arrow_right.png"),
+      },
+      route: "Notifications_Profile",
+      // routePush: true,
+    },
   ],
 };

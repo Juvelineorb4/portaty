@@ -1,28 +1,99 @@
-type ADCategory @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
-  id: ID!
-  name: String!
-  image: String!
+type ADCategory @model @auth(rules: [
+  { allow: groups, groups: ["admin"] },
+  { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
+  id: ID! 
+  name: String! @auth(rules:[
+    { allow: groups, groups: ["admin"] },
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, provider: iam, operations: [read] },
+  ])
+  image: String
+  path: String
   products: [ADProduct] @hasMany(indexName: "byCategory", fields: ["id"])
+  brands: [ADBrand] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String
+  createdBy: ID @auth(rules:[
+    {allow: groups, groups:["admin"], operations:[read, create, delete]}
+  ])
 }
 
-type ADBrand @model @auth(rules: [{allow: public, provider: iam, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create]}]) {
-  id: ID!
-  name: String!
-  image: String!
-  products: [ADProduct] @hasMany(indexName: "byBrand", fields: ["id"])
-}
-
-type ADProduct @model @auth(rules: [
-   { allow: private, provider: iam, operations: [read] },
+type ADBrand @model @auth(rules: [
+  { allow: groups, groups: ["admin"] },
+  { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
   ]) {
   id: ID!
-  name: String!
-  images: [String!]!
-  suggestedPrice: Float!
-  categoryID: ID! @index(name: "byCategory", sortKeyFields: ["name"])
-  brandID: ID! @index(name: "byBrand", sortKeyFields: ["name"])
+   name: String! @auth(rules:[
+    { allow: groups, groups: ["admin"] },
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, provider: iam, operations: [read] },
+  ])
+  image: String
+  path: String
+  products: [ADProduct] @hasMany(indexName: "byBrand", fields: ["id"])
+  categories: [ADCategory] @manyToMany(relationName: "CategoryBrands")
+  abreviation: String
+  createdBy: ID @auth(rules:[
+    {allow: groups, groups:["admin"], operations:[read, create, delete]}
+  ])
+}
+
+
+type ADProduct @model @auth(rules: [
+  { allow: groups, groups: ["admin"] },
+  { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+  ]) {
+  id: ID!
+  name: String @auth(rules:[
+    { allow: groups, groups: ["admin"] },
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, provider: iam, operations: [read] },
+  ])
+  images: [String]
+  paths: [String]
+  description: String
+  suggestedPrice: Float
+  categoryID: ID @index(name: "byCategory", sortKeyFields: ["name"])
+  brandID: ID @index(name: "byBrand", sortKeyFields: ["name"])
+  phone: GuidePhone 
+  createdBy: ID @auth(rules:[
+    {allow: groups, groups:["admin"], operations:[read, create, delete]}
+  ])
+  customerProduct: [CustomerProduct] @hasMany(indexName:"byADProductCustomerProduct", fields: ["id"])
 } 
+
+type GuidePhone {
+    colors: [String]
+    storage: [Int]
+    width: Float
+    height: Float
+    depth: Float
+    weight: Float
+    display: Display
+    camera: Camera
+    battery: Battery
+}
+
+type Display {
+  resolution: String
+  screenSize: String
+  ppi: String
+}
+
+type Camera {
+  primary: Int
+  secondary: Int
+  resolution: String
+}
+
+type Battery {
+  capacity: Int
+  duration: Int
+  usb: String
+}
 
 type Todo @model @auth(rules: [
   { allow: owner },
@@ -32,4 +103,182 @@ type Todo @model @auth(rules: [
   id: ID!
   name: String
   description: String
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type Mutation {
+ pruebaE(credentials: String!): String @function(name: "portaty11dae80f-${env}")
+  pruebaFunc(credentials: String!): String @function(name: "portatyPrueba-${env}")
+}
+
+type CustomerShop @model @auth(rules:[
+  { allow: owner},
+  { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+]){
+  userID: ID! @primaryKey
+  name: String! @auth(rules:[
+    {allow: owner},
+    {allow: private, provider: iam, operations: [read]},
+    {allow: public, provider: iam, operations: [read]}
+  ])
+  email: String! @auth(rules:[
+    {allow: owner},
+    {allow: private, provider: iam, operations: [read]},
+    {allow: public, provider: iam, operations: [read]}
+  ])
+  description: String
+  favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
+  salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
+  purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
+  products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
+  shippingAddress: [CustomerShippingAddress] @hasMany(indexName: "CustomerShippingAddress", fields:["userID"])
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+type CustomerShippingAddress @model @auth(rules:[
+  {allow: owner}
+  {allow: groups, groups:["admin"], operations:[read]}
+]){
+  id: ID!
+  customerID: ID! @index(name: "CustomerShippingAddress")
+  title: String
+  country: String
+  postal: String
+  city: String
+  address: String
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type FavoriteItem @model @auth(rules:[
+  {allow: owner, operations: [read, create, delete]},
+  {allow: groups, groups: ["admin"], operations:[read]}
+]){
+  id: ID!
+  itemID: ID! @index(name: "byCustomerProductStatusFavoriteItem")
+  item: CustomerProductStatus @belongsTo(fields:["itemID"])
+  customerShopID: ID! @index(name: "byCustomerShopFavoriteItem")
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type CustomerProduct @model @auth(rules:[
+  { allow: owner},
+  { allow: private, provider: iam, operations: [read] },
+  { allow: public, provider: iam, operations: [read] },
+]){
+  id: ID!
+  customerID: ID! @index(name: "byCustomerShop",sortKeyFields: ["code"])
+  customer: CustomerShop @belongsTo(fields: ["customerID"])
+  categoryID: ID!
+  categoryFields: CategoryFields
+  brandID: ID!
+  brandFields: BrandFields
+  productID: ID! @index(name:"byADProductCustomerProduct")
+  adproduct: ADProduct @belongsTo(fields:["productID"])
+  productFields: ProductFields
+  # 
+  code: String
+  price: Float!
+  condition: Condition
+  description: String
+  status: CustomerProductStatus @belongsTo
+# campos personalizado dependiendo del producto
+  phoneFields: PhoneFields
+  laptoFields: LaptoFields
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+}
+
+type CategoryFields{
+  name: String!
+  image: String!
+  abreviation: String!
+}
+type BrandFields{
+  name: String!
+  image: String!
+  abreviation: String!
+}
+type ProductFields{
+  name: String!
+  images: String!
+}
+
+type CustomerProductStatus @model @auth(rules:[
+  {allow: groups, groups:["admin"]},
+  {allow: owner, operations: [read, create ,delete, update]}
+  {allow: private, provider: iam, operations:[read]}
+]){
+  id: ID!
+  productID: ID
+  product: CustomerProduct @hasOne(fields: ["productID"])
+  status: ProductStatusValue @default(value: "PUBLISHED")
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  favoriteItems: [FavoriteItem] @hasMany(indexName: "byCustomerProductStatusFavoriteItem", fields: ["id"])
+ 
+}
+
+type OrderDetail @model @auth(rules:[
+  {allow: owner, operations:[read, create]},
+  {allow: groups, groups:["admin"], operations:[read]},
+  {allow: private, provider: iam, operations: [read]}
+]){
+  id: ID!
+  purchaseUserID: ID! @index(name: "byCustomerShopPurchaseOrder")
+  salesUserID: ID! @index(name: "byCustomerShopSaleOrder")
+  total: Float!
+  items: [OrderItem] @hasMany(indexName: "byOrderDetailItem", fields: ["id"])
+  paymentID: ID!
+  payment: PaymentStripe @hasOne(fields: ["paymentID"])
+  shippingAddress: ShippingAddress
+}
+
+type ShippingAddress{
+  country: String
+  postal: String
+  city: String
+  address: String
+  phoneNumber: String
+}
+
+type OrderItem @model @auth(rules:[
+  {allow: owner, operations: [read, create]},
+  {allow: groups, groups: ["admin"], operations:[read, update]}
+]){
+  id: ID!
+  orderID: ID @index(name: "byOrderDetailItem")
+  itemID: ID! 
+  item: CustomerProductStatus @hasOne(fields:["itemID"])
+}
+
+type PaymentStripe @model @auth(rules:[
+  {allow: owner, operations:[read, create]},
+  {allow: groups, groups:["admin"]}
+]){
+  id: ID!
+  paymentStripeID: String!
+  metadata: String
+}
+enum ProductStatusValue {
+  PUBLISHED
+  PENDING
+  UNPUBLISHED
+  SOLD
+}
+
+enum Condition {
+  NEW
+  PERFECT
+  GOOD
+  USED
+}
+
+type PhoneFields {
+  carrier: String!
+  imei: String!
+  model: String!
+  storage: String!
+  batery: String!
+}
+
+type LaptoFields {
+  serial: String!
 }

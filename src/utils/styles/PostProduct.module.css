@@ -17,9 +17,7 @@
   justify-content: center;
 }
 .textButton {
-  /* font-style: normal; */
   font-family: 'semibold';
-  /* font-weight: 700; */
   font-size: 14px;
   color: #404040;
 }
@@ -35,7 +33,83 @@
 .textPublish {
   font-family: 'semibold';
   text-align: center;
-  /* font-weight: 700; */
   color: white;
   font-size: 14px;
+}
+.textInput {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  text-transform: capitalize;
+}
+.inputContainer {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  width: 95%;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.placeholder {
+  font-size: 13px;
+}
+.labelInput {
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+.textInputD {
+  flex: 1;
+  margin-left: 10px;
+  color: #8c9199cb;
+  /* text-transform: capitalize; */
+}
+.inputContainerD {
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #fafafa;
+  width: 100%;
+  padding: 15px 10px 15px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+
+.labelInputD {
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+  text-transform: capitalize;
+}
+.othersText {
+  font-family: 'semibold';
+  font-size: 14px;
+  color: #404040;
+  text-align: center;
+  padding: 25px 0;
+}
+.labelInputIMEI {
+  font-family: 'medium';
+  font-size: 14px;
+  color: #404040;
+  text-transform: uppercase;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+
+}
+.lineTwo {
+  margin-bottom: 15px;
+  flex: 1;
+  position: relative;
+  left: 25%;
+  width: 50%;
+  height: 1px;
 }
