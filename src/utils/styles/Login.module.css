@@ -21,7 +21,7 @@
 }
 .inputContainer {
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #fafafa;
   padding: 15px 20px;
@@ -45,9 +45,11 @@
 }
 
 .login {
+  flex: 1;
   text-align: center;
   width: 100%;
   padding: 20px;
+  height: 60px;
   background-color: #ffa424;
   border-radius: 16px;
   margin-top: 20px;
@@ -55,7 +57,7 @@
 
 .textLogin {
   text-align: center;
-  font-family: 'bold';
+  font-family: 'medium';
   /* font-weight: 700; */
   color: white;
   font-size: 14px;

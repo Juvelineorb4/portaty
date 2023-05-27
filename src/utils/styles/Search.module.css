@@ -1,21 +1,20 @@
 .container {
-    flex: 1;
-    background-color: #ffffff;
+  flex: 1;
+  background-color: #ffffff;
 }
 
 .title {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom-width: 2px;
-    border-color: #efeded;
-  font-family: 'regular';
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-width: 1px;
+  border-color: #efeded;
+  /* font-family: "thin"; */
   padding-bottom: 10px;
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .textTitle {
-    /* font-weight: bold; */
-  font-family: 'regular';
+  font-family: "light";
   font-size: 16px;
 }

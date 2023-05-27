@@ -6,6 +6,7 @@ import styles from "@/utils/styles/Forgot.module.css";
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "@/components/CustomText";
+import { es } from "@/utils/constants/lenguage";
 
 const Forgot = ({navigation}) => {
   const global = require("@/utils/styles/global.js");
@@ -28,8 +29,8 @@ const Forgot = ({navigation}) => {
                 subtitle: [styles.subtitle, global.topGray],
                 container: styles.textContainer,
               }}
-              title={`Reset password`}
-              subtitle={`Type the email associated with your account`}
+              title={es.authentication.forgot.main.title}
+              subtitle={es.authentication.forgot.main.subtitle}
             />
             <Image
               style={{
@@ -45,7 +46,7 @@ const Forgot = ({navigation}) => {
           <CustomInput
             control={control}
             name={`email`}
-            placeholder={"Write your email..."}
+            placeholder={es.authentication.forgot.email.placeholder}
             styled={{
               text: styles.textInput,
               label: [styles.labelInput, global.topGray],
@@ -64,11 +65,11 @@ const Forgot = ({navigation}) => {
             // }}
           />
           <Text style={[styles.code, global.topGray]}>
-            We send you a 6-digit security code to your email:{" "}
+          {es.authentication.forgot.code}{" "}
             <Text style={styles.emailText}>{emailValue}</Text>
           </Text>
           <CustomButton
-            text={`Confirm Code`}
+            text={es.authentication.forgot.button}
             handlePress={handleSubmit(() => navigation.navigate("ChangePassword", { email: emailValue}))}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}

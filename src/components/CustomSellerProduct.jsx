@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
-import React from "react";
-=======
 import {
   View,
   Text,
@@ -12,18 +8,12 @@ import {
   FlatList,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
->>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
 import styles from "@/utils/styles/CustomSellerProduct.module.css";
 import CustomButton from "./CustomButton";
 import { productsHome } from "@/utils/constants/products";
 import CustomProductCard from "./CustomProductCard";
 
 // amplify
-<<<<<<< HEAD
-import { API, graphqlOperation, Auth } from 'aws-amplify'
-import * as queries from '@/graphql/queries'
-
-=======
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
@@ -64,21 +54,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
   return (
     <ScrollView style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}>
       <View style={styles.container}>
-<<<<<<< HEAD
-        <View style={[global.bgWhiteSmoke, styles.containerImages]}>
-          <Image
-            style={{
-              width: 300,
-              height: 300,
-              resizeMode: "contain",
-            }}
-            source={
-              data.images
-                ? { uri: data.images }
-                : require("@/utils/images/notimage.png")
-            }
-          />
-=======
         <View style={styles.containerImages}>
           {!keyImages.length <= 0 && (
             <FlatList
@@ -102,122 +77,16 @@ const CustomSellerProduct = ({ route, navigation }) => {
               )}
             />
           )}
->>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
         </View>
 
         <View style={styles.content}>
           <View style={styles.containerTitle}>
-<<<<<<< HEAD
-            <Text style={[styles.title, global.black]}>
-              {data.name} - {data.brand}
-            </Text>
-            <Image
-              style={{
-                width: 20,
-                height: 20,
-                resizeMode: "contain",
-              }}
-              source={require("@/utils/images/favorites-black.png")}
-            />
-          </View>
-          <View style={styles.containerInfo}>
-            <View style={styles.containerSolds}>
-              <Text>{data.solds ? data.solds : "7430"} sold |</Text>
-            </View>
-            <View style={styles.containerReviews}>
-              <Image
-                style={{
-                  width: 13,
-                  height: 13,
-                  resizeMode: "contain",
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Text style={styles.textReviews}>
-                {data.reviews ? data.reviews : "(4.9) (5389 reviews)"}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.containerSeller}>
-            <View style={styles.stars}>
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  resizeMode: "contain",
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  resizeMode: "contain",
-                  marginLeft: 5,
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  resizeMode: "contain",
-                  marginLeft: 5,
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  resizeMode: "contain",
-                  marginLeft: 5,
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  resizeMode: "contain",
-                  marginLeft: 5,
-                }}
-                source={require("@/utils/images/star.png")}
-              />
-            </View>
-            <Text style={[styles.textSeller, global.black]}>
-              - Christopher Alvarez
-=======
             <Text style={[styles.titleProduct, global.black]}>
               {product.productFields.name}
->>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
             </Text>
           </View>
           <View style={[styles.line, global.bgWhiteSmoke]} />
-          <View style={styles.containerOptions}>
-            <CustomButton
-              text={`Buy`}
-              handlePress={onHandleBuy}
-              textStyles={[styles.textBuy, global.white]}
-              buttonStyles={[styles.buy, global.mainBgColor]}
-            />
-            <View style={styles.containerPrice}>
-              <Text style={[styles.price, global.black]}>${data.maxPrice}</Text>
-              <View style={styles.reportedContainer}>
-                <Text style={[styles.reported, global.black]}>
-                  Reported product
-                </Text>
-                <Image
-                  style={{
-                    width: 16,
-                    height: 16,
-                    resizeMode: "contain",
-                  }}
-                  source={require("@/utils/images/reported.png")}
-                />
-              </View>
-            </View>
-          </View>
+
           <View style={styles.containerDetails}>
             <View style={styles.description}>
               <Text style={[styles.title, global.black]}>
@@ -712,7 +581,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
           source={require("@/utils/images/arrow_right.png")}
         /> */}
       </View>
->>>>>>> af8975fa0dfb05f90e2c02790b544d746bd8db08
     </ScrollView>
   );
 };

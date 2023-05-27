@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Alert,
+  TouchableHighlight,
+} from "react-native";
 import styles from "@/utils/styles/PostProduct.module.css";
 import React, { useEffect, useState } from "react";
 import CustomInput from "@/components/CustomInput";
@@ -7,8 +14,10 @@ import CustomButton from "@/components/CustomButton";
 import CustomModal from "@/components/CustomModal";
 import * as ImagePicker from "expo-image-picker";
 // amplify
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customPost from '@/graphql/CustomQueries/Post'
+import * as mutations from "@/graphql/mutations";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   brandsId,
@@ -27,12 +36,15 @@ import {
   storageItem,
   serialItem,
   customerId,
+  blobsPost,
+  errorPostProduct,
 } from "@/atoms";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { es } from "@/utils/constants/lenguage";
 const PostProduct = ({ navigation, route }) => {
   // console.log(route.params.userID)e
   const global = require("@/utils/styles/global.js");
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, watch } = useForm();
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
   const [brandsSelect, setBrandsSelect] = useRecoilState(brandsId);
   const [productsSelect, setProductsSelect] = useRecoilState(productsId);
@@ -50,9 +62,12 @@ const PostProduct = ({ navigation, route }) => {
     useRecoilState(supplierItem);
   const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
 
   /* Images Picker */
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [blobImages, setBlobImages] = useRecoilState(blobsPost);
   const [image, setImage] = useState(null);
   const pickImage = async () => {
     ImagePicker.getPendingResultAsync;
@@ -64,29 +79,63 @@ const PostProduct = ({ navigation, route }) => {
     });
     if (!result.canceled) {
       const { uri } = result.assets[0];
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      setBlobImages([...blobImages, blob]);
       setImagesPostSelect([...imagesPostSelect, result.assets[0].uri]);
-      // uriSelect(uri);
       setImage(result.assets[0].uri);
     }
   };
+  const { price, description, imei, serial } = control;
+  // const { price, description, imei, serial } = watch;
 
-  const onHandleSubmit = (data) => {
+  const onHandleSubmit = async (data) => {
     const { price, description, imei, serial } = data;
+    console.log(selectCustomerId)
+    /* Ramdon Code */
+    return
+    const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
+      }-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    const resultCode = await API.graphql({
+      query: queries.listCustomerProducts,
+      variables: {
+        filter: {
+          code: {
+            eq: ramdonCode,
+          },
+        },
+      },
+    });
 
     const dataItem = {
       customerID: selectCustomerId,
-      category: selectItemCategory,
-      brand: selectItemBrand,
-      product: selectItemProduct,
-      price: price,
+      categoryID: selectItemCategory.id,
+      categoryFields: {
+        name: selectItemCategory.name,
+        image: selectItemCategory.image,
+        abreviation: selectItemCategory.abreviation,
+      },
+      brandID: selectItemBrand.aDBrandId,
+      brandFields: {
+        name: selectItemBrand.aDBrand.name,
+        image: selectItemBrand.aDBrand.image,
+        abreviation: selectItemBrand.aDBrand.abreviation,
+      },
+      productID: selectItemProduct.id,
+      productFields: {
+        name: selectItemProduct.name,
+        images: selectItemProduct.images[0],
+      },
+      price: price ? price : 100,
       description: description,
-      condition: selectItemCondition,
-      images: imagesPostSelect,
+      condition: "BUENO",
       phoneFields: {
         imei: imei,
-        supplier: selectItemSupplier,
+        carrier: selectItemSupplier,
         model: selectItemModel,
         storage: selectItemStorage,
+        batery: "",
       },
       // laptoFields: {
       //   serial: serial,
@@ -169,7 +218,7 @@ const PostProduct = ({ navigation, route }) => {
   const fetchData = async () => {
     try {
       const categories = await API.graphql({
-        query: queries.listADCategories,
+        query: customPost.listCategories,
         authMode: "AWS_IAM",
       });
       setDataCategories(categories.data.listADCategories.items);
@@ -191,9 +240,10 @@ const PostProduct = ({ navigation, route }) => {
     });
   };
   const conditions = [
-    { title: "good", id: "perfect", bgCondition: "#35BF05" },
-    { title: "nice", id: "nice", bgCondition: "#FFC700" },
-    { title: "bad", id: "bad", bgCondition: "#F60A0A" },
+    { title: "NUEVO", id: "new", bgCondition: "#35BF05" },
+    { title: "PERFECTO", id: "perfect", bgCondition: "#FFC700" },
+    { title: "BUENO", id: "good", bgCondition: "#F60A0A" },
+    { title: "USADO", id: "used", bgCondition: "#F60A0A" },
   ];
 
   const models = [
@@ -222,6 +272,7 @@ const PostProduct = ({ navigation, route }) => {
     categoriesSelect,
     brandsSelect,
     productsSelect,
+    blobImages,
   ]);
 
   return (
@@ -232,17 +283,11 @@ const PostProduct = ({ navigation, route }) => {
             <CustomModal
               control={control}
               name={`category`}
-              placeholder={"Select Category"}
+              placeholder={es.post.product.category.placeholder}
               both={true}
-              text={`Category`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
+              text={es.post.product.category.title}
               modal={{
-                text: "Select your type of category",
+                text: es.post.product.category.modal,
               }}
               data={dataCategories}
               dataValue={"categories"}
@@ -252,17 +297,11 @@ const PostProduct = ({ navigation, route }) => {
             <CustomModal
               control={control}
               name={`brand`}
-              placeholder={"Select Brand"}
+              placeholder={es.post.product.brand.placeholder}
               both={true}
-              text={`Brand`}
-              icon={{
-                name: "chevron-down",
-                size: 24,
-                color: "#1f1f1f",
-                type: "MTI",
-              }}
+              text={es.post.product.brand.title}
               modal={{
-                text: "Select your type of brand",
+                text: es.post.product.brand.modal,
               }}
               data={dataBrands}
               dataValue={"brands"}
@@ -274,16 +313,10 @@ const PostProduct = ({ navigation, route }) => {
           <CustomModal
             control={control}
             name={`product`}
-            placeholder={"Select Product"}
-            text={`Product`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
+            placeholder={es.post.product.product.placeholder}
+            text={es.post.product.product.title}
             modal={{
-              text: "Select your type of product",
+              text: es.post.product.product.modal,
             }}
             data={dataProducts}
             dataValue={"products"}
@@ -293,57 +326,60 @@ const PostProduct = ({ navigation, route }) => {
           <CustomModal
             control={control}
             name={`condition`}
-            placeholder={"Select Condition"}
+            placeholder={es.post.product.condition.placeholder}
             both={true}
-            text={`Condition`}
-            icon={{
-              name: "chevron-down",
-              size: 24,
-              color: "#1f1f1f",
-              type: "MTI",
-            }}
+            text={es.post.product.condition.title}
             modal={{
-              text: "Select condition of your product",
+              text: es.post.product.condition.modal,
             }}
             data={conditions}
             dataValue={""}
           />
-          <View>
+          <View style={{ flex: 1 }}>
             <CustomInput
               control={control}
               name={`price`}
-              placeholder={"Enter Price"}
+              placeholder={es.post.product.price.placeholder}
               styled={{
-                text: styles.textInput,
-                label: [styles.labelInput, global.topGray],
-                error: styles.errorInput,
-                input: [styles.inputContainer, global.bgWhiteSoft],
-                placeholder: styles.placeholder,
+                text: styles.textInputPrice,
+                label: [styles.labelInputPrice],
+                error: styles.errorInputPrice,
+                input: [styles.inputContainerPrice],
+                placeholder: styles.placeholderPrice,
               }}
-              text={`Price`}
-              iconRight={{
-                name: "dollar",
-                size: 14,
-                color: "#8c9199cb",
-                type: "FA",
-              }}
+              text={es.post.product.price.title}
+              // iconRight={{
+              //   name: "dollar",
+              //   size: 14,
+              //   color: "#8c9199cb",
+              //   type: "FA",
+              // }}
+              numeric={true}
+            // errorPost={selectErrorPostProduct}
+            // rules={{
+            //   required: "Required",
+            // }}
             />
           </View>
         </View>
         <CustomInput
           control={control}
           name={`description`}
-          placeholder={"Write description about your product"}
+          placeholder={es.post.product.description.placeholder}
           styled={{
             text: styles.textInputD,
-            label: [styles.labelInputD, global.topGray],
+            label: [styles.labelInputD],
             error: styles.errorInputD,
-            input: [styles.inputContainerD, global.bgWhiteSoft],
+            input: [styles.inputContainerD],
             placeholder: styles.placeholder,
           }}
-          text={`Description`}
+          text={es.post.product.description.title}
           area={true}
           lines={6}
+        // errorPost={selectErrorPostProduct}
+        // rules={{
+        //   required: "Required",
+        // }}
         />
         <View style={styles.imagesPicker}>
           <View style={styles.images}>
@@ -513,7 +549,9 @@ const PostProduct = ({ navigation, route }) => {
               }}
               source={require("@/utils/images/picker.png")}
             />
-            <Text style={styles.textButton}>Upload your images</Text>
+            <Text style={styles.textButton}>
+              {es.post.product.images.title}
+            </Text>
           </TouchableOpacity>
         </View>
         {selectItemCategory.name === "phone" ? (
@@ -525,9 +563,9 @@ const PostProduct = ({ navigation, route }) => {
               <CustomModal
                 control={control}
                 name={`model`}
-                placeholder={"Select Model"}
+                placeholder={es.post.product.model.placeholder}
                 both={true}
-                text={`Model`}
+                text={es.post.product.model.title}
                 icon={{
                   name: "chevron-down",
                   size: 24,
@@ -535,17 +573,17 @@ const PostProduct = ({ navigation, route }) => {
                   type: "MTI",
                 }}
                 modal={{
-                  text: "Select model of your phone",
+                  text: es.post.product.model.modal,
                 }}
                 data={models}
-                dataValue={""}
+                dataValue={"model"}
               />
               <CustomModal
                 control={control}
                 name={`supplier`}
-                placeholder={"Select Supplier"}
+                placeholder={es.post.product.supplier.placeholder}
                 both={true}
-                text={`Supplier`}
+                text={es.post.product.supplier.title}
                 icon={{
                   name: "chevron-down",
                   size: 24,
@@ -553,34 +591,41 @@ const PostProduct = ({ navigation, route }) => {
                   type: "MTI",
                 }}
                 modal={{
-                  text: "Select supplier of your phone",
+                  text: es.post.product.supplier.modal,
                 }}
                 data={suppliers}
-                dataValue={""}
+                dataValue={"supplier"}
               />
             </View>
             <View style={styles.both}>
-              <View>
+              <View style={{ flex: 1 }}>
                 <CustomInput
                   control={control}
                   name={`imei`}
-                  placeholder={"Enter IMEI"}
+                  placeholder={es.post.product.imei.placeholder}
                   styled={{
-                    text: styles.textInput,
-                    label: [styles.labelInputIMEI, global.topGray],
-                    error: styles.errorInput,
-                    input: [styles.inputContainer, global.bgWhiteSoft],
-                    placeholder: styles.placeholder,
+                    text: styles.textInputIMEI,
+                    label: [styles.labelInputIMEI],
+                    error: styles.errorInputIMEI,
+                    input: [styles.inputContainerIMEI],
+                    placeholder: styles.placeholderIMEI,
                   }}
-                  text={`IMEI`}
+                  text={es.post.product.imei.title}
+                  numeric={true}
+                // errorPost={selectErrorPostProduct}e
+                // rules={{
+                //   required: "Required",
+                // }}
                 />
               </View>
+              {/* <View style={{flex: 1}}> */}
+
               <CustomModal
                 control={control}
                 name={`storage`}
-                placeholder={"Select Storage"}
+                placeholder={es.post.product.storage.placeholder}
                 both={true}
-                text={`Storage`}
+                text={es.post.product.storage.title}
                 icon={{
                   name: "chevron-down",
                   size: 24,
@@ -588,17 +633,18 @@ const PostProduct = ({ navigation, route }) => {
                   type: "MTI",
                 }}
                 modal={{
-                  text: "Select storage of your phone",
+                  text: es.post.product.storage.modal,
                 }}
                 data={storages}
-                dataValue={""}
+                dataValue={"storage"}
               />
+              {/* </View> */}
             </View>
           </View>
         ) : selectItemCategory.name === "lapto" ? (
           <View>
             <View style={[styles.line, global.bgWhiteSmoke]} />
-            <Text style={styles.othersText}>Otros campos de interes</Text>
+            <Text style={styles.othersText}>{es.post.product.other}</Text>
             <View style={[styles.lineTwo, global.bgWhiteSmoke]} />
             <CustomInput
               control={control}
@@ -618,8 +664,22 @@ const PostProduct = ({ navigation, route }) => {
           ""
         )}
         <CustomButton
-          text={`Publish your product`}
-          handlePress={handleSubmit(onHandleSubmit)}
+          text={es.post.product.button}
+          handlePress={
+            // !selectItemCategory.name ||
+            // !selectItemBrand.name ||
+            // !selectItemModel.title ||
+            // !selectItemProduct.name ||
+            // !selectItemCondition.title ||
+            // !selectItemStorage.title ||
+            // !selectItemSupplier.title ||
+            // // !price ||
+            // !description ||
+            // !imei ||
+            // !serial
+            //   ? () => setSelectErrorPostProduct(true)
+            handleSubmit(onHandleSubmit)
+          }
           textStyles={[styles.textPublish, global.white]}
           buttonStyles={[styles.publish, global.mainBgColor]}
         />

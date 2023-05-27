@@ -48,7 +48,6 @@ type ADProduct @model @auth(rules: [
   ]) {
   id: ID!
   name: String @auth(rules:[
-  name: String @auth(rules:[
     { allow: groups, groups: ["admin"] },
     { allow: private, provider: iam, operations: [read] },
     { allow: public, provider: iam, operations: [read] },
@@ -63,7 +62,6 @@ type ADProduct @model @auth(rules: [
   createdBy: ID @auth(rules:[
     {allow: groups, groups:["admin"], operations:[read, create, delete]}
   ])
-  customerProduct: [CustomerProduct] @hasMany(indexName:"byADProductCustomerProduct", fields: ["id"])
   customerProduct: [CustomerProduct] @hasMany(indexName:"byADProductCustomerProduct", fields: ["id"])
 } 
 
@@ -133,9 +131,6 @@ type CustomerShop @model @auth(rules:[
   favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
   salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
   purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
-  favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
-  salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
-  purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   shippingAddress: [CustomerShippingAddress] @hasMany(indexName: "CustomerShippingAddress", fields:["userID"])
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
@@ -156,15 +151,9 @@ type CustomerShippingAddress @model @auth(rules:[
 
 type FavoriteItem @model @auth(rules:[
   {allow: owner, operations: [read, create, delete]},
-type FavoriteItem @model @auth(rules:[
-  {allow: owner, operations: [read, create, delete]},
   {allow: groups, groups: ["admin"], operations:[read]}
 ]){
   id: ID!
-  itemID: ID! @index(name: "byCustomerProductStatusFavoriteItem")
-  item: CustomerProductStatus @belongsTo(fields:["itemID"])
-  customerShopID: ID! @index(name: "byCustomerShopFavoriteItem")
-  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
   itemID: ID! @index(name: "byCustomerProductStatusFavoriteItem")
   item: CustomerProductStatus @belongsTo(fields:["itemID"])
   customerShopID: ID! @index(name: "byCustomerShopFavoriteItem")
@@ -179,13 +168,10 @@ type CustomerProduct @model @auth(rules:[
   id: ID!
   customerID: ID! @index(name: "byCustomerShop",sortKeyFields: ["code"])
   customer: CustomerShop @belongsTo(fields: ["customerID"])
-  customer: CustomerShop @belongsTo(fields: ["customerID"])
   categoryID: ID!
   categoryFields: CategoryFields
   brandID: ID!
   brandFields: BrandFields
-  productID: ID! @index(name:"byADProductCustomerProduct")
-  adproduct: ADProduct @belongsTo(fields:["productID"])
   productID: ID! @index(name:"byADProductCustomerProduct")
   adproduct: ADProduct @belongsTo(fields:["productID"])
   productFields: ProductFields
@@ -261,51 +247,8 @@ type OrderItem @model @auth(rules:[
   orderID: ID @index(name: "byOrderDetailItem")
   itemID: ID! 
   item: CustomerProductStatus @hasOne(fields:["itemID"])
-  favoriteItems: [FavoriteItem] @hasMany(indexName: "byCustomerProductStatusFavoriteItem", fields: ["id"])
- 
 }
 
-type OrderDetail @model @auth(rules:[
-  {allow: owner, operations:[read, create]},
-  {allow: groups, groups:["admin"], operations:[read]},
-  {allow: private, provider: iam, operations: [read]}
-]){
-  id: ID!
-  purchaseUserID: ID! @index(name: "byCustomerShopPurchaseOrder")
-  salesUserID: ID! @index(name: "byCustomerShopSaleOrder")
-  total: Float!
-  items: [OrderItem] @hasMany(indexName: "byOrderDetailItem", fields: ["id"])
-  paymentID: ID!
-  payment: PaymentStripe @hasOne(fields: ["paymentID"])
-  shippingAddress: ShippingAddress
-}
-
-type ShippingAddress{
-  country: String
-  postal: String
-  city: String
-  address: String
-  phoneNumber: String
-}
-
-type OrderItem @model @auth(rules:[
-  {allow: owner, operations: [read, create]},
-  {allow: groups, groups: ["admin"], operations:[read, update]}
-]){
-  id: ID!
-  orderID: ID @index(name: "byOrderDetailItem")
-  itemID: ID! 
-  item: CustomerProductStatus @hasOne(fields:["itemID"])
-}
-
-type PaymentStripe @model @auth(rules:[
-  {allow: owner, operations:[read, create]},
-  {allow: groups, groups:["admin"]}
-]){
-  id: ID!
-  paymentStripeID: String!
-  metadata: String
-}
 type PaymentStripe @model @auth(rules:[
   {allow: owner, operations:[read, create]},
   {allow: groups, groups:["admin"]}
@@ -318,7 +261,6 @@ enum ProductStatusValue {
   PUBLISHED
   PENDING
   UNPUBLISHED
-  SOLD
   SOLD
 }
 

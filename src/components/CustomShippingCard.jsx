@@ -6,26 +6,27 @@ const CustomShippingCard = ({ content = {} }) => {
   const global = require("@/utils/styles/global.js");
 
   return (
-    <TouchableOpacity style={[global.bgWhiteSoft, styles.container]} activeOpacity={1}>
+    <TouchableOpacity style={[global.bgWhite, styles.container]} activeOpacity={1}>
       <View style={styles.content}>
         <Image
           style={{
-            width: 50,
-            height: 50,
+            width: 35,
+            height: 35,
+            marginRight: 8,
             resizeMode: "contain",
           }}
-          source={require("@/utils/images/location.png")}
+          source={require("@/utils/images/shipping.png")}
         />
         <View style={styles.textContent}>
-          <Text>{content.title}</Text>
-          <Text>{content.text}</Text>
+          <Text style={{fontFamily: 'light', fontSize: 14}}>{content.title}</Text>
+          <Text style={{fontFamily: 'lightItalic', fontSize: 12}}>{content.text}</Text>
         </View>
       </View>
 
       <Image
         style={{
-          width: 25,
-          height: 25,
+          width: 40,
+          height: 40,
           resizeMode: "contain",
         }}
         source={require("@/utils/images/edit.png")}

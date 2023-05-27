@@ -69,8 +69,8 @@ const Navigation = () => {
           />
         )}
         <Stack.Screen
-          name={`Home`}
-          component={DrawerNavigator}
+          name={`Navigator`}
+          component={Tabs}
           options={{
             headerShown: false,
           }}

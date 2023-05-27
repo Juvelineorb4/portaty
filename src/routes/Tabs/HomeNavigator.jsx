@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "@/screens/Home/Home";
-import Result from '@/screens/Search/Result'
+import Result from "@/screens/Search/Result";
 import CustomSearch from "@/components/CustomSearch";
 import CustomPageProduct from "@/components/CustomPageProduct";
 import CustomSellerProduct from "@/components/CustomSellerProduct";
 
 // Header
-import Header from './HeaderTabs/index'
+import Header from "./HeaderTabs/index";
 
 // Hooks
 
@@ -48,6 +48,7 @@ const HomeNavigator = ({ route, navigation }) => {
         component={CustomSellerProduct}
         options={{
           animation: "slide_from_right",
+          header: (props) => <CustomNavSearch {...props} />,
         }}
       />
       <Stack.Screen

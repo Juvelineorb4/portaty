@@ -19,6 +19,7 @@ import {
   categoriesId,
   categoryItem,
   conditionItem,
+  errorPostProduct,
   modelItem,
   productItem,
   productsBrandId,
@@ -43,6 +44,8 @@ const CustomModal = ({
 
   /* Estaticos */
   const [selectId, setSelectId] = useState("");
+
+  const [selectError, setSelectError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   /* Guardar valor por item seleccionado */
@@ -52,11 +55,10 @@ const CustomModal = ({
   const [selectItemProduct, setSelectItemProduct] = useRecoilState(productItem);
   const [selectItemCondition, setSelectItemCondition] =
     useRecoilState(conditionItem);
-    const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
-    const [selectItemSupplier, setSelectItemSupplier] = useRecoilState(supplierItem);
-    const [selectItemStorage, setSelectItemStorage] =
-      useRecoilState(storageItem);
-
+  const [selectItemModel, setSelectItemModel] = useRecoilState(modelItem);
+  const [selectItemSupplier, setSelectItemSupplier] =
+    useRecoilState(supplierItem);
+  const [selectItemStorage, setSelectItemStorage] = useRecoilState(storageItem);
 
   /* Guardar ids de items seleccionados independientes */
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
@@ -64,8 +66,10 @@ const CustomModal = ({
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
-    
 
+  /* Error */
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
   useEffect(() => {}, [productBrandSelect, selectItemProduct]);
 
   return (
@@ -83,7 +87,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !categoriesSelect
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -93,7 +103,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -115,12 +126,19 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct && !categoriesSelect ? (
+                    <Text style={styles.errorCategory}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -141,11 +159,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -161,6 +179,7 @@ const CustomModal = ({
                             setSelectItemCategory(item);
                             setSelectId(item.id);
                             setCategoriesSelect(item.id);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -172,7 +191,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemCategory.name || ""}
+                        Seleccionaste: {selectItemCategory.name || ""}
                       </Text>
                     </View>
                   </View>
@@ -181,13 +200,25 @@ const CustomModal = ({
             </>
           ) : dataValue === "brands" ? (
             <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (categoriesSelect) setModalVisible(!modalVisible);
+                  if (!categoriesSelect) setSelectError(true);
+                }}
+              >
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    (selectError || selectErrorPostProduct) &&
+                    (!brandsSelect || !categoriesSelect)
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -197,7 +228,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -220,14 +252,26 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
                 </View>
+                {selectErrorPostProduct || selectError ? (
+                  !categoriesSelect ? (
+                    <Text style={styles.errorBrand}>Selecciona la categoría antes</Text>
+                  ) : !brandsSelect ? (
+                    <Text style={styles.errorBrand}>Requerido</Text>
+                  ) : (
+                    ""
+                  )
+                ) : (
+                  ""
+                )}
               </TouchableOpacity>
               <Modal
                 animationType="none"
@@ -247,11 +291,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -268,6 +312,8 @@ const CustomModal = ({
                             setSelectItemBrand(item);
                             setSelectId(item.aDBrandId);
                             setBrandsSelect(item.aDBrandId);
+                            setSelectError(false);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -279,7 +325,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected:{" "}
+                      Seleccionaste:{" "}
                         {selectItemBrand.aDCategoryId === categoriesSelect
                           ? selectItemBrand.aDBrand.name
                           : ""}
@@ -291,13 +337,25 @@ const CustomModal = ({
             </>
           ) : dataValue === "products" ? (
             <>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (brandsSelect) setModalVisible(!modalVisible);
+                  if (!brandsSelect) setSelectError(true);
+                }}
+              >
                 <Text style={both ? styles.labelInputBoth : styles.labelInput}>
                   {text}
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    (selectError || selectErrorPostProduct) &&
+                    (!brandsSelect || !productSelect)
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -307,7 +365,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -335,12 +394,27 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct || selectError ? (
+                    !brandsSelect ? (
+                      <Text style={styles.errorBoth}>
+                        Selecciona la marca primero
+                      </Text>
+                    ) : !productSelect ? (
+                      <Text style={styles.errorProduct}>Requerido</Text>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -361,11 +435,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -383,6 +457,8 @@ const CustomModal = ({
                               setSelectId(item.id);
                               setProductSelect(item.id);
                               setProductBrandSelect(item.brandID);
+                              setSelectError(false);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -396,7 +472,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemProduct.name || ""}
+                        Seleccionaste: {selectItemProduct.name || ""}
                       </Text>
                     </View>
                   </View>
@@ -411,7 +487,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemModel.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -421,11 +503,12 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
-                      {selectItemModel
+                      {selectItemModel.title
                         ? selectItemModel.title
                         : placeholder}
                     </Text>
@@ -445,12 +528,19 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct && !selectItemModel.title ? (
+                    <Text style={styles.errorBoth}>Requerido</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -471,11 +561,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -486,11 +576,13 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemModel(item);
                               setSelectId(item.id);
+                              setSelectError(false);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -504,7 +596,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemModel.title || ""}
+                        Seleccionaste: {selectItemModel.title || ""}
                       </Text>
                     </View>
                   </View>
@@ -519,7 +611,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemSupplier.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -529,11 +627,12 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
-                      {selectItemSupplier
+                      {selectItemSupplier.title
                         ? selectItemSupplier.title
                         : placeholder}
                     </Text>
@@ -553,12 +652,19 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct && !selectItemSupplier.title ? (
+                    <Text style={styles.errorBoth}>Requerido</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -594,11 +700,12 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemSupplier(item);
                               setSelectId(item.id);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -627,7 +734,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemStorage.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -637,12 +750,13 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
-                      {selectItemStorage
-                        ? selectItemStorage.name
+                      {selectItemStorage.title
+                        ? selectItemStorage.title
                         : placeholder}
                     </Text>
                     {selectItemStorage ? (
@@ -661,12 +775,19 @@ const CustomModal = ({
                     )}
                   </View>
 
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct && !selectItemStorage.title ? (
+                    <Text style={styles.errorBoth}>Required</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -687,11 +808,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -702,11 +823,12 @@ const CustomModal = ({
                         ({ item }) => (
                           <CustomCategory
                             title={item.title || item.name}
-                            icon={item.images[0]}
+                            // icon={item.images[0]}
                             itemId={item.id}
                             onPress={() => {
                               setSelectItemStorage(item);
                               setSelectId(item.id);
+                              setModalVisible(!modalVisible);
                             }}
                             activeSelect={selectId}
                           />
@@ -720,7 +842,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemStorage.title || ""}
+                        Seleccionaste: {selectItemStorage.title || ""}
                       </Text>
                     </View>
                   </View>
@@ -735,7 +857,13 @@ const CustomModal = ({
                 </Text>
                 <View
                   style={
-                    both ? styles.inputContainerBoth : styles.inputContainer
+                    selectErrorPostProduct && !selectItemCondition.title
+                      ? both
+                        ? styles.inputContainerBothError
+                        : styles.inputContainerError
+                      : both
+                      ? styles.inputContainerBoth
+                      : styles.inputContainer
                   }
                 >
                   <View style={both ? styles.textInputBoth : styles.textInput}>
@@ -745,7 +873,8 @@ const CustomModal = ({
                         {
                           textTransform: "capitalize",
                           marginRight: 3,
-                          fontSize: 13,
+                          fontSize: 12,
+                          fontFamily: "light",
                         },
                       ]}
                     >
@@ -764,13 +893,19 @@ const CustomModal = ({
                       ""
                     )}
                   </View>
-
-                  <Icon
-                    name={icon.name}
-                    color={icon.color}
-                    size={icon.size}
-                    type={icon.type}
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/arrow_down.png")}
                   />
+                  {selectErrorPostProduct && !selectItemCondition.title ? (
+                    <Text style={styles.errorBoth}>Requerido</Text>
+                  ) : (
+                    ""
+                  )}
                 </View>
               </TouchableOpacity>
               <Modal
@@ -791,11 +926,11 @@ const CustomModal = ({
                       >
                         <Image
                           style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             resizeMode: "contain",
                           }}
-                          source={require("@/utils/images/arrow-back.png")}
+                          source={require("@/utils/images/arrow_back.png")}
                         />
                       </Pressable>
                       <Text style={styles.modalText}>{modal.text}</Text>
@@ -811,6 +946,7 @@ const CustomModal = ({
                           onPress={() => {
                             setSelectId(item.id);
                             setSelectItemCondition(item);
+                            setModalVisible(!modalVisible);
                           }}
                           activeSelect={selectId}
                         />
@@ -822,7 +958,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                        Your selected: {selectItemCondition.title || ""}
+                        Seleccionaste: {selectItemCondition.title || ""}
                       </Text>
                     </View>
                   </View>

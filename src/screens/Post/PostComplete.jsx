@@ -1,12 +1,14 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import styles from "@/utils/styles/PostComplete.module.css";
+import { API, Storage } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import { es } from "@/utils/constants/lenguage";
 
 const PostComplete = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
-  const { data } = route.params
-  console.log(data)
+  const { product } = route.params;
   return (
     <View style={[styles.container, global.bgWhite]}>
       <View style={styles.imageContent}>
@@ -19,15 +21,14 @@ const PostComplete = ({ navigation, route }) => {
           source={require("@/utils/images/check.png")}
         />
         <Text style={styles.textComplete}>
-          Your product is under review, we will notify you once we review it,
-          normally it takes 24 hours to review
+          {es.post.complete.text}
         </Text>
       </View>
       <CustomButton
-        text={`Preview of your product`}
-        handlePress={() => navigation.navigate("Preview_Product")}
+        text={es.post.complete.button}
+        handlePress={() => navigation.navigate("Preview_Product", { product: product })}
         textStyles={[styles.textPreview, global.white]}
-        buttonStyles={[styles.preview, global.bgBlack]}
+        buttonStyles={[styles.preview, global.mainBgColor]}
       />
     </View>
   );

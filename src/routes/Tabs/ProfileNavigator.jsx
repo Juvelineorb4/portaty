@@ -50,6 +50,7 @@ const ProfileNavigator = () => {
         component={Permissions}
         options={{
           animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
       <Stack.Screen
