@@ -904,26 +904,6 @@ export const listCustomerProductStatus = /* GraphQL */ `
             abreviation
           }
           productID
-          adproduct {
-            id
-            name
-            images
-            paths
-            description
-            suggestedPrice
-            categoryID
-            brandID
-            phone {
-              colors
-              storage
-              width
-              height
-              depth
-              weight
-            }
-            createdAt
-            updatedAt
-          }
           productFields {
             name
             images

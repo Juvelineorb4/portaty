@@ -131,7 +131,7 @@ const Login = ({ navigation }) => {
 
           <View style={styles.social}>
             <View style={styles.iconSocial}>
-              <TouchableOpacity>
+              {/* <TouchableOpacity>
                 <Image
                   style={{
                     width: 28,
@@ -140,7 +140,7 @@ const Login = ({ navigation }) => {
                   }}
                   source={require("@/utils/images/facebook.png")}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <View style={styles.iconSocial}>
               <TouchableOpacity>
