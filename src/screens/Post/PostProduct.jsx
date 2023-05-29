@@ -63,7 +63,6 @@ const PostProduct = ({ navigation, route }) => {
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const [selectErrorPostProduct, setSelectErrorPostProduct] =
     useRecoilState(errorPostProduct);
-
   /* Images Picker */
   const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
   const [blobImages, setBlobImages] = useRecoilState(blobsPost);
@@ -182,7 +181,6 @@ const PostProduct = ({ navigation, route }) => {
         },
       },
     });
-    console.log(dataItem);
     const resultStatus = await API.graphql({
       query: mutations.createCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",

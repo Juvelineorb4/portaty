@@ -24,6 +24,10 @@ import { userAutenticated } from "@/atoms";
 
 const CustomSellerProduct = ({ route, navigation }) => {
   const user = useRecoilValue(userAutenticated);
+  const fetchId = async () => {
+    const user = await Auth.currentCredentials();
+  }
+  
   const global = require("@/utils/styles/global.js");
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
@@ -31,12 +35,14 @@ const CustomSellerProduct = ({ route, navigation }) => {
     try {
       Storage.list(`product/${product.code}/`, {
         level: "protected",
+        identityId: 'us-east-1:3345e7d9-d1ef-4430-bb26-603fa52b4e76',
         pageSize: 10,
       }).then(async (data) => {
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
+              identityId: 'us-east-1:3345e7d9-d1ef-4430-bb26-603fa52b4e76'
             });
             return imageResult;
           })
@@ -55,6 +61,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
 
   useLayoutEffect(() => {
     getImages();
+    fetchId()
   }, []);
 
   return (

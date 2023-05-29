@@ -16,23 +16,23 @@ const OrderPreview = ({route}) => {
   const fetchOrder = async () => {
 
     const orderDetail = await API.graphql({
-      query: queries.getOrderDetail,
+      query: customHome.getOrderItem,
       variables: {
-        id: order,
+        id: '02de5db7-0ce1-40ca-8f51-b4c04ea974a4',
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const shop = await API.graphql({
-      query: queries.getCustomerShop,
-      variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    const productItem = await API.graphql({
-      query: customHome.getADProductPrueba,
-      variables: { id: shop.data.getCustomerShop.purchaseOrders.items[0].items.items[0].item.product.productID },
-      authMode: "AWS_IAM",
-    });
-    console.log(productItem)
+    // const shop = await API.graphql({
+    //   query: queries.getCustomerShop,
+    //   variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
+    //   authMode: "AMAZON_COGNITO_USER_POOLS",
+    // });
+    // const productItem = await API.graphql({
+    //   query: customHome.getADProductPrueba,
+    //   variables: { id: shop.data.getCustomerShop.purchaseOrders.items[0].items.items[0].item.product.productID },
+    //   authMode: "AWS_IAM",
+    // });]
+    console.log(orderDetail.data)
     // // setCustomerShop()/*  */
   }
   useEffect(() => {

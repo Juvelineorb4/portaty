@@ -964,3 +964,48 @@ export const getADProductPrueba = /* GraphQL */ `
     }
   }
 `;
+
+export const getOrderDetail = /* GraphQL */ `
+  query GetOrderDetail($id: ID!) {
+    getOrderDetail(id: $id) {
+      id
+      purchaseUserID
+      salesUserID
+      total
+      paymentID
+      items {
+        items {
+          id
+        }
+      }
+      payment {
+        id
+        paymentStripeID
+        metadata
+        createdAt
+        updatedAt
+        owner
+      }
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+
+export const getOrderItem = /* GraphQL */ `
+  query GetOrderItem($id: ID!) {
+    getOrderItem(id: $id) {
+      id
+      orderID
+      itemID
+    }
+  }
+`;
