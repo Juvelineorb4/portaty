@@ -113,16 +113,16 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
-    const statusItem = await API.graphql({
-      query: mutations.updateCustomerProductStatus,
-      variables: {
-        input: {
-          status: 'SOLD',
-          id: item.product.status.id,
-        },
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
+    // const statusItem = await API.graphql({
+    //   query: mutations.updateCustomerProductStatus,
+    //   variables: {
+    //     input: {
+    //       status: 'SOLD',
+    //       id: item.product.status.id,
+    //     },
+    //   },
+    //   authMode: "AMAZON_COGNITO_USER_POOLS",
+    // });
     setModalVisible(!modalVisible)
     setDetail(orderDetail.data.createOrderDetail.id)
   };

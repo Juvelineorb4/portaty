@@ -28,16 +28,22 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
   const getImages = async () => {
+    console.log(user.attributes)
+    console.log("ID PRODUCT: ", product.customerID)
     try {
       Storage.list(`product/${product.code}/`, {
         level: "protected",
+        identityId: "us-east-1:03ee54d9-9afd-43f6-a40d-39951054108a",
         pageSize: 10,
       }).then(async (data) => {
+       
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
+              identityId: "us-east-1:03ee54d9-9afd-43f6-a40d-39951054108a",
             });
+            console.log("DATA: ", imageResult)
             return imageResult;
           })
         );
@@ -91,7 +97,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
               {product.productFields.name}
             </Text>
             {user.attributes.sub === product.customerID && (
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   style={{
                     width: 17,
@@ -102,7 +108,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
                   }}
                   source={require("@/utils/images/available.png")}
                 />
-                <Text style={[{ fontFamily: "thinItalic",  }, global.black]}>
+                <Text style={[{ fontFamily: "thinItalic", }, global.black]}>
                   Propietario
                 </Text>
               </View>

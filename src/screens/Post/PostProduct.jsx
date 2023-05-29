@@ -16,7 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 // amplify
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
-import * as customPost from '@/graphql/CustomQueries/Post'
+// import * as customPost from '@/graphql/CustomQueries/Post'
 import * as mutations from "@/graphql/mutations";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -93,7 +93,7 @@ const PostProduct = ({ navigation, route }) => {
     const { price, description, imei, serial } = data;
     console.log(selectCustomerId)
     /* Ramdon Code */
-    return
+    
     const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
       }-${Math.floor(100000 + Math.random() * 900000)}`;
 
@@ -218,7 +218,7 @@ const PostProduct = ({ navigation, route }) => {
   const fetchData = async () => {
     try {
       const categories = await API.graphql({
-        query: customPost.listCategories,
+        query: queries.listADCategories,
         authMode: "AWS_IAM",
       });
       setDataCategories(categories.data.listADCategories.items);

@@ -128,6 +128,7 @@ type CustomerShop @model @auth(rules:[
     {allow: public, provider: iam, operations: [read]}
   ])
   description: String
+  identityId: String
   favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
   salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
   purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
@@ -204,8 +205,8 @@ type ProductFields{
 
 type CustomerProductStatus @model @auth(rules:[
   {allow: groups, groups:["admin"]},
-  {allow: owner, operations: [read, create ,delete, update]}
-  {allow: private, provider: iam, operations:[read]}
+  {allow: owner}
+  {allow: private, provider: iam, operations:[read, update]}
 ]){
   id: ID!
   productID: ID
@@ -241,12 +242,13 @@ type ShippingAddress{
 
 type OrderItem @model @auth(rules:[
   {allow: owner, operations: [read, create]},
-  {allow: groups, groups: ["admin"], operations:[read, update]}
+  {allow: groups, groups: ["admin"], operations:[read, update]},
+  {allow: private, provider: iam, operations: [read]}
 ]){
   id: ID!
   orderID: ID @index(name: "byOrderDetailItem")
   itemID: ID! 
-  item: CustomerProductStatus @hasOne(fields:["itemID"])
+  item: CustomerProductStatus @hasOne(fields:["itemID"]) @auth(rules: [{ allow: owner }])
 }
 
 type PaymentStripe @model @auth(rules:[
