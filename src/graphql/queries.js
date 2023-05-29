@@ -1161,6 +1161,7 @@ export const getCustomerShop = /* GraphQL */ `
           id
           customerID
           country
+          title
           postal
           city
           address
@@ -1356,6 +1357,7 @@ export const listCustomerShops = /* GraphQL */ `
             country
             postal
             city
+            title
             address
             owner
             createdAt
@@ -1403,6 +1405,7 @@ export const listCustomerShippingAddresses = /* GraphQL */ `
         country
         postal
         city
+        title
         address
         owner
         createdAt

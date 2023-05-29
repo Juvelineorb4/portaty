@@ -2021,6 +2021,7 @@ export const createCustomerShippingAddress = /* GraphQL */ `
       customerID
       country
       postal
+      title
       city
       address
       owner
@@ -2039,6 +2040,7 @@ export const updateCustomerShippingAddress = /* GraphQL */ `
       customerID
       country
       postal
+      title
       city
       address
       owner
@@ -2057,6 +2059,7 @@ export const deleteCustomerShippingAddress = /* GraphQL */ `
       customerID
       country
       postal
+      title
       city
       address
       owner
@@ -3914,226 +3917,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
   ) {
     updateCustomerProductStatus(input: $input, condition: $condition) {
       id
-      productID
-      product {
-        id
-        customerID
-        customer {
-          userID
-          name
-          email
-          description
-          favorites {
-            items {
-              id
-              itemID
-              customerShopID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          salesOrders {
-            items {
-              id
-              purchaseUserID
-              salesUserID
-              total
-              paymentID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          purchaseOrders {
-            items {
-              id
-              purchaseUserID
-              salesUserID
-              total
-              paymentID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          products {
-            items {
-              id
-              customerID
-              categoryID
-              brandID
-              productID
-              code
-              price
-              condition
-              description
-              owner
-              createdAt
-              updatedAt
-              customerProductStatusId
-            }
-            nextToken
-          }
-          owner
-          createdAt
-          updatedAt
-        }
-        categoryID
-        categoryFields {
-          name
-          image
-          abreviation
-        }
-        brandID
-        brandFields {
-          name
-          image
-          abreviation
-        }
-        productID
-        productFields {
-          name
-          images
-        }
-        code
-        price
-        condition
-        description
-        status {
-          id
-          productID
-          product {
-            id
-            customerID
-            customer {
-              userID
-              name
-              email
-              description
-              owner
-              createdAt
-              updatedAt
-            }
-            categoryID
-            categoryFields {
-              name
-              image
-              abreviation
-            }
-            brandID
-            brandFields {
-              name
-              image
-              abreviation
-            }
-            productID
-            productFields {
-              name
-              images
-            }
-            code
-            price
-            condition
-            description
-            status {
-              id
-              productID
-              status
-              owner
-              createdAt
-              updatedAt
-            }
-            phoneFields {
-              carrier
-              imei
-              model
-              storage
-              batery
-            }
-            laptoFields {
-              serial
-            }
-            owner
-            createdAt
-            updatedAt
-            customerProductStatusId
-          }
-          status
-          owner
-          favoriteItems {
-            items {
-              id
-              itemID
-              customerShopID
-              owner
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        phoneFields {
-          carrier
-          imei
-          model
-          storage
-          batery
-        }
-        laptoFields {
-          serial
-        }
-        owner
-        createdAt
-        updatedAt
-        customerProductStatusId
-      }
-      status
-      owner
-      favoriteItems {
-        items {
-          id
-          itemID
-          item {
-            id
-            productID
-            product {
-              id
-              customerID
-              categoryID
-              brandID
-              productID
-              code
-              price
-              condition
-              description
-              owner
-              createdAt
-              updatedAt
-              customerProductStatusId
-            }
-            status
-            owner
-            favoriteItems {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          customerShopID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -4664,125 +4447,6 @@ export const createOrderItem = /* GraphQL */ `
       id
       orderID
       itemID
-      item {
-        id
-        productID
-        product {
-          id
-          customerID
-          customer {
-            userID
-            name
-            email
-            description
-            favorites {
-              nextToken
-            }
-            salesOrders {
-              nextToken
-            }
-            purchaseOrders {
-              nextToken
-            }
-            products {
-              nextToken
-            }
-            shippingAddress {
-              nextToken
-            }
-            owner
-            createdAt
-            updatedAt
-          }
-          categoryID
-          categoryFields {
-            name
-            image
-            abreviation
-          }
-          brandID
-          brandFields {
-            name
-            image
-            abreviation
-          }
-          productID
-          productFields {
-            name
-            images
-          }
-          code
-          price
-          condition
-          description
-          status {
-            id
-            productID
-            product {
-              id
-              customerID
-              categoryID
-              brandID
-              productID
-              code
-              price
-              condition
-              description
-              owner
-              createdAt
-              updatedAt
-              customerProductStatusId
-            }
-            status
-            owner
-            favoriteItems {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          phoneFields {
-            carrier
-            imei
-            model
-            storage
-            batery
-          }
-          laptoFields {
-            serial
-          }
-          owner
-          createdAt
-          updatedAt
-          customerProductStatusId
-        }
-        status
-        owner
-        favoriteItems {
-          items {
-            id
-            itemID
-            item {
-              id
-              productID
-              status
-              owner
-              createdAt
-              updatedAt
-            }
-            customerShopID
-            owner
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
