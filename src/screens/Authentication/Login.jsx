@@ -30,13 +30,13 @@ const Login = ({ navigation }) => {
   };
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.welcome}>
-        <View style={styles.content}>
+      <View style={styles.content}>
           <Text style={styles.title}>{es.authentication.login.title}</Text>
           <Image
             style={{
               width: 300,
               height: 150,
+              marginBottom: 15,
               resizeMode: "contain",
             }}
             source={require("@/utils/images/welcome.png")}
@@ -44,20 +44,17 @@ const Login = ({ navigation }) => {
           <CustomInput
             control={control}
             name={`email`}
-            placeholder={es.authentication.login.email.placeholder}
+            placeholder={`ejemplo@email.com`}
             styled={{
               text: styles.textInput,
               label: [styles.labelInput, global.topGray],
               error: styles.errorInput,
+              placeholder: styles.placeholder,
               input: [styles.inputContainer, global.bgWhiteSoft],
             }}
-            // text={`Email`}
-            icon={{
-              type: "MTI",
-              name: "email-outline",
-              color: "#404040",
-              size: 25,
-            }}
+            icon={require(`@/utils/images/email.png`)}
+
+            text={`Correo electrónico`}
             // rules={{
             //   required: "Email is required",
             //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
@@ -66,20 +63,17 @@ const Login = ({ navigation }) => {
           <CustomInput
             control={control}
             name={`password`}
-            placeholder={es.authentication.login.password.placeholder}
+            placeholder={`**********`}
             styled={{
               text: styles.textInput,
               label: [styles.labelInput, global.topGray],
               error: styles.errorInput,
+              placeholder: styles.placeholder,
               input: [styles.inputContainer, global.bgWhiteSoft],
             }}
-            // text={`Password`}
-            icon={{
-              type: "MTI",
-              name: "lock-outline",
-              color: "#404040",
-              size: 25,
-            }}
+            text={`Contraseña`}
+            icon={require(`@/utils/images/password.png`)}
+
             security={true}
             // rules={{
             //   required: "Password is required",
@@ -131,18 +125,6 @@ const Login = ({ navigation }) => {
 
           <View style={styles.social}>
             <View style={styles.iconSocial}>
-              {/* <TouchableOpacity>
-                <Image
-                  style={{
-                    width: 28,
-                    height: 28,
-                    resizeMode: "contain",
-                  }}
-                  source={require("@/utils/images/facebook.png")}
-                />
-              </TouchableOpacity> */}
-            </View>
-            <View style={styles.iconSocial}>
               <TouchableOpacity>
                 <Image
                   style={{
@@ -164,7 +146,6 @@ const Login = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
     </ScrollView>
   );
 };

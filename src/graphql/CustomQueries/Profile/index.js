@@ -228,3 +228,57 @@ export const getCustomerShop = /* GraphQL */ `
     }
   }
 `;
+export const getOrderDetail = /* GraphQL */ `
+  query GetOrderDetail($id: ID!) {
+    getOrderDetail(id: $id) {
+      id
+      purchaseUserID
+      salesUserID
+      total
+      items {
+        items {
+          id
+          orderID
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              customer {
+                userID
+                name
+              }
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+          }
+        }
+        nextToken
+      }
+      paymentID
+      payment {
+        id
+        paymentStripeID
+        metadata
+      }
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
+    }
+  }
+`;
