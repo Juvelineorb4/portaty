@@ -1,4 +1,4 @@
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import Icon from "./Icon";
@@ -11,7 +11,7 @@ const CustomInput = ({
   placeholder,
   security,
   styled = {},
-  icon = {},
+  icon,
   text,
   iconRight = {},
   placeholderTextColor = {},
@@ -40,13 +40,15 @@ const CustomInput = ({
                 errorState && { borderColor: "red", borderWidth: 1 },
             ]}
           >
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: "row" }}>
               {icon && (
-                <Icon
-                  name={icon.name}
-                  color={icon.color}
-                  size={icon.size}
-                  type={icon.type}
+                <Image
+                  style={{
+                    width: 30,
+                    height: 30,
+                    resizeMode: "contain",
+                  }}
+                  source={icon}
                 />
               )}
               <TextInput
@@ -68,12 +70,23 @@ const CustomInput = ({
                   <TouchableOpacity
                     onPress={() => setSecurityChange(!securityChange)}
                   >
-                    <Icon
-                      name={securityChange ? "eye-off-outline" : "eye-outline"}
-                      color={icon.color}
-                      size={icon.size}
-                      type={icon.type}
-                    />
+                    {
+                      securityChange ? <Image
+                      style={{
+                        width: 30,
+                        height: 30,
+                        resizeMode: "contain",
+                      }}
+                      source={require("@/utils/images/eye_yes.png")}
+                    /> : <Image
+                    style={{
+                      width: 30,
+                      height: 30,
+                      resizeMode: "contain",
+                    }}
+                    source={require("@/utils/images/eye_no.png")}
+                  />
+                    }
                   </TouchableOpacity>
                 )
               : iconRight && (
