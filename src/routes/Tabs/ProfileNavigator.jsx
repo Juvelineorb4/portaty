@@ -8,6 +8,13 @@ import { useRoute } from "@react-navigation/native";
 import Header from "./HeaderTabs/index";
 import Result from "@/screens/Search/Result";
 import PostNavigator from "./PostNavigator";
+import LeftHeader from "./HeaderTabs/LeftHeader";
+import ListProducts from "@/screens/Profile/ListProducts";
+import ListOrders from "@/screens/Profile/ListOrders";
+import CustomPageListProduct from "@/components/CustomPageListProduct";
+import OrderPreview from "@/components/OrderPreview";
+import Notifications from "@/screens/Notifications/Notifications";
+import OrderPreviewList from "@/components/OrderPreviewList";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -43,6 +50,7 @@ const ProfileNavigator = () => {
         component={Permissions}
         options={{
           animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
       <Stack.Screen
@@ -58,7 +66,39 @@ const ProfileNavigator = () => {
         component={PostNavigator}
         options={{
           animation: "slide_from_right",
-          headerShown: false
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ListProducts"
+        component={ListProducts}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ListOrders"
+        component={ListOrders}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="EditListProduct"
+        component={CustomPageListProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="ViewOrderList"
+        component={OrderPreviewList}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
     </Stack.Navigator>

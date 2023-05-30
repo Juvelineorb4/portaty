@@ -16,18 +16,11 @@
         "portaty": {},
         "userPoolGroups": {}
       },
-      "api": {
-        "portaty": {}
-      },
-      "storage": {
-        "s3portaty": {}
-      },
       "function": {
         "Prueba": {
           "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
           "s3Key": "amplify-builds/Prueba-2b6e344f587a554f7065-build.zip"
         },
-        "lambdaquery": {},
         "portaty11dae80f": {
           "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
           "s3Key": "amplify-builds/portaty11dae80f-6c363843576b655a6767-build.zip"
@@ -36,6 +29,12 @@
           "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
           "s3Key": "amplify-builds/portatyPrueba-51347079586341665976-build.zip"
         }
+      },
+      "storage": {
+        "s3portaty": {}
+      },
+      "api": {
+        "portaty": {}
       }
     }
   }

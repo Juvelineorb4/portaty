@@ -26,22 +26,22 @@ import CustomCategory from "@/components/CustomCategory";
 import CustomProductCard from "@/components/CustomProductCard";
 import { productsHome } from "@/utils/constants/products";
 import CustomFloatButton from "@/components/CustomFloatButton";
+import { es } from "@/utils/constants/lenguage";
+import { API, Storage } from "aws-amplify";
+import * as queries from "@/graphql/queries";
+import * as customHome from "@/graphql/CustomQueries/Home";
+import * as mutations from "@/graphql/mutations";
 
 const Home = ({ data, navigation }) => {
   // console.log(data[0]);
   const global = require("@/utils/styles/global.js");
   const [settings, setSettings] = useState(false);
+  const [listCategories, setListCategories] = useState([]);
+  const [listBrands, setListBrands] = useState([]);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [status, requestPermission] = Camera.useCameraPermissions();
 
-  // const [permissionStatus, setPermissionStatus] =
-  //   useRecoilState(permissionsStatus);
-
-  /* Globals */
-  // const [notificationsPermission, setNotificationsPermission] = useRecoilState(
-  //   notificationPermissions
-  // );
   const [locationPermission, setLocationPermission] =
     useRecoilState(locationPermissions);
   const [contactPermission, setContactPermission] =
@@ -63,6 +63,28 @@ const Home = ({ data, navigation }) => {
       setCameraPermission(null);
     }
   };
+
+  const fetchData = async () => {
+    try {
+      const categories = await API.graphql({
+        query: customHome.listADCategories,
+        authMode: "AWS_IAM",
+      });
+      const brands = await API.graphql({
+        query: customHome.listADBrands,
+        authMode: "AWS_IAM",
+      });
+      const products = await API.graphql({
+        query: customHome.listCustomerProductStatus,
+        authMode: "AWS_IAM",
+      });
+      setListCategories(categories.data.listADCategories.items);
+      setListBrands(brands.data.listADBrands.items);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       const contacts = await Contacts.requestPermissionsAsync();
@@ -84,7 +106,7 @@ const Home = ({ data, navigation }) => {
         let position = await Location.getCurrentPositionAsync({});
         setLocation(position);
         /* Location */
-        let text = "Waiting..";
+        let text = "Cargando..";
         if (errorMsg) {
           text = errorMsg;
         } else if (location) {
@@ -104,24 +126,25 @@ const Home = ({ data, navigation }) => {
         // checkPermissions()
       }
     })();
+    fetchData();
   }, []);
 
   if (settings) Linking.openSettings();
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      nestedScrollEnabled
+      // nestedScrollEnabled
       style={[styles.container, global.bgWhite]}
     >
       <View style={styles.categoriesOne}>
-        {data.map((item, index) => (
+        {listCategories.map((category, index) => (
           <CustomCategory
-            title={item.title}
-            icon={item.icon}
+            title={category.name}
+            icon={category.image}
             key={index}
             onPress={() =>
-              navigation.navigate(item.title, {
-                data: item,
+              navigation.navigate("Home_Search", {
+                data: category.products.items,
               })
             }
           />
@@ -129,89 +152,58 @@ const Home = ({ data, navigation }) => {
       </View>
       <View style={styles.trendingPopular}>
         <View style={styles.textTrendingPopular}>
-          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>Trending Phones</Text>
-          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
+          <Text
+            style={[styles.textMain, global.black, { letterSpacing: -0.5 }]}
+          >
+            {es.home.trending.product}
+          </Text>
+          <Text style={[styles.textAll, global.black, { letterSpacing: -0.5 }]}>
+            {es.home.trending.all}
+          </Text>
         </View>
         <View style={styles.productsTrendingPopular}>
-          <View style={styles.productsTopTrendingPopular}>
-            <CustomProductCard product={productsHome[0]} />
-            <CustomProductCard product={productsHome[1]} />
-          </View>
-          <View style={styles.productsBotTrendingPopular}>
-            <CustomProductCard product={productsHome[2]} />
-            <CustomProductCard product={productsHome[3]} />
-          </View>
+          {listCategories[0] &&
+            listCategories[0].products.items.map((item, index) => (
+              <CustomProductCard product={item} key={index} />
+            ))}
         </View>
       </View>
       <ScrollView horizontal style={{ flex: 1 }}>
         <View style={styles.categoriesBrand}>
-          {data.map((item, index) => (
-            <View style={styles.sectionBrand} key={index}>
-              {item.brands.map((brand, index) => (
-                <View style={styles.bubbleBrand} key={index}>
-                  <CustomCategory
-                    title={brand.title}
-                    icon={brand.icon}
-                    onPress={() => navigation.navigate(brand.title)}
-                  />
-                </View>
-              ))}
-            </View>
-          ))}
+          <View style={styles.sectionBrand}>
+            {listBrands.map((brand, index) => (
+              <View style={styles.bubbleBrand} key={index}>
+                <CustomCategory
+                  title={brand.name}
+                  icon={brand.image}
+                  onPress={() =>
+                    navigation.navigate("Home_Search", {
+                      data: brand.products.items,
+                    })
+                  }
+                />
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
       <View style={styles.trendingBrand}>
         <View style={styles.textTrendingBrand}>
-          <Text style={[styles.textMain, global.black, {letterSpacing: -0.5}]}>
-            Trending Apple Products
+          <Text
+            style={[styles.textMain, global.black, { letterSpacing: -0.5 }]}
+          >
+            {es.home.trending.brand}
           </Text>
-          <Text style={[styles.textAll, global.black, {letterSpacing: -0.5}]}>All</Text>
+          <Text style={[styles.textAll, global.black, { letterSpacing: -0.5 }]}>
+            {es.home.trending.all}
+          </Text>
         </View>
         <View style={styles.productsTrendingPopular}>
-          <View style={styles.productsTopTrendingPopular}>
-            <CustomProductCard product={productsHome[0]} />
-            <CustomProductCard product={productsHome[1]} />
-          </View>
-          <View style={styles.productsBotTrendingPopular}>
-            <CustomProductCard product={productsHome[2]} />
-            <CustomProductCard product={productsHome[3]} />
-          </View>
+          {listBrands[1] &&
+            listBrands[1].products.items.map((item, index) => (
+              <CustomProductCard product={item} key={index} />
+            ))}
         </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 20,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => setSettings(true)}
-          style={{
-            backgroundColor: "blue",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Open Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login_Welcome")}
-          style={{
-            backgroundColor: "orange",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Salir</Text>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

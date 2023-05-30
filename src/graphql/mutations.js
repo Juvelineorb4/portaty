@@ -20,14 +20,59 @@ export const createADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -42,6 +87,7 @@ export const createADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -49,6 +95,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -56,6 +103,7 @@ export const createADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -63,6 +111,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -72,6 +121,7 @@ export const createADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -86,14 +136,59 @@ export const updateADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -108,6 +203,7 @@ export const updateADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -115,6 +211,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -122,6 +219,7 @@ export const updateADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -129,6 +227,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -138,6 +237,7 @@ export const updateADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -152,14 +252,59 @@ export const deleteADCategory = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -174,6 +319,7 @@ export const deleteADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -181,6 +327,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -188,6 +335,7 @@ export const deleteADCategory = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -195,6 +343,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -204,6 +353,7 @@ export const deleteADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -218,14 +368,59 @@ export const createADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -240,6 +435,7 @@ export const createADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -247,6 +443,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -254,6 +451,7 @@ export const createADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -261,6 +459,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -270,6 +469,7 @@ export const createADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -284,14 +484,59 @@ export const updateADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -306,6 +551,7 @@ export const updateADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -313,6 +559,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -320,6 +567,7 @@ export const updateADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -327,6 +575,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -336,6 +585,7 @@ export const updateADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -350,14 +600,59 @@ export const deleteADBrand = /* GraphQL */ `
       id
       name
       image
+      path
       products {
         items {
           id
           name
           images
+          paths
+          description
           suggestedPrice
           categoryID
           brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -372,6 +667,7 @@ export const deleteADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -379,6 +675,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -386,6 +683,7 @@ export const deleteADBrand = /* GraphQL */ `
             id
             name
             image
+            path
             products {
               nextToken
             }
@@ -393,6 +691,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
+            
             createdAt
             updatedAt
           }
@@ -402,6 +701,7 @@ export const deleteADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
+      
       createdAt
       updatedAt
     }
@@ -416,9 +716,151 @@ export const createADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      
+      customerProduct {
+        items {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -433,9 +875,151 @@ export const updateADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      
+      customerProduct {
+        items {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -450,9 +1034,150 @@ export const deleteADProduct = /* GraphQL */ `
       id
       name
       images
+      paths
+      description
       suggestedPrice
       categoryID
       brandID
+      phone {
+        colors
+        storage
+        width
+        height
+        depth
+        weight
+        display {
+          resolution
+          screenSize
+          ppi
+        }
+        camera {
+          primary
+          secondary
+          resolution
+        }
+        battery {
+          capacity
+          duration
+          usb
+        }
+      }
+      
+      customerProduct {
+        items {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -513,10 +1238,149 @@ export const createCustomerShop = /* GraphQL */ `
       name
       email
       description
+      favorites {
+        items {
+          id
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customerShopID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      salesOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      purchaseOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -530,6 +1394,30 @@ export const createCustomerShop = /* GraphQL */ `
             abreviation
           }
           productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           productFields {
             name
             images
@@ -558,6 +1446,9 @@ export const createCustomerShop = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -575,6 +1466,20 @@ export const createCustomerShop = /* GraphQL */ `
           createdAt
           updatedAt
           customerProductStatusId
+        }
+        nextToken
+      }
+      shippingAddress {
+        items {
+          id
+          customerID
+          country
+          postal
+          city
+          address
+          owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
@@ -594,10 +1499,149 @@ export const updateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      favorites {
+        items {
+          id
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customerShopID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      salesOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      purchaseOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -611,6 +1655,30 @@ export const updateCustomerShop = /* GraphQL */ `
             abreviation
           }
           productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           productFields {
             name
             images
@@ -639,6 +1707,9 @@ export const updateCustomerShop = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -656,6 +1727,20 @@ export const updateCustomerShop = /* GraphQL */ `
           createdAt
           updatedAt
           customerProductStatusId
+        }
+        nextToken
+      }
+      shippingAddress {
+        items {
+          id
+          customerID
+          country
+          postal
+          city
+          address
+          owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
@@ -675,10 +1760,149 @@ export const deleteCustomerShop = /* GraphQL */ `
       name
       email
       description
+      favorites {
+        items {
+          id
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customerShopID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      salesOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      purchaseOrders {
+        items {
+          id
+          purchaseUserID
+          salesUserID
+          total
+          items {
+            items {
+              id
+              orderID
+              itemID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          paymentID
+          payment {
+            id
+            paymentStripeID
+            metadata
+            createdAt
+            updatedAt
+            owner
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       products {
         items {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -692,6 +1916,30 @@ export const deleteCustomerShop = /* GraphQL */ `
             abreviation
           }
           productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           productFields {
             name
             images
@@ -720,6 +1968,9 @@ export const deleteCustomerShop = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -740,6 +1991,542 @@ export const deleteCustomerShop = /* GraphQL */ `
         }
         nextToken
       }
+      shippingAddress {
+        items {
+          id
+          customerID
+          country
+          postal
+          city
+          address
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCustomerShippingAddress = /* GraphQL */ `
+  mutation CreateCustomerShippingAddress(
+    $input: CreateCustomerShippingAddressInput!
+    $condition: ModelCustomerShippingAddressConditionInput
+  ) {
+    createCustomerShippingAddress(input: $input, condition: $condition) {
+      id
+      customerID
+      country
+      postal
+      title
+      city
+      address
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCustomerShippingAddress = /* GraphQL */ `
+  mutation UpdateCustomerShippingAddress(
+    $input: UpdateCustomerShippingAddressInput!
+    $condition: ModelCustomerShippingAddressConditionInput
+  ) {
+    updateCustomerShippingAddress(input: $input, condition: $condition) {
+      id
+      customerID
+      country
+      postal
+      title
+      city
+      address
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCustomerShippingAddress = /* GraphQL */ `
+  mutation DeleteCustomerShippingAddress(
+    $input: DeleteCustomerShippingAddressInput!
+    $condition: ModelCustomerShippingAddressConditionInput
+  ) {
+    deleteCustomerShippingAddress(input: $input, condition: $condition) {
+      id
+      customerID
+      country
+      postal
+      title
+      city
+      address
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFavoriteItem = /* GraphQL */ `
+  mutation CreateFavoriteItem(
+    $input: CreateFavoriteItemInput!
+    $condition: ModelFavoriteItemConditionInput
+  ) {
+    createFavoriteItem(input: $input, condition: $condition) {
+      id
+      itemID
+      item {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      customerShopID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFavoriteItem = /* GraphQL */ `
+  mutation UpdateFavoriteItem(
+    $input: UpdateFavoriteItemInput!
+    $condition: ModelFavoriteItemConditionInput
+  ) {
+    updateFavoriteItem(input: $input, condition: $condition) {
+      id
+      itemID
+      item {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      customerShopID
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFavoriteItem = /* GraphQL */ `
+  mutation DeleteFavoriteItem(
+    $input: DeleteFavoriteItemInput!
+    $condition: ModelFavoriteItemConditionInput
+  ) {
+    deleteFavoriteItem(input: $input, condition: $condition) {
+      id
+      itemID
+      item {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      customerShopID
       owner
       createdAt
       updatedAt
@@ -754,6 +2541,169 @@ export const createCustomerProduct = /* GraphQL */ `
     createCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
+      customer {
+        userID
+        name
+        email
+        description
+        favorites {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        salesOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        purchaseOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        products {
+          items {
+            id
+            customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
+            productID
+            productFields {
+              name
+              images
+            }
+            code
+            price
+            condition
+            description
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          nextToken
+        }
+        shippingAddress {
+          items {
+            id
+            customerID
+            country
+            postal
+            city
+            address
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        owner
+        createdAt
+        updatedAt
+      }
       categoryID
       categoryFields {
         name
@@ -781,6 +2731,30 @@ export const createCustomerProduct = /* GraphQL */ `
         product {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -822,6 +2796,9 @@ export const createCustomerProduct = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -842,6 +2819,25 @@ export const createCustomerProduct = /* GraphQL */ `
         }
         status
         owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -870,6 +2866,169 @@ export const updateCustomerProduct = /* GraphQL */ `
     updateCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
+      customer {
+        userID
+        name
+        email
+        description
+        favorites {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        salesOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        purchaseOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        products {
+          items {
+            id
+            customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
+            productID
+            productFields {
+              name
+              images
+            }
+            code
+            price
+            condition
+            description
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          nextToken
+        }
+        shippingAddress {
+          items {
+            id
+            customerID
+            country
+            postal
+            city
+            address
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        owner
+        createdAt
+        updatedAt
+      }
       categoryID
       categoryFields {
         name
@@ -897,6 +3056,30 @@ export const updateCustomerProduct = /* GraphQL */ `
         product {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -938,6 +3121,9 @@ export const updateCustomerProduct = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -958,6 +3144,25 @@ export const updateCustomerProduct = /* GraphQL */ `
         }
         status
         owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -986,6 +3191,182 @@ export const deleteCustomerProduct = /* GraphQL */ `
     deleteCustomerProduct(input: $input, condition: $condition) {
       id
       customerID
+      customer {
+        userID
+        name
+        email
+        description
+        favorites {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        salesOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        purchaseOrders {
+          items {
+            id
+            purchaseUserID
+            salesUserID
+            total
+            items {
+              nextToken
+            }
+            paymentID
+            payment {
+              id
+              paymentStripeID
+              metadata
+              createdAt
+              updatedAt
+              owner
+            }
+            shippingAddress {
+              country
+              postal
+              city
+              address
+              phoneNumber
+            }
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        products {
+          items {
+            id
+            customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
+            productID
+            adproduct {
+              id
+              name
+              images
+              paths
+              description
+              suggestedPrice
+              categoryID
+              brandID
+              
+              createdAt
+              updatedAt
+            }
+            productFields {
+              name
+              images
+            }
+            code
+            price
+            condition
+            description
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          nextToken
+        }
+        shippingAddress {
+          items {
+            id
+            customerID
+            country
+            postal
+            city
+            address
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        owner
+        createdAt
+        updatedAt
+      }
       categoryID
       categoryFields {
         name
@@ -999,6 +3380,114 @@ export const deleteCustomerProduct = /* GraphQL */ `
         abreviation
       }
       productID
+      adproduct {
+        id
+        name
+        images
+        paths
+        description
+        suggestedPrice
+        categoryID
+        brandID
+        phone {
+          colors
+          storage
+          width
+          height
+          depth
+          weight
+          display {
+            resolution
+            screenSize
+            ppi
+          }
+          camera {
+            primary
+            secondary
+            resolution
+          }
+          battery {
+            capacity
+            duration
+            usb
+          }
+        }
+        
+        customerProduct {
+          items {
+            id
+            customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
+            categoryID
+            categoryFields {
+              name
+              image
+              abreviation
+            }
+            brandID
+            brandFields {
+              name
+              image
+              abreviation
+            }
+            productID
+            adproduct {
+              id
+              name
+              images
+              paths
+              description
+              suggestedPrice
+              categoryID
+              brandID
+              
+              createdAt
+              updatedAt
+            }
+            productFields {
+              name
+              images
+            }
+            code
+            price
+            condition
+            description
+            status {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            phoneFields {
+              carrier
+              imei
+              model
+              storage
+              batery
+            }
+            laptoFields {
+              serial
+            }
+            owner
+            createdAt
+            updatedAt
+            customerProductStatusId
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       productFields {
         name
         images
@@ -1013,6 +3502,30 @@ export const deleteCustomerProduct = /* GraphQL */ `
         product {
           id
           customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
           categoryID
           categoryFields {
             name
@@ -1026,6 +3539,30 @@ export const deleteCustomerProduct = /* GraphQL */ `
             abreviation
           }
           productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           productFields {
             name
             images
@@ -1054,6 +3591,9 @@ export const deleteCustomerProduct = /* GraphQL */ `
             }
             status
             owner
+            favoriteItems {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1074,6 +3614,25 @@ export const deleteCustomerProduct = /* GraphQL */ `
         }
         status
         owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1105,6 +3664,84 @@ export const createCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
+        customer {
+          userID
+          name
+          email
+          description
+          favorites {
+            items {
+              id
+              itemID
+              customerShopID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          salesOrders {
+            items {
+              id
+              purchaseUserID
+              salesUserID
+              total
+              paymentID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          purchaseOrders {
+            items {
+              id
+              purchaseUserID
+              salesUserID
+              total
+              paymentID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          products {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          shippingAddress {
+            items {
+              id
+              customerID
+              country
+              postal
+              city
+              address
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          owner
+          createdAt
+          updatedAt
+        }
         categoryID
         categoryFields {
           name
@@ -1132,6 +3769,15 @@ export const createCustomerProductStatus = /* GraphQL */ `
           product {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -1145,6 +3791,19 @@ export const createCustomerProductStatus = /* GraphQL */ `
               abreviation
             }
             productID
+            adproduct {
+              id
+              name
+              images
+              paths
+              description
+              suggestedPrice
+              categoryID
+              brandID
+              
+              createdAt
+              updatedAt
+            }
             productFields {
               name
               images
@@ -1178,6 +3837,17 @@ export const createCustomerProductStatus = /* GraphQL */ `
           }
           status
           owner
+          favoriteItems {
+            items {
+              id
+              itemID
+              customerShopID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1198,6 +3868,43 @@ export const createCustomerProductStatus = /* GraphQL */ `
       }
       status
       owner
+      favoriteItems {
+        items {
+          id
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customerShopID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -1210,105 +3917,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
   ) {
     updateCustomerProductStatus(input: $input, condition: $condition) {
       id
-      productID
-      product {
-        id
-        customerID
-        categoryID
-        categoryFields {
-          name
-          image
-          abreviation
-        }
-        brandID
-        brandFields {
-          name
-          image
-          abreviation
-        }
-        productID
-        productFields {
-          name
-          images
-        }
-        code
-        price
-        condition
-        description
-        status {
-          id
-          productID
-          product {
-            id
-            customerID
-            categoryID
-            categoryFields {
-              name
-              image
-              abreviation
-            }
-            brandID
-            brandFields {
-              name
-              image
-              abreviation
-            }
-            productID
-            productFields {
-              name
-              images
-            }
-            code
-            price
-            condition
-            description
-            status {
-              id
-              productID
-              status
-              owner
-              createdAt
-              updatedAt
-            }
-            phoneFields {
-              carrier
-              imei
-              model
-              storage
-              batery
-            }
-            laptoFields {
-              serial
-            }
-            owner
-            createdAt
-            updatedAt
-            customerProductStatusId
-          }
-          status
-          owner
-          createdAt
-          updatedAt
-        }
-        phoneFields {
-          carrier
-          imei
-          model
-          storage
-          batery
-        }
-        laptoFields {
-          serial
-        }
-        owner
-        createdAt
-        updatedAt
-        customerProductStatusId
-      }
-      status
-      owner
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1323,6 +3931,84 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
       product {
         id
         customerID
+        customer {
+          userID
+          name
+          email
+          description
+          favorites {
+            items {
+              id
+              itemID
+              customerShopID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          salesOrders {
+            items {
+              id
+              purchaseUserID
+              salesUserID
+              total
+              paymentID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          purchaseOrders {
+            items {
+              id
+              purchaseUserID
+              salesUserID
+              total
+              paymentID
+              createdAt
+              updatedAt
+              owner
+            }
+            nextToken
+          }
+          products {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          shippingAddress {
+            items {
+              id
+              customerID
+              country
+              postal
+              city
+              address
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          owner
+          createdAt
+          updatedAt
+        }
         categoryID
         categoryFields {
           name
@@ -1336,6 +4022,60 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
           abreviation
         }
         productID
+        adproduct {
+          id
+          name
+          images
+          paths
+          description
+          suggestedPrice
+          categoryID
+          brandID
+          phone {
+            colors
+            storage
+            width
+            height
+            depth
+            weight
+            display {
+              resolution
+              screenSize
+              ppi
+            }
+            camera {
+              primary
+              secondary
+              resolution
+            }
+            battery {
+              capacity
+              duration
+              usb
+            }
+          }
+          
+          customerProduct {
+            items {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         productFields {
           name
           images
@@ -1350,6 +4090,15 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
           product {
             id
             customerID
+            customer {
+              userID
+              name
+              email
+              description
+              owner
+              createdAt
+              updatedAt
+            }
             categoryID
             categoryFields {
               name
@@ -1363,6 +4112,19 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               abreviation
             }
             productID
+            adproduct {
+              id
+              name
+              images
+              paths
+              description
+              suggestedPrice
+              categoryID
+              brandID
+              
+              createdAt
+              updatedAt
+            }
             productFields {
               name
               images
@@ -1396,6 +4158,17 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
           }
           status
           owner
+          favoriteItems {
+            items {
+              id
+              itemID
+              customerShopID
+              owner
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -1416,8 +4189,619 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
       }
       status
       owner
+      favoriteItems {
+        items {
+          id
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          customerShopID
+          owner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createOrderDetail = /* GraphQL */ `
+  mutation CreateOrderDetail(
+    $input: CreateOrderDetailInput!
+    $condition: ModelOrderDetailConditionInput
+  ) {
+    createOrderDetail(input: $input, condition: $condition) {
+      id
+      purchaseUserID
+      salesUserID
+      total
+      items {
+        items {
+          id
+          orderID
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      paymentID
+      payment {
+        id
+        paymentStripeID
+        metadata
+        createdAt
+        updatedAt
+        owner
+      }
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateOrderDetail = /* GraphQL */ `
+  mutation UpdateOrderDetail(
+    $input: UpdateOrderDetailInput!
+    $condition: ModelOrderDetailConditionInput
+  ) {
+    updateOrderDetail(input: $input, condition: $condition) {
+      id
+      purchaseUserID
+      salesUserID
+      total
+      items {
+        items {
+          id
+          orderID
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      paymentID
+      payment {
+        id
+        paymentStripeID
+        metadata
+        createdAt
+        updatedAt
+        owner
+      }
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteOrderDetail = /* GraphQL */ `
+  mutation DeleteOrderDetail(
+    $input: DeleteOrderDetailInput!
+    $condition: ModelOrderDetailConditionInput
+  ) {
+    deleteOrderDetail(input: $input, condition: $condition) {
+      id
+      purchaseUserID
+      salesUserID
+      total
+      items {
+        items {
+          id
+          orderID
+          itemID
+          item {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      paymentID
+      payment {
+        id
+        paymentStripeID
+        metadata
+        createdAt
+        updatedAt
+        owner
+      }
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createOrderItem = /* GraphQL */ `
+  mutation CreateOrderItem(
+    $input: CreateOrderItemInput!
+    $condition: ModelOrderItemConditionInput
+  ) {
+    createOrderItem(input: $input, condition: $condition) {
+      id
+      orderID
+      itemID
+    }
+  }
+`;
+export const updateOrderItem = /* GraphQL */ `
+  mutation UpdateOrderItem(
+    $input: UpdateOrderItemInput!
+    $condition: ModelOrderItemConditionInput
+  ) {
+    updateOrderItem(input: $input, condition: $condition) {
+      id
+      orderID
+      itemID
+      item {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteOrderItem = /* GraphQL */ `
+  mutation DeleteOrderItem(
+    $input: DeleteOrderItemInput!
+    $condition: ModelOrderItemConditionInput
+  ) {
+    deleteOrderItem(input: $input, condition: $condition) {
+      id
+      orderID
+      itemID
+      item {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            shippingAddress {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          adproduct {
+            id
+            name
+            images
+            paths
+            description
+            suggestedPrice
+            categoryID
+            brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        owner
+        favoriteItems {
+          items {
+            id
+            itemID
+            item {
+              id
+              productID
+              status
+              owner
+              createdAt
+              updatedAt
+            }
+            customerShopID
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createPaymentStripe = /* GraphQL */ `
+  mutation CreatePaymentStripe(
+    $input: CreatePaymentStripeInput!
+    $condition: ModelPaymentStripeConditionInput
+  ) {
+    createPaymentStripe(input: $input, condition: $condition) {
+      id
+      paymentStripeID
+      metadata
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePaymentStripe = /* GraphQL */ `
+  mutation UpdatePaymentStripe(
+    $input: UpdatePaymentStripeInput!
+    $condition: ModelPaymentStripeConditionInput
+  ) {
+    updatePaymentStripe(input: $input, condition: $condition) {
+      id
+      paymentStripeID
+      metadata
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePaymentStripe = /* GraphQL */ `
+  mutation DeletePaymentStripe(
+    $input: DeletePaymentStripeInput!
+    $condition: ModelPaymentStripeConditionInput
+  ) {
+    deletePaymentStripe(input: $input, condition: $condition) {
+      id
+      paymentStripeID
+      metadata
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -1434,14 +4818,29 @@ export const createCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1456,7 +4855,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1464,7 +4865,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1474,6 +4877,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }
@@ -1481,14 +4885,29 @@ export const createCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1503,7 +4922,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1511,7 +4932,9 @@ export const createCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1521,6 +4944,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }
@@ -1542,14 +4966,29 @@ export const updateCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1564,7 +5003,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1572,7 +5013,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1582,6 +5025,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }
@@ -1589,14 +5033,29 @@ export const updateCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1611,7 +5070,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1619,7 +5080,9 @@ export const updateCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1629,6 +5092,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }
@@ -1650,14 +5114,29 @@ export const deleteCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1672,7 +5151,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1680,7 +5161,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1690,6 +5173,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }
@@ -1697,14 +5181,29 @@ export const deleteCategoryBrands = /* GraphQL */ `
         id
         name
         image
+        path
         products {
           items {
             id
             name
             images
+            paths
+            description
             suggestedPrice
             categoryID
             brandID
+            phone {
+              colors
+              storage
+              width
+              height
+              depth
+              weight
+            }
+            
+            customerProduct {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -1719,7 +5218,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1727,7 +5228,9 @@ export const deleteCategoryBrands = /* GraphQL */ `
               id
               name
               image
+              path
               abreviation
+              
               createdAt
               updatedAt
             }
@@ -1737,6 +5240,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
+        
         createdAt
         updatedAt
       }

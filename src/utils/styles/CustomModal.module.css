@@ -11,8 +11,8 @@
 }
 .modalText {
   /* font-weight: 600; */
-  font-family: 'regular';
-  font-size: 16px;
+  font-family: "regular";
+  font-size: 14px;
   margin-left: 5px;
 }
 .modalContent {
@@ -23,9 +23,9 @@
   height: 400px;
 }
 .modalTextSelect {
-  font-family: 'regular';
+  font-family: "light";
   /* font-weight: 500; */
-  font-size: 16px;
+  font-size: 14px;
   color: #8c9199;
   text-transform: capitalize;
 }
@@ -50,7 +50,7 @@
 .labelInput {
   /* font-style: normal; */
   /* font-weight: 700; */
-  font-family: 'medium';
+  font-family: "regular";
   font-size: 14px;
   color: #404040;
 }
@@ -62,11 +62,12 @@
   text-transform: capitalize;
 }
 .inputContainerBoth {
-  flex: 1;
+  /* flex: 1; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fafafa;
+  border: none;
   width: 90%;
   padding: 15px 10px 15px 5px;
   border-radius: 16px;
@@ -74,9 +75,7 @@
 }
 
 .labelInputBoth {
-  /* font-style: normal; */
-  /* font-weight: 700; */
-  font-family: 'medium';
+  font-family: "regular";
   font-size: 14px;
   color: #404040;
   text-transform: capitalize;
@@ -88,5 +87,68 @@
   flex-direction: row;
   align-items: center;
   color: #8c9199cb;
+  text-transform: capitalize;
+}
+
+/* Error */
+.inputContainerBothError {
+  /* flex: 1; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  border: 1px solid red;
+  width: 90%;
+  padding: 14px 10px 14px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.inputContainerError {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid red;
+  background-color: #fafafa;
+  padding: 14px 10px 14px 5px;
+  border-radius: 16px;
+  margin: 3px 0px 10px;
+}
+.errorBoth {
+  font-family: "medium";
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  bottom: -16;
+  right: 0;
+  /* left: ; */
+  text-transform: capitalize;
+}
+.errorProduct {
+  font-family: "medium";
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  bottom: -16;
+  right: 0;
+  text-transform: capitalize;
+}
+.errorCategory {
+  font-family: "medium";
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  bottom: -16;
+  right: 0;
+  /* left: ; */
+  text-transform: capitalize;
+}
+.errorBrand {
+  font-family: "medium";
+  font-size: 10px;
+  color: red;
+  position: absolute;
+  bottom: -5;
+  right: 20;
+  /* left: ; */
   text-transform: capitalize;
 }

@@ -10,15 +10,11 @@ import React from "react";
 import CustomProductCard from "./CustomProductCard";
 
 const CustomSearch = ({ route }) => {
-  const products = [];
   const { data } = route.params
-  data.brands.map((brand) =>
-    brand.products.map((product) => products.push(product))
-  );
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={products}
+        data={data}
         renderItem={({ item }) => <CustomProductCard product={item} />}
         numColumns={2}
         keyExtractor={(item, index) => index}
@@ -34,7 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "white",
-    padding: 20
+    padding: 20,
+    marginBottom: 40
   },
 });
 

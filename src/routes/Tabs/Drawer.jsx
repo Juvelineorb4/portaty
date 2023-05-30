@@ -4,10 +4,9 @@ import {
   createDrawerNavigator,
   useDrawerProgress,
 } from "@react-navigation/drawer";
-import TabsNavigator from './Tabs';
 import SearchNavigator from './SearchNavigator'
 import Constants from "expo-constants";
-
+import Tabs from './Tabs'
 const Drawer = createDrawerNavigator();
 // Documentation: https://reactnavigation.org/docs/drawer-navigator
 
@@ -42,7 +41,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen
        
         name="Tabs"
-        component={TabsNavigator}
+        component={Tabs}
         options={{
           title: "None",
           drawerItemStyle: {
