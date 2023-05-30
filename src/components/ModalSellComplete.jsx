@@ -32,7 +32,6 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
   
   const onHandleBuy = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
-    console.log(attributes);
     // 1. Create a payment intent
     const response = await onCreatePaymentIntent({
       amount: Math.floor(item.product.price * 100),
@@ -46,7 +45,6 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       Alert.alert("Ocurrio un Error");
       return;
     }
-    console.log(response);
     const { amount, paymentID, secret } = response;
     // 2. Initialize the Payment sheet
     const initResponse = await initPaymentSheet({
@@ -67,6 +65,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       );
       return;
     }
+
     // 4. If payment ok -> create the order
     onCreateOrder({ amount, paymentID, attributes });
   };
@@ -112,10 +111,8 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log(orderItem)
-    
-    setModalVisible(!modalVisible)
     setDetail(orderDetail.data.createOrderDetail.id)
+    setModalVisible(!modalVisible)
   };
 
   return (

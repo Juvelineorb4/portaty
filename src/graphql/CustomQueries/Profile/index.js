@@ -282,3 +282,12 @@ export const getOrderDetail = /* GraphQL */ `
     }
   }
 `;
+
+export const getADProductPrueba = /* GraphQL */ `
+  query GetADProduct($id: ID!) {
+    getADProduct(id: $id) {
+      id
+      name
+    }
+  }
+`;

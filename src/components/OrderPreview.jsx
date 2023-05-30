@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import CustomCardOrder from "./CustomCardOrder";
 import styles from "@/utils/styles/OrderPreview.module.css";
@@ -16,28 +16,16 @@ const OrderPreview = ({ route }) => {
   const [orderProduct, setOrderProduct] = useState("")
   const [customerShop, setCustomerShop] = useState('')
   const fetchOrder = async () => {
-    if (!order) Alert.alert("Order ID no admitida")
-    try {
 
-      const { data: { getOrderDetail } } = await API.graphql({
+      const orderDetail = await API.graphql({
         query: customHome.getOrderDetailPreview,
         authMode: "AMAZON_COGNITO_USER_POOLS",
         variables: {
           id: order
         }
       })
-      // producto comprado 
-      let purchasedProduct = getOrderDetail.items.items[0].item.product
-      console.log("PURCHASEDPRODUCT: ", purchasedProduct)
-      setOrderProduct({
-        name: purchasedProduct.adproduct.name,
-        price: purchasedProduct.price
-      })
-      setOrderPreview(getOrderDetail)
-    } catch (error) {
-      console.error("ERROR: ", error);
+      setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
     }
-  }
   useEffect(() => {
     fetchOrder()
   }, [])
@@ -45,7 +33,7 @@ const OrderPreview = ({ route }) => {
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={orderProduct} image={images[0]} />
+      <CustomCardOrder item={orderProduct} image={images[0]} customer={orderProduct.customer.name} />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
@@ -205,7 +193,7 @@ const OrderPreview = ({ route }) => {
       <View style={{ marginBottom: 95 }}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
-          <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
+          <Text style={styles.numberOrder}>Precio del producto: ${orderProduct.price}.00</Text>
           <Text style={styles.numberOrder}>Impuestos: $10.00</Text>
           <Text style={styles.numberOrder}>Envio: $10.00</Text>
           <Text style={styles.numberOrder}>Comision: $10.00</Text>

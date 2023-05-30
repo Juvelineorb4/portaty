@@ -987,6 +987,9 @@ export const getOrderDetailPreview = /* GraphQL */ `
               id 
               price
               code
+              customer {
+                name
+              }
               # dicho producto es un customerProduct
               adproduct{ 
                 # adproduct es el campo que guarda el producto de tipo ADProducto
