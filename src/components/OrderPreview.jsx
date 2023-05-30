@@ -1,48 +1,51 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import CustomCardOrder from "./CustomCardOrder";
 import styles from "@/utils/styles/OrderPreview.module.css";
 import CustomTimeOrderCard from "./CustomTimeOrderCard";
 import { ScrollView } from "react-native-gesture-handler";
-import { Auth, API } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
-const OrderPreview = ({route}) => {
+const OrderPreview = ({ route }) => {
   const global = require("@/utils/styles/global.js");
   const { product, order, images } = route.params
+  const [orderPreview, setOrderPreview] = useState("")
+  const [orderProduct, setOrderProduct] = useState("")
   const [customerShop, setCustomerShop] = useState('')
   const fetchOrder = async () => {
+    if (!order) Alert.alert("Order ID no admitida")
+    try {
 
-    const orderDetail = await API.graphql({
-      query: queries.getOrderDetail,
-      variables: {
-        id: order,
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    const shop = await API.graphql({
-      query: queries.getCustomerShop,
-      variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    const productItem = await API.graphql({
-      query: customHome.getADProductPrueba,
-      variables: { id: shop.data.getCustomerShop.purchaseOrders.items[0].items.items[0].item.product.productID },
-      authMode: "AWS_IAM",
-    });
-    console.log(productItem)
-    // // setCustomerShop()/*  */
+      const { data: { getOrderDetail } } = await API.graphql({
+        query: customHome.getOrderDetailPreview,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        variables: {
+          id: order
+        }
+      })
+      // producto comprado 
+      let purchasedProduct = getOrderDetail.items.items[0].item.product
+      console.log("PURCHASEDPRODUCT: ", purchasedProduct)
+      setOrderProduct({
+        name: purchasedProduct.adproduct.name,
+        price: purchasedProduct.price
+      })
+      setOrderPreview(getOrderDetail)
+    } catch (error) {
+      console.error("ERROR: ", error);
+    }
   }
   useEffect(() => {
     fetchOrder()
   }, [])
-  
+
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={product} image={images[0]}/>
+      <CustomCardOrder item={orderProduct} image={images[0]} />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
@@ -199,14 +202,14 @@ const OrderPreview = ({route}) => {
         </View>
       </View>
       <View style={[styles.line, global.bgWhiteSmoke]} />
-      <View style={{marginBottom: 95}}>
+      <View style={{ marginBottom: 95 }}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
-        <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
+          <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
           <Text style={styles.numberOrder}>Impuestos: $10.00</Text>
           <Text style={styles.numberOrder}>Envio: $10.00</Text>
           <Text style={styles.numberOrder}>Comision: $10.00</Text>
-      <View style={[styles.lineTotal, global.bgWhiteSmoke]} />
+          <View style={[styles.lineTotal, global.bgWhiteSmoke]} />
           <Text style={styles.numberTotal}>Total: $130.00</Text>
         </View>
       </View>

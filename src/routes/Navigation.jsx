@@ -19,6 +19,8 @@ const Navigation = () => {
 
   const checkUser = async () => {
     try {
+      const userX = await Auth.currentUserCredentials();
+      console.log(userX)
       const result = await Auth.currentAuthenticatedUser({});
       setUserAuth(result);
     } catch (error) {

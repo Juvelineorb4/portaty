@@ -29,6 +29,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
   const [detail, setDetail] = useState({});
   const global = require("@/utils/styles/global.js");
   const [onCreatePaymentIntent] = usePayment();
+  
   const onHandleBuy = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
     console.log(attributes);
@@ -101,7 +102,6 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-
     const orderItem = await API.graphql({
       query: mutations.createOrderItem,
       variables: {
@@ -112,17 +112,8 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-
-    // const statusItem = await API.graphql({
-    //   query: mutations.updateCustomerProductStatus,
-    //   variables: {
-    //     input: {
-    //       status: 'SOLD',
-    //       id: item.product.status.id,
-    //     },
-    //   },
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    // });
+    console.log(orderItem)
+    
     setModalVisible(!modalVisible)
     setDetail(orderDetail.data.createOrderDetail.id)
   };

@@ -23,8 +23,8 @@ const Checkout = ({ navigation, route }) => {
 
         <CustomAddressCard
           content={{
-            title: "Casa",
-            text: "Calle 5 #34 - Barquisimeto, Lara",
+            title: "Title",
+            text: "Description",
           }}
           handlePress={onHandlePress}
         />

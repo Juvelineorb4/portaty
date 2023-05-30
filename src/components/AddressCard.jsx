@@ -7,41 +7,17 @@ import { TextInput } from "react-native-gesture-handler";
 import CustomInput from "./CustomInput";
 import { useForm } from "react-hook-form";
 import { es } from "@/utils/constants/lenguage";
-import { useRecoilValue } from "recoil";
-// amplify
-import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
-import * as customQueries from "@/graphql/CustomQueries/ShippingAddress";
-import * as customMutations from "@/graphql/CustomMutations/ShippingAddress";
-import { userAutenticated } from "@/atoms";
 
-const AddressEdit = () => {
+const AddressCard = () => {
   const global = require("@/utils/styles/global.js");
-  const user = useRecoilValue(userAutenticated);
+  const [address, setAddress] = useState("one");
   const [modalVisible, setModalVisible] = useState(false);
   const [valueAddress, setValueAddress] = useState("");
   const { control, handleSubmit, watch } = useForm();
-  // const { address, postal, city, country } = control;
-  // console.log()
-  // const onHandleAddress = async (data) => {
-  //   const { address, postal, city, country, title } = data;
-  //   const result = await API.graphql({
-  //     query: customMutations.createCustomerShippingAddress,
-  //     variables: { 
-  //       input: {
-  //         title: title,
-  //         address: address,
-  //         postal: postal,
-  //         city: city,
-  //         country: country,
-  //       }
-  //      },
-  //     authMode: "AMAZON_COGNITO_USER_POOLS",
-  //   });
-
-  // };
   return (
     <View style={[global.bgWhite, { flex: 1, padding: 20 }]}>
       <Text style={styles.title}>{es.address.title}</Text>
+      <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ alignItems: "center" }}>
         <TouchableOpacity
@@ -96,24 +72,6 @@ const AddressEdit = () => {
                   <Text style={styles.modalText}>{es.address.modal.back}</Text>
                 </View>
                 <View style={{flex: 1}}>
-                <CustomInput
-                    control={control}
-                    name={`title`}
-                    placeholder={es.address.modal.line.placeholder}
-                    styled={{
-                      text: styles.textInputAddress,
-                      label: [styles.labelInputAddress],
-                      error: styles.errorInputAddress,
-                      input: [styles.inputContainerAddress],
-                      placeholder: styles.placeholderAddress,
-                    }}
-                    text={`Title`}
-                    // numeric={true}
-                    // errorPost={selectErrorPostProduct}e
-                    // rules={{
-                    //   required: "Required",
-                    // }}
-                  />
                   <CustomInput
                     control={control}
                     name={`address`}
@@ -203,4 +161,5 @@ const AddressEdit = () => {
   );
 };
 
-export default AddressEdit;
+export default AddressCard;
+
