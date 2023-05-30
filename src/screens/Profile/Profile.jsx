@@ -75,6 +75,7 @@ const Profile = ({ navigation }) => {
       variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    console.log("RESULT", userAuth)
     const listProducts = await API.graphql({
       query: customHome.listCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",

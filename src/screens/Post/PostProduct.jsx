@@ -16,6 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 // amplify
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+// import * as customPost from '@/graphql/CustomQueries/Post'
 import * as mutations from "@/graphql/mutations";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -89,11 +90,11 @@ const PostProduct = ({ navigation, route }) => {
 
   const onHandleSubmit = async (data) => {
     const { price, description, imei, serial } = data;
-
+    console.log(selectCustomerId)
     /* Ramdon Code */
-    const ramdonCode = `${selectItemCategory.abreviation}-${
-      selectItemBrand.aDBrand.abreviation
-    }-${Math.floor(100000 + Math.random() * 900000)}`;
+    
+    const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
+      }-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const resultCode = await API.graphql({
       query: queries.listCustomerProducts,
@@ -352,10 +353,10 @@ const PostProduct = ({ navigation, route }) => {
               //   type: "FA",
               // }}
               numeric={true}
-              // errorPost={selectErrorPostProduct}
-              // rules={{
-              //   required: "Required",
-              // }}
+            // errorPost={selectErrorPostProduct}
+            // rules={{
+            //   required: "Required",
+            // }}
             />
           </View>
         </View>
@@ -373,10 +374,10 @@ const PostProduct = ({ navigation, route }) => {
           text={es.post.product.description.title}
           area={true}
           lines={6}
-          // errorPost={selectErrorPostProduct}
-          // rules={{
-          //   required: "Required",
-          // }}
+        // errorPost={selectErrorPostProduct}
+        // rules={{
+        //   required: "Required",
+        // }}
         />
         <View style={styles.imagesPicker}>
           <View style={styles.images}>
@@ -609,10 +610,10 @@ const PostProduct = ({ navigation, route }) => {
                   }}
                   text={es.post.product.imei.title}
                   numeric={true}
-                  // errorPost={selectErrorPostProduct}e
-                  // rules={{
-                  //   required: "Required",
-                  // }}
+                // errorPost={selectErrorPostProduct}e
+                // rules={{
+                //   required: "Required",
+                // }}
                 />
               </View>
               {/* <View style={{flex: 1}}> */}

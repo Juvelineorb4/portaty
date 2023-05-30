@@ -964,8 +964,8 @@ export const getADProductPrueba = /* GraphQL */ `
     }
   }
 `;
-
-export const getOrderDetail = /* GraphQL */ `
+// obtener detalles de una orden pagada
+export const getOrderDetailPreview = /* GraphQL */ `
   query GetOrderDetail($id: ID!) {
     getOrderDetail(id: $id) {
       id
@@ -973,29 +973,30 @@ export const getOrderDetail = /* GraphQL */ `
       salesUserID
       total
       paymentID
+      # items son los productos que se vendieron con la orden
       items {
-        items {
+        items{
+          # resultado ya que items puede ser un arreglo de OrderItem
           id
+          # como se esta en orderItem tiene un campo llamado item que es el producto vendido
+          item{
+            # cese item es de tipo CustomerProductStatus
+            id 
+            # producto seria el producto que maneja el customerProductStatus
+            product{
+              id 
+              price
+              code
+              # dicho producto es un customerProduct
+              adproduct{ 
+                # adproduct es el campo que guarda el producto de tipo ADProducto
+                id 
+                name
+              }
+            }
+          }
         }
       }
-      payment {
-        id
-        paymentStripeID
-        metadata
-        createdAt
-        updatedAt
-        owner
-      }
-      shippingAddress {
-        country
-        postal
-        city
-        address
-        phoneNumber
-      }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
@@ -1006,6 +1007,19 @@ export const getOrderItem = /* GraphQL */ `
       id
       orderID
       itemID
+      item{
+        id
+      }
+    }
+  }
+`;
+
+export const getCustomerProductStatusPrueba = /* GraphQL */ `
+  query GetCustomerProductStatus($id: ID!) {
+    getCustomerProductStatus(id: $id) {
+      id
+      productID
+      status
     }
   }
 `;

@@ -19,7 +19,7 @@ const CustomCardOrder = ({item, image, customer}) => {
         />
       </View>
       <View style={styles.content}>
-        <Text style={[styles.name, global.topGray]}>Iphone 14 Pro Max</Text>
+        <Text style={[styles.name, global.topGray]}>{item.name}</Text>
         <Text style={[styles.price, global.topGray]}>${item.price}.00</Text>
 
         <Text style={[styles.seller, global.topGray]}>

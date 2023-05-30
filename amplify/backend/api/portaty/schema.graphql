@@ -2,12 +2,14 @@ type ADCategory @model @auth(rules: [
   { allow: groups, groups: ["admin"] },
   { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
+    {allow: private, operations:[read]}
   ]) {
   id: ID! 
   name: String! @auth(rules:[
     { allow: groups, groups: ["admin"] },
     { allow: private, provider: iam, operations: [read] },
     { allow: public, provider: iam, operations: [read] },
+      {allow: private, operations:[read]}
   ])
   image: String
   path: String
@@ -23,12 +25,14 @@ type ADBrand @model @auth(rules: [
   { allow: groups, groups: ["admin"] },
   { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
+    {allow: private, operations:[read]}
   ]) {
   id: ID!
    name: String! @auth(rules:[
     { allow: groups, groups: ["admin"] },
     { allow: private, provider: iam, operations: [read] },
     { allow: public, provider: iam, operations: [read] },
+      {allow: private, operations:[read]}
   ])
   image: String
   path: String
@@ -45,12 +49,14 @@ type ADProduct @model @auth(rules: [
   { allow: groups, groups: ["admin"] },
   { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
+   {allow: private, operations:[read]}
   ]) {
   id: ID!
   name: String @auth(rules:[
     { allow: groups, groups: ["admin"] },
     { allow: private, provider: iam, operations: [read] },
     { allow: public, provider: iam, operations: [read] },
+    {allow: private, operations:[read]}
   ])
   images: [String]
   paths: [String]
@@ -99,6 +105,7 @@ type Todo @model @auth(rules: [
   { allow: owner },
   { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
+    {allow: private, operations:[read]}
   ]) {
   id: ID!
   name: String
@@ -115,19 +122,23 @@ type CustomerShop @model @auth(rules:[
   { allow: owner},
   { allow: private, provider: iam, operations: [read] },
   { allow: public, provider: iam, operations: [read] },
+    {allow: private, operations:[read]}
 ]){
   userID: ID! @primaryKey
   name: String! @auth(rules:[
     {allow: owner},
     {allow: private, provider: iam, operations: [read]},
-    {allow: public, provider: iam, operations: [read]}
+    {allow: public, provider: iam, operations: [read]},
+      {allow: private, operations:[read]}
   ])
   email: String! @auth(rules:[
     {allow: owner},
     {allow: private, provider: iam, operations: [read]},
-    {allow: public, provider: iam, operations: [read]}
+    {allow: public, provider: iam, operations: [read]},
+      {allow: private, operations:[read]}
   ])
   description: String
+  identityId: String
   favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
   salesOrders: [OrderDetail] @hasMany(indexName:"byCustomerShopSaleOrder", fields:["userID"])
   purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
@@ -141,6 +152,7 @@ type CustomerShippingAddress @model @auth(rules:[
 ]){
   id: ID!
   customerID: ID! @index(name: "CustomerShippingAddress")
+  title: String
   country: String
   postal: String
   city: String
@@ -162,6 +174,7 @@ type FavoriteItem @model @auth(rules:[
 type CustomerProduct @model @auth(rules:[
   { allow: owner},
   { allow: private, provider: iam, operations: [read] },
+   {allow: private, operations:[read]},
   { allow: public, provider: iam, operations: [read] },
 ]){
   id: ID!
@@ -203,8 +216,9 @@ type ProductFields{
 
 type CustomerProductStatus @model @auth(rules:[
   {allow: groups, groups:["admin"]},
-  {allow: owner, operations: [read, create ,delete]}
-  {allow: private, provider: iam, operations:[read]}
+  {allow: owner}
+  {allow: private, provider: iam, operations:[read]},
+  {allow: private, operations:[read]}
 ]){
   id: ID!
   productID: ID
@@ -218,7 +232,8 @@ type CustomerProductStatus @model @auth(rules:[
 type OrderDetail @model @auth(rules:[
   {allow: owner, operations:[read, create]},
   {allow: groups, groups:["admin"], operations:[read]},
-  {allow: private, provider: iam, operations: [read]}
+  {allow: private, provider: iam, operations: [read]},
+    {allow: private, operations:[read]}
 ]){
   id: ID!
   purchaseUserID: ID! @index(name: "byCustomerShopPurchaseOrder")
@@ -240,12 +255,14 @@ type ShippingAddress{
 
 type OrderItem @model @auth(rules:[
   {allow: owner, operations: [read, create]},
-  {allow: groups, groups: ["admin"], operations:[read, update]}
+  {allow: groups, groups: ["admin"], operations:[read, update]},
+  {allow: private, provider: iam, operations: [read]},
+  {allow: private, operations:[read]}
 ]){
   id: ID!
   orderID: ID @index(name: "byOrderDetailItem")
   itemID: ID! 
-  item: CustomerProductStatus @hasOne(fields:["itemID"])
+  item: CustomerProductStatus @hasOne(fields:["itemID"]) @auth(rules: [{ allow: owner }])
 }
 
 type PaymentStripe @model @auth(rules:[
