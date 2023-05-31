@@ -8,17 +8,20 @@ import CustomSelect from "@/components/CustomSelect";
 // amplify
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
 // recoil
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  blobsPost,
   brandItem,
   brandsId,
   categoriesId,
   categoryItem,
   conditionItem,
   customerId,
+  errorPostProduct,
   imagesPost,
   modelItem,
   productItem,
@@ -28,16 +31,18 @@ import {
   supplierItem,
   userAutenticated,
 } from "@/atoms";
+import { es } from "@/utils/constants/lenguage";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([])
+  const [purchaseOrders, setPurchaseOrders] = useState([])
+  const [salesOrders, setSalesOrders] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
     await Auth.signOut();
-
     setTimeout(() => {
       navigation.navigate("Login_Welcome");
     }, 500);
@@ -59,7 +64,10 @@ const Profile = ({ navigation }) => {
   const [productSelect, setProductSelect] = useRecoilState(productsId);
   const [productBrandSelect, setProductBrandSelect] =
     useRecoilState(productsBrandId);
-    const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [imagesPostSelect, setImagesPostSelect] = useRecoilState(imagesPost);
+  const [blobImages, setBlobImages] = useRecoilState(blobsPost);
+  const [selectErrorPostProduct, setSelectErrorPostProduct] =
+    useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
     const result = await API.graphql({
@@ -67,13 +75,14 @@ const Profile = ({ navigation }) => {
       variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const result2 = await API.graphql({
-      query: queries.listADCategories,
-      // variables: { id: userAuth.username },
-      authMode: "AWS_IAM",
+    const listProducts = await API.graphql({
+      query: customHome.listCustomerProductStatus,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
     });
     setItems(listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
+    setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)
+    setSalesOrders(result.data.getCustomerShop.salesOrders.items)
   };
 
   const resetPost = () => {
@@ -88,12 +97,14 @@ const Profile = ({ navigation }) => {
     setBrandsSelect("");
     setProductSelect("");
     setProductBrandSelect("");
-    setImagesPostSelect([])
+    setImagesPostSelect([]);
+    setBlobImages([]);
+    setSelectErrorPostProduct(false);
   };
 
   useEffect(() => {
     fecthShop();
-  }, [items]);
+  }, []);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -102,13 +113,7 @@ const Profile = ({ navigation }) => {
           <View style={styles.image}></View>
           <CustomButton
             buttonStyles={[styles.edit, global.bgBlack]}
-            icon={{
-              status: true,
-              name: "image-edit-outline",
-              size: 20,
-              color: "#ffffff",
-              type: `MTI`,
-            }}
+            image={require("@/utils/images/capture.png")}
           />
         </View>
         <Text style={[styles.user, global.black]}>
@@ -117,7 +122,7 @@ const Profile = ({ navigation }) => {
       </View>
       <View style={styles.content}>
         <Text style={[styles.titleSettings, global.black]}>
-          My Shop: {/*{userShop.name.toUpperCase()}*/}
+          {es.profile.shop.title}
         </Text>
         <TouchableOpacity
           activeOpacity={1}
@@ -128,8 +133,8 @@ const Profile = ({ navigation }) => {
         >
           <View style={[styles.line, global.bgWhiteSmoke]} />
           <CustomSelect
-            title={"Post"}
-            subtitle={"Post a product for your shop"}
+            title={es.profile.shop.post.title}
+            subtitle={es.profile.shop.post.subtitle}
             styled={{
               text: {
                 container: styles.textContainerSelect,
@@ -161,23 +166,55 @@ const Profile = ({ navigation }) => {
                 title: [styles.textTitleSelect, global.black],
                 subtitle: [styles.textSubtitleSelect, global.topGray],
               },
-              right: {
-                name: "arrow-right",
-                size: 24,
-                color: "#404040",
-                type: "MTI",
+              container: styles.containerSelect,
+              iconLeft: [styles.iconLeft, global.mainBgColor],
+              iconRight: styles.iconRight,
+            }}
+            icon={{
+              left: require("@/utils/images/product.png"),
+              right: require("@/utils/images/arrow_right.png"),
+            }}
+            toogle={false}
+          />
+        </TouchableOpacity>
+
+        <View style={[styles.line, global.bgWhiteSmoke]} />
+        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders", {
+          purchase: purchaseOrders,
+          sales: salesOrders
+        })}>
+          <CustomSelect
+            title={es.profile.shop.orders.title}
+            subtitle={es.profile.shop.orders.subtitle}
+            styled={{
+              text: {
+                container: styles.textContainerSelect,
+                title: [styles.textTitleSelect, global.black],
+                subtitle: [styles.textSubtitleSelect, global.topGray],
               },
+              container: styles.containerSelect,
+              iconLeft: [styles.iconLeft, global.mainBgColor],
+              iconRight: styles.iconRight,
+            }}
+            icon={{
+              left: require("@/utils/images/order.png"),
+              right: require("@/utils/images/arrow_right.png"),
             }}
             toogle={false}
           />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>Settings</Text>
+        <Text style={[styles.titleSettings, global.black]}>
+          {es.profile.settings.title}
+        </Text>
         {buttons.map((button, index) => (
           <View key={index}>
             {button.route ? (
-              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => navigation.navigate(button.route)}
+              >
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -197,7 +234,7 @@ const Profile = ({ navigation }) => {
                 />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity onPress={() => Auth.signOut()}>
+              <TouchableOpacity activeOpacity={1} onPress={onHandleLogout}>
                 <View style={[styles.line, global.bgWhiteSmoke]} />
                 <CustomSelect
                   title={button.title}
@@ -209,7 +246,7 @@ const Profile = ({ navigation }) => {
                       subtitle: [styles.textSubtitleSelect, global.topGray],
                     },
                     container: styles.containerSelect,
-                    iconLeft: [styles.iconLeft, global.bgBlack],
+                    iconLeft: [styles.iconLeft, global.mainBgColor],
                     iconRight: styles.iconRight,
                   }}
                   icon={button.icon}

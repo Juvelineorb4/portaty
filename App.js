@@ -1,4 +1,3 @@
-// android id : 959689221062-lsif8545oquitok7ckk6fklj4aab6tov.apps.googleusercontent.com
 import Navigation from "@/routes/Navigation";
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -15,48 +14,8 @@ import awsconfig from '@/aws-exports';
 // stripe
 import { StripeProvider } from '@stripe/stripe-react-native'
 
-// authentication federators 
-import * as WebBrowser from "expo-web-browser";
-import * as Linking from 'expo-linking';
-
-const isLocalHost = Boolean(__DEV__);
-
-
-const [localRedirectSignIn, productionRedirectSignIn] =
-  awsconfig.oauth.redirectSignIn.split(",");
-console.log(localRedirectSignIn)
-const [localRedirectSignOut, productionRedirectSignOut] =
-  awsconfig.oauth.redirectSignOut.split(",");
-console.log("Islocal: ", awsconfig.oauth.redirectSignIn.split(","))
-async function urlOpener(url, redirectUrl) {
-  const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
-    url,
-    redirectUrl
-  );
-  console.log("TYPE: ", type)
-  if (type === "success" && Platform.OS === "ios") {
-    WebBrowser.dismissBrowser();
-    return Linking.openURL(newUrl);
-  }
-}
-
-const updatedConfig = {
-  ...awsconfig,
-  oauth: {
-    ...awsconfig.oauth,
-    redirectSignIn: isLocalHost
-      ? localRedirectSignIn
-      : productionRedirectSignIn,
-    redirectSignOut: isLocalHost
-      ? localRedirectSignOut
-      : productionRedirectSignOut,
-    urlOpener,
-  },
-};
-
-
 Amplify.configure({
-  ...updatedConfig,
+  ...awsconfig,
   API: {
     endpoints: [
       {

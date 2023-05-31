@@ -8,7 +8,6 @@ import CustomCardProductPending from "@/components/CustomCardProductPending";
 const ListProducts = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
-  console.log(data[0].product)
   return (
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>

@@ -29,6 +29,7 @@ import CustomFloatButton from "@/components/CustomFloatButton";
 import { es } from "@/utils/constants/lenguage";
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
 const Home = ({ data, navigation }) => {
@@ -66,20 +67,19 @@ const Home = ({ data, navigation }) => {
   const fetchData = async () => {
     try {
       const categories = await API.graphql({
-        query: queries.listADCategories,
+        query: customHome.listADCategories,
         authMode: "AWS_IAM",
       });
       const brands = await API.graphql({
-        query: queries.listADBrands,
+        query: customHome.listADBrands,
         authMode: "AWS_IAM",
       });
       const products = await API.graphql({
-        query: queries.listCustomerProductStatuses,
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: customHome.listCustomerProductStatus,
+        authMode: "AWS_IAM",
       });
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);
-      console.log(categories.data.listADCategories.items[0].products.items[1].id === products.data.listCustomerProductStatuses.items[0].product.productID)
     } catch (error) {
       console.error(error);
     }
@@ -106,7 +106,7 @@ const Home = ({ data, navigation }) => {
         let position = await Location.getCurrentPositionAsync({});
         setLocation(position);
         /* Location */
-        let text = "Waiting..";
+        let text = "Cargando..";
         if (errorMsg) {
           text = errorMsg;
         } else if (location) {
@@ -204,41 +204,6 @@ const Home = ({ data, navigation }) => {
               <CustomProductCard product={item} key={index} />
             ))}
         </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 20,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => setSettings(true)}
-          style={{
-            backgroundColor: "blue",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Open Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login_Welcome")}
-          style={{
-            backgroundColor: "orange",
-            width: 100,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 10,
-          }}
-        >
-          <Text>Salir</Text>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

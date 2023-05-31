@@ -14,6 +14,7 @@ import ListOrders from "@/screens/Profile/ListOrders";
 import CustomPageListProduct from "@/components/CustomPageListProduct";
 import OrderPreview from "@/components/OrderPreview";
 import Notifications from "@/screens/Notifications/Notifications";
+import OrderPreviewList from "@/components/OrderPreviewList";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -49,6 +50,7 @@ const ProfileNavigator = () => {
         component={Permissions}
         options={{
           animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
       <Stack.Screen
@@ -92,21 +94,13 @@ const ProfileNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="ViewOrder"
-        component={OrderPreview}
+        name="ViewOrderList"
+        component={OrderPreviewList}
         options={{
           animation: "slide_from_right",
           header: (props) => <LeftHeader {...props} />,
         }}
       />
-      <Stack.Screen
-      name="Notifications_Profile"
-      component={Notifications}
-      options={{
-        animation: "slide_from_right",
-        header: (props) => <LeftHeader {...props} />,
-      }}
-    />
     </Stack.Navigator>
   );
 };

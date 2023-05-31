@@ -2,15 +2,19 @@
     flex: 1;
     justify-content: center;
     align-items: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
 }
 .imageContent {
     flex: 1;
+    padding: 20px;
 }
 .preview {
   margin: 20px 0px;
   text-align: center;
   width: 90%;
   padding: 20px;
+  height: 60px;
   /* background-color: #ffa424; */
   border-radius: 16px;
   margin-top: 20px;

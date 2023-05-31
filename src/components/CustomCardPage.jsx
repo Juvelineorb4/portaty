@@ -6,7 +6,7 @@ import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
 
-const CustomCardPage = ({ onHandlePress, data = {} }) => {
+const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
   const global = require("@/utils/styles/global.js");
   const [save, setSave] = useState(false);
   const [keyImages, setKeyImages] = useState([]);
@@ -63,20 +63,20 @@ const CustomCardPage = ({ onHandlePress, data = {} }) => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 17,
+            marginTop: owner ? 5 : 17,
           }}
         >
           <Image
             style={{
-              width: 17,
-              height: 17,
+              width: owner ? 35 : 17,
+              height: owner ? 35 : 17,
               resizeMode: "contain",
               alignSelf: "center",
             }}
-            source={require("@/utils/images/available.png")}
+            source={owner ? require("@/utils/images/owner.png") : require("@/utils/images/available.png")}
           />
           <Text style={[styles.available, global.topGray]}>
-            {es.page.card.available}
+            {owner ? 'Propietario' : es.page.card.available}
           </Text>
         </View>
       </View>
@@ -88,7 +88,7 @@ const CustomCardPage = ({ onHandlePress, data = {} }) => {
           {es.page.card.message} {data.customer.name}
         </Text>
         <View style={styles.options}>
-          <TouchableOpacity onPress={() => setSave(!save)} style={styles.save}>
+          {owner ? '' : <TouchableOpacity onPress={() => setSave(!save)} style={styles.save}>
             {save ? (
               <Image
                 style={{
@@ -114,13 +114,13 @@ const CustomCardPage = ({ onHandlePress, data = {} }) => {
             <Text style={[styles.textSave, global.topGray]}>
               {es.page.card.favorites}
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
           <TouchableOpacity
             onPress={onHandlePress}
-            style={[styles.buy, global.mainBgColor]}
+            style={[owner ? styles.see : styles.buy, global.mainBgColor]}
           >
-            <Text style={[styles.textBuy, global.white]}>
-              {es.page.card.buy}
+            <Text style={[owner ? styles.textSee : styles.textBuy, global.white]}>
+              {owner ? 'Ver' : es.page.card.buy}
             </Text>
           </TouchableOpacity>
         </View>

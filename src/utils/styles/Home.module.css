@@ -19,8 +19,8 @@
 }
 .textMain,
 .textAll {
-  font-family: 'semibold';
-  /* font-weight: 700; */
+  font-family: 'regular';
+  margin-bottom: 5px;
   font-size: 16px;
 }
 
@@ -40,4 +40,7 @@
 }
 .bubbleBrand {
   padding: 20px 20px 20px 0px;
+}
+.trendingBrand {
+  margin-bottom: 70px;
 }

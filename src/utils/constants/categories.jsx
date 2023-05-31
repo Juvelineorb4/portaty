@@ -1,7 +1,7 @@
 export const categories = {
   partOne: [
     {
-      title: "Phones",
+      title: "Teléfonos",
       icon: require("@/utils/images/phone.png"),
     },
     {
@@ -9,11 +9,11 @@ export const categories = {
       icon: require("@/utils/images/laptop.png"),
     },
     {
-      title: "Watches",
+      title: "Relojes",
       icon: require("@/utils/images/watches.png"),
     },
     {
-      title: "Computers",
+      title: "Ordenadores",
       icon: require("@/utils/images/computers.png"),
     },
   ],
@@ -27,7 +27,7 @@ export const categories = {
       icon: require("@/utils/images/drones.png"),
     },
     {
-      title: "Cameras",
+      title: "Cámaras",
       icon: require("@/utils/images/camera.png"),
     },
     {

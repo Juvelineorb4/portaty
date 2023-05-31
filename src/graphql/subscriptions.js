@@ -731,6 +731,7 @@ export const onCreateADProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -889,6 +890,7 @@ export const onUpdateADProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -1047,6 +1049,7 @@ export const onDeleteADProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -1214,6 +1217,7 @@ export const onCreateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      identityId
       favorites {
         items {
           id
@@ -1338,6 +1342,7 @@ export const onCreateCustomerShop = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -1476,6 +1481,7 @@ export const onUpdateCustomerShop = /* GraphQL */ `
       name
       email
       description
+      identityId
       favorites {
         items {
           id
@@ -1600,6 +1606,7 @@ export const onUpdateCustomerShop = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -1738,6 +1745,7 @@ export const onDeleteCustomerShop = /* GraphQL */ `
       name
       email
       description
+      identityId
       favorites {
         items {
           id
@@ -1862,6 +1870,7 @@ export const onDeleteCustomerShop = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -2066,6 +2075,7 @@ export const onCreateFavoriteItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -2221,6 +2231,7 @@ export const onUpdateFavoriteItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -2376,6 +2387,7 @@ export const onDeleteFavoriteItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -2525,6 +2537,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
         name
         email
         description
+        identityId
         favorites {
           items {
             id
@@ -2615,6 +2628,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -2752,6 +2766,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -2837,6 +2852,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -2996,6 +3012,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
         name
         email
         description
+        identityId
         favorites {
           items {
             id
@@ -3086,6 +3103,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -3223,6 +3241,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -3308,6 +3327,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -3467,6 +3487,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
         name
         email
         description
+        identityId
         favorites {
           items {
             id
@@ -3557,6 +3578,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -3694,6 +3716,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -3779,6 +3802,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -3941,6 +3965,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
           name
           email
           description
+          identityId
           favorites {
             items {
               id
@@ -4101,6 +4126,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -4253,6 +4279,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
           name
           email
           description
+          identityId
           favorites {
             items {
               id
@@ -4413,6 +4440,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -4565,6 +4593,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
           name
           email
           description
+          identityId
           favorites {
             items {
               id
@@ -4725,6 +4754,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
               name
               email
               description
+              identityId
               owner
               createdAt
               updatedAt
@@ -5088,6 +5118,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -5243,6 +5274,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }
@@ -5398,6 +5430,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             name
             email
             description
+            identityId
             favorites {
               nextToken
             }

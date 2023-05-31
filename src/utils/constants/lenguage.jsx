@@ -142,13 +142,21 @@ export const es = {
         details: "Ver detalles",
       },
     },
+    buy: {
+      title: "Mis ordenes de compra",
+      card: {
+        available: "Embalado",
+        message: "Comprado el 17 de Abril de 2023",
+        details: "Ver detalles",
+      },
+    },
   },
   checkout: {
     address: {
       title: "Dirección de envío",
     },
-    order: {
-      title: "Lista de Orden",
+    item: {
+      title: "Producto",
     },
     shipping: {
       title: "Elegir envío",
