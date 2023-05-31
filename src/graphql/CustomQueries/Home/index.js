@@ -879,15 +879,7 @@ export const listCustomerProductStatus = /* GraphQL */ `
             name
             email
             description
-            salesOrders {
-              nextToken
-            }
-            purchaseOrders {
-              nextToken
-            }
-            products {
-              nextToken
-            }
+            identityId
             createdAt
             updatedAt
           }
@@ -909,6 +901,7 @@ export const listCustomerProductStatus = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -973,6 +966,13 @@ export const getOrderDetailPreview = /* GraphQL */ `
       salesUserID
       total
       paymentID
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
       # items son los productos que se vendieron con la orden
       items {
         items{
@@ -987,6 +987,9 @@ export const getOrderDetailPreview = /* GraphQL */ `
               id 
               price
               code
+              customer {
+                name
+              }
               # dicho producto es un customerProduct
               adproduct{ 
                 # adproduct es el campo que guarda el producto de tipo ADProducto
@@ -1023,3 +1026,4 @@ export const getCustomerProductStatusPrueba = /* GraphQL */ `
     }
   }
 `;
+

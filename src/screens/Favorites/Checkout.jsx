@@ -1,5 +1,5 @@
 import { View, Text} from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/Checkout.module.css";
 import CustomAddressCard from "@/components/CustomAddressCard";
 import CustomCardList from "@/components/CustomCardList";
@@ -7,13 +7,35 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomShippingCard from "@/components/CustomShippingCard";
 import { es } from "@/utils/constants/lenguage";
 import ModalSellComplete from "@/components/ModalSellComplete";
-
+import { useRecoilState, useRecoilValue } from "recoil";
+import { addressSelected, userAutenticated } from "@/atoms";
+import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
+import * as customQueries from "@/graphql/CustomQueries/ShippingAddress";
 
 const Checkout = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
   const { data, images } = route.params
+  const [address, setAddress] = useState([]);
+  const user = useRecoilValue(userAutenticated);
+  const [activeAddress, setActiveAddress] = useRecoilState(addressSelected);
+  console.log(activeAddress)
   /* Navegaciones */
-  const onHandlePress = () => navigation.navigate("Address_Edit");
+  const onHandlePress = () => navigation.navigate("Address_Edit", {
+    item: data
+  });
+  const fetchAddress = async () => {
+    const addressItem = await API.graphql({
+      query: customQueries.getAddress,
+      variables: {
+        userID: user.attributes.sub,
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    setAddress(addressItem.data.getCustomerShop.shippingAddress.items[activeAddress]);
+  };
+  useEffect(() => {
+    fetchAddress();
+  }, [activeAddress]);
   // const onHandlePreview = () => navigation.navigate("Order_Preview", { item: data});
   
   return (
@@ -23,8 +45,8 @@ const Checkout = ({ navigation, route }) => {
 
         <CustomAddressCard
           content={{
-            title: "Title",
-            text: "Description",
+            title: address.title ? address.title : 'Título',
+            text: address.address ? address.address : 'Dirección',
           }}
           handlePress={onHandlePress}
         />
@@ -54,7 +76,8 @@ const Checkout = ({ navigation, route }) => {
         />  
        <ModalSellComplete item={{
           product: data,
-          images: images
+          images: images,
+          address: address
         }}  />
       </View>
     </ScrollView>

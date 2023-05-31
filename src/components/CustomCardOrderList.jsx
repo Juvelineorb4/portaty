@@ -4,31 +4,39 @@ import styles from "@/utils/styles/CustomCardList.module.css";
 import { es } from "@/utils/constants/lenguage";
 import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
+import * as customProfile from "@/graphql/CustomQueries/Profile";
 import { useNavigation } from "@react-navigation/native";
 
 const CustomCardOrderList = ({data = {}, status}) => {
   const global = require("@/utils/styles/global.js");
   const [deleteCard, setDeleteCard] = useState(true);
   const [orderProduct, setOrderProduct] = useState({})
-  const [customerShop, setCustomerShop] = useState('')
+  const [productName, setProductName] = useState('')
+  const [date, setDate] = useState('')
   const [keyImages, setKeyImages] = useState([]);
   const navigation = useNavigation()
 
   const fetchOrder = async () => {
     const orderDetail = await API.graphql({
-      query: queries.getOrderDetail,
+      query: customProfile.getOrderDetail,
       variables: {
         id: data.items.items[0].orderID,
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const shop = await API.graphql({
-      query: queries.getCustomerShop,
-      variables: { userID: orderDetail.data.getOrderDetail.items.items[0].item.product.owner },
+    const product = await API.graphql({
+      query: customProfile.getADProductPrueba,
+      variables: {
+        id: orderDetail.data.getOrderDetail.items.items[0].item.product.productID,
+      },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    setCustomerShop(shop.data.getCustomerShop.name)
+    setProductName(product.data.getADProduct.name)
     setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
+
+    const date = new Date(orderDetail.data.getOrderDetail.items.items[0].item.product.createdAt);
+    const formattedDate = date.toLocaleDateString('es-ES');
+    setDate(formattedDate)
   }
   const getImages = async () => {
     try {
@@ -89,11 +97,11 @@ const CustomCardOrderList = ({data = {}, status}) => {
         </View>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.name, global.topGray]}>{orderProduct.adproduct.name}</Text>
+        <Text style={[styles.name, global.topGray]}>{productName}</Text>
         <Text style={[styles.price, global.topGray]}>${orderProduct.price}.00</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          {status === 'sell' ? es.list.sell.card.message : es.list.buy.card.message}
+          {status === 'sell' ? `Vendido el ${date}` : `Comprado el ${date}`}
         </Text>
 
         <View style={styles.options}>
@@ -101,7 +109,7 @@ const CustomCardOrderList = ({data = {}, status}) => {
             onPress={() => navigation.navigate('ViewOrderList', {
               product: orderProduct,
               images: keyImages,
-              shop: customerShop
+              data: date,
             })}
             style={styles.option}
           >

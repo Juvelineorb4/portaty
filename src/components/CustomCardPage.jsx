@@ -11,15 +11,18 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
   const [save, setSave] = useState(false);
   const [keyImages, setKeyImages] = useState([]);
   const getImages = async () => {
+    console.log(data.customer?.identityId)
     try {
-      Storage.list(`product/${data.code}/`, {
+      Storage.list(`products/${data.code}/`, {
         level: "protected",
         pageSize: 10,
+        identityId: data.customer?.identityId
       }).then(async (data) => {
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
+              identityId: data.customer?.identityId
             });
             return imageResult;
           })
@@ -56,7 +59,7 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
             resizeMode: "contain",
             alignSelf: "center",
           }}
-          source={{uri: keyImages[0]}}
+          source={{ uri: keyImages[0] }}
         />
         <View
           style={{

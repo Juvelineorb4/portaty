@@ -5,9 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginNavigator from "./Authentication/LoginNavigator";
 
 // amplify
-import { Auth, Hub, API, graphqlOperation } from "aws-amplify";
-import * as queries from "@/graphql/queries";
-import * as mutations from "@/graphql/mutations";
+import { Auth, Hub, API, graphqlOperation, Storage } from "aws-amplify";
+import * as customNavigation from "@/graphql/CustomMutations/Navigation";
+
 // recoil
 import { useRecoilState } from "recoil";
 import { userAutenticated } from "@/atoms/index";
@@ -19,14 +19,53 @@ const Navigation = () => {
 
   const checkUser = async () => {
     try {
-      const result = await Auth.currentAuthenticatedUser({});
+      const result = await Auth.currentAuthenticatedUser({
+        bypassCache: true
+      });
       setUserAuth(result);
+      if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
+      // await updateAttributeIdentityID(result.attributes)
+      // configStoragePrefix(result);
+      // console.log("Configurado")
     } catch (error) {
       setUserAuth(undefined);
-      // console.error(error)
+      console.error(error)
     }
   };
 
+  const updateAttributeIdentityID = async (user) => {
+    try {
+      // obtenermos el identityID (id unico por usuario autenticado por cognito)
+      const { identityId } = await Auth.currentUserCredentials();
+      // cargar atributo en cognito
+      await Auth.updateUserAttributes(user, {
+        "custom:identityID": identityId
+      })
+      // cargar en customer shop
+      const params = {
+        input: {
+          userID: user.username,
+          identityId: identityId
+        }
+      }
+      await API.graphql(graphqlOperation(customNavigation.updateChargeIdentityIdCustomerShop, params))
+
+    } catch (error) {
+      console.error("Error al cargar Atributo: ", error);
+    }
+
+  }
+
+  const configStoragePrefix = (result) => {
+    Storage.configure({
+      customPrefix: {
+        public: 'myPublicPrefix/',
+        protected: 'myProtectedPrefix/',
+        private: 'myPrivatePrefix/'
+      },
+
+    })
+  }
   useEffect(() => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -51,10 +90,7 @@ const Navigation = () => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    fecthalgo();
-  }, []);
-  const fecthalgo = async () => {};
+
 
   return (
     <NavigationContainer>

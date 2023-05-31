@@ -1,49 +1,131 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, ScrollView } from "react-native";
 import styles from "@/utils/styles/AddressEdit.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { Modal } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CustomInput from "./CustomInput";
 import { useForm } from "react-hook-form";
 import { es } from "@/utils/constants/lenguage";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 // amplify
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
 import * as customQueries from "@/graphql/CustomQueries/ShippingAddress";
 import * as customMutations from "@/graphql/CustomMutations/ShippingAddress";
-import { userAutenticated } from "@/atoms";
+import { addressSelected, userAutenticated } from "@/atoms";
 
-const AddressEdit = () => {
+const AddressEdit = ({ route }) => {
   const global = require("@/utils/styles/global.js");
   const user = useRecoilValue(userAutenticated);
   const [modalVisible, setModalVisible] = useState(false);
-  const [valueAddress, setValueAddress] = useState("");
-  const { control, handleSubmit, watch } = useForm();
-  // const { address, postal, city, country } = control;
-  // console.log()
-  // const onHandleAddress = async (data) => {
-  //   const { address, postal, city, country, title } = data;
-  //   const result = await API.graphql({
-  //     query: customMutations.createCustomerShippingAddress,
-  //     variables: { 
-  //       input: {
-  //         title: title,
-  //         address: address,
-  //         postal: postal,
-  //         city: city,
-  //         country: country,
-  //       }
-  //      },
-  //     authMode: "AMAZON_COGNITO_USER_POOLS",
-  //   });
+  const [addressList, setAddressList] = useState([]);
+  const { control, handleSubmit, resetField } = useForm();
+  const [activeAddress, setActiveAddress] = useRecoilState(addressSelected);
+  const { address, postal, city, country, title } = control;
+  const onHandleAddress = async (data) => {
+    const { address, postal, city, country, title } = data;
+    const result = await API.graphql({
+      query: customMutations.createCustomerShippingAddress,
+      variables: {
+        input: {
+          customerID: user.attributes.sub,
+          title: title.trim(),
+          address: address.trim(),
+          postal: postal.trim(),
+          city: city.trim(),
+          country: country.trim(),
+        },
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    const addressItem = await API.graphql({
+      query: customQueries.getAddress,
+      variables: {
+        userID: user.attributes.sub,
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    setAddressList(addressItem.data.getCustomerShop.shippingAddress.items);
+    setModalVisible(!modalVisible);
+  };
+  const fetchAddress = async () => {
+    const addressItem = await API.graphql({
+      query: customQueries.getAddress,
+      variables: {
+        userID: user.attributes.sub,
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    setAddressList(addressItem.data.getCustomerShop.shippingAddress.items);
+  };
+  useEffect(() => {
+    fetchAddress();
+  }, []);
 
-  // };
   return (
-    <View style={[global.bgWhite, { flex: 1, padding: 20 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1, padding: 20 }]}>
       <Text style={styles.title}>{es.address.title}</Text>
       <View style={[styles.line, global.bgWhiteSmoke]} />
-      <View style={{ alignItems: "center" }}>
+      {addressList.map((item, index) => (
+        <View
+          key={index}
+          style={{
+            borderColor: "#404040",
+            borderWidth: 0.4,
+            padding: 20,
+            borderRadius: 8,
+            marginBottom: 20,
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View>
+            <Text style={{ fontFamily: "light", fontSize: 20 }}>
+              {item.title}
+            </Text>
+            <Text style={{ fontFamily: "light", fontSize: 14 }}>
+              {item.address}
+            </Text>
+          </View>
+          <View>
+            <Text style={{ fontFamily: "light", fontSize: 12 }}>
+              {item.country}
+            </Text>
+            <Text style={{ fontFamily: "light", fontSize: 12 }}>
+              {item.city}
+            </Text>
+            <Text style={{ fontFamily: "light", fontSize: 12 }}>
+              {item.postal}
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              borderColor: "#404040",
+              borderWidth: 0.5,
+              borderRadius: 50,
+              width: 25,
+              height: 25,
+              alignSelf: "center",
+              justifyContent: "center",
+            }}
+            onPress={() => setActiveAddress(index)}
+          >
+            <View
+              style={[
+                index === activeAddress ? global.mainBgColor : global.bgWhite,
+                {
+                  width: 20,
+                  height: 20,
+                  alignSelf: "center",
+                  borderRadius: 50,
+                },
+              ]}
+            ></View>
+          </TouchableOpacity>
+        </View>
+      ))}
+      <View style={{ alignItems: "center", marginBottom: 90 }}>
         <TouchableOpacity
           style={[
             global.mainBgColor,
@@ -57,7 +139,7 @@ const AddressEdit = () => {
           onPress={() => setModalVisible(!modalVisible)}
         >
           <Text style={[global.white, { fontFamily: "regular", fontSize: 16 }]}>
-          {es.address.add}
+            {es.address.add}
           </Text>
           <Image
             style={{
@@ -95,11 +177,11 @@ const AddressEdit = () => {
                   </Pressable>
                   <Text style={styles.modalText}>{es.address.modal.back}</Text>
                 </View>
-                <View style={{flex: 1}}>
-                <CustomInput
+                <View style={{ flex: 1 }}>
+                  <CustomInput
                     control={control}
                     name={`title`}
-                    placeholder={es.address.modal.line.placeholder}
+                    placeholder={`Ingrese el título`}
                     styled={{
                       text: styles.textInputAddress,
                       label: [styles.labelInputAddress],
@@ -107,7 +189,7 @@ const AddressEdit = () => {
                       input: [styles.inputContainerAddress],
                       placeholder: styles.placeholderAddress,
                     }}
-                    text={`Title`}
+                    text={`Título`}
                     // numeric={true}
                     // errorPost={selectErrorPostProduct}e
                     // rules={{
@@ -132,7 +214,12 @@ const AddressEdit = () => {
                     //   required: "Required",
                     // }}
                   />
-                  <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <CustomInput
                       control={control}
                       name={`postal`}
@@ -170,7 +257,7 @@ const AddressEdit = () => {
                       // }}
                     />
                   </View>
-                  <View style={{flexDirection: "row",alignItems: "center"}}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <CustomInput
                       control={control}
                       name={`country`}
@@ -189,8 +276,28 @@ const AddressEdit = () => {
                       //   required: "Required",
                       // }}
                     />
-                    <TouchableOpacity style={[global.mainBgColor, {borderRadius:8, flex: 1, justifyContent: "center", alignItems: "center", height: 49, marginTop: 10}]}>
-                      <Text style={[global.white, {fontFamily: 'medium', fontSize: 14}]}>{es.address.modal.add}</Text>
+                    <TouchableOpacity
+                      style={[
+                        global.mainBgColor,
+                        {
+                          borderRadius: 8,
+                          flex: 1,
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: 49,
+                          marginTop: 10,
+                        },
+                      ]}
+                      onPress={handleSubmit(onHandleAddress)}
+                    >
+                      <Text
+                        style={[
+                          global.white,
+                          { fontFamily: "medium", fontSize: 14 },
+                        ]}
+                      >
+                        {es.address.modal.add}
+                      </Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -199,7 +306,7 @@ const AddressEdit = () => {
           </Modal>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

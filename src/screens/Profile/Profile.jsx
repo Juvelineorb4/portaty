@@ -72,10 +72,9 @@ const Profile = ({ navigation }) => {
   const fecthShop = async () => {
     const result = await API.graphql({
       query: queries.getCustomerShop,
-      variables: { userID: userAuth.username },
+      variables: { userID: userAuth?.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log("RESULT", userAuth)
     const listProducts = await API.graphql({
       query: customHome.listCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -104,8 +103,8 @@ const Profile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fecthShop();
-  }, []);
+    if (userAuth) fecthShop();
+  }, [userAuth]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -118,7 +117,7 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {/*{userAuth.attributes.name}*/}
+          {userAuth && userAuth?.attributes?.name}
         </Text>
       </View>
       <View style={styles.content}>
