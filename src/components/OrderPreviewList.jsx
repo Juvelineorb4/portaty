@@ -10,19 +10,18 @@ import * as mutations from "@/graphql/mutations";
 
 const OrderPreviewList = ({route}) => {
   const global = require("@/utils/styles/global.js");
-  const { product, images, shop } = route.params
-  console.log(product.owner)
+  const { product, images, date } = route.params
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={product} image={images[0]} customer={shop}/>
+      <CustomCardOrder item={product} image={images[0]} customer={product.customer.name} />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
         <CustomTimeOrderCard
           content={{
             title: "Estándar",
-            text: "Fecha estimada: Lunes 17 Abril",
+            text: `Fecha estimada: Lunes 17 Abril`,
           }}
         />
       </View>

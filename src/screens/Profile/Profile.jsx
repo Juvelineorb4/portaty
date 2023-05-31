@@ -79,7 +79,6 @@ const Profile = ({ navigation }) => {
       query: customHome.listCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log(result.data.getCustomerShop.purchaseOrders)
     setItems(listProducts.data.listCustomerProductStatuses.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
     setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)

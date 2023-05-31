@@ -144,3 +144,8 @@ export const errorPostProduct = atom({
   key: "errorPostProductValue",
   default: false,
 });
+
+export const addressSelected = atom({
+  key: "addressSelectedValue",
+  default: 0,
+});

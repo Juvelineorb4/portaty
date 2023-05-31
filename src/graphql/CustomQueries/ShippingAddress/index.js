@@ -1,4 +1,4 @@
-export const getCustomerShippingAddress = /* GraphQL */ `
+export const getAddress = /* GraphQL */ `
   query GetCustomerShop($userID: ID!) {
     getCustomerShop(userID: $userID) {
       userID
@@ -11,9 +11,15 @@ export const getCustomerShippingAddress = /* GraphQL */ `
           postal
           city
           address
+          owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      owner
+      createdAt
+      updatedAt
     }
   }
 `;
