@@ -31,7 +31,7 @@ const useImageStorage = () => {
 
     };
     // descarag de imagenes propias del usuario 
-    const downloadImage = async (key) => {
+    const downloadImage = async (key, level) => {
         try {
             // configuracion del storage 
             Storage.configure({ level: 'protected' });

@@ -31,13 +31,13 @@ const Register = () => {
         username: email.trim(),
         password: password,
         attributes: {
-          name: name
+          name: name.trim()
         }
       })
+
       navigation.navigate("ConfirmAccount", {
-        email: email
+        email: email,
       })
-      console.log("REGISTER: ", result)
     } catch (error) {
       console.error(error)
     }

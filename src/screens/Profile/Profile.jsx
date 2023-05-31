@@ -117,7 +117,7 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {/*{userAuth.attributes.name}*/}
+          {userAuth?.attributes?.name?.toUpperCase()}
         </Text>
       </View>
       <View style={styles.content}>
