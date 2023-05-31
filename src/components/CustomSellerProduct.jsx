@@ -32,8 +32,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
   const getImages = async () => {
-    console.log(user.attributes)
-    console.log("ID PRODUCT: ", product.customerID)
     try {
       Storage.list(`product/${product.code}/`, {
         level: "protected",

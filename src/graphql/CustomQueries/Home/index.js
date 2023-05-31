@@ -973,6 +973,13 @@ export const getOrderDetailPreview = /* GraphQL */ `
       salesUserID
       total
       paymentID
+      shippingAddress {
+        country
+        postal
+        city
+        address
+        phoneNumber
+      }
       # items son los productos que se vendieron con la orden
       items {
         items{
@@ -1026,3 +1033,4 @@ export const getCustomerProductStatusPrueba = /* GraphQL */ `
     }
   }
 `;
+

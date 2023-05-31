@@ -47,6 +47,7 @@
 
 .textInputAddress {
   flex: 1;
+  font-family: 'light';
   margin-left: 10px;
   color: #8c9199cb;
   text-transform: capitalize;
@@ -82,6 +83,7 @@
     flex: 1;
     margin-left: 10px;
     color: #8c9199cb;
+  font-family: 'light';
     text-transform: capitalize;
   }
   .inputContainerPostal {
@@ -116,6 +118,7 @@
     flex: 1;
     margin-left: 10px;
     color: #8c9199cb;
+  font-family: 'light';
     text-transform: capitalize;
   }
   .inputContainerCity {
@@ -149,6 +152,8 @@
     flex: 1;
     margin-left: 10px;
     color: #8c9199cb;
+  font-family: 'light';
+
     text-transform: capitalize;
   }
   .inputContainerCountry {

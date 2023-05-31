@@ -90,10 +90,10 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
           salesUserID: item.product.customerID,
           total: item.product.price,
           shippingAddress: {
-            country: "",
-            postal: "",
-            city: "",
-            address: "",
+            country: item.address.country,
+            postal: item.address.postal,
+            city: item.address.city,
+            address: item.address.address,
             phoneNumber: "",
           },
           paymentID: payment.data.createPaymentStripe.id

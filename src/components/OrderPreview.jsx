@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import CustomCardOrder from "./CustomCardOrder";
 import styles from "@/utils/styles/OrderPreview.module.css";
 import CustomTimeOrderCard from "./CustomTimeOrderCard";
@@ -24,16 +24,17 @@ const OrderPreview = ({ route }) => {
           id: order
         }
       })
+      console.log(orderDetail.data.getOrderDetail)
       setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
     }
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchOrder()
   }, [])
 
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={orderProduct} image={images[0]} customer={orderProduct.customer.name} />
+      <CustomCardOrder item={orderProduct} image={images[0]} customer={orderProduct?.customer?.name} />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
