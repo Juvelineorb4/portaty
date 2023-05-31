@@ -27,23 +27,25 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const fetchId = async () => {
     const user = await Auth.currentCredentials();
   }
-  
+
   const global = require("@/utils/styles/global.js");
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
+  // console.log("LO BUSCO: ", product)
   const getImages = async () => {
+    console.log(product.customer.identityId)
     try {
-      Storage.list(`product/${product.code}/`, {
+      Storage.list(`products/${product.code}/`, {
         level: "protected",
-        identityId: 'us-east-1:3345e7d9-d1ef-4430-bb26-603fa52b4e76',
-        pageSize: 10,
+        identityId: product.customer.identityId,
+        pageSize: 3,
       }).then(async (data) => {
-       
+        
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
-              identityId: 'us-east-1:3345e7d9-d1ef-4430-bb26-603fa52b4e76'
+              identityId: product.customer.identityId
             });
             console.log("DATA: ", imageResult)
             return imageResult;

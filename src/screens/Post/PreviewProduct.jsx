@@ -18,7 +18,7 @@ const PreviewProduct = ({ data = {}, route, navigation }) => {
   const { product } = route.params;
   const getImages = async () => {
     try {
-      Storage.list(`product/${product.product.code}/`, {
+      Storage.list(`products/${product.product.code}/`, {
         level: "protected",
         pageSize: 10,
       }).then(async (data) => {

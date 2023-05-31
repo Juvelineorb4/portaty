@@ -879,15 +879,7 @@ export const listCustomerProductStatus = /* GraphQL */ `
             name
             email
             description
-            salesOrders {
-              nextToken
-            }
-            purchaseOrders {
-              nextToken
-            }
-            products {
-              nextToken
-            }
+            identityId
             createdAt
             updatedAt
           }
@@ -909,6 +901,7 @@ export const listCustomerProductStatus = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description

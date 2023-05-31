@@ -261,7 +261,8 @@ const CustomPageProduct = ({ route, navigation }) => {
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
           {items.map((item, index) => (
-            item.status === 'PUBLISHED' && item.product.customerID !== user.attributes.sub ? <CustomCardPage
+            item.status === 'PUBLISHED' && item.product.customerID !== user.attributes.sub ? 
+            <CustomCardPage
             key={index}
             data={item.product}
             onHandlePress={() =>
@@ -269,7 +270,8 @@ const CustomPageProduct = ({ route, navigation }) => {
                 product: item.product,
               })
             }
-          /> : item.status === 'PUBLISHED' && item.product.customerID === user.attributes.sub ? <CustomCardPage
+          /> : item.status === 'PUBLISHED' && item.product.customerID === user.attributes.sub ? 
+          <CustomCardPage
           key={index}
           data={item.product}
           owner
