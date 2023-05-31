@@ -5,6 +5,7 @@ import {
   Image,
   Alert,
   TouchableHighlight,
+  ActivityIndicator
 } from "react-native";
 import styles from "@/utils/styles/PostProduct.module.css";
 import React, { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ import { API, Storage } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 // import * as customPost from '@/graphql/CustomQueries/Post'
 import * as mutations from "@/graphql/mutations";
+import * as mutationsPost from "@/graphql/CustomMutations/Post"
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   brandsId,
@@ -42,9 +44,10 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { es } from "@/utils/constants/lenguage";
 const PostProduct = ({ navigation, route }) => {
-  // console.log(route.params.userID)e
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, watch } = useForm();
+  // isLoading para animacion de publicacion de prodcuto
+  const [isLoading, setIsLoading] = useState(false)
   const [categoriesSelect, setCategoriesSelect] = useRecoilState(categoriesId);
   const [brandsSelect, setBrandsSelect] = useRecoilState(brandsId);
   const [productsSelect, setProductsSelect] = useRecoilState(productsId);
@@ -73,7 +76,7 @@ const PostProduct = ({ navigation, route }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 6],
       quality: 0.5,
     });
     if (!result.canceled) {
@@ -88,130 +91,201 @@ const PostProduct = ({ navigation, route }) => {
   const { price, description, imei, serial } = control;
   // const { price, description, imei, serial } = watch;
 
+  const generateCode = () => {
+    let code = undefined
+    code = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
+      }-${Math.floor(100000 + Math.random() * 900000)}`;
+    return code
+  }
+  const verifyCode = async (ramdonCode) => {
+    let continuar = true
+    while (continuar) {
+      const { data: { listCustomerProducts } } = await API.graphql({
+        query: queries.listCustomerProducts,
+        variables: {
+          filter: {
+            code: {
+              eq: ramdonCode,
+            },
+          },
+        },
+      });
+      if (!(listCustomerProducts.items.length > 0)) continuar = false
+    }
+    return continuar
+  }
+
   const onHandleSubmit = async (data) => {
     const { price, description, imei, serial } = data;
-    console.log(selectCustomerId)
-    /* Ramdon Code */
-    
-    const ramdonCode = `${selectItemCategory.abreviation}-${selectItemBrand.aDBrand.abreviation
-      }-${Math.floor(100000 + Math.random() * 900000)}`;
+    let ramdonCode = undefined
+    // validar que nada este vacio
+    // if (price === undefined || description === undefined || selectItemBrand === undefined || selectItemCategory === undefined || selectItemProduct === undefined || selectItemCondition === undefined) return Alert.alert("Campos Vacios")
+    setIsLoading(true)
+    try {
+      // 1. Generar codigo aleatorio
+      ramdonCode = generateCode();
+      if (ramdonCode === undefined) return () => {
+        Alert.alert("Codigo Ramdon en Undefined")
+        setIsLoading(false)
+      }
+      /* 
+        2.1 Verificar que el codigo no exista
+        2.2 IMPORTANTE: nota hacer un sorkField a code para buscar por codigo un producto
+      */
+      const response = await verifyCode(ramdonCode);
+      if (response === true) return () => {
+        Alert.alert("El codigo no se verifico correctamente")
+        setIsLoading(false)
+      }
 
-    const resultCode = await API.graphql({
-      query: queries.listCustomerProducts,
-      variables: {
-        filter: {
-          code: {
-            eq: ramdonCode,
+      // Cargamos imagenes al storage
+      const keys = await Promise.all(blobImages.map(async (image, index) => {
+        const { key } = await Storage.put(`products/${ramdonCode}/image-${index}.jpg`, image, {
+          level: "protected",
+          contentType: "image/jpeg",
+          metadata: {
+            hola: "hola"
+          },
+          errorCallback: (error) => {
+            console.log("Error al cargar: ", error)
+          }
+        });
+        return key
+      }))
+      // Crear CusTomerProduct
+      const { data: { createCustomerProduct } } = await API.graphql({
+        query: mutationsPost.createPostCustomerProduct,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        variables: {
+          input: {
+            customerID: selectCustomerId,
+            categoryID: selectItemCategory.id,
+            categoryFields: {
+              name: selectItemCategory.name,
+              image: selectItemCategory.image,
+              abreviation: selectItemCategory.abreviation,
+            },
+            brandID: selectItemBrand.aDBrandId,
+            brandFields: {
+              name: selectItemBrand.aDBrand.name,
+              image: selectItemBrand.aDBrand.image,
+              abreviation: selectItemBrand.aDBrand.abreviation,
+            },
+            productID: selectItemProduct.id,
+            productFields: {
+              name: selectItemProduct.name,
+              images: selectItemProduct.images[0],
+            },
+            price: price,
+            description: description,
+            condition: "GOOD",
+            phoneFields: {
+              imei: imei ? imei : "",
+              carrier: selectItemSupplier.title ? selectItemSupplier.title : "",
+              model: selectItemModel.title ? selectItemModel.title : "",
+              storage: selectItemStorage.title ? selectItemStorage.title : "",
+              batery: "",
+            },
+            code: ramdonCode,
+            paths: keys
           },
         },
-      },
-    });
-
-    const dataItem = {
-      customerID: selectCustomerId,
-      categoryID: selectItemCategory.id,
-      categoryFields: {
-        name: selectItemCategory.name,
-        image: selectItemCategory.image,
-        abreviation: selectItemCategory.abreviation,
-      },
-      brandID: selectItemBrand.aDBrandId,
-      brandFields: {
-        name: selectItemBrand.aDBrand.name,
-        image: selectItemBrand.aDBrand.image,
-        abreviation: selectItemBrand.aDBrand.abreviation,
-      },
-      productID: selectItemProduct.id,
-      productFields: {
-        name: selectItemProduct.name,
-        images: selectItemProduct.images[0],
-      },
-      price: price ? price : 100,
-      description: description,
-      condition: "BUENO",
-      phoneFields: {
-        imei: imei,
-        carrier: selectItemSupplier,
-        model: selectItemModel,
-        storage: selectItemStorage,
-        batery: "",
-      },
-      // laptoFields: {
-      //   serial: serial,
-      // },
-      code: ramdonCode,
-    };
-
-    const resultData = await API.graphql({
-      query: mutations.createCustomerProduct,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-      variables: {
-        input: {
-          customerID: selectCustomerId,
-          categoryID: selectItemCategory.id,
-          categoryFields: {
-            name: selectItemCategory.name,
-            image: selectItemCategory.image,
-            abreviation: selectItemCategory.abreviation,
+      });
+      // Crear Status de CustomerProductStatus
+      const { data: { createCustomerProductStatus } } = await API.graphql({
+        query: mutations.createCustomerProductStatus,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        variables: {
+          input: {
+            productID: createCustomerProduct.id,
           },
-          brandID: selectItemBrand.aDBrandId,
-          brandFields: {
-            name: selectItemBrand.aDBrand.name,
-            image: selectItemBrand.aDBrand.image,
-            abreviation: selectItemBrand.aDBrand.abreviation,
-          },
-          productID: selectItemProduct.id,
-          productFields: {
-            name: selectItemProduct.name,
-            images: selectItemProduct.images[0],
-          },
-          price: price,
-          description: description,
-          condition: "GOOD",
-          phoneFields: {
-            imei: imei ? imei : "",
-            carrier: selectItemSupplier.title ? selectItemSupplier.title : "",
-            model: selectItemModel.title ? selectItemModel.title : "",
-            storage: selectItemStorage.title ? selectItemStorage.title : "",
-            batery: "",
-          },
-          // laptoFields: {
-          //   serial: serial,
-          // },
-          code: ramdonCode,
         },
-      },
-    });
-    const resultStatus = await API.graphql({
-      query: mutations.createCustomerProductStatus,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-      variables: {
-        input: {
-          productID: resultData.data.createCustomerProduct.id,
+      });
+      // Crear Relacion bidirecional entre CustomerProduct y Status
+      const updateStatus = await API.graphql({
+        query: mutations.updateCustomerProduct,
+        variables: {
+          input: {
+            id: createCustomerProduct.id,
+            customerProductStatusId: createCustomerProductStatus.id,
+          },
         },
-      },
-    });
-    const updateStatus = await API.graphql({
-      query: mutations.updateCustomerProduct,
-      variables: {
-        input: {
-          id: resultData.data.createCustomerProduct.id,
-          customerProductStatusId:
-            resultStatus.data.createCustomerProductStatus.id,
-        },
-      },
-    });
-    // const uploadImage = async () => {
-    blobImages.map((image, index) => {
-      Storage.put(`product/${ramdonCode}/image-${index}.jpg`, image, {
-        level: "protected",
-        contentType: "image/jpeg",
-      }); //.then((result) => console.log(result))
-    });
+      });
 
-    navigation.navigate("Post_Complete", {
-      product: resultStatus.data.createCustomerProductStatus,
-    });
+      // naviegar
+      navigation.navigate("Post_Complete", {
+        product: createCustomerProductStatus,
+      });
+    } catch (error) {
+      console.error("Error al Publicar Producto", error);
+      setIsLoading(false)
+    }
+    setIsLoading(false)
+
+    // const resultData = await API.graphql({
+    //   query: mutations.createCustomerProduct,
+    //   authMode: "AMAZON_COGNITO_USER_POOLS",
+    //   variables: {
+    //     input: {
+    //       customerID: selectCustomerId,
+    //       categoryID: selectItemCategory.id,
+    //       categoryFields: {
+    //         name: selectItemCategory.name,
+    //         image: selectItemCategory.image,
+    //         abreviation: selectItemCategory.abreviation,
+    //       },
+    //       brandID: selectItemBrand.aDBrandId,
+    //       brandFields: {
+    //         name: selectItemBrand.aDBrand.name,
+    //         image: selectItemBrand.aDBrand.image,
+    //         abreviation: selectItemBrand.aDBrand.abreviation,
+    //       },
+    //       productID: selectItemProduct.id,
+    //       productFields: {
+    //         name: selectItemProduct.name,
+    //         images: selectItemProduct.images[0],
+    //       },
+    //       price: price,
+    //       description: description,
+    //       condition: "GOOD",
+    //       phoneFields: {
+    //         imei: imei ? imei : "",
+    //         carrier: selectItemSupplier.title ? selectItemSupplier.title : "",
+    //         model: selectItemModel.title ? selectItemModel.title : "",
+    //         storage: selectItemStorage.title ? selectItemStorage.title : "",
+    //         batery: "",
+    //       },
+    //       // laptoFields: {
+    //       //   serial: serial,
+    //       // },
+    //       code: ramdonCode,
+    //     },
+    //   },
+    // });
+    // const resultStatus = await API.graphql({
+    //   query: mutations.createCustomerProductStatus,
+    //   authMode: "AMAZON_COGNITO_USER_POOLS",
+    //   variables: {
+    //     input: {
+    //       productID: resultData.data.createCustomerProduct.id,
+    //     },
+    //   },
+    // });
+    // const updateStatus = await API.graphql({
+    //   query: mutations.updateCustomerProduct,
+    //   variables: {
+    //     input: {
+    //       id: resultData.data.createCustomerProduct.id,
+    //       customerProductStatusId:
+    //         resultStatus.data.createCustomerProductStatus.id,
+    //     },
+    //   },
+    // });
+
+
+    // navigation.navigate("Post_Complete", {
+    //   product: resultStatus.data.createCustomerProductStatus,
+    // });
   };
   const fetchData = async () => {
     try {
@@ -662,7 +736,7 @@ const PostProduct = ({ navigation, route }) => {
           ""
         )}
         <CustomButton
-          text={es.post.product.button}
+          text={!isLoading ? es.post.product.button : <ActivityIndicator />}
           handlePress={
             // !selectItemCategory.name ||
             // !selectItemBrand.name ||

@@ -187,8 +187,8 @@ type CustomerProduct @model @auth(rules:[
   productID: ID! @index(name:"byADProductCustomerProduct")
   adproduct: ADProduct @belongsTo(fields:["productID"])
   productFields: ProductFields
-  # 
   code: String
+  paths: [String]
   price: Float!
   condition: Condition
   description: String
@@ -218,7 +218,7 @@ type CustomerProductStatus @model @auth(rules:[
   {allow: groups, groups:["admin"]},
   {allow: owner}
   {allow: private, provider: iam, operations:[read]},
-  {allow: private, operations:[read]}
+  {allow: private, operations:[read, update]}
 ]){
   id: ID!
   productID: ID
@@ -267,7 +267,9 @@ type OrderItem @model @auth(rules:[
 
 type PaymentStripe @model @auth(rules:[
   {allow: owner, operations:[read, create]},
-  {allow: groups, groups:["admin"]}
+  {allow: groups, groups:["admin"]},
+  {allow: private, provider: iam, operations: [read]},
+  {allow: private, operations:[read]}
 ]){
   id: ID!
   paymentStripeID: String!

@@ -9,12 +9,14 @@ const CustomButton = ({
   buttonStyles,
   icon = {},
   image = {},
+  disabled = false
 }) => {
   return (
     <TouchableOpacity
       style={buttonStyles}
       onPress={handlePress}
       activeOpacity={1}
+      disabled={disabled}
     >
       {text && <Text style={textStyles}>{text}</Text>}
       {icon.status && (
