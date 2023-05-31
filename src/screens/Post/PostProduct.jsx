@@ -119,7 +119,7 @@ const PostProduct = ({ navigation, route }) => {
     const { price, description, imei, serial } = data;
     let ramdonCode = undefined
     // validar que nada este vacio
-    // if (price === undefined || description === undefined || selectItemBrand === undefined || selectItemCategory === undefined || selectItemProduct === undefined || selectItemCondition === undefined) return Alert.alert("Campos Vacios")
+    if (price === undefined || description === undefined || selectItemBrand === undefined || selectItemCategory === undefined || selectItemProduct === undefined || selectItemCondition === undefined) return Alert.alert("Campos Vacios")
     setIsLoading(true)
     try {
       // 1. Generar codigo aleatorio
@@ -222,70 +222,6 @@ const PostProduct = ({ navigation, route }) => {
     }
     setIsLoading(false)
 
-    // const resultData = await API.graphql({
-    //   query: mutations.createCustomerProduct,
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    //   variables: {
-    //     input: {
-    //       customerID: selectCustomerId,
-    //       categoryID: selectItemCategory.id,
-    //       categoryFields: {
-    //         name: selectItemCategory.name,
-    //         image: selectItemCategory.image,
-    //         abreviation: selectItemCategory.abreviation,
-    //       },
-    //       brandID: selectItemBrand.aDBrandId,
-    //       brandFields: {
-    //         name: selectItemBrand.aDBrand.name,
-    //         image: selectItemBrand.aDBrand.image,
-    //         abreviation: selectItemBrand.aDBrand.abreviation,
-    //       },
-    //       productID: selectItemProduct.id,
-    //       productFields: {
-    //         name: selectItemProduct.name,
-    //         images: selectItemProduct.images[0],
-    //       },
-    //       price: price,
-    //       description: description,
-    //       condition: "GOOD",
-    //       phoneFields: {
-    //         imei: imei ? imei : "",
-    //         carrier: selectItemSupplier.title ? selectItemSupplier.title : "",
-    //         model: selectItemModel.title ? selectItemModel.title : "",
-    //         storage: selectItemStorage.title ? selectItemStorage.title : "",
-    //         batery: "",
-    //       },
-    //       // laptoFields: {
-    //       //   serial: serial,
-    //       // },
-    //       code: ramdonCode,
-    //     },
-    //   },
-    // });
-    // const resultStatus = await API.graphql({
-    //   query: mutations.createCustomerProductStatus,
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    //   variables: {
-    //     input: {
-    //       productID: resultData.data.createCustomerProduct.id,
-    //     },
-    //   },
-    // });
-    // const updateStatus = await API.graphql({
-    //   query: mutations.updateCustomerProduct,
-    //   variables: {
-    //     input: {
-    //       id: resultData.data.createCustomerProduct.id,
-    //       customerProductStatusId:
-    //         resultStatus.data.createCustomerProductStatus.id,
-    //     },
-    //   },
-    // });
-
-
-    // navigation.navigate("Post_Complete", {
-    //   product: resultStatus.data.createCustomerProductStatus,
-    // });
   };
   const fetchData = async () => {
     try {
@@ -294,7 +230,6 @@ const PostProduct = ({ navigation, route }) => {
         authMode: "AWS_IAM",
       });
       setDataCategories(categories.data.listADCategories.items);
-      // console.log(categories.data.listADCategories.items)
     } catch (error) {
       console.error(error);
     }
