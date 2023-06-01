@@ -25,7 +25,6 @@ const Navigation = () => {
     
       setUserAuth(result);
       if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
-      // await updateAttributeIdentityID(result.attributes)
       // configStoragePrefix(result);
       // console.log("Configurado")
     } catch (error) {
