@@ -10,50 +10,23 @@ import { useNavigation } from "@react-navigation/native";
 const CustomCardOrderList = ({data = {}, status}) => {
   const global = require("@/utils/styles/global.js");
   const [deleteCard, setDeleteCard] = useState(true);
-  const [orderProduct, setOrderProduct] = useState({})
-  const [productName, setProductName] = useState('')
-  const [date, setDate] = useState('')
   const [keyImages, setKeyImages] = useState([]);
   const navigation = useNavigation()
-
-  const fetchOrder = async () => {
-    const orderDetail = await API.graphql({
-      query: customProfile.getOrderDetail,
-      variables: {
-        id: data.items.items[0].orderID,
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    const product = await API.graphql({
-      query: customProfile.getADProductPrueba,
-      variables: {
-        id: orderDetail.data.getOrderDetail.items.items[0].item.product.productID,
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    setProductName(product.data.getADProduct.name)
-    setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
-
-    const date = new Date(orderDetail.data.getOrderDetail.items.items[0].item.product.createdAt);
+  const { paths, customer, price, adproduct } = data.items.items[0].item.product
+  const date = new Date(data.items.items[0].createdAt);
     const formattedDate = date.toLocaleDateString('es-ES');
-    setDate(formattedDate)
-  }
   const getImages = async () => {
     try {
-      Storage.list(`product/${orderProduct.code}/`, {
-        level: "protected",
-        pageSize: 10,
-      }).then(async (data) => {
         const promises = await Promise.all(
-          data.results.map(async (image) => {
-            const imageResult = await Storage.get(image.key, {
+          paths.map(async (image) => {
+            const imageResult = await Storage.get(image, {
               level: "protected",
+              identityId: customer.identityId
             });
             return imageResult;
           })
         );
         setKeyImages(promises);
-      });
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +34,6 @@ const CustomCardOrderList = ({data = {}, status}) => {
 
   useLayoutEffect(() => {
     getImages();
-    fetchOrder()
   }, []);
 
   return deleteCard ? (
@@ -97,19 +69,18 @@ const CustomCardOrderList = ({data = {}, status}) => {
         </View>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.name, global.topGray]}>{productName}</Text>
-        <Text style={[styles.price, global.topGray]}>${orderProduct.price}.00</Text>
+        <Text style={[styles.name, global.topGray]}>{adproduct.name}</Text>
+        <Text style={[styles.price, global.topGray]}>${price}.00</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          {status === 'sell' ? `Vendido el ${date}` : `Comprado el ${date}`}
+          {status === 'sell' ? `Vendido el ${formattedDate}` : `Comprado el ${formattedDate}`}
         </Text>
 
         <View style={styles.options}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ViewOrderList', {
-              product: orderProduct,
+              product: data.items.items[0].item.product,
               images: keyImages,
-              data: date,
             })}
             style={styles.option}
           >

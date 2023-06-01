@@ -3714,10 +3714,14 @@ export const getOrderDetail = /* GraphQL */ `
             product {
               id
               customerID
+              customer {
+                indentityId
+              }
               categoryID
               brandID
               productID
               code
+              paths
               price
               condition
               description

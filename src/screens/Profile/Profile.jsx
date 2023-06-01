@@ -8,7 +8,7 @@ import CustomSelect from "@/components/CustomSelect";
 // amplify
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
-import * as customHome from "@/graphql/CustomQueries/Home";
+import * as customProfile from "@/graphql/CustomQueries/Profile";
 import * as mutations from "@/graphql/mutations";
 
 // recoil
@@ -71,12 +71,12 @@ const Profile = ({ navigation }) => {
 
   const fecthShop = async () => {
     const result = await API.graphql({
-      query: queries.getCustomerShop,
+      query: customProfile.getCustomerShop,
       variables: { userID: userAuth?.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
     const listProducts = await API.graphql({
-      query: customHome.listCustomerProductStatus,
+      query: customProfile.listCustomerProductStatus,
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
     setItems(listProducts.data.listCustomerProductStatuses.items)

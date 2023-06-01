@@ -33,7 +33,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const [keyImages, setKeyImages] = useState([]);
   // console.log("LO BUSCO: ", product)
   const getImages = async () => {
-    console.log(product.customer.identityId)
     try {
       Storage.list(`products/${product.code}/`, {
         level: "protected",

@@ -7,6 +7,8 @@ import * as customProfile from "@/graphql/CustomQueries/Profile";
 
 const CustomCardOrder = ({item, image, customer}) => {
   const global = require("@/utils/styles/global.js");
+ 
+  
   return (
     <View style={[styles.container]}>
       <View style={styles.image}>
@@ -17,7 +19,7 @@ const CustomCardOrder = ({item, image, customer}) => {
             resizeMode: "contain",
             alignSelf: "center",
           }}
-          // source={{uri: image}}
+          source={{uri: image}}
         />
       </View>
       <View style={styles.content}>

@@ -10,7 +10,7 @@ import * as mutations from "@/graphql/mutations";
 
 const OrderPreviewList = ({route}) => {
   const global = require("@/utils/styles/global.js");
-  const { product, images, date } = route.params
+  const { product, images } = route.params
   return (
     <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
       <Text style={styles.title}>Pedido</Text>
