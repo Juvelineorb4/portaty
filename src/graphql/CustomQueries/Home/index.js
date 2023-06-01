@@ -987,8 +987,10 @@ export const getOrderDetailPreview = /* GraphQL */ `
               id 
               price
               code
+              paths
               customer {
                 name
+                identityId
               }
               # dicho producto es un customerProduct
               adproduct{ 

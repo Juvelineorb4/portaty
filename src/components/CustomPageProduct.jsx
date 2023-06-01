@@ -260,29 +260,43 @@ const CustomPageProduct = ({ route, navigation }) => {
             </View>
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
-          {items.map((item, index) => (
-            item.status === 'PUBLISHED' && item.product.customerID !== user.attributes.sub ? 
-            <CustomCardPage
-            key={index}
-            data={item.product}
-            onHandlePress={() =>
-              navigation.navigate("SellerProduct", {
-                product: item.product,
-              })
-            }
-          /> : item.status === 'PUBLISHED' && item.product.customerID === user.attributes.sub ? 
-          <CustomCardPage
-          key={index}
-          data={item.product}
-          owner
-          onHandlePress={() =>
-            navigation.navigate("SellerProduct", {
-              product: item.product,
-            })
-          }
-        /> : ''
-          ))}
-          {items.length <= 0 ? <Text style={{fontFamily: 'light', textAlign: 'center', fontSize: 24}}>N/T</Text> : ''}
+          {items.map((item, index) =>
+            item.status === "PUBLISHED" &&
+            item.product.customerID !== user.attributes.sub ? (
+              <CustomCardPage
+                key={index}
+                data={item.product}
+                onHandlePress={() =>
+                  navigation.navigate("SellerProduct", {
+                    product: item.product,
+                  })
+                }
+              />
+            ) : item.status === "PUBLISHED" &&
+              item.product.customerID === user.attributes.sub ? (
+              <CustomCardPage
+                key={index}
+                data={item.product}
+                owner
+                onHandlePress={() =>
+                  navigation.navigate("SellerProduct", {
+                    product: item.product,
+                  })
+                }
+              />
+            ) : (
+              ""
+            )
+          )}
+          {items.length <= 0 ? (
+            <Text
+              style={{ fontFamily: "light", textAlign: "center", fontSize: 24 }}
+            >
+              N/T
+            </Text>
+          ) : (
+            ""
+          )}
         </View>
       </View>
     </ScrollView>
