@@ -99,7 +99,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
             <Text style={[styles.titleProduct, global.black]}>
               {product.productFields.name}
             </Text>
-            {user.attributes.sub === product.customerID && (
+            {user?.attributes?.sub === product.customerID && (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   style={{
@@ -142,7 +142,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
                 <Text style={[styles.priceText, global.midGray]}>
                   ${product.price}.00
                 </Text>
-                {user.attributes.sub !== product.customerID && (
+                {user?.attributes?.sub !== product.customerID && (
                   <TouchableOpacity
                     onPress={onHandleNavigation}
                     style={[

@@ -70,16 +70,14 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
+    console.log(userAuth.username)
     const result = await API.graphql({
       query: customProfile.getCustomerShop,
       variables: { userID: userAuth?.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const listProducts = await API.graphql({
-      query: customProfile.listCustomerProductStatus,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    setItems(listProducts.data.listCustomerProductStatuses.items)
+  
+    setItems(result.data.getCustomerShop.products.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
     setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)
     setSalesOrders(result.data.getCustomerShop.salesOrders.items)
@@ -117,7 +115,10 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {userAuth && userAuth?.attributes?.name}
+          {userAuth && (userAuth?.attributes?.name).toUpperCase()}
+        </Text>
+        <Text style={[styles.user, { color: "lightgray", marginTop: 1 }]}>
+          {userAuth && (userAuth?.attributes?.email).toUpperCase()}
         </Text>
       </View>
       <View style={styles.content}>

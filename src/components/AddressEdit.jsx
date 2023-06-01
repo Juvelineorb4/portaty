@@ -28,7 +28,7 @@ const AddressEdit = ({ route }) => {
       query: customMutations.createCustomerShippingAddress,
       variables: {
         input: {
-          customerID: user.attributes.sub,
+          customerID: user?.attributes?.sub,
           title: title.trim(),
           address: address.trim(),
           postal: postal.trim(),
@@ -41,7 +41,7 @@ const AddressEdit = ({ route }) => {
     const addressItem = await API.graphql({
       query: customQueries.getAddress,
       variables: {
-        userID: user.attributes.sub,
+        userID: user?.attributes?.sub,
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
@@ -52,7 +52,7 @@ const AddressEdit = ({ route }) => {
     const addressItem = await API.graphql({
       query: customQueries.getAddress,
       variables: {
-        userID: user.attributes.sub,
+        userID: user?.attributes?.sub,
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });

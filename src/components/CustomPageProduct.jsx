@@ -262,7 +262,7 @@ const CustomPageProduct = ({ route, navigation }) => {
           </View>
           {items.map((item, index) =>
             item.status === "PUBLISHED" &&
-            item.product.customerID !== user.attributes.sub ? (
+            item.product.customerID !== user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
                 data={item.product}
@@ -273,7 +273,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                 }
               />
             ) : item.status === "PUBLISHED" &&
-              item.product.customerID === user.attributes.sub ? (
+              item.product.customerID === user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
                 data={item.product}

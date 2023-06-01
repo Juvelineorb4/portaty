@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Modal,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import { es } from "@/utils/constants/lenguage";
@@ -18,7 +19,7 @@ import {
   presentPaymentSheet,
 } from "@stripe/stripe-react-native";
 // amplify
-import { Auth, API } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
 import { useNavigation } from "@react-navigation/native";
@@ -29,7 +30,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
   const [detail, setDetail] = useState({});
   const global = require("@/utils/styles/global.js");
   const [onCreatePaymentIntent] = usePayment();
-  
+
   const onHandleBuy = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
     // 1. Create a payment intent
@@ -72,6 +73,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
 
   const onCreateOrder = async ({ amount, paymentID, attributes }) => {
 
+    // como el pago es exitoso crear registro de pago con la referencia del pago 
     const payment = await API.graphql({
       query: mutations.createPaymentStripe,
       variables: {
@@ -82,6 +84,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
+    // crear la order que asocia el pago con el producto comprado 
     const orderDetail = await API.graphql({
       query: mutations.createOrderDetail,
       variables: {
@@ -101,16 +104,27 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    // asociar el prodcuto con la orden creada
     const orderItem = await API.graphql({
       query: mutations.createOrderItem,
       variables: {
         input: {
           orderID: orderDetail.data.createOrderDetail.id,
-          itemID: item.product.status.id,
+          itemID: item?.product.status.id,
         },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    console.log("ID1: ", item?.id)
+    console.log("ID2: ", item?.product.status.id)
+    // cambiar status del producto comprado 
+    const statusParams = {
+      input: {
+        id: item?.product.status.id,
+        status: "SOLD"
+      }
+    }
+    const changeStatusItem = await API.graphql(graphqlOperation(mutations.updateCustomerProductStatus, statusParams))
     setDetail(orderDetail.data.createOrderDetail.id)
     setModalVisible(!modalVisible)
   };
