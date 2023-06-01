@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import styles from "@/utils/styles/Register.module.css";
 import CustomText from "@/components/CustomText";
@@ -16,6 +16,7 @@ const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
 const Register = () => {
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, watch } = useForm();
+  const [isLoading, setIsLoading] = useState(false)
   const pwd = watch("password")
   const navigation = useNavigation();
   const [active, setActive] = useState(true);
@@ -26,6 +27,7 @@ const Register = () => {
 
   const onHandleRegister = async (data) => {
     const { email, name, password } = data
+    setIsLoading(true)
     try {
       const result = await Auth.signUp({
         username: email.trim(),
@@ -40,7 +42,9 @@ const Register = () => {
       })
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
     }
+    setIsLoading(false)
   }
 
   return (
@@ -174,10 +178,12 @@ const Register = () => {
           </View>
 
           <CustomButton
-            text={es.authentication.register.button}
+
+            text={!isLoading ? es.authentication.register.button : <ActivityIndicator />}
             handlePress={handleSubmit(onHandleRegister)}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
+            disabled={isLoading}
           />
         </View>
       </ScrollView>

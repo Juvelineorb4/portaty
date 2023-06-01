@@ -26,7 +26,7 @@ const Checkout = ({ navigation, route }) => {
     const addressItem = await API.graphql({
       query: customQueries.getAddress,
       variables: {
-        userID: user.attributes.sub,
+        userID: user?.attributes?.sub,
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });

@@ -6,7 +6,6 @@ import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
-
 // amplify 
 import { Amplify } from 'aws-amplify';
 import awsconfig from '@/aws-exports';

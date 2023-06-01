@@ -211,6 +211,7 @@ const PostProduct = ({ navigation, route }) => {
           },
         },
       });
+      console.log(updateStatus)
 
       // naviegar
       navigation.navigate("Post_Complete", {
@@ -672,23 +673,10 @@ const PostProduct = ({ navigation, route }) => {
         )}
         <CustomButton
           text={!isLoading ? es.post.product.button : <ActivityIndicator />}
-          handlePress={
-            // !selectItemCategory.name ||
-            // !selectItemBrand.name ||
-            // !selectItemModel.title ||
-            // !selectItemProduct.name ||
-            // !selectItemCondition.title ||
-            // !selectItemStorage.title ||
-            // !selectItemSupplier.title ||
-            // // !price ||
-            // !description ||
-            // !imei ||
-            // !serial
-            //   ? () => setSelectErrorPostProduct(true)
-            handleSubmit(onHandleSubmit)
-          }
+          handlePress={handleSubmit(onHandleSubmit)}
           textStyles={[styles.textPublish, global.white]}
           buttonStyles={[styles.publish, global.mainBgColor]}
+          disabled={isLoading}
         />
       </View>
     </ScrollView>

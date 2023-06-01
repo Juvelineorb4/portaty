@@ -17,12 +17,14 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
         pageSize: 10,
         identityId: userKey
       }).then(async (data) => {
+       
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
               identityId: userKey
             });
+            console.log(imageResult)
             return imageResult;
           })
         );
