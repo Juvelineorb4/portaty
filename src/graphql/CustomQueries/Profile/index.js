@@ -5,119 +5,6 @@ export const getCustomerShop = /* GraphQL */ `
       name
       email
       description
-      favorites {
-        items {
-          id
-          itemID
-          item {
-            id
-            productID
-            product {
-              id
-              customerID
-              categoryID
-              brandID
-              productID
-              code
-              price
-              condition
-              description
-              owner
-              createdAt
-              updatedAt
-              customerProductStatusId
-            }
-            status
-            owner
-            favoriteItems {
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          customerShopID
-          owner
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      salesOrders {
-        items {
-          id
-          purchaseUserID
-          salesUserID
-          total
-          items {
-            items {
-              id
-              orderID
-              itemID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          paymentID
-          payment {
-            id
-            paymentStripeID
-            metadata
-            createdAt
-            updatedAt
-            owner
-          }
-          shippingAddress {
-            country
-            postal
-            city
-            address
-            phoneNumber
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      purchaseOrders {
-        items {
-          id
-          purchaseUserID
-          salesUserID
-          total
-          items {
-            items {
-              id
-              orderID
-              itemID
-              item {
-                product {
-                  productID
-                }
-              }
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          paymentID
-          payment {
-            id
-            paymentStripeID
-            metadata
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       products {
         items {
           id
@@ -207,6 +94,70 @@ export const getCustomerShop = /* GraphQL */ `
         }
         nextToken
       }
+      salesOrders {
+        items {
+          total
+          items {
+            items {
+              id
+              item {
+                product {
+                  price
+                  adproduct {
+                    name
+                  }
+                  paths
+                  customer {
+                    name
+                    userID
+                    identityId
+                  }
+                }
+              }
+              createdAt
+            }
+            nextToken
+          }
+          shippingAddress {
+            country
+            postal
+            city
+            address
+            phoneNumber
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      purchaseOrders {
+        items {
+          total
+          items {
+            items {
+              item {
+                product {
+                  productID
+                  price
+                  adproduct {
+                    name
+                  }
+                  paths
+                  customer {
+                    name
+                    userID
+                    identityId
+                  }
+                }
+              }
+              createdAt
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
       shippingAddress {
         items {
           id
@@ -222,9 +173,6 @@ export const getCustomerShop = /* GraphQL */ `
         }
         nextToken
       }
-      owner
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -237,6 +185,7 @@ export const getOrderDetail = /* GraphQL */ `
       total
       items {
         items {
+          createdAt
           id
           orderID
           itemID
@@ -282,7 +231,97 @@ export const getOrderDetail = /* GraphQL */ `
     }
   }
 `;
-
+export const listCustomerProductStatus = /* GraphQL */ `
+  query ListCustomerProductStatuses(
+    $filter: ModelCustomerProductStatusFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCustomerProductStatuses(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productID
+        product {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            identityId
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          productFields {
+            name
+            images
+          }
+          code
+          paths
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        status
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getADProductPrueba = /* GraphQL */ `
   query GetADProduct($id: ID!) {
     getADProduct(id: $id) {

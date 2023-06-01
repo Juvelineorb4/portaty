@@ -10,20 +10,21 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
   const global = require("@/utils/styles/global.js");
   const [save, setSave] = useState(false);
   const [keyImages, setKeyImages] = useState([]);
-  const getImages = async () => {
-    console.log(data.customer?.identityId)
+  const getImages = async (userKey) => {
     try {
       Storage.list(`products/${data.code}/`, {
         level: "protected",
         pageSize: 10,
-        identityId: data.customer?.identityId
+        identityId: userKey
       }).then(async (data) => {
+       
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
-              identityId: data.customer?.identityId
+              identityId: userKey
             });
+            console.log(imageResult)
             return imageResult;
           })
         );
@@ -33,21 +34,8 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
       console.error(error);
     }
   };
-  // const fetchData = async () => {
-  //   try {
-  //     const shops = await API.graphql({
-  //       query: queries.listCustomerShops,
-  //       variables: { owner: data.owner},
-  //       authMode: "AMAZON_COGNITO_USER_POOLS",
-  //     });
-  //     console.log(shops.data.listCustomerShops.items[0].owner === data.owner)
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
   useLayoutEffect(() => {
-    // fetchData()
-    getImages();
+    getImages(data.customer.identityId);
   }, []);
   return (
     <View style={[styles.container]}>

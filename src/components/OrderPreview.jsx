@@ -12,11 +12,9 @@ import * as mutations from "@/graphql/mutations";
 const OrderPreview = ({ route }) => {
   const global = require("@/utils/styles/global.js");
   const { product, order, images } = route.params
-  const [orderPreview, setOrderPreview] = useState("")
+  // const [cardOrder, setCardOrder] = useState({})
   const [orderProduct, setOrderProduct] = useState("")
-  const [customerShop, setCustomerShop] = useState('')
   const fetchOrder = async () => {
-
       const orderDetail = await API.graphql({
         query: customHome.getOrderDetailPreview,
         authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -24,7 +22,7 @@ const OrderPreview = ({ route }) => {
           id: order
         }
       })
-      console.log(orderDetail.data.getOrderDetail)
+      // setCardOrder(orderDetail.data.getOrderDetail.items.items[0].item.product)
       setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
     }
   useLayoutEffect(() => {

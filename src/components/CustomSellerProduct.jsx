@@ -33,7 +33,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const [keyImages, setKeyImages] = useState([]);
   // console.log("LO BUSCO: ", product)
   const getImages = async () => {
-    console.log(product.customer.identityId)
     try {
       Storage.list(`products/${product.code}/`, {
         level: "protected",
@@ -47,7 +46,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
               level: "protected",
               identityId: product.customer.identityId
             });
-            console.log("DATA: ", imageResult)
             return imageResult;
           })
         );
@@ -101,7 +99,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
             <Text style={[styles.titleProduct, global.black]}>
               {product.productFields.name}
             </Text>
-            {user.attributes.sub === product.customerID && (
+            {user?.attributes?.sub === product.customerID && (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   style={{
@@ -144,7 +142,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
                 <Text style={[styles.priceText, global.midGray]}>
                   ${product.price}.00
                 </Text>
-                {user.attributes.sub !== product.customerID && (
+                {user?.attributes?.sub !== product.customerID && (
                   <TouchableOpacity
                     onPress={onHandleNavigation}
                     style={[

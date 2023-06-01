@@ -15,10 +15,10 @@ import * as customQueries from "@/graphql/CustomQueries/ShippingAddress";
 const Checkout = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
   const { data, images } = route.params
-  const [address, setAddress] = useState([]);
+  const [address, setAddress] = useState({});
   const user = useRecoilValue(userAutenticated);
   const [activeAddress, setActiveAddress] = useRecoilState(addressSelected);
-  console.log(activeAddress)
+  console.log(address)
   /* Navegaciones */
   const onHandlePress = () => navigation.navigate("Address_Edit", {
     item: data
@@ -27,7 +27,7 @@ const Checkout = ({ navigation, route }) => {
     const addressItem = await API.graphql({
       query: customQueries.getAddress,
       variables: {
-        userID: user.attributes.sub,
+        userID: user?.attributes?.sub,
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
@@ -45,8 +45,8 @@ const Checkout = ({ navigation, route }) => {
 
         <CustomAddressCard
           content={{
-            title: address.title ? address.title : 'Título',
-            text: address.address ? address.address : 'Dirección',
+            title: address ? address.title : 'Título',
+            text: address ? address.address : 'Dirección',
           }}
           handlePress={onHandlePress}
         />

@@ -8,7 +8,7 @@ import CustomSelect from "@/components/CustomSelect";
 // amplify
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
-import * as customHome from "@/graphql/CustomQueries/Home";
+import * as customProfile from "@/graphql/CustomQueries/Profile";
 import * as mutations from "@/graphql/mutations";
 
 // recoil
@@ -70,16 +70,13 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
+    console.log(userAuth.username)
     const result = await API.graphql({
-      query: queries.getCustomerShop,
-      variables: { userID: userAuth?.username },
+      query: customProfile.getCustomerShop,
+      variables: { userID: userAuth.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    const listProducts = await API.graphql({
-      query: customHome.listCustomerProductStatus,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    setItems(listProducts.data.listCustomerProductStatuses.items)
+    setItems(result.data.getCustomerShop.products.items)
     setSelectCustomerId(result.data.getCustomerShop.userID);
     setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)
     setSalesOrders(result.data.getCustomerShop.salesOrders.items)
@@ -103,8 +100,8 @@ const Profile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (userAuth) fecthShop();
-  }, [userAuth]);
+    fecthShop();
+  }, []);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]}>
@@ -117,7 +114,10 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {userAuth && userAuth?.attributes?.name}
+          {userAuth && (userAuth?.attributes?.name).toUpperCase()}
+        </Text>
+        <Text style={[styles.user, { color: "lightgray", marginTop: 1 }]}>
+          {userAuth && (userAuth?.attributes?.email).toUpperCase()}
         </Text>
       </View>
       <View style={styles.content}>
