@@ -15,7 +15,7 @@ const ListProducts = ({ navigation, route }) => {
         {data.map((item, index) => (
           <CustomCardProductPublished
             onHandleNavigation={() =>
-              navigation.navigate("EditListProduct", { product: item.product })
+              navigation.navigate("EditListProduct", { product: item })
             }
             item={item}
             key={index}

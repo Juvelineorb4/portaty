@@ -121,7 +121,7 @@ export const es = {
       pending: 'Mis productos pendientes',
       card: {
         available: "Disponible",
-        message: "Publicado el 17 de Abril de 2023",
+        message: "Publicado el ",
         details: "Ver",
         delete: "Borrar",
       },
@@ -130,7 +130,7 @@ export const es = {
       title: "Mis productos pendientes",
       card: {
         available: "Pendiente",
-        message: "En revisión desde el 17 de Abril de 2023",
+        message: "En revisión desde el ",
         delete: "Borrar",
       },
     },

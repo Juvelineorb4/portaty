@@ -12,23 +12,7 @@ export const getCustomerShop = /* GraphQL */ `
           customer {
             userID
             name
-            email
-            description
-            favorites {
-              nextToken
-            }
-            salesOrders {
-              nextToken
-            }
-            purchaseOrders {
-              nextToken
-            }
-            products {
-              nextToken
-            }
-            owner
-            createdAt
-            updatedAt
+            identityId
           }
           categoryID
           categoryFields {
@@ -48,6 +32,7 @@ export const getCustomerShop = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -198,6 +183,7 @@ export const getOrderDetail = /* GraphQL */ `
               customer {
                 userID
                 name
+                identityId
               }
               categoryID
               brandID
