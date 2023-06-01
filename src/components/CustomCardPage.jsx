@@ -11,19 +11,21 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
   const [save, setSave] = useState(false);
   const [keyImages, setKeyImages] = useState([]);
   const getImages = async () => {
-    console.log(data.customer?.identityId)
+    console.log(data.customer.identityId)
     try {
       Storage.list(`products/${data.code}/`, {
         level: "protected",
         pageSize: 10,
-        identityId: data.customer?.identityId
+        identityId: data.customer.identityId
       }).then(async (data) => {
+       
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
-              identityId: data.customer?.identityId
+              identityId: data.customer.identityId
             });
+            console.log(imageResult)
             return imageResult;
           })
         );

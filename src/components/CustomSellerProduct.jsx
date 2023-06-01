@@ -47,7 +47,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
               level: "protected",
               identityId: product.customer.identityId
             });
-            console.log("DATA: ", imageResult)
             return imageResult;
           })
         );
