@@ -124,7 +124,9 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
         status: "SOLD"
       }
     }
-    const changeStatusItem = await API.graphql(graphqlOperation(mutations.updateCustomerProductStatus, statusParams))
+    const changeStatusItem = await API.graphql(
+      graphqlOperation(mutations.updateCustomerProductStatus, statusParams)
+    )
     setDetail(orderDetail.data.createOrderDetail.id)
     setModalVisible(!modalVisible)
   };

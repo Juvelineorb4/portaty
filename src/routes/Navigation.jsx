@@ -22,6 +22,7 @@ const Navigation = () => {
       const result = await Auth.currentAuthenticatedUser({
         bypassCache: true
       });
+    
       setUserAuth(result);
       if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
       // await updateAttributeIdentityID(result.attributes)

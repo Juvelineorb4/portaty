@@ -32,6 +32,16 @@ const Login = ({ navigation }) => {
     }
     setIsLoading(false)
   };
+
+  const onHandleLoginWithGoogle = async () => {
+    try {
+      const google = await Auth.federatedSignIn({ provider: 'Google' });
+      console.log("GOOLE: ", google)
+      // El usuario ha iniciado sesión correctamente con Google
+    } catch (error) {
+      console.log('Error al iniciar sesión con Google:', error);
+    }
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
@@ -130,7 +140,9 @@ const Login = ({ navigation }) => {
 
         <View style={styles.social}>
           <View style={styles.iconSocial}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={onHandleLoginWithGoogle}
+            >
               <Image
                 style={{
                   width: 28,
