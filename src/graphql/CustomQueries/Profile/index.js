@@ -5,6 +5,95 @@ export const getCustomerShop = /* GraphQL */ `
       name
       email
       description
+      products {
+        items {
+          id
+          customerID
+          customer {
+            userID
+            name
+            email
+            description
+            favorites {
+              nextToken
+            }
+            salesOrders {
+              nextToken
+            }
+            purchaseOrders {
+              nextToken
+            }
+            products {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          categoryID
+          categoryFields {
+            name
+            image
+            abreviation
+          }
+          brandID
+          brandFields {
+            name
+            image
+            abreviation
+          }
+          productID
+          productFields {
+            name
+            images
+          }
+          code
+          price
+          condition
+          description
+          status {
+            id
+            productID
+            product {
+              id
+              customerID
+              categoryID
+              brandID
+              productID
+              code
+              price
+              condition
+              description
+              owner
+              createdAt
+              updatedAt
+              customerProductStatusId
+            }
+            status
+            owner
+            favoriteItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phoneFields {
+            carrier
+            imei
+            model
+            storage
+            batery
+          }
+          laptoFields {
+            serial
+          }
+          owner
+          createdAt
+          updatedAt
+          customerProductStatusId
+        }
+        nextToken
+      }
       salesOrders {
         items {
           total
