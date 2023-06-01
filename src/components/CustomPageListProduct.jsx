@@ -12,31 +12,28 @@ import { API, Storage } from "aws-amplify";
 import CustomButton from "@/components/CustomButton";
 import { es } from "@/utils/constants/lenguage";
 
-const PreviewProduct = ({ data = {}, route }) => {
+const CustomPageListProduct = ({ data = {}, route }) => {
   const global = require("@/utils/styles/global.js");
   const [keyImages, setKeyImages] = useState([]);
   const { product } = route.params;
+  console.log(product.paths);
   const getImages = async () => {
     try {
-      Storage.list(`product/${product.code}/`, {
-        level: "protected",
-        pageSize: 10,
-      }).then(async (data) => {
         const promises = await Promise.all(
-          data.results.map(async (image) => {
-            const imageResult = await Storage.get(image.key, {
+          product.paths.map(async (image) => {
+            const imageResult = await Storage.get(image, {
               level: "protected",
+              identityId: product.customer.identityId
             });
             return imageResult;
           })
         );
-        console.log("rango", promises.length);
         setKeyImages(promises);
-      });
     } catch (error) {
       console.error(error);
     }
   };
+
   useLayoutEffect(() => {
     getImages();
   }, []);
@@ -45,7 +42,6 @@ const PreviewProduct = ({ data = {}, route }) => {
     <ScrollView style={[global.bgWhite, { flex: 1 }]}>
       <View style={styles.container}>
         <View style={styles.containerImages}>
-          {console.log(product)}
           {!keyImages.length <= 0 && (
             <FlatList
               data={keyImages}
@@ -80,7 +76,9 @@ const PreviewProduct = ({ data = {}, route }) => {
 
           <View style={styles.containerDetails}>
             <View style={styles.description}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.description}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.description}
+              </Text>
               <Text style={[styles.descriptionText, global.midGray]}>
                 {product.description
                   ? product.description
@@ -94,7 +92,9 @@ const PreviewProduct = ({ data = {}, route }) => {
               </Text>
             </View>
             <View style={styles.features}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.features}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.features}
+              </Text>
               <View style={styles.bothFeatures}>
                 <View style={styles.leftFeatures}>
                   {product.phoneFields.carrier ? (
@@ -108,7 +108,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/carrier.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.carrier}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.carrier}
@@ -125,9 +127,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/carrier.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.carrier}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.carrier}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.imei ? (
@@ -148,7 +154,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/imei.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.imei}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.imei}
@@ -172,9 +180,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/imei.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.imei}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.imei}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.batery ? (
@@ -188,7 +200,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/batery.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.batery}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.batery}
@@ -205,9 +219,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/batery.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.batery}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.batery}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -223,7 +241,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/model.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.model}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.model}
@@ -240,9 +260,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/model.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.model}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.model}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.phoneFields.storage ? (
@@ -256,7 +280,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/storage.png")}
                         />
-                        <Text style={styles.labelTextFeatureStorage}>{es.post.preview.storage}</Text>
+                        <Text style={styles.labelTextFeatureStorage}>
+                          {es.post.preview.storage}
+                        </Text>
                       </View>
                       <Text style={styles.textFeature}>
                         {product.phoneFields.storage}
@@ -273,9 +299,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/storage.png")}
                         />
-                        <Text style={styles.labelTextFeature}>{es.post.preview.storage}</Text>
+                        <Text style={styles.labelTextFeature}>
+                          {es.post.preview.storage}
+                        </Text>
                       </View>
-                      <Text style={styles.textFeature}>{es.post.preview.none}</Text>
+                      <Text style={styles.textFeature}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -283,7 +313,9 @@ const PreviewProduct = ({ data = {}, route }) => {
             </View>
 
             <View style={styles.abouts}>
-              <Text style={[styles.title, global.black]}>{es.post.preview.about}</Text>
+              <Text style={[styles.title, global.black]}>
+                {es.post.preview.about}
+              </Text>
               <View style={styles.bothAbout}>
                 <View style={styles.leftAbout}>
                   {product.condition ? (
@@ -297,11 +329,11 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/question_black.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.condition}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>
-                        {product.condition}
-                      </Text>
+                      <Text style={styles.textAbout}>{product.condition}</Text>
                     </View>
                   ) : (
                     <View style={styles.about}>
@@ -314,9 +346,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/question_black.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.condition}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.condition}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
 
@@ -331,7 +367,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={{ uri: product.categoryFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.category}
+                        </Text>
                       </View>
                       <Text style={styles.textAbout}>
                         {product.categoryFields.name}
@@ -348,9 +386,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={{ uri: product.categoryFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.category}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.category}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -373,7 +415,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/id.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.id}
+                        </Text>
                       </View>
                       <Text style={{ fontSize: 10, fontFamily: "light" }}>
                         {product.code}
@@ -397,9 +441,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={require("@/utils/images/id.png")}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.id}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.id}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                   {product.brandFields.name ? (
@@ -421,7 +469,9 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={{ uri: product.brandFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.brand}
+                        </Text>
                       </View>
                       <Text style={styles.textAbout}>
                         {product.brandFields.name}
@@ -446,9 +496,13 @@ const PreviewProduct = ({ data = {}, route }) => {
                           }}
                           source={{ uri: product.brandFields.image }}
                         />
-                        <Text style={styles.labelTextAbout}>{es.post.preview.brand}</Text>
+                        <Text style={styles.labelTextAbout}>
+                          {es.post.preview.brand}
+                        </Text>
                       </View>
-                      <Text style={styles.textAbout}>{es.post.preview.none}</Text>
+                      <Text style={styles.textAbout}>
+                        {es.post.preview.none}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -461,4 +515,4 @@ const PreviewProduct = ({ data = {}, route }) => {
   );
 };
 
-export default PreviewProduct;
+export default CustomPageListProduct;

@@ -6,6 +6,9 @@ import { es } from "@/utils/constants/lenguage";
 const CustomCardProductPublished = ({onHandleNavigation, item}) => {
   const global = require("@/utils/styles/global.js");
   const [deleteCard, setDeleteCard] = useState(true);
+  const date = new Date(item.createdAt);
+    const formattedDate = date.toLocaleDateString('es-ES');
+    console.log(formattedDate)
   return deleteCard ? (
     <View style={[styles.container]}>
       <View style={styles.image}>
@@ -16,7 +19,7 @@ const CustomCardProductPublished = ({onHandleNavigation, item}) => {
             resizeMode: "contain",
             alignSelf: "center",
           }}
-          source={{uri: item.product.productFields.images}}
+          source={{uri: item.productFields.images}}
         />
         <View
           style={{
@@ -35,15 +38,15 @@ const CustomCardProductPublished = ({onHandleNavigation, item}) => {
             }}
             source={require("@/utils/images/available.png")}
           />
-          <Text style={[styles.available, global.topGray]}>{item.status ? es.list.products.card.available : ''}</Text>
+          <Text style={[styles.available, global.topGray]}>{item.status.status ? es.list.products.card.available : ''}</Text>
         </View>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.name, global.topGray]}>{item.product.productFields.name}</Text>
-        <Text style={[styles.price, global.topGray]}>${item.product.price}.00</Text>
+        <Text style={[styles.name, global.topGray]}>{item.productFields.name}</Text>
+        <Text style={[styles.price, global.topGray]}>${item.price}.00</Text>
 
         <Text style={[styles.seller, global.topGray]}>
-          {es.list.products.card.message}
+          {es.list.products.card.message}{formattedDate}
         </Text>
 
         <View style={styles.options}>

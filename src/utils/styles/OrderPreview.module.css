@@ -11,21 +11,36 @@
   margin-bottom: 20px;
 }
 .numberOrder {
-    font-family: 'lightItalic';
-    font-size: 13px;
-    text-align: right;
-    margin-bottom: 3px;
+  font-family: "lightItalic";
+  font-size: 13px;
+  text-align: right;
+  margin-bottom: 3px;
 }
 .numberTotal {
-    font-family: 'lightItalic';
-    font-size: 17px;
-    text-align: right;
-    margin-bottom: 3px;
+  font-family: "lightItalic";
+  font-size: 17px;
+  text-align: right;
+  margin-bottom: 3px;
 }
 .lineTotal {
-    width: 150%;
-    height: 0.8px;
-    position: relative;
-    left: -10%;
-    margin: 10px 0px;
-  }
+  width: 150%;
+  height: 0.8px;
+  position: relative;
+  left: -10%;
+  margin: 10px 0px;
+}
+
+.button {
+  /* margin: 0px 0px 0px; */
+  text-align: center;
+  border: 2px solid #ffa424;
+  padding: 18px;
+  height: 60px;
+  border-radius: 7px;
+}
+.textButton {
+  text-align: center;
+  font-family: "medium";
+  color: white;
+  font-size: 16px;
+}

@@ -29,7 +29,7 @@ const PaymentNavigator = ({ route }) => {
         component={OrderPreview}
         options={{
           animation: "slide_from_right",
-          header: (props) => <LeftHeader {...props} />,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
