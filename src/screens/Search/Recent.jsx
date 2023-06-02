@@ -19,6 +19,7 @@ const DATA = [
 const Recent = ({ route, navigation }) => {
   const search = useRecoilValue(searchGlobal);
   const search_recent = useRecoilValue(searchRecent);
+  const global = require("@/utils/styles/global.js");
   const [coincidence, setCoincidence] = useState([
     {
       id: 1,
@@ -66,7 +67,7 @@ const Recent = ({ route, navigation }) => {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, global.bgWhite]}>
       <FlatList
         data={DATA}
         keyExtractor={(__, index) => index.toString()}
@@ -104,8 +105,11 @@ const Title = () => {
   const global = require("@/utils/styles/global.js");
   return (
     <View style={[styles.title]}>
-      <Text style={styles.textTitle}>Recent</Text>
-      <Text style={styles.textTitle}>Clear All</Text>
+      <View style={[{flex: 1, justifyContent: "space-between", alignItems: 'center', flexDirection: 'row'}]}>
+        <Text style={styles.textTitle}>Recent</Text>
+        <Text style={styles.textTitle}>Clear All</Text>
+      </View>
+      <View style={[styles.line, global.bgWhiteSmoke]} />
     </View>
   );
 };
