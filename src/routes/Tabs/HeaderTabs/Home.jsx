@@ -59,10 +59,10 @@ const Search = ({ version, onSearchHandler }) => {
   const navigation = useNavigation();
   const [isFilter, setFilter] = useRecoilState(isFilterShow);
   return (
-    <View style={[styles.containerSearch]}>
+    <View style={[styles.containerSearch, {marginTop: version === 1 ? 0 : 20}]}>
       {version === 3 && (
         <TouchableOpacity
-          style={styles.contentBack}
+          style={[styles.contentBack]}
           onPress={() => navigation.goBack()}
         >
           <Image
@@ -111,24 +111,19 @@ const Search = ({ version, onSearchHandler }) => {
           </TouchableOpacity>
         </View>
         {/* icon */}
-
+{/* 
         {version === 3 && (
           <TouchableOpacity
             style={{
               height: "100%",
-              paddingHorizontal: 10,
+              // paddingHorizontal: 10,
               flexDirection: "row",
               alignItems: "center",
             }}
             onPress={() => setFilter(!isFilter)}
           >
-            {isFilter ? (
-              <AntDesign name="downcircle" size={24} color="black" />
-            ) : (
-              <Ionicons name="options-outline" size={24} color="black" />
-            )}
           </TouchableOpacity>
-        )}
+        )} */}
       </TouchableOpacity>
     </View>
   );

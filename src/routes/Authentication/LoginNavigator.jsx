@@ -24,13 +24,15 @@ const LoginNavigator = () => {
         name={"Register_App"}
         component={RegisterNavigator}
         options={{
-          animation: 'slide_from_right'
+          animation: 'slide_from_right',
+          headerShown: false
         }}
       />
       <Stack.Screen
         name={"Forgot_App"}
         component={ForgotNavigator}
         options={{
+          headerShown: false,
           animation: 'slide_from_right'
         }}
       />
