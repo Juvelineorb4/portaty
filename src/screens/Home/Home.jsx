@@ -78,6 +78,7 @@ const Home = ({ data, navigation }) => {
         query: customHome.listCustomerProductStatus,
         authMode: "AWS_IAM",
       });
+      console.log(categories)
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);
     } catch (error) {
