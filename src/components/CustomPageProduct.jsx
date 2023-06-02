@@ -37,7 +37,10 @@ const CustomPageProduct = ({ route, navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}>
+    <ScrollView
+      style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.container}>
         <View style={styles.containerImages}>
           <Image

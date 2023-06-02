@@ -63,7 +63,7 @@ const AddressEdit = ({ route }) => {
   }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1, padding: 20 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1, padding: 20 }]}  showsVerticalScrollIndicator={false}>
       <Text style={styles.title}>{es.address.title}</Text>
       <View style={[styles.line, global.bgWhiteSmoke]} />
       {addressList.map((item, index) => (

@@ -35,6 +35,7 @@ const OrderPreview = ({ route, navigation }) => {
   return (
     <ScrollView
       style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 40 }]}
+      showsVerticalScrollIndicator={false}
     >
       <Text style={styles.title}>Pedido</Text>
       <CustomCardOrder

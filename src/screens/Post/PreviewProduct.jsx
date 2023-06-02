@@ -42,7 +42,7 @@ const PreviewProduct = ({ data = {}, route, navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1 }]} showsVerticalScrollIndicator={false}>
       <View style={[styles.container, { paddingTop: 30}]}>
         <View style={styles.containerImages}>
           {console.log(product)}

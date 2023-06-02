@@ -8,13 +8,20 @@ import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
 
-const OrderPreviewList = ({route}) => {
+const OrderPreviewList = ({ route }) => {
   const global = require("@/utils/styles/global.js");
-  const { product, images } = route.params
+  const { product, images } = route.params;
   return (
-    <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
+    <ScrollView
+      style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}
+      showsVerticalScrollIndicator={false}
+    >
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={product} image={images[0]} customer={product.customer.name} />
+      <CustomCardOrder
+        item={product}
+        image={images[0]}
+        customer={product.customer.name}
+      />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
@@ -171,14 +178,16 @@ const OrderPreviewList = ({route}) => {
         </View>
       </View>
       <View style={[styles.line, global.bgWhiteSmoke]} />
-      <View style={{marginBottom: 95}}>
+      <View style={{ marginBottom: 95 }}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
-          <Text style={styles.numberOrder}>Precio del producto: ${product.price}.00</Text>
+          <Text style={styles.numberOrder}>
+            Precio del producto: ${product.price}.00
+          </Text>
           <Text style={styles.numberOrder}>Impuestos: $10.00</Text>
           <Text style={styles.numberOrder}>Envio: $10.00</Text>
           <Text style={styles.numberOrder}>Comision: $10.00</Text>
-      <View style={[styles.lineTotal, global.bgWhiteSmoke]} />
+          <View style={[styles.lineTotal, global.bgWhiteSmoke]} />
           <Text style={styles.numberTotal}>Total: $130.00</Text>
         </View>
       </View>

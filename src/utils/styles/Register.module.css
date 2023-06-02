@@ -1,34 +1,47 @@
+.container {
+  flex: 1;
+}
 .content {
   flex: 1;
   flex-direction: column;
+  justify-content: center;
+  padding: 0px 20px 20px;
 }
-
-.form {
-  padding: 20px 20px 0px;
-  flex: 1;
+.title {
+  font-family: 'lightItalic';
+  margin: 0px 20px 10px;
+  text-align: center;
+  font-size: 30px;
+  color: #1f1f1f;
 }
-
 .inputContainer {
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border-radius: 16px;
-  margin: 10px 0px;
+  background-color: #fafafa;
+  padding: 15px 10px;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
 .labelInput {
-  font-family: 'regular';
+  font-style: normal;
+  font-family: 'light';
   /* font-weight: 500; */
   font-size: 14px;
   color: #404040;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .textInput {
-  font-family: 'regular';
-  flex: 1;
-  margin-left: 15px;
+  font-family: 'light';
+  margin-left: 5px;
+  width: 75%;
+}
+.placeholder {
+  text-align: left;
+  font-family: 'light';
+  width: 75%;
+  margin-left: 5px;
 }
 
 .errorInput {
@@ -36,34 +49,32 @@
 }
 
 .continue {
+  flex: 1;
   text-align: center;
   width: 100%;
-  padding: 20px 10px;
+  padding: 20px;
+  height: 60px;
+  background-color: #ffa424;
   border-radius: 16px;
 }
 
 .textContinue {
   text-align: center;
-  font-family: 'bold';
+  font-family: 'medium';
   /* font-weight: 700; */
+  color: white;
   font-size: 14px;
 }
 
 .terms {
   /* font-weight: 400; */
   font-family: 'regular';
-  font-size: 14px;
+  font-size: 12px;
   color: #404040;
   margin-left: 5px;
 }
 
-.title {
-  text-align: center;
-  /* font-weight: 700; */
-  font-family: 'semibold';
-  font-size: 35px;
-  color: #1f1f1f;
-}
+
 
 .subtitle {
   /* font-weight: 400; */
@@ -73,12 +84,12 @@
   color: #404040;
 }
 .controls {
-  margin: 10px 0px 40px;
+  margin: 10px 0px 0px;
 }
 .check {
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .box {
   width: 20px;
@@ -100,4 +111,14 @@
   align-items: center;
   justify-content: center;
   background-color: #ffa424;
+}
+.buttonImage {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.textButton {
+  font-family: 'regular';
+  font-size: 14px;
+  color: #1f1f1f;
 }
