@@ -39,7 +39,7 @@ const CustomPageListProduct = ({ data = {}, route }) => {
   }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1 }]} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.containerImages}>
           {!keyImages.length <= 0 && (

@@ -12,6 +12,7 @@ import * as customNavigation from "@/graphql/CustomMutations/Navigation";
 import { useRecoilState } from "recoil";
 import { userAutenticated } from "@/atoms/index";
 import Tabs from "./Tabs/Tabs";
+import SearchNavigator from "./Tabs/SearchNavigator";
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -111,6 +112,14 @@ const Navigation = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+        name="SearchNavigator"
+        component={SearchNavigator}
+        options={{
+          headerShown: false,
+          animation: "slide_from_right",
+        }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );

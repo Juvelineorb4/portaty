@@ -284,7 +284,7 @@ const PostProduct = ({ navigation, route }) => {
   ]);
 
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <View style={styles.form}>
         <View style={styles.both}>
           <View>

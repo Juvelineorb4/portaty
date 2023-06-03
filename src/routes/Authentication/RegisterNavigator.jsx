@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Register from "@/screens/Authentication/Register";
 import Account from "@/screens/Authentication/Account";
 import ConfirmAccount from "@/screens/Authentication/ConfirmAccount";
+import LeftHeader from "../Tabs/HeaderTabs/LeftHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ const RegisterNavigator = () => {
         name="Register"
         component={Register}
         options={{
-          headerShown: false,
+          header: (props) => <LeftHeader {...props} />,
           animation: 'slide_from_right'
         }}
       />

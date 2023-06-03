@@ -8,7 +8,7 @@ const ListOrders = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
   const { purchase, sales } = route.params;
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1 }]} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Text style={styles.title}>{es.list.sell.title}</Text>
         {sales.map((item, index) => (

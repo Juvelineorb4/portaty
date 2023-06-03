@@ -26,7 +26,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const user = useRecoilValue(userAutenticated);
   const fetchId = async () => {
     const user = await Auth.currentCredentials();
-  }
+  };
 
   const global = require("@/utils/styles/global.js");
   const { product } = route.params;
@@ -39,12 +39,11 @@ const CustomSellerProduct = ({ route, navigation }) => {
         identityId: product.customer.identityId,
         pageSize: 3,
       }).then(async (data) => {
-        
         const promises = await Promise.all(
           data.results.map(async (image) => {
             const imageResult = await Storage.get(image.key, {
               level: "protected",
-              identityId: product.customer.identityId
+              identityId: product.customer.identityId,
             });
             return imageResult;
           })
@@ -63,11 +62,14 @@ const CustomSellerProduct = ({ route, navigation }) => {
 
   useLayoutEffect(() => {
     getImages();
-    fetchId()
+    fetchId();
   }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}>
+    <ScrollView
+      style={[global.bgWhite, { flex: 1, paddingTop: 10 }]}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.container}>
         <View style={styles.containerImages}>
           {!keyImages.length <= 0 && (
@@ -100,18 +102,18 @@ const CustomSellerProduct = ({ route, navigation }) => {
               {product.productFields.name}
             </Text>
             {user?.attributes?.sub === product.customerID && (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   style={{
                     width: 17,
                     height: 17,
                     resizeMode: "contain",
                     alignSelf: "center",
-                    marginRight: 2
+                    marginRight: 2,
                   }}
                   source={require("@/utils/images/available.png")}
                 />
-                <Text style={[{ fontFamily: "thinItalic", }, global.black]}>
+                <Text style={[{ fontFamily: "thinItalic" }, global.black]}>
                   Propietario
                 </Text>
               </View>

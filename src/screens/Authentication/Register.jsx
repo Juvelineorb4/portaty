@@ -1,5 +1,13 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
+import * as ImagePicker from "expo-image-picker";
 import styles from "@/utils/styles/Register.module.css";
 import CustomText from "@/components/CustomText";
 import CustomInput from "@/components/CustomInput";
@@ -7,49 +15,68 @@ import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
-// amplify 
-import { Auth } from 'aws-amplify'
+// amplify
+import { Auth } from "aws-amplify";
 import { es } from "@/utils/constants/lenguage";
 
-const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Register = () => {
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, watch } = useForm();
-  const [isLoading, setIsLoading] = useState(false)
-  const pwd = watch("password")
+  const [isLoading, setIsLoading] = useState(false);
+  const pwd = watch("password");
   const navigation = useNavigation();
   const [active, setActive] = useState(true);
-
+  /* Images Picker */
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    ImagePicker.getPendingResultAsync;
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 6],
+      quality: 0.5,
+    });
+    if (!result.canceled) {
+      const { uri } = result.assets[0];
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      // setBlobImages([...blobImages, blob]);
+      // setImagesPostSelect([...imagesPostSelect, result.assets[0].uri]);
+      setImage(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
   const onHandleActive = () => {
     setActive(!active);
   };
 
   const onHandleRegister = async (data) => {
-    const { email, name, password } = data
-    setIsLoading(true)
+    const { email, name, password } = data;
+    setIsLoading(true);
     try {
       const result = await Auth.signUp({
         username: email.trim(),
         password: password,
         attributes: {
-          name: name.trim()
-        }
-      })
+          name: name.trim(),
+        },
+      });
 
       navigation.navigate("ConfirmAccount", {
         email: email,
-      })
+      });
     } catch (error) {
-      console.error(error)
-      setIsLoading(false)
+      console.error(error);
+      setIsLoading(false);
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
-    <View style={[styles.content, global.bgWhite]}>
-      <ScrollView style={styles.form}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
+      <View style={[styles.content]}>
         <CustomText
           styled={{
             title: styles.title,
@@ -63,8 +90,9 @@ const Register = () => {
             width: 300,
             height: 180,
             resizeMode: "cover",
-            marginTop: -25,
+            marginTop: -35,
             marginBottom: 15,
+            alignSelf: "center",
           }}
           source={require("@/utils/images/create.png")}
         />
@@ -76,14 +104,11 @@ const Register = () => {
             text: styles.textInput,
             label: styles.labelInput,
             error: styles.errorInput,
+            placeholder: styles.placeholder,
             input: [styles.inputContainer, global.bgWhiteSoft],
           }}
-          icon={{
-            name: "account-circle-outline",
-            color: "#404040",
-            size: 25,
-            type: "MTI",
-          }}
+          text={`Usuario`}
+          icon={require(`@/utils/images/profile_default.png`)}
           rules={{
             required: es.authentication.register.name.rules,
           }}
@@ -96,17 +121,14 @@ const Register = () => {
             text: styles.textInput,
             label: styles.labelInput,
             error: styles.errorInput,
+            placeholder: styles.placeholder,
             input: [styles.inputContainer, global.bgWhiteSoft],
           }}
-          icon={{
-            name: "email-outline",
-            color: "#404040",
-            size: 25,
-            type: "MTI",
-          }}
+          text={`Correo electrónico`}
+          icon={require(`@/utils/images/email.png`)}
           rules={{
             required: es.authentication.register.email.rules,
-            pattern: { value: EMAIL_REGEX, message: "Inválido" }
+            pattern: { value: EMAIL_REGEX, message: "Inválido" },
           }}
         />
         <CustomInput
@@ -117,20 +139,17 @@ const Register = () => {
             text: styles.textInput,
             label: styles.labelInput,
             error: styles.errorInput,
+            placeholder: styles.placeholder,
             input: [styles.inputContainer, global.bgWhiteSoft],
           }}
-          icon={{
-            name: "lock-outline",
-            color: "#404040",
-            size: 25,
-            type: "MTI",
-          }}
+          text={`Contraseña`}
+          icon={require(`@/utils/images/password.png`)}
           security={true}
           rules={{
             required: es.authentication.register.password.rules,
             minLength: {
               value: 8,
-              message: "Mínimo 8 caracteres"
+              message: "Mínimo 8 caracteres",
             },
           }}
         />
@@ -142,21 +161,76 @@ const Register = () => {
             text: styles.textInput,
             label: styles.labelInput,
             error: styles.errorInput,
+            placeholder: styles.placeholder,
             input: [styles.inputContainer, global.bgWhiteSoft],
           }}
-          icon={{
-            name: "lock-outline",
-            color: "#404040",
-            size: 25,
-            type: "MTI",
-          }}
+          text={`Repetir contraseña`}
+          icon={require(`@/utils/images/password.png`)}
           security={true}
           rules={{
             required: es.authentication.register.repeat.rules,
-            validate: value =>
-              value == pwd || 'No coincide'
+            validate: (value) => value == pwd || "No coincide",
           }}
         />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: 18,
+            marginTop: 10,
+          }}
+        >
+          <TouchableOpacity activeOpacity={1} onPress={pickImage}>
+            <View
+              style={{
+                position: "relative",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                style={{
+                  width: 100,
+                  height: 100,
+                  resizeMode: "contain",
+                  marginLeft: 10,
+                }}
+                source={require("@/utils/images/rectangle-add.png")}
+              />
+              <Image
+                style={{
+                  width: 95,
+                  height: 95,
+                  resizeMode: "contain",
+                  marginLeft: 7,
+                  left: 6,
+                  borderRadius: 8,
+                  position: "absolute",
+                }}
+                source={{ uri: image }}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonImage}
+            activeOpacity={1}
+            onPress={pickImage}
+          >
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                resizeMode: "contain",
+                marginRight: 10,
+              }}
+              source={require("@/utils/images/picker.png")}
+            />
+            <Text style={styles.textButton}>Cargar imagen</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.controls}>
           <View style={styles.check}>
             {active ? (
@@ -172,22 +246,25 @@ const Register = () => {
                 onPress={onHandleActive}
               ></TouchableOpacity>
             )}
-            <Text style={styles.terms}>
-              {es.authentication.register.terms}
-            </Text>
+            <Text style={styles.terms}>{es.authentication.register.terms}</Text>
           </View>
 
           <CustomButton
-
-            text={!isLoading ? es.authentication.register.button : <ActivityIndicator />}
+            text={
+              !isLoading ? (
+                es.authentication.register.button
+              ) : (
+                <ActivityIndicator />
+              )
+            }
             handlePress={handleSubmit(onHandleRegister)}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
             disabled={isLoading}
           />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

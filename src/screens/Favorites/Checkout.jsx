@@ -41,7 +41,7 @@ const Checkout = ({ navigation, route }) => {
   }, [activeAddress]);
   
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <View style={styles.section}>
         <Text style={styles.title}>{es.checkout.address.title}</Text>
 
