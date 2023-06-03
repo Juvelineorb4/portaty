@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-const RecentSearch = ({ item, onHandler }) => {
+const RecentSearch = ({ item, onHandler, isBrand = false, isProduct = false, brand = "" }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      {console.log("ESTOY AQUI: ", brand)}
       <TouchableOpacity style={styles.result} onPress={() => onHandler(item)}>
         <Image
           style={{
@@ -16,9 +17,16 @@ const RecentSearch = ({ item, onHandler }) => {
           }}
           source={require("@/utils/images/arrow_diagonal.png")}
         />
-        <Text style={styles.text}>{item.title}</Text>
+        <Text style={[styles.text, isBrand && { fontWeight: "bold" }]}>
+          {item?.name}
+          {isBrand ?
+            <Text style={{ color: "lightgray" }}>  (VER TODOS)</Text>
+            : isProduct &&
+            <Text style={{ color: "lightgray" }}>  ({brand})</Text>
+          }
+        </Text>
       </TouchableOpacity>
-    </View>
+    </View >
   );
 };
 
