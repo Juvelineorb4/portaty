@@ -13,13 +13,14 @@ const awsmobile = {
     "oauth": {
         "domain": "portaty-oauth-dev.auth.us-east-1.amazoncognito.com",
         "scope": [
+            "phone",
             "email",
             "openid",
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "exp://192.168.68.120:19000/--/",
-        "redirectSignOut": "exp://192.168.68.120:19000/--/",
+        "redirectSignIn": "exp://192.168.250.2:19000/--/",
+        "redirectSignOut": "exp://192.168.250.2:19000/--/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",

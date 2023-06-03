@@ -8,31 +8,41 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
+import CustomButton from "./CustomButton";
 
-const OrderPreview = ({ route }) => {
+const OrderPreview = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
-  const { product, order, images } = route.params
+  const { product, order, images } = route.params;
   // const [cardOrder, setCardOrder] = useState({})
-  const [orderProduct, setOrderProduct] = useState("")
+  const [orderProduct, setOrderProduct] = useState("");
   const fetchOrder = async () => {
-      const orderDetail = await API.graphql({
-        query: customHome.getOrderDetailPreview,
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-        variables: {
-          id: order
-        }
-      })
-      // setCardOrder(orderDetail.data.getOrderDetail.items.items[0].item.product)
-      setOrderProduct(orderDetail.data.getOrderDetail.items.items[0].item.product)
-    }
+    const orderDetail = await API.graphql({
+      query: customHome.getOrderDetailPreview,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      variables: {
+        id: order,
+      },
+    });
+    // setCardOrder(orderDetail.data.getOrderDetail.items.items[0].item.product)
+    setOrderProduct(
+      orderDetail.data.getOrderDetail.items.items[0].item.product
+    );
+  };
   useLayoutEffect(() => {
-    fetchOrder()
-  }, [])
+    fetchOrder();
+  }, []);
 
   return (
-    <ScrollView style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 10 }]}>
+    <ScrollView
+      style={[global.bgWhite, { padding: 20, flex: 1, paddingTop: 40 }]}
+      showsVerticalScrollIndicator={false}
+    >
       <Text style={styles.title}>Pedido</Text>
-      <CustomCardOrder item={orderProduct} image={images[0]} customer={orderProduct?.customer?.name} />
+      <CustomCardOrder
+        item={orderProduct}
+        image={images[0]}
+        customer={orderProduct?.customer?.name}
+      />
       <View style={[styles.line, global.bgWhiteSmoke]} />
       <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Tiempo estimado</Text>
@@ -189,15 +199,27 @@ const OrderPreview = ({ route }) => {
         </View>
       </View>
       <View style={[styles.line, global.bgWhiteSmoke]} />
-      <View style={{ marginBottom: 95 }}>
+      <View style={{ marginBottom: 20 }}>
         <Text style={styles.title}>Total del pedido</Text>
         <View>
-          <Text style={styles.numberOrder}>Precio del producto: ${orderProduct.price}.00</Text>
+          <Text style={styles.numberOrder}>
+            Precio del producto: ${orderProduct.price}.00
+          </Text>
           <Text style={styles.numberOrder}>Impuestos: $10.00</Text>
           <Text style={styles.numberOrder}>Envio: $10.00</Text>
           <Text style={styles.numberOrder}>Comision: $10.00</Text>
           <View style={[styles.lineTotal, global.bgWhiteSmoke]} />
           <Text style={styles.numberTotal}>Total: $130.00</Text>
+        </View>
+      </View>
+      <View style={{ marginBottom: 115 }}>
+        <View>
+          <CustomButton
+            text={`Ir al inicio`}
+            handlePress={() => navigation.replace("Home")}
+            textStyles={[styles.textButton, global.white]}
+            buttonStyles={[styles.button, global.mainBgColor]}
+          />
         </View>
       </View>
     </ScrollView>

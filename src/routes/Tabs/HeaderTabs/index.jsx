@@ -12,7 +12,6 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
   // useEffect(() => {
   //     console.log("ID: ", getId())
   // }, [])
-
   const onSearchHandler = () => {
     navigation.navigate("SearchNavigator", {
       screen: "Search_Recent",
@@ -20,7 +19,6 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
         mainRoute: navigation.getParent(getId()).getState().routeNames[0],
       },
     });
-    console.log(navigation.getParent(getId()).getState().routeNames[0])
   };
 
   return (

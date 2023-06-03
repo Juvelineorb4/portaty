@@ -18,7 +18,6 @@ const Checkout = ({ navigation, route }) => {
   const [address, setAddress] = useState({});
   const user = useRecoilValue(userAutenticated);
   const [activeAddress, setActiveAddress] = useRecoilState(addressSelected);
-  console.log(address)
   /* Navegaciones */
   const onHandlePress = () => navigation.navigate("Address_Edit", {
     item: data
@@ -33,13 +32,16 @@ const Checkout = ({ navigation, route }) => {
     });
     setAddress(addressItem.data.getCustomerShop.shippingAddress.items[activeAddress]);
   };
+
   useEffect(() => {
-    fetchAddress();
+    const interval = setInterval(() => {
+      fetchAddress();
+    }, 1000);
+    return () => clearInterval(interval);
   }, [activeAddress]);
-  // const onHandlePreview = () => navigation.navigate("Order_Preview", { item: data});
   
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <View style={styles.section}>
         <Text style={styles.title}>{es.checkout.address.title}</Text>
 

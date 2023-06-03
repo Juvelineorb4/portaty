@@ -28,12 +28,12 @@ export const es = {
   },
   authentication: {
     password: {
-      create: "Crear contraseña",
+      create: "Crear nueva contraseña",
       new: {
-        placeholder: "Escribe tu nueva contraseña...",
+        placeholder: "Tu nueva contraseña",
       },
       confirm: {
-        placeholder: "Por favor, confirme su contraseña...",
+        placeholder: "Repetir contraseña",
       },
       code: {
         email:
@@ -64,7 +64,7 @@ export const es = {
         subtitle: "Escriba el correo electrónico asociado a su cuenta",
       },
       email: {
-        placeholder: "Escribe tu correo electrónico...",
+        placeholder: "Tu correo electrónico",
       },
       code: "Te enviamos un código de seguridad de 6 dígitos a tu correo electrónico:",
       button: "Confirmar código",
@@ -87,19 +87,19 @@ export const es = {
     register: {
       title: "Crear nueva cuenta",
       name: {
-        placeholder: "Escribe tu nombre de usuario...",
+        placeholder: "Tu nombre de usuario",
         rules: "Requerido",
       },
       email: {
-        placeholder: "Escribe tu correo electrónico...",
+        placeholder: "ejemplo@email.com",
         rules: "Requerido",
       },
       password: {
-        placeholder: "Escribe tu contraseña...",
+        placeholder: "***********",
         rules: "Requerido",
       },
       repeat: {
-        placeholder: "Escribe tu contraseña de nuevo...",
+        placeholder: "***********",
         rules: "Requerido",
       },
       terms: "Acepto los Términos y Política de Privacidad",
@@ -121,7 +121,7 @@ export const es = {
       pending: 'Mis productos pendientes',
       card: {
         available: "Disponible",
-        message: "Publicado el 17 de Abril de 2023",
+        message: "Publicado el ",
         details: "Ver",
         delete: "Borrar",
       },
@@ -130,7 +130,7 @@ export const es = {
       title: "Mis productos pendientes",
       card: {
         available: "Pendiente",
-        message: "En revisión desde el 17 de Abril de 2023",
+        message: "En revisión desde el ",
         delete: "Borrar",
       },
     },

@@ -12,7 +12,7 @@ const Permissions = () => {
   const { permits } = permissions;
 
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <CustomText
         title={es.profile.permissions.title}
         subtitle={es.profile.permissions.subtitle}

@@ -9,13 +9,13 @@ const ListProducts = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
   return (
-    <ScrollView style={[global.bgWhite, { flex: 1 }]}>
+    <ScrollView style={[global.bgWhite, { flex: 1 }]} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Text style={styles.title}>{es.list.products.title}</Text>
         {data.map((item, index) => (
           <CustomCardProductPublished
             onHandleNavigation={() =>
-              navigation.navigate("EditListProduct", { product: item.product })
+              navigation.navigate("EditListProduct", { product: item })
             }
             item={item}
             key={index}

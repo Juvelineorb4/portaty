@@ -110,8 +110,8 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
         </View>
         <TouchableOpacity>
           <CustomText title={title} subtitle={subtitle} styled={{
-            title: [styles.title, global.midGray],
-            subtitle: [styles.subtitle, global.black]
+            title: [styles.title, global.black],
+            subtitle: [styles.subtitle]
           }} />
         </TouchableOpacity>
       </View>

@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Forgot from "@/screens/Authentication/Forgot";
 import ChangePassword from "@/screens/Authentication/ChangePassword";
+import LeftHeader from "../Tabs/HeaderTabs/LeftHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ const ForgotNavigator = () => {
         name="Forgot"
         component={Forgot}
         options={{
-          headerShown: false,
+          header: (props) => <LeftHeader {...props} />,
           animation: 'slide_from_right'
         }}
       />

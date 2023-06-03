@@ -104,7 +104,7 @@ const Profile = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <View style={styles.profile}>
         <View style={styles.containerImage}>
           <View style={styles.image}></View>
@@ -114,10 +114,10 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {userAuth && (userAuth?.attributes?.name).toUpperCase()}
+          {userAuth && (userAuth?.attributes?.name)}
         </Text>
-        <Text style={[styles.user, { color: "lightgray", marginTop: 1 }]}>
-          {userAuth && (userAuth?.attributes?.email).toUpperCase()}
+        <Text style={[styles.user, { color: "lightgray", marginTop: 0 }]}>
+          {userAuth && (userAuth?.attributes?.email)}
         </Text>
       </View>
       <View style={styles.content}>

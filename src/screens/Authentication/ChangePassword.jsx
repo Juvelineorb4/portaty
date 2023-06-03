@@ -1,6 +1,6 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
-import styles from "@/utils/styles/Forgot.module.css";
+import styles from "@/utils/styles/ConfirmPassword.module.css";
 import CustomText from "@/components/CustomText";
 import EnterCode from "@/components/EnterCode";
 import { useForm } from "react-hook-form";
@@ -16,11 +16,10 @@ const ChangePassword = ({ navigation, route }) => {
       code: ["", "", "", "", "", ""],
     },
   });
-
+  const onHandleConfirm = () => navigation.replace('Login_Welcome')
   return (
-    <View style={[styles.container, global.bgWhite]}>
+    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
       <View style={styles.content}>
-        <ScrollView horizontal={false} showsVerticalScrollIndicator={false}>
           <View style={styles.textContainer}>
             <CustomText
               styled={{
@@ -31,11 +30,11 @@ const ChangePassword = ({ navigation, route }) => {
             />
             <Image
               style={{
-                width: 300,
-                height: 160,
+                width: 200,
+                height: 145,
                 resizeMode: "contain",
                 alignSelf: "center",
-                marginBottom: 10,
+                marginBottom: 20,
               }}
               source={require("@/utils/images/reset.png")}
             />
@@ -46,25 +45,19 @@ const ChangePassword = ({ navigation, route }) => {
               name={`password`}
               placeholder={es.authentication.password.new.placeholder}
               styled={{
-                text: styles.textInputPassword,
+                text: styles.textInput,
                 label: [styles.labelInput, global.topGray],
                 error: styles.errorInput,
+                placeholder: styles.placeholder,
                 input: [styles.inputContainer, global.bgWhiteSoft],
               }}
-              icon={{
-                name: "lock-outline",
-                color: "#404040",
-                size: 25,
-                type: "MTI",
-              }}
+              icon={require(`@/utils/images/email.png`)}
+              text={`Nueva contraseña`}
               security={true}
-              //   rules={{
-              //     required: "Password is required",
-              //     minLength: {
-              //       value: 8,
-              //       message: "Min 8 characters"
-              //     },
-              //   }}
+              // rules={{
+              //   required: "Email is required",
+              //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
+              // }}
             />
             {/* <Text style={styles.textRules}>
               Minimum 8 characters, with a combination of upper and lower case
@@ -75,28 +68,25 @@ const ChangePassword = ({ navigation, route }) => {
               name={`password-confirm`}
               placeholder={es.authentication.password.confirm.placeholder}
               styled={{
-                text: styles.textInputPassword,
+                text: styles.textInput,
                 label: [styles.labelInput, global.topGray],
                 error: styles.errorInput,
+                placeholder: styles.placeholder,
                 input: [styles.inputContainer, global.bgWhiteSoft],
               }}
-              icon={{
-                name: "lock-outline",
-                color: "#404040",
-                size: 25,
-                type: "MTI",
-              }}
+              icon={require(`@/utils/images/email.png`)}
+              text={`Repetir contraseña`}
               security={true}
-              //   rules={{
-              //     required: "Password Repeat is required",
-              //     validate: value =>
-              //       value == pwd || 'Password do not match'
-              //   }}
+              // rules={{
+              //   required: "Email is required",
+              //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
+              // }}
             />
           </View>
           <Text style={[styles.code, global.topGray]}>
             {es.authentication.password.code.email}{" "}
-            <Text style={styles.emailText}>{route.params?.email}</Text> {es.authentication.password.code.expire}{" "}
+            <Text style={styles.emailText}>{route.params?.email}</Text>{" "}
+            {es.authentication.password.code.expire}{" "}
             {route.params?.email && (
               <CustomTimer
                 styled={{
@@ -119,12 +109,12 @@ const ChangePassword = ({ navigation, route }) => {
           />
           <CustomButton
             text={es.authentication.password.button}
+            handlePress={onHandleConfirm}
             textStyles={[styles.textContinue, global.white]}
             buttonStyles={[styles.continue, global.mainBgColor]}
           />
-        </ScrollView>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

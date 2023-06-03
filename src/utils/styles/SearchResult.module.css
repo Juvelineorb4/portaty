@@ -1,6 +1,6 @@
 .container {
   flex: 1;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 }
 
 .title {
@@ -9,7 +9,7 @@
   /* align-items: center; */
   /* font-family: "thin"; */
   /* padding-bottom: 10px; */
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .textTitle {
