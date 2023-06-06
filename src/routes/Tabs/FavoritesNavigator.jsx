@@ -6,14 +6,14 @@ import Header from "./HeaderTabs/index";
 import Favorites from "@/screens/Favorites/Favorites";
 // import Checkout from "@/screens/Favorites/Checkout";
 import LeftHeader from "./HeaderTabs/LeftHeader";
+import LeftSearch from "./HeaderTabs/LeftSearch";
+import CustomPageFavorite from "@/components/CustomPageFavorite";
+// import PaymentFavoriteNavigator from "./PaymentFavoriteNavigator";
+import PaymentNavigator from "./PaymentNavigator";
 
 const Stack = createNativeStackNavigator();
 
 const FavoritesNavigator = () => {
-  const router = useRoute();
-  useEffect(() => {
-    console.log(router.name);
-  }, []);
   return (
     <Stack.Navigator id="Favorites_Stack" initialRouteName={`Favorites`}>
       <Stack.Screen
@@ -21,6 +21,18 @@ const FavoritesNavigator = () => {
         component={Favorites}
         options={{ header: (props) => <Header {...props} /> }}
       />
+      <Stack.Screen
+        name="Favorite_Product"
+        component={CustomPageFavorite}
+        options={{ header: (props) => <LeftSearch {...props} /> }}
+      />
+      <Stack.Screen
+          name={`Payment_Navigator`}
+          component={PaymentNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
       {/* <Stack.Screen
         name="Checkout"
         component={Checkout}

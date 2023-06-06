@@ -32,11 +32,13 @@ import {
   userAutenticated,
 } from "@/atoms";
 import { es } from "@/utils/constants/lenguage";
+import { useIsFocused } from "@react-navigation/native";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([])
+  const isFocus = useIsFocused()
   const [purchaseOrders, setPurchaseOrders] = useState([])
   const [salesOrders, setSalesOrders] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
@@ -70,7 +72,6 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
-    console.log(userAuth.username)
     const result = await API.graphql({
       query: customProfile.getCustomerShop,
       variables: { userID: userAuth.username },
@@ -101,7 +102,7 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     fecthShop();
-  }, []);
+  }, [userAuth, isFocus]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>

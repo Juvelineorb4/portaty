@@ -36,7 +36,6 @@ const Login = ({ navigation }) => {
   const onHandleLoginWithGoogle = async () => {
     try {
       const google = await Auth.federatedSignIn({ provider: 'Google' });
-      console.log("GOOLE: ", google)
       // El usuario ha iniciado sesión correctamente con Google
     } catch (error) {
       console.log('Error al iniciar sesión con Google:', error);

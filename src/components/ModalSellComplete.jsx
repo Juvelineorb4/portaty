@@ -115,8 +115,6 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    console.log("ID1: ", item?.id)
-    console.log("ID2: ", item?.product.status.id)
     // cambiar status del producto comprado 
     const statusParams = {
       input: {
@@ -227,7 +225,8 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
                 navigation.navigate('Order_Preview', {
                   product: item.product,
                   order: detail,
-                  images: item.images
+                  images: item.images,
+                  popRoute: item.popRoute
                 })
               }}
             >

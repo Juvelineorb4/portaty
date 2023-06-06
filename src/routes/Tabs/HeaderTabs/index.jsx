@@ -9,9 +9,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 const HeaderIndex = ({ route, navigation, ...props }) => {
   const { getId } = navigation;
 
-  // useEffect(() => {
-  //     console.log("ID: ", getId())
-  // }, [])
+
   const onSearchHandler = () => {
     navigation.navigate("SearchNavigator", {
       screen: "Search_Recent",

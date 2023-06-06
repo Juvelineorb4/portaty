@@ -11,7 +11,7 @@ const Result = ({ navigation, route }) => {
     <View
       style={[
         styles.container,
-        { paddingHorizontal: 10, paddingTop: 5 },
+        // { paddingHorizontal: 10, paddingTop: 5 },
         global.bgWhite,
       ]}
     >

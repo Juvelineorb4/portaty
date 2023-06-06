@@ -8,7 +8,6 @@ const CustomCardProductPublished = ({onHandleNavigation, item}) => {
   const [deleteCard, setDeleteCard] = useState(true);
   const date = new Date(item.createdAt);
     const formattedDate = date.toLocaleDateString('es-ES');
-    console.log(formattedDate)
   return deleteCard ? (
     <View style={[styles.container]}>
       <View style={styles.image}>

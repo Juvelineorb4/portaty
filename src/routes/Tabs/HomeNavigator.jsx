@@ -14,8 +14,8 @@ import Header from "./HeaderTabs/index";
 // graphql
 
 // import LeftHeader from "./HeaderTabs/LeftHeader";
-import CustomNavSearch from "@/components/CustomNavSearch";
 import PaymentNavigator from "./PaymentNavigator";
+import LeftSearch from "./HeaderTabs/LeftSearch";
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = ({ route, navigation }) => {
@@ -32,7 +32,7 @@ const HomeNavigator = ({ route, navigation }) => {
         component={CustomSearch}
         options={{
           animation: "slide_from_right",
-          header: (props) => <CustomNavSearch {...props} />,
+          header: (props) => <LeftSearch {...props} />,
         }}
       />
       <Stack.Screen
@@ -40,7 +40,7 @@ const HomeNavigator = ({ route, navigation }) => {
         component={CustomPageProduct}
         options={{
           animation: "slide_from_right",
-          header: (props) => <CustomNavSearch {...props} />,
+          header: (props) => <LeftSearch {...props} />,
         }}
       />
       <Stack.Screen
@@ -48,7 +48,7 @@ const HomeNavigator = ({ route, navigation }) => {
         component={CustomSellerProduct}
         options={{
           animation: "slide_from_right",
-          header: (props) => <CustomNavSearch {...props} />,
+          header: (props) => <LeftSearch {...props} />,
         }}
       />
       <Stack.Screen

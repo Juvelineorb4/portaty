@@ -45,7 +45,6 @@ const Register = () => {
       // setBlobImages([...blobImages, blob]);
       // setImagesPostSelect([...imagesPostSelect, result.assets[0].uri]);
       setImage(result.assets[0].uri);
-      console.log(result.assets[0].uri);
     }
   };
   const onHandleActive = () => {

@@ -14,7 +14,7 @@ import * as customQueries from "@/graphql/CustomQueries/ShippingAddress";
 
 const Checkout = ({ navigation, route }) => {
   const global = require("@/utils/styles/global.js");
-  const { data, images } = route.params
+  const { data, images, popRoute } = route.params
   const [address, setAddress] = useState({});
   const user = useRecoilValue(userAutenticated);
   const [activeAddress, setActiveAddress] = useRecoilState(addressSelected);
@@ -79,7 +79,8 @@ const Checkout = ({ navigation, route }) => {
        <ModalSellComplete item={{
           product: data,
           images: images,
-          address: address
+          address: address,
+          popRoute: popRoute
         }}  />
       </View>
     </ScrollView>

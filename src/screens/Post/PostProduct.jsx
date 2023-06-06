@@ -211,7 +211,6 @@ const PostProduct = ({ navigation, route }) => {
           },
         },
       });
-      console.log(updateStatus)
 
       // naviegar
       navigation.navigate("Post_Complete", {
