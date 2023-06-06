@@ -88,10 +88,10 @@ const CustomCardListFavorite = ({ product }) => {
               resizeMode: "contain",
               alignSelf: "center",
             }}
-            source={require("@/utils/images/available.png")}
+            source={product.item.status === 'PUBLISHED' ? require("@/utils/images/available.png") : require("@/utils/images/bad.png")}
           />
           <Text style={[styles.available, global.topGray]}>
-            {es.favorites.card.available}
+            {product.item.status === 'PUBLISHED' ? es.favorites.card.available : `Vendido`}
           </Text>
         </View>
       </View>
@@ -108,7 +108,7 @@ const CustomCardListFavorite = ({ product }) => {
         </Text>
 
         <View style={styles.options}>
-          <TouchableOpacity onPress={() => navigation.navigate('Favorite_Product', {
+          {product.item.status === 'PUBLISHED' && <TouchableOpacity onPress={() => navigation.navigate('Favorite_Product', {
             product: item.product
           })} style={styles.option}>
             <Image
@@ -121,7 +121,7 @@ const CustomCardListFavorite = ({ product }) => {
               source={require("@/utils/images/info.png")}
             />
             <Text style={[styles.textOption, global.topGray]}>{`Ver`}</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
           <TouchableOpacity
             onPress={() => onDeleteFavorites()}
             style={styles.option}
