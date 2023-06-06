@@ -39,20 +39,7 @@ export const searchGlobal = atom({
 
 export const searchRecent = atom({
   key: "recentSvalue",
-  default: [
-    {
-      id: 1,
-      title: "Snake Skin Bag"
-    },
-    {
-      id: 2,
-      title: "Dell 133999"
-    },
-    {
-      id: 3,
-      title: "HeadPhone White"
-    }
-  ],
+  default: [],
 });
 /* */
 

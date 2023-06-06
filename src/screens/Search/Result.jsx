@@ -40,7 +40,7 @@ const HeaderComponent = ({ name = "", search = "" }) => {
   return (
     <View style={{ flex: 1, flexDirection: "column" }}>
       <View>
-        <Text style={styles.textTitle}>Resultado de "{search}"</Text>
+        <Text style={styles.textTitle}>Resultado de "{search?.name}"</Text>
         <Text style={[global.midGray, { fontFamily: "thin" }]}>
           0 encontrados
         </Text>

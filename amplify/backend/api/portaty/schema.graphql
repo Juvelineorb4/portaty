@@ -101,16 +101,13 @@ type Battery {
   usb: String
 }
 
-type Todo @model @auth(rules: [
-  { allow: owner },
-  { allow: private, provider: iam, operations: [read] },
-  { allow: public, provider: iam, operations: [read] },
-    {allow: private, operations:[read]}
+type Todo
+  @model
+  @auth(rules: [
+    { allow: owner, provider: oidc, identityClaim: "user_id" },
+    { allow: private, provider: oidc },
   ]) {
-  id: ID!
-  name: String
-  description: String
-  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  content: String
 }
 
 type Mutation {
@@ -119,24 +116,14 @@ type Mutation {
 }
 
 type CustomerShop @model @auth(rules:[
-  { allow: owner},
-  { allow: private, provider: iam, operations: [read] },
-  { allow: public, provider: iam, operations: [read] },
-    {allow: private, operations:[read]}
+  {allow: owner},
+  {allow: private, operations:[read]},
+  {allow: private, provider: iam, operations: [read] },
+  {allow: public, provider: iam, operations: [read] },
 ]){
   userID: ID! @primaryKey
-  name: String! @auth(rules:[
-    {allow: owner},
-    {allow: private, provider: iam, operations: [read]},
-    {allow: public, provider: iam, operations: [read]},
-      {allow: private, operations:[read]}
-  ])
-  email: String! @auth(rules:[
-    {allow: owner},
-    {allow: private, provider: iam, operations: [read]},
-    {allow: public, provider: iam, operations: [read]},
-      {allow: private, operations:[read]}
-  ])
+  name: String
+  email: String
   description: String
   identityId: String
   favorites: [FavoriteItem] @hasMany(indexName: "byCustomerShopFavoriteItem", fields: ["userID"])
@@ -144,8 +131,10 @@ type CustomerShop @model @auth(rules:[
   purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   shippingAddress: [CustomerShippingAddress] @hasMany(indexName: "CustomerShippingAddress", fields:["userID"])
-  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  owner: String @auth(rules: [
+    { allow: owner, operations: [read, delete] } ])
 }
+
 type CustomerShippingAddress @model @auth(rules:[
   {allow: owner}
   {allow: groups, groups:["admin"], operations:[read]}
@@ -262,7 +251,7 @@ type OrderItem @model @auth(rules:[
   id: ID!
   orderID: ID @index(name: "byOrderDetailItem")
   itemID: ID! 
-  item: CustomerProductStatus @hasOne(fields:["itemID"]) @auth(rules: [{ allow: owner }])
+  item: CustomerProductStatus @hasOne(fields:["itemID"]) 
 }
 
 type PaymentStripe @model @auth(rules:[

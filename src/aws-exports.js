@@ -13,6 +13,7 @@ const awsmobile = {
     "oauth": {
         "domain": "portaty-oauth-dev.auth.us-east-1.amazoncognito.com",
         "scope": [
+            "phone",
             "email",
             "openid",
             "profile",
