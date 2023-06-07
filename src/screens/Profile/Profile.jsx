@@ -74,7 +74,7 @@ const Profile = ({ navigation }) => {
   const fecthShop = async () => {
     const result = await API.graphql({
       query: customProfile.getCustomerShop,
-      variables: { userID: userAuth.username },
+      variables: { userID: userAuth.attributes.sub },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
     setItems(result.data.getCustomerShop.products.items)

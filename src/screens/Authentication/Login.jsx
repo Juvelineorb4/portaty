@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
     }
   }
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container}  showsVerticalScrollIndicator={false}>
       <View style={styles.content}>
         <Text style={styles.title}>{es.authentication.login.title}</Text>
         <Image
