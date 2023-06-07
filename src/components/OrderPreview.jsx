@@ -12,7 +12,7 @@ import CustomButton from "./CustomButton";
 
 const OrderPreview = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
-  const { product, order, images } = route.params;
+  const { product, order, images, popRoute } = route.params;
   // const [cardOrder, setCardOrder] = useState({})
   const [orderProduct, setOrderProduct] = useState("");
   const fetchOrder = async () => {
@@ -216,7 +216,7 @@ const OrderPreview = ({ route, navigation }) => {
         <View>
           <CustomButton
             text={`Ir al inicio`}
-            handlePress={() => navigation.replace("Home")}
+            handlePress={() => navigation.replace(popRoute)}
             textStyles={[styles.textButton, global.white]}
             buttonStyles={[styles.button, global.mainBgColor]}
           />

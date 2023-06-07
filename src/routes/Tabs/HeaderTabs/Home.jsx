@@ -13,7 +13,7 @@ const Home = ({ version = 1, onSearchHandler }) => {
     <>
       {version === 1 && (
         <View style={styles.contentProfile}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity>
             <Image
               style={{
                 width: 40,
@@ -59,7 +59,7 @@ const Search = ({ version, onSearchHandler }) => {
   const navigation = useNavigation();
   const [isFilter, setFilter] = useRecoilState(isFilterShow);
   return (
-    <View style={[styles.containerSearch, {marginTop: version === 1 ? 0 : 20}]}>
+    <View style={[styles.containerSearch, {marginTop: version === 1 ? 5 : 5}]}>
       {version === 3 && (
         <TouchableOpacity
           style={[styles.contentBack]}

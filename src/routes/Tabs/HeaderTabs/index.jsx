@@ -9,9 +9,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 const HeaderIndex = ({ route, navigation, ...props }) => {
   const { getId } = navigation;
 
-  // useEffect(() => {
-  //     console.log("ID: ", getId())
-  // }, [])
+
   const onSearchHandler = () => {
     navigation.navigate("SearchNavigator", {
       screen: "Search_Recent",
@@ -19,6 +17,7 @@ const HeaderIndex = ({ route, navigation, ...props }) => {
         mainRoute: navigation.getParent(getId()).getState().routeNames[0],
       },
     });
+    console.log(navigation.getParent(getId()).getState().routeNames)
   };
 
   return (
@@ -44,12 +43,10 @@ const headerSwitch = (route, navigation, onSearchHandler) => {
   switch (route.name) {
     case "Home":
       return <Header_Home onSearchHandler={onSearchHandler} />;
-    case "Result_Home":
+    case "Result":
       return <Header_Home version={3} onSearchHandler={onSearchHandler} />;
     case "Profile":
       return <Header_Home onSearchHandler={onSearchHandler} />;
-    case "Result_Profile":
-      return <Header_Home version={3} onSearchHandler={onSearchHandler} />;
     case "Notifications":
       return <Header_Home onSearchHandler={onSearchHandler} />;
     case "Favorites":

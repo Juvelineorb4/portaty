@@ -6,7 +6,7 @@ import LoginNavigator from "./Authentication/LoginNavigator";
 
 // amplify
 import { Auth, Hub, API, graphqlOperation, Storage } from "aws-amplify";
-import * as customNavigation from "@/graphql/CustomMutations/Navigation";
+import * as mutationsNavigation from "@/graphql/CustomMutations/Navigation";
 
 // recoil
 import { useRecoilState } from "recoil";
@@ -23,14 +23,11 @@ const Navigation = () => {
       const result = await Auth.currentAuthenticatedUser({
         bypassCache: true
       });
-    
       setUserAuth(result);
       if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
-      // configStoragePrefix(result);
-      // console.log("Configurado")
     } catch (error) {
       setUserAuth(undefined);
-      console.error(error)
+      console.error("CHECK USER ERROR: ", error)
     }
   };
 
@@ -45,12 +42,16 @@ const Navigation = () => {
       // cargar en customer shop
       const params = {
         input: {
-          userID: user.username,
+          userID: user.attributes.sub,
           identityId: identityId
         }
       }
-      await API.graphql(graphqlOperation(customNavigation.updateChargeIdentityIdCustomerShop, params))
-
+      const ejele = await API.graphql({
+        query: mutationsNavigation.updateChargeIdentityIdCustomerShop,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        variables: params
+      })
+      console.log("EJELE: ", ejele)
     } catch (error) {
       console.error("Error al cargar Atributo: ", error);
     }
@@ -70,7 +71,6 @@ const Navigation = () => {
   useEffect(() => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
-      console.log("HUB: ", event);
       switch (event) {
         case "signIn":
           checkUser();
@@ -113,13 +113,13 @@ const Navigation = () => {
           }}
         />
         <Stack.Screen
-        name="SearchNavigator"
-        component={SearchNavigator}
-        options={{
-          headerShown: false,
-          animation: "slide_from_right",
-        }}
-      />
+          name="SearchNavigator"
+          component={SearchNavigator}
+          options={{
+            headerShown: false,
+            animation: "slide_from_right",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

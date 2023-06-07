@@ -33,7 +33,6 @@ import * as customHome from "@/graphql/CustomQueries/Home";
 import * as mutations from "@/graphql/mutations";
 
 const Home = ({ data, navigation }) => {
-  // console.log(data[0]);
   const global = require("@/utils/styles/global.js");
   const [settings, setSettings] = useState(false);
   const [listCategories, setListCategories] = useState([]);
@@ -112,17 +111,13 @@ const Home = ({ data, navigation }) => {
           text = errorMsg;
         } else if (location) {
           text = JSON.stringify(location);
-          // console.log(text);
         }
         /* Contacts */
         if (data.length > 0) {
           const contact = data;
-          // console.log(contact);
         }
         /* Calendars */
-        // console.log({ calendars });
         /* Camera */
-        // console.log("Done Camera");
         /* check */
         // checkPermissions()
       }

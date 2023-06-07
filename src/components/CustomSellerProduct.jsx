@@ -31,7 +31,6 @@ const CustomSellerProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { product } = route.params;
   const [keyImages, setKeyImages] = useState([]);
-  // console.log("LO BUSCO: ", product)
   const getImages = async () => {
     try {
       Storage.list(`products/${product.code}/`, {
@@ -58,6 +57,7 @@ const CustomSellerProduct = ({ route, navigation }) => {
     navigation.navigate("Payment_Navigator", {
       data: product,
       images: keyImages,
+      popRoute: 'Home'
     });
 
   useLayoutEffect(() => {

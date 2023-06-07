@@ -36,14 +36,13 @@ const Login = ({ navigation }) => {
   const onHandleLoginWithGoogle = async () => {
     try {
       const google = await Auth.federatedSignIn({ provider: 'Google' });
-      console.log("GOOLE: ", google)
       // El usuario ha iniciado sesión correctamente con Google
     } catch (error) {
       console.log('Error al iniciar sesión con Google:', error);
     }
   }
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container}  showsVerticalScrollIndicator={false}>
       <View style={styles.content}>
         <Text style={styles.title}>{es.authentication.login.title}</Text>
         <Image
