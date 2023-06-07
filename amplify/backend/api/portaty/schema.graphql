@@ -107,7 +107,8 @@ type Todo
     { allow: owner, provider: oidc, identityClaim: "user_id" },
     { allow: private, provider: oidc },
   ]) {
-  content: String
+    id: ID!
+    content: String
 }
 
 type Mutation {
@@ -131,6 +132,8 @@ type CustomerShop @model @auth(rules:[
   purchaseOrders: [OrderDetail] @hasMany(indexName: "byCustomerShopPurchaseOrder", fields:["userID"])
   products: [CustomerProduct] @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   shippingAddress: [CustomerShippingAddress] @hasMany(indexName: "CustomerShippingAddress", fields:["userID"])
+  googleID: ID!
+  appleID: ID!
   owner: String @auth(rules: [
     { allow: owner, operations: [read, delete] } ])
 }

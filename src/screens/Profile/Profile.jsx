@@ -4,7 +4,7 @@ import styles from "@/utils/styles/Profile.module.css";
 import CustomButton from "@/components/CustomButton";
 import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
-
+import { useIsFocused } from "@react-navigation/native";
 // amplify
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
@@ -35,6 +35,7 @@ import { es } from "@/utils/constants/lenguage";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
+  const isFocus = useIsFocused();
   const userAuth = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([])
   const [purchaseOrders, setPurchaseOrders] = useState([])
@@ -70,10 +71,10 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
-    console.log(userAuth.username)
+    if (!userAuth) return
     const result = await API.graphql({
       query: customProfile.getCustomerShop,
-      variables: { userID: userAuth.username },
+      variables: { userID: userAuth.attributes.sub },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
     setItems(result.data.getCustomerShop.products.items)
@@ -101,7 +102,7 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     fecthShop();
-  }, []);
+  }, [userAuth, isFocus]);
 
   return (
     <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>

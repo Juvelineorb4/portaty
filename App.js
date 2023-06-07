@@ -1,14 +1,15 @@
-import Navigation from "@/routes/Navigation";
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
+
+import Navigation from "@/routes/Navigation";
 // amplify 
+LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 import { Amplify } from 'aws-amplify';
-import awsconfig from '@/aws-exports';
+import awsconfig from './src/aws-exports.js';
 
 // stripe
 import { StripeProvider } from '@stripe/stripe-react-native'

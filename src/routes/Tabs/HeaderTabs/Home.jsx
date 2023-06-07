@@ -13,7 +13,7 @@ const Home = ({ version = 1, onSearchHandler }) => {
     <>
       {version === 1 && (
         <View style={styles.contentProfile}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity onPress={() => ("")}>
             <Image
               style={{
                 width: 40,
