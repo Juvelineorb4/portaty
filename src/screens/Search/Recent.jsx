@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import RecentSearch from "@/components/RecentSearch";
 import CoincidenceSearch from "@/components/CoincidenceSearch";
 import styles from "@/utils/styles/Search.module.css";
@@ -96,9 +96,10 @@ const Recent = ({ route, navigation }) => {
     }
   }, [search]);
 
-  const onHandleItemPress = (data) => {
-    navigation.navigate("Result_Home", {
-      search: data
+  const onHandleItemPress = (data, group) => {
+    navigation.navigate("Result", {
+      data: data,
+      group: group
     });
   };
 
@@ -108,7 +109,7 @@ const Recent = ({ route, navigation }) => {
         data={DATA}
         keyExtractor={(__, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <>
+          <View key={index}>
             {/* {console.log("DATA: ", filter)} */}
             {item.name === "recent"
               ? filter2.map((data, index) => (
@@ -120,9 +121,8 @@ const Recent = ({ route, navigation }) => {
               ))
               : item.name === "coincidence" &&
               filter.map((data, index) => (
-                <>
+                <View key={index}>
                   <CoincidenceSearch
-                    key={index}
                     item={data}
                     onHandler={onHandleItemPress}
                     isBrand={data["products"] ? true : false}
@@ -132,20 +132,19 @@ const Recent = ({ route, navigation }) => {
                   {
                     data?.products?.items.length > 0 &&
                     data?.products?.items.map((item, i) => (
-                      <>
+                      <View key={i}>
                         <CoincidenceSearch
-                          key={i}
                           item={item}
                           onHandler={onHandleItemPress}
                           isProduct={true}
                           brand={data.name}
                         />
-                      </>
+                      </View>
                     ))
                   }
-                </>
+                </View>
               ))}
-          </>
+          </View>
         )}
         ListHeaderComponent={() => <Title />}
         keyboardShouldPersistTaps="always"
@@ -162,10 +161,9 @@ const Title = () => {
   return (
     <View style={[styles.title]}>
       <View style={[{ flex: 1, justifyContent: "space-between", alignItems: 'center', flexDirection: 'row' }]}>
-        <Text style={styles.textTitle}>Recent</Text>
-        <Text style={styles.textTitle}>Clear All</Text>
+        <Text style={styles.textTitle}>Recientes</Text>
+        <Text style={styles.textTitle}>Limpiar todos</Text>
       </View>
-      <View style={[styles.line, global.bgWhiteSmoke]} />
     </View>
   );
 };

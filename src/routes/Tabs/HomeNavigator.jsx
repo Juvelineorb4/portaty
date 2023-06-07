@@ -16,6 +16,8 @@ import Header from "./HeaderTabs/index";
 // import LeftHeader from "./HeaderTabs/LeftHeader";
 import PaymentNavigator from "./PaymentNavigator";
 import LeftSearch from "./HeaderTabs/LeftSearch";
+import CustomSearchSellerProduct from "@/components/CustomSearchSellerProduct";
+import LeftHeader from "./HeaderTabs/LeftHeader";
 
 const Stack = createNativeStackNavigator();
 const HomeNavigator = ({ route, navigation }) => {
@@ -52,11 +54,19 @@ const HomeNavigator = ({ route, navigation }) => {
         }}
       />
       <Stack.Screen
-        name="Result_Home"
+        name="Result"
         component={Result}
         options={{
           animation: "slide_from_right",
           header: (props) => <Header {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="SearchSellerPoduct"
+        component={CustomSearchSellerProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
         }}
       />
       <Stack.Screen

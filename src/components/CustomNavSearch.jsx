@@ -78,7 +78,7 @@ const CustomNavSearch = ({ navigation, route }) => {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, {marginTop: 6}]}>
       {navigation.canGoBack() && (
         <TouchableOpacity
           style={styles.contentBack}

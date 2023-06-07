@@ -10,6 +10,8 @@ import LeftSearch from "./HeaderTabs/LeftSearch";
 import CustomPageFavorite from "@/components/CustomPageFavorite";
 // import PaymentFavoriteNavigator from "./PaymentFavoriteNavigator";
 import PaymentNavigator from "./PaymentNavigator";
+import Result from "@/screens/Search/Result";
+import CustomSearchSellerProduct from "@/components/CustomSearchSellerProduct";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,11 +35,22 @@ const FavoritesNavigator = () => {
             headerShown: false,
           }}
         />
-      {/* <Stack.Screen
-        name="Checkout"
-        component={Checkout}
-        options={{ header: (props) => <LeftHeader {...props} />, }}
-      /> */}
+        <Stack.Screen
+        name="Result"
+        component={Result}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <Header {...props} />,
+        }}
+      />
+      <Stack.Screen
+        name="SearchSellerPoduct"
+        component={CustomSearchSellerProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
     </Stack.Navigator>
   );
 };

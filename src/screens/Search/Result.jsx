@@ -1,12 +1,44 @@
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/SearchResult.module.css";
 import NotFound from "./NotFound";
 import SortFilter from "./SortFilter";
+import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
+import * as customQueries from "@/graphql/CustomQueries/Home";
+import { useIsFocused } from "@react-navigation/native";
+import CustomSearchProductCard from "@/components/CustomSearchProductCard";
 
 const Result = ({ navigation, route }) => {
-  const [search, setSearch] = useState(route.params?.search);
   const global = require("@/utils/styles/global.js");
+  const { data, group } = route.params
+  const [items, setItems] = useState([]);
+
+  console.log(data, group)
+
+  const fetchList = async () => {
+
+    const listSearch = await API.graphql({
+      query: customQueries.listCustomerProductStatus,
+      variables: {
+        filter: {
+          status: { eq: 'PUBLISHED' },
+        }
+      },
+      authMode: "AWS_IAM",
+    });
+    let listItems = [];
+    listSearch.data.listCustomerProductStatuses.items.map((item, index) => {
+      if (group === 'brand' && item.product.brandID === data.id) listItems.push(item);
+      if (group === 'product' && item.product.productID === data.id) listItems.push(item);
+    });
+    setItems(listItems);
+  };
+
+  useEffect(() => {
+    fetchList();
+  }, []);
+
+
   return (
     <View
       style={[
@@ -16,33 +48,33 @@ const Result = ({ navigation, route }) => {
       ]}
     >
       <FlatList
-        data={[]}
-        ListEmptyComponent={<NotFound />}
+        data={items}
+        ListEmptyComponent={items ? <ActivityIndicator style={{marginTop: '50%', transform: [{ scale: 1 }]}} size={`large`} color={`#ffa424`}/> : <NotFound />}
         keyExtractor={(__, index) => index.toString()}
-        renderItem={({ item }) => <></>}
+        renderItem={({ item }) => <CustomSearchProductCard product={item} />}
         ListHeaderComponent={
           <HeaderComponent
-            name={route.params?.name}
-            search={route.params?.search}
+            list={data}
+            number={items.length}
           />
         }
+        numColumns={2}
         contentContainerStyle={{
-          padding: 10,
+          padding: 20,
         }}
         ListFooterComponent={<SortFilter />}
       />
-      <SortFilter />
     </View>
   );
 };
 
-const HeaderComponent = ({ name = "", search = "" }) => {
+const HeaderComponent = ({ list, number }) => {
   return (
     <View style={{ flex: 1, flexDirection: "column" }}>
       <View>
-        <Text style={styles.textTitle}>Resultado de "{search?.name}"</Text>
+        <Text style={styles.textTitle}>Resultado de "{list.name}"</Text>
         <Text style={[global.midGray, { fontFamily: "thin" }]}>
-          0 encontrados
+          {number} encontrados
         </Text>
       </View>
       <View style={[styles.line, global.bgWhiteSmoke]} />

@@ -12,7 +12,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
   const global = require("@/utils/styles/global.js");
-  const [save, setSave] = useState('');
+  const [save, setSave] = useState("");
   const [keyImages, setKeyImages] = useState([]);
   const userAuth = useRecoilValue(userAutenticated);
   const isFocus = useIsFocused();
@@ -66,7 +66,7 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
-    setSave('');
+    setSave("");
   };
 
   const fetchFavorites = async () => {
@@ -79,16 +79,17 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
     });
 
     favoritesItem.data.getCustomerShop.favorites.items.map((item, index) => {
-      item.item.product.customerProductStatusId === data.customerProductStatusId
-        ? setSave(item.id)
-        : setSave("");
+      if (
+        item.item.product.customerProductStatusId ===
+        data.customerProductStatusId
+      ) setSave(item.id);
     });
   };
 
   useLayoutEffect(() => {
     fetchFavorites();
     getImages(data.customer.identityId);
-  }, [userAuth, isFocus, save]);
+  }, [userAuth, isFocus]);
   return (
     <View style={[styles.container]}>
       <View style={styles.image}>

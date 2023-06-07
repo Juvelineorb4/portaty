@@ -897,6 +897,7 @@ export const listCustomerProductStatus = /* GraphQL */ `
           }
           productID
           productFields {
+
             name
             images
           }
@@ -1029,3 +1030,49 @@ export const getCustomerProductStatusPrueba = /* GraphQL */ `
   }
 `;
 
+export const listProductPrueba = /* GraphQL */ `
+  query ListADProducts(
+    $filter: ModelADProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listADProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        images
+        paths
+        description
+        suggestedPrice
+        categoryID
+        brandID
+        phone {
+          colors
+          storage
+          width
+          height
+          depth
+          weight
+          display {
+            resolution
+            screenSize
+            ppi
+          }
+          camera {
+            primary
+            secondary
+            resolution
+          }
+          battery {
+            capacity
+            duration
+            usb
+          }
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
