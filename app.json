@@ -26,7 +26,8 @@
         "NSRemindersUsageDescription": "Allow $(PRODUCT_NAME) to access your reminders",
         "NSPhotoLibraryUsageDescription": "Allow Portasty to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Portaty to save photos."
-      }
+      },
+      "bundleIdentifier": "com.teamportaty.appdev"
     },
     "android": {
       "adaptiveIcon": {

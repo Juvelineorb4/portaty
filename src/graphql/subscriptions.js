@@ -52,6 +52,7 @@ export const onCreateADCategory = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -167,6 +168,7 @@ export const onUpdateADCategory = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -282,6 +284,7 @@ export const onDeleteADCategory = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -395,6 +398,7 @@ export const onCreateADBrand = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -508,6 +512,7 @@ export const onUpdateADBrand = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -621,6 +626,7 @@ export const onDeleteADBrand = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -793,6 +799,7 @@ export const onCreateADProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -806,6 +813,7 @@ export const onCreateADProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -952,6 +960,7 @@ export const onUpdateADProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -965,6 +974,7 @@ export const onUpdateADProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1111,6 +1121,7 @@ export const onDeleteADProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -1124,6 +1135,7 @@ export const onDeleteADProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1169,11 +1181,10 @@ export const onCreateTodo = /* GraphQL */ `
   ) {
     onCreateTodo(filter: $filter, owner: $owner) {
       id
-      name
-      description
-      owner
+      content
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1184,11 +1195,10 @@ export const onUpdateTodo = /* GraphQL */ `
   ) {
     onUpdateTodo(filter: $filter, owner: $owner) {
       id
-      name
-      description
-      owner
+      content
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1199,11 +1209,10 @@ export const onDeleteTodo = /* GraphQL */ `
   ) {
     onDeleteTodo(filter: $filter, owner: $owner) {
       id
-      name
-      description
-      owner
+      content
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1232,6 +1241,7 @@ export const onCreateCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1404,6 +1414,7 @@ export const onCreateCustomerShop = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -1417,6 +1428,7 @@ export const onCreateCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1496,6 +1508,7 @@ export const onUpdateCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1668,6 +1681,7 @@ export const onUpdateCustomerShop = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -1681,6 +1695,7 @@ export const onUpdateCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1760,6 +1775,7 @@ export const onDeleteCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -1932,6 +1948,7 @@ export const onDeleteCustomerShop = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -1945,6 +1962,7 @@ export const onDeleteCustomerShop = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -2137,6 +2155,7 @@ export const onCreateFavoriteItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -2150,6 +2169,7 @@ export const onCreateFavoriteItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -2293,6 +2313,7 @@ export const onUpdateFavoriteItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -2306,6 +2327,7 @@ export const onUpdateFavoriteItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -2449,6 +2471,7 @@ export const onDeleteFavoriteItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -2462,6 +2485,7 @@ export const onDeleteFavoriteItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -2664,6 +2688,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -2802,6 +2827,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -2838,6 +2864,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
         images
       }
       code
+      paths
       price
       condition
       description
@@ -2914,6 +2941,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -2927,6 +2955,7 @@ export const onCreateCustomerProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -3139,6 +3168,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -3277,6 +3307,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -3313,6 +3344,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
         images
       }
       code
+      paths
       price
       condition
       description
@@ -3389,6 +3421,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -3402,6 +3435,7 @@ export const onUpdateCustomerProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -3614,6 +3648,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -3752,6 +3787,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -3788,6 +3824,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
         images
       }
       code
+      paths
       price
       condition
       description
@@ -3864,6 +3901,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -3877,6 +3915,7 @@ export const onDeleteCustomerProduct = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4011,6 +4050,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4094,6 +4134,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4112,6 +4153,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
           images
         }
         code
+        paths
         price
         condition
         description
@@ -4162,6 +4204,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -4235,6 +4278,7 @@ export const onCreateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4325,6 +4369,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4408,6 +4453,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4426,6 +4472,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
           images
         }
         code
+        paths
         price
         condition
         description
@@ -4476,6 +4523,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -4549,6 +4597,7 @@ export const onUpdateCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4639,6 +4688,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4722,6 +4772,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4740,6 +4791,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
           images
         }
         code
+        paths
         price
         condition
         description
@@ -4790,6 +4842,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
               images
             }
             code
+            paths
             price
             condition
             description
@@ -4863,6 +4916,7 @@ export const onDeleteCustomerProductStatus = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4916,6 +4970,7 @@ export const onCreateOrderDetail = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -4985,6 +5040,7 @@ export const onUpdateOrderDetail = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -5054,6 +5110,7 @@ export const onDeleteOrderDetail = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -5180,6 +5237,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -5193,6 +5251,7 @@ export const onCreateOrderItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -5336,6 +5395,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -5349,6 +5409,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
@@ -5492,6 +5553,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             images
           }
           code
+          paths
           price
           condition
           description
@@ -5505,6 +5567,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
               brandID
               productID
               code
+              paths
               price
               condition
               description
