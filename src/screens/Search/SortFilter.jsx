@@ -35,7 +35,6 @@ const SortFilter = () => {
   const snapPoints = useMemo(() => snapPointsInitial, []);
 
   const handleSheetChanges = useCallback((index) => {
-    console.log('handleSheetChanges', index);
     if (index === -1) setFilter(false)
     if (index === 0) handleClosePress()
   }, []);

@@ -16,7 +16,6 @@ const CustomPageListProduct = ({ data = {}, route }) => {
   const global = require("@/utils/styles/global.js");
   const [keyImages, setKeyImages] = useState([]);
   const { product } = route.params;
-  console.log(product.paths);
   const getImages = async () => {
     try {
         const promises = await Promise.all(

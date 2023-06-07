@@ -4,7 +4,7 @@ import styles from "@/utils/styles/Profile.module.css";
 import CustomButton from "@/components/CustomButton";
 import { settings } from "@/utils/constants/settings";
 import CustomSelect from "@/components/CustomSelect";
-import { useIsFocused } from "@react-navigation/native";
+
 // amplify
 import { Auth, API } from "aws-amplify";
 import * as queries from "@/graphql/queries";
@@ -32,12 +32,13 @@ import {
   userAutenticated,
 } from "@/atoms";
 import { es } from "@/utils/constants/lenguage";
+import { useIsFocused } from "@react-navigation/native";
 
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
-  const isFocus = useIsFocused();
   const userAuth = useRecoilValue(userAutenticated);
   const [items, setItems] = useState([])
+  const isFocus = useIsFocused()
   const [purchaseOrders, setPurchaseOrders] = useState([])
   const [salesOrders, setSalesOrders] = useState([])
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
@@ -71,7 +72,6 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
-    if (!userAuth) return
     const result = await API.graphql({
       query: customProfile.getCustomerShop,
       variables: { userID: userAuth.attributes.sub },

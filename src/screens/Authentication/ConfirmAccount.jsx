@@ -22,21 +22,7 @@ const ConfirmAccount = () => {
     },
   });
 
-  //   const omHandleConfirm = async (data) => {
-  //     const { email, code } = data
-  //     let newCode = ""
-  //     code.forEach(item => {
-  //       newCode = newCode + item
-  //     });
 
-  //     try {
-  //       if (!code.lenght === 6) return console.log("no tiene 6");
-  //       await Auth.confirmSignUp(email, newCode)
-  //     } catch (error) {
-  //       if (error.message == "User cannot be confirmed. Current status is CONFIRMED") return navigation.navigate("Home")
-  //       Alert.alert(error.message)
-  //     }
-  //   }
 
   const onHandleConfirm = async (data) => {
     const { code, email } = data

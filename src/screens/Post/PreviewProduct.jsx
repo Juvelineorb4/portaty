@@ -30,7 +30,6 @@ const PreviewProduct = ({ data = {}, route, navigation }) => {
             return imageResult;
           })
         );
-        console.log("rango", promises.length);
         setKeyImages(promises);
       });
     } catch (error) {
@@ -45,7 +44,6 @@ const PreviewProduct = ({ data = {}, route, navigation }) => {
     <ScrollView style={[global.bgWhite, { flex: 1 }]} showsVerticalScrollIndicator={false}>
       <View style={[styles.container, { paddingTop: 30}]}>
         <View style={styles.containerImages}>
-          {console.log(product)}
           {!keyImages.length <= 0 && (
             <FlatList
               data={keyImages}

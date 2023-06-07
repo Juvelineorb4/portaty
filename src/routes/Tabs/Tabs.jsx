@@ -152,6 +152,7 @@ const Tabs = () => {
       initialRouteName={`Home_Tab`}
       screenOptions={{
         headerShown: false,
+        unmountOnBlur: true
       }}
     >
         <Tab.Screen

@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-const RecentSearch = ({ item, onHandler, isBrand = false, isProduct = false, brand = "" }) => {
+
+const CoincidenceSearch = ({ item, onHandler, isBrand = false, isProduct = false, brand = "" }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      {console.log("ESTOY AQUI: ", brand)}
-      <TouchableOpacity style={styles.result} onPress={() => onHandler(item)}>
+      <TouchableOpacity style={styles.result} onPress={() => {
+        isBrand ? onHandler(item, `brand`) : isProduct ? onHandler(item, `product`) : console.log(`none`)
+      }}>
         <Image
           style={{
             width: 15,
@@ -17,12 +19,12 @@ const RecentSearch = ({ item, onHandler, isBrand = false, isProduct = false, bra
           }}
           source={require("@/utils/images/arrow_diagonal.png")}
         />
-        <Text style={[styles.text, isBrand && { fontWeight: "bold" }]}>
+        <Text style={[styles.text, isBrand && { fontFamily: 'bold' }]}>
           {item?.name}
           {isBrand ?
-            <Text style={{ color: "lightgray" }}>  (VER TODOS)</Text>
+            <Text style={{ color: "lightgray", fontFamily: 'light', fontSize: 14, textTransform: 'uppercase' }}>  {`(VER TODOS)`}</Text>
             : isProduct &&
-            <Text style={{ color: "lightgray" }}>  ({brand})</Text>
+            <Text style={{ color: "lightgray", fontFamily: 'light', fontSize: 14, textTransform: 'uppercase' }}>  ({brand})</Text>
           }
         </Text>
       </TouchableOpacity>
@@ -30,7 +32,7 @@ const RecentSearch = ({ item, onHandler, isBrand = false, isProduct = false, bra
   );
 };
 
-export default RecentSearch;
+export default CoincidenceSearch;
 
 const styles = StyleSheet.create({
   container: {

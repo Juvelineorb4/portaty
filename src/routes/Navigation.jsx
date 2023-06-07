@@ -25,8 +25,6 @@ const Navigation = () => {
       });
       setUserAuth(result);
       if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
-      // configStoragePrefix(result);
-      // console.log("Configurado")
     } catch (error) {
       setUserAuth(undefined);
       console.error("CHECK USER ERROR: ", error)
@@ -73,8 +71,6 @@ const Navigation = () => {
   useEffect(() => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
-      console.log("HUB: ", event);
-      console.log("HUB DATA: ", data);
       switch (event) {
         case "signIn":
           checkUser();

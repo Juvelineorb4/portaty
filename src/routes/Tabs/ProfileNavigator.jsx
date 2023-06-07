@@ -15,6 +15,8 @@ import CustomPageListProduct from "@/components/CustomPageListProduct";
 import OrderPreview from "@/components/OrderPreview";
 import Notifications from "@/screens/Notifications/Notifications";
 import OrderPreviewList from "@/components/OrderPreviewList";
+import CustomSearchSellerProduct from "@/components/CustomSearchSellerProduct";
+import PaymentNavigator from "./PaymentNavigator";
 
 const Stack = createNativeStackNavigator();
 const ProfileNavigator = () => {
@@ -54,7 +56,7 @@ const ProfileNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="Result_Profile"
+        name="Result"
         component={Result}
         options={{
           animation: "slide_from_right",
@@ -101,6 +103,21 @@ const ProfileNavigator = () => {
           header: (props) => <LeftHeader {...props} />,
         }}
       />
+      <Stack.Screen
+        name="SearchSellerPoduct"
+        component={CustomSearchSellerProduct}
+        options={{
+          animation: "slide_from_right",
+          header: (props) => <LeftHeader {...props} />,
+        }}
+      />
+      <Stack.Screen
+          name={`Payment_Navigator`}
+          component={PaymentNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
     </Stack.Navigator>
   );
 };
