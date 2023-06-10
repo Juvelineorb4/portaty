@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
-import { LogBox } from "react-native";
+import { LogBox, SafeAreaView, StatusBar } from "react-native";
+
 
 import Navigation from "@/routes/Navigation";
 // amplify
@@ -13,6 +15,7 @@ import awsconfig from "./src/aws-exports.js";
 
 // stripe
 import { StripeProvider } from "@stripe/stripe-react-native";
+// import { StatusBar } from "expo-status-bar";
 
 Amplify.configure({
   ...awsconfig,
@@ -30,6 +33,7 @@ const STRIPE_KEY =
   "pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ";
 
 export default function App() {
+  const global = require("@/utils/styles/global.js");
   const [fontsLoaded] = useFonts({
     thin: require("@/utils/fonts/Montserrat-Thin.ttf"),
     regular: require("@/utils/fonts/Montserrat-Regular.ttf"),
@@ -55,17 +59,18 @@ export default function App() {
     return null;
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={[{ flex: 1 }, global.mainBgColor]}>
       <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <RecoilRoot>
             <StripeProvider publishableKey={STRIPE_KEY}>
-              <StatusBar style="auto" />
+              {/* <StatusBar style="light" backgroundColor="red" /> */}
               <Navigation />
             </StripeProvider>
           </RecoilRoot>
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </SafeAreaView>
+
   );
 }
