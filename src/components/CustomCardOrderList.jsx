@@ -28,7 +28,7 @@ const CustomCardOrderList = ({data = {}, status}) => {
         );
         setKeyImages(promises);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

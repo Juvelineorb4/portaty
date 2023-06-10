@@ -28,7 +28,7 @@ const CustomPageProduct = ({ route, navigation }) => {
       });
       setItems(listItems);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
     try {
       await Auth.signIn(email, password);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setIsLoading(false)
     }
     setIsLoading(false)

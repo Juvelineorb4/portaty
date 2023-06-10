@@ -81,7 +81,7 @@ const Home = ({ data, navigation }) => {
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
