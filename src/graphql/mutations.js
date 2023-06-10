@@ -1,6 +1,5 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-
 export const pruebaE = /* GraphQL */ `
   mutation PruebaE($credentials: String!) {
     pruebaE(credentials: $credentials)
@@ -54,7 +53,6 @@ export const createADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -67,7 +65,6 @@ export const createADCategory = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -96,7 +93,6 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -112,7 +108,6 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -122,7 +117,6 @@ export const createADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -171,7 +165,6 @@ export const updateADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -184,7 +177,6 @@ export const updateADCategory = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -213,7 +205,6 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -229,7 +220,6 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -239,7 +229,6 @@ export const updateADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -288,7 +277,6 @@ export const deleteADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -301,7 +289,6 @@ export const deleteADCategory = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -330,7 +317,6 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -346,7 +332,6 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -356,7 +341,6 @@ export const deleteADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -405,7 +389,6 @@ export const createADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -418,7 +401,6 @@ export const createADBrand = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -447,7 +429,6 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -463,7 +444,6 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -473,7 +453,6 @@ export const createADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -522,7 +501,6 @@ export const updateADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -535,7 +513,6 @@ export const updateADBrand = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -564,7 +541,6 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -580,7 +556,6 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -590,7 +565,6 @@ export const updateADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -639,7 +613,6 @@ export const deleteADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -652,7 +625,6 @@ export const deleteADBrand = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -681,7 +653,6 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -697,7 +668,6 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
             createdAt
             updatedAt
           }
@@ -707,7 +677,6 @@ export const deleteADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
       createdAt
       updatedAt
     }
@@ -750,7 +719,6 @@ export const createADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
       customerProduct {
         items {
           id
@@ -776,7 +744,6 @@ export const createADProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -810,7 +777,6 @@ export const createADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -840,13 +806,11 @@ export const createADProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -863,7 +827,6 @@ export const createADProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -912,7 +875,6 @@ export const updateADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
       customerProduct {
         items {
           id
@@ -938,7 +900,6 @@ export const updateADProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -972,7 +933,6 @@ export const updateADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1002,13 +962,11 @@ export const updateADProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1025,7 +983,6 @@ export const updateADProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -1074,7 +1031,6 @@ export const deleteADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
       customerProduct {
         items {
           id
@@ -1100,7 +1056,6 @@ export const deleteADProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -1134,7 +1089,6 @@ export const deleteADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1164,13 +1118,11 @@ export const deleteADProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1187,7 +1139,6 @@ export const deleteADProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -1209,7 +1160,6 @@ export const createTodo = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -1223,7 +1173,6 @@ export const updateTodo = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -1237,7 +1186,6 @@ export const deleteTodo = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -1270,13 +1218,11 @@ export const createCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1284,7 +1230,6 @@ export const createCustomerShop = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -1303,7 +1248,6 @@ export const createCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1314,7 +1258,6 @@ export const createCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1325,7 +1268,6 @@ export const createCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1342,7 +1284,6 @@ export const createCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1353,7 +1294,6 @@ export const createCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1364,7 +1304,6 @@ export const createCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1393,7 +1332,6 @@ export const createCustomerShop = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -1427,7 +1365,6 @@ export const createCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1457,13 +1394,11 @@ export const createCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1480,7 +1415,6 @@ export const createCustomerShop = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -1496,13 +1430,11 @@ export const createCustomerShop = /* GraphQL */ `
           postal
           city
           address
-          owner
           createdAt
           updatedAt
         }
         nextToken
       }
-      owner
       createdAt
       updatedAt
     }
@@ -1537,13 +1469,11 @@ export const updateCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1551,7 +1481,6 @@ export const updateCustomerShop = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -1570,7 +1499,6 @@ export const updateCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1581,7 +1509,6 @@ export const updateCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1592,7 +1519,6 @@ export const updateCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1609,7 +1535,6 @@ export const updateCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1620,7 +1545,6 @@ export const updateCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1631,7 +1555,6 @@ export const updateCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1660,7 +1583,6 @@ export const updateCustomerShop = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -1694,7 +1616,6 @@ export const updateCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1724,13 +1645,11 @@ export const updateCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1747,7 +1666,6 @@ export const updateCustomerShop = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -1763,13 +1681,11 @@ export const updateCustomerShop = /* GraphQL */ `
           postal
           city
           address
-          owner
           createdAt
           updatedAt
         }
         nextToken
       }
-      owner
       createdAt
       updatedAt
     }
@@ -1804,13 +1720,11 @@ export const deleteCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -1818,7 +1732,6 @@ export const deleteCustomerShop = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -1837,7 +1750,6 @@ export const deleteCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1848,7 +1760,6 @@ export const deleteCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1859,7 +1770,6 @@ export const deleteCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1876,7 +1786,6 @@ export const deleteCustomerShop = /* GraphQL */ `
               itemID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -1887,7 +1796,6 @@ export const deleteCustomerShop = /* GraphQL */ `
             metadata
             createdAt
             updatedAt
-            owner
           }
           shippingAddress {
             country
@@ -1898,7 +1806,6 @@ export const deleteCustomerShop = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1927,7 +1834,6 @@ export const deleteCustomerShop = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -1961,7 +1867,6 @@ export const deleteCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -1991,13 +1896,11 @@ export const deleteCustomerShop = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -2014,7 +1917,6 @@ export const deleteCustomerShop = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
@@ -2030,13 +1932,11 @@ export const deleteCustomerShop = /* GraphQL */ `
           postal
           city
           address
-          owner
           createdAt
           updatedAt
         }
         nextToken
       }
-      owner
       createdAt
       updatedAt
     }
@@ -2055,7 +1955,6 @@ export const createCustomerShippingAddress = /* GraphQL */ `
       postal
       city
       address
-      owner
       createdAt
       updatedAt
     }
@@ -2074,7 +1973,6 @@ export const updateCustomerShippingAddress = /* GraphQL */ `
       postal
       city
       address
-      owner
       createdAt
       updatedAt
     }
@@ -2093,7 +1991,6 @@ export const deleteCustomerShippingAddress = /* GraphQL */ `
       postal
       city
       address
-      owner
       createdAt
       updatedAt
     }
@@ -2108,7 +2005,6 @@ export const createFavoriteItem = /* GraphQL */ `
       id
       itemID
       customerShopID
-      owner
       createdAt
       updatedAt
     }
@@ -2149,7 +2045,6 @@ export const updateFavoriteItem = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -2183,7 +2078,6 @@ export const updateFavoriteItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -2213,13 +2107,11 @@ export const updateFavoriteItem = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -2236,13 +2128,11 @@ export const updateFavoriteItem = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -2251,12 +2141,10 @@ export const updateFavoriteItem = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -2266,7 +2154,6 @@ export const updateFavoriteItem = /* GraphQL */ `
         updatedAt
       }
       customerShopID
-      owner
       createdAt
       updatedAt
     }
@@ -2304,12 +2191,10 @@ export const createCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -2331,7 +2216,6 @@ export const createCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -2342,7 +2226,6 @@ export const createCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2362,7 +2245,6 @@ export const createCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -2373,7 +2255,6 @@ export const createCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2387,7 +2268,6 @@ export const createCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -2413,7 +2293,6 @@ export const createCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -2430,7 +2309,6 @@ export const createCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -2444,7 +2322,6 @@ export const createCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -2460,13 +2337,11 @@ export const createCustomerProduct = /* GraphQL */ `
             postal
             city
             address
-            owner
             createdAt
             updatedAt
           }
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -2515,7 +2390,6 @@ export const createCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         customerProduct {
           items {
             id
@@ -2526,7 +2400,6 @@ export const createCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -2552,7 +2425,6 @@ export const createCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -2569,7 +2441,6 @@ export const createCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -2583,7 +2454,6 @@ export const createCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -2629,7 +2499,6 @@ export const createCustomerProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -2663,7 +2532,6 @@ export const createCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -2693,13 +2561,11 @@ export const createCustomerProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -2716,13 +2582,11 @@ export const createCustomerProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -2731,12 +2595,10 @@ export const createCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -2755,7 +2617,6 @@ export const createCustomerProduct = /* GraphQL */ `
       laptoFields {
         serial
       }
-      owner
       createdAt
       updatedAt
       customerProductStatusId
@@ -2784,12 +2645,10 @@ export const updateCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -2811,7 +2670,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -2822,7 +2680,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2842,7 +2699,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -2853,7 +2709,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -2867,7 +2722,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -2893,7 +2747,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -2910,7 +2763,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -2924,7 +2776,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -2940,13 +2791,11 @@ export const updateCustomerProduct = /* GraphQL */ `
             postal
             city
             address
-            owner
             createdAt
             updatedAt
           }
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -2995,7 +2844,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         customerProduct {
           items {
             id
@@ -3006,7 +2854,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -3032,7 +2879,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -3049,7 +2895,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -3063,7 +2908,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -3109,7 +2953,6 @@ export const updateCustomerProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -3143,7 +2986,6 @@ export const updateCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -3173,13 +3015,11 @@ export const updateCustomerProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -3196,13 +3036,11 @@ export const updateCustomerProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -3211,12 +3049,10 @@ export const updateCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -3235,7 +3071,6 @@ export const updateCustomerProduct = /* GraphQL */ `
       laptoFields {
         serial
       }
-      owner
       createdAt
       updatedAt
       customerProductStatusId
@@ -3264,12 +3099,10 @@ export const deleteCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -3291,7 +3124,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -3302,7 +3134,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3322,7 +3153,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               metadata
               createdAt
               updatedAt
-              owner
             }
             shippingAddress {
               country
@@ -3333,7 +3163,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             }
             createdAt
             updatedAt
-            owner
           }
           nextToken
         }
@@ -3347,7 +3176,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -3373,7 +3201,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -3390,7 +3217,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -3404,7 +3230,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -3420,13 +3245,11 @@ export const deleteCustomerProduct = /* GraphQL */ `
             postal
             city
             address
-            owner
             createdAt
             updatedAt
           }
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -3475,7 +3298,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
         customerProduct {
           items {
             id
@@ -3486,7 +3308,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -3512,7 +3333,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -3529,7 +3349,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -3543,7 +3362,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
@@ -3589,7 +3407,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -3623,7 +3440,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -3653,13 +3469,11 @@ export const deleteCustomerProduct = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -3676,13 +3490,11 @@ export const deleteCustomerProduct = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -3691,12 +3503,10 @@ export const deleteCustomerProduct = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -3715,7 +3525,6 @@ export const deleteCustomerProduct = /* GraphQL */ `
       laptoFields {
         serial
       }
-      owner
       createdAt
       updatedAt
       customerProductStatusId
@@ -3744,7 +3553,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -3759,7 +3567,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3772,7 +3579,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -3788,7 +3594,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -3804,13 +3609,11 @@ export const createCustomerProductStatus = /* GraphQL */ `
               postal
               city
               address
-              owner
               createdAt
               updatedAt
             }
             nextToken
           }
-          owner
           createdAt
           updatedAt
         }
@@ -3859,7 +3662,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -3872,7 +3674,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -3903,7 +3704,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -3929,7 +3729,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -3946,7 +3745,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -3960,19 +3758,16 @@ export const createCustomerProductStatus = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
           }
           status
-          owner
           favoriteItems {
             items {
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -3991,13 +3786,11 @@ export const createCustomerProductStatus = /* GraphQL */ `
         laptoFields {
           serial
         }
-        owner
         createdAt
         updatedAt
         customerProductStatusId
       }
       status
-      owner
       favoriteItems {
         items {
           id
@@ -4016,13 +3809,11 @@ export const createCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4030,7 +3821,6 @@ export const createCustomerProductStatus = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -4063,7 +3853,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -4078,7 +3867,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4091,7 +3879,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4107,7 +3894,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -4123,13 +3909,11 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               postal
               city
               address
-              owner
               createdAt
               updatedAt
             }
             nextToken
           }
-          owner
           createdAt
           updatedAt
         }
@@ -4178,7 +3962,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -4191,7 +3974,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -4222,7 +4004,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -4248,7 +4029,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -4265,7 +4045,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -4279,19 +4058,16 @@ export const updateCustomerProductStatus = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
           }
           status
-          owner
           favoriteItems {
             items {
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -4310,13 +4086,11 @@ export const updateCustomerProductStatus = /* GraphQL */ `
         laptoFields {
           serial
         }
-        owner
         createdAt
         updatedAt
         customerProductStatusId
       }
       status
-      owner
       favoriteItems {
         items {
           id
@@ -4335,13 +4109,11 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4349,7 +4121,6 @@ export const updateCustomerProductStatus = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -4382,7 +4153,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -4397,7 +4167,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4410,7 +4179,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               paymentID
               createdAt
               updatedAt
-              owner
             }
             nextToken
           }
@@ -4426,7 +4194,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -4442,13 +4209,11 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               postal
               city
               address
-              owner
               createdAt
               updatedAt
             }
             nextToken
           }
-          owner
           createdAt
           updatedAt
         }
@@ -4497,7 +4262,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
           customerProduct {
             items {
               id
@@ -4510,7 +4274,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
@@ -4541,7 +4304,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               email
               description
               identityId
-              owner
               createdAt
               updatedAt
             }
@@ -4567,7 +4329,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
               createdAt
               updatedAt
             }
@@ -4584,7 +4345,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
@@ -4598,19 +4358,16 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
             laptoFields {
               serial
             }
-            owner
             createdAt
             updatedAt
             customerProductStatusId
           }
           status
-          owner
           favoriteItems {
             items {
               id
               itemID
               customerShopID
-              owner
               createdAt
               updatedAt
             }
@@ -4629,13 +4386,11 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
         laptoFields {
           serial
         }
-        owner
         createdAt
         updatedAt
         customerProductStatusId
       }
       status
-      owner
       favoriteItems {
         items {
           id
@@ -4654,13 +4409,11 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4668,7 +4421,6 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
             updatedAt
           }
           customerShopID
-          owner
           createdAt
           updatedAt
         }
@@ -4708,13 +4460,11 @@ export const createOrderDetail = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4723,7 +4473,6 @@ export const createOrderDetail = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4734,7 +4483,6 @@ export const createOrderDetail = /* GraphQL */ `
         metadata
         createdAt
         updatedAt
-        owner
       }
       shippingAddress {
         country
@@ -4745,7 +4493,6 @@ export const createOrderDetail = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -4778,13 +4525,11 @@ export const updateOrderDetail = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4793,7 +4538,6 @@ export const updateOrderDetail = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4804,7 +4548,6 @@ export const updateOrderDetail = /* GraphQL */ `
         metadata
         createdAt
         updatedAt
-        owner
       }
       shippingAddress {
         country
@@ -4815,7 +4558,6 @@ export const updateOrderDetail = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -4848,13 +4590,11 @@ export const deleteOrderDetail = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -4863,7 +4603,6 @@ export const deleteOrderDetail = /* GraphQL */ `
           }
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4874,7 +4613,6 @@ export const deleteOrderDetail = /* GraphQL */ `
         metadata
         createdAt
         updatedAt
-        owner
       }
       shippingAddress {
         country
@@ -4885,7 +4623,6 @@ export const deleteOrderDetail = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -4925,7 +4662,6 @@ export const createOrderItem = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -4959,7 +4695,6 @@ export const createOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -4989,13 +4724,11 @@ export const createOrderItem = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -5012,13 +4745,11 @@ export const createOrderItem = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -5027,12 +4758,10 @@ export const createOrderItem = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -5043,7 +4772,6 @@ export const createOrderItem = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5083,7 +4811,6 @@ export const updateOrderItem = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -5117,7 +4844,6 @@ export const updateOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5147,13 +4873,11 @@ export const updateOrderItem = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -5170,13 +4894,11 @@ export const updateOrderItem = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -5185,12 +4907,10 @@ export const updateOrderItem = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -5201,7 +4921,6 @@ export const updateOrderItem = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5241,7 +4960,6 @@ export const deleteOrderItem = /* GraphQL */ `
             shippingAddress {
               nextToken
             }
-            owner
             createdAt
             updatedAt
           }
@@ -5275,7 +4993,6 @@ export const deleteOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5305,13 +5022,11 @@ export const deleteOrderItem = /* GraphQL */ `
               price
               condition
               description
-              owner
               createdAt
               updatedAt
               customerProductStatusId
             }
             status
-            owner
             favoriteItems {
               nextToken
             }
@@ -5328,13 +5043,11 @@ export const deleteOrderItem = /* GraphQL */ `
           laptoFields {
             serial
           }
-          owner
           createdAt
           updatedAt
           customerProductStatusId
         }
         status
-        owner
         favoriteItems {
           items {
             id
@@ -5343,12 +5056,10 @@ export const deleteOrderItem = /* GraphQL */ `
               id
               productID
               status
-              owner
               createdAt
               updatedAt
             }
             customerShopID
-            owner
             createdAt
             updatedAt
           }
@@ -5359,7 +5070,6 @@ export const deleteOrderItem = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5374,7 +5084,6 @@ export const createPaymentStripe = /* GraphQL */ `
       metadata
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5389,7 +5098,6 @@ export const updatePaymentStripe = /* GraphQL */ `
       metadata
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5404,7 +5112,6 @@ export const deletePaymentStripe = /* GraphQL */ `
       metadata
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -5440,7 +5147,6 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5460,7 +5166,6 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5470,7 +5175,6 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5480,7 +5184,6 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }
@@ -5507,7 +5210,6 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5527,7 +5229,6 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5537,7 +5238,6 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5547,7 +5247,6 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }
@@ -5588,7 +5287,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5608,7 +5306,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5618,7 +5315,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5628,7 +5324,6 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }
@@ -5655,7 +5350,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5675,7 +5369,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5685,7 +5378,6 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5695,7 +5387,6 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }
@@ -5736,7 +5427,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5756,7 +5446,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5766,7 +5455,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5776,7 +5464,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }
@@ -5803,7 +5490,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
             customerProduct {
               nextToken
             }
@@ -5823,7 +5509,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5833,7 +5518,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
               createdAt
               updatedAt
             }
@@ -5843,7 +5527,6 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
         createdAt
         updatedAt
       }

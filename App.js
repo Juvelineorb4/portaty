@@ -13,6 +13,7 @@ import awsconfig from "./src/aws-exports.js";
 
 // stripe
 import { StripeProvider } from "@stripe/stripe-react-native";
+import { StatusBar } from "expo-status-bar";
 
 Amplify.configure({
   ...awsconfig,
@@ -55,7 +56,7 @@ export default function App() {
     return null;
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <RecoilRoot>
