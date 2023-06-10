@@ -217,7 +217,7 @@ const PostProduct = ({ navigation, route }) => {
         product: createCustomerProductStatus,
       });
     } catch (error) {
-      console.error("Error al Publicar Producto", error);
+      console.log("Error al Publicar Producto", error);
       setIsLoading(false)
     }
     setIsLoading(false)
@@ -231,7 +231,7 @@ const PostProduct = ({ navigation, route }) => {
       });
       setDataCategories(categories.data.listADCategories.items);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
   const dataUpdate = () => {

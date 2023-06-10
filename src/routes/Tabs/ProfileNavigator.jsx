@@ -30,7 +30,7 @@ const ProfileNavigator = () => {
         setData(json);
       })
       .catch((error) => {
-        console.error(JSON.stringify(error));
+        console.log(JSON.stringify(error));
       });
   }
 

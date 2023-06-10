@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["*/"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -55,11 +53,7 @@
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "jsx",
-        "css"
-      ]
+      "sourceExts": ["js", "jsx", "css"]
     },
     "plugins": [
       [

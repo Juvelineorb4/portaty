@@ -36,7 +36,7 @@ const CustomCardPage = ({ onHandlePress, data = {}, owner }) => {
         setKeyImages(promises);
       });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

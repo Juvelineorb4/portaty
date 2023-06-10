@@ -26,8 +26,8 @@ const Navigation = () => {
       setUserAuth(result);
       if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
     } catch (error) {
-      setUserAuth(undefined);
-      console.error("CHECK USER ERROR: ", error)
+      setUserAuth(null);
+      console.log("CHECK USER ERROR: ", error)
     }
   };
 
@@ -53,7 +53,7 @@ const Navigation = () => {
       })
       console.log("EJELE: ", ejele)
     } catch (error) {
-      console.error("Error al cargar Atributo: ", error);
+      console.log("Error al cargar Atributo: ", error);
     }
 
   }
@@ -76,7 +76,7 @@ const Navigation = () => {
           checkUser();
           break;
         case "signOut":
-          setUserAuth(undefined);
+          setUserAuth(null);
           break;
         case "confirmSignUp":
           break;

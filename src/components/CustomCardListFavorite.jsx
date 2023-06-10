@@ -54,7 +54,7 @@ const CustomCardListFavorite = ({ product }) => {
       );
       setKeyImages(promises);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
   useLayoutEffect(() => {
