@@ -1,15 +1,15 @@
-const { getDefaultConfig } = require('expo/metro-config');
-const exclusionList = require('metro-config/src/defaults/exclusionList');
+const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
-  const { resolver: { sourceExts } } = await getDefaultConfig(__dirname);
+  const {
+    resolver: { sourceExts },
+  } = await getDefaultConfig();
   return {
     transformer: {
       babelTransformerPath: require.resolve("react-native-css-transformer"),
     },
     resolver: {
       sourceExts: [...sourceExts, "css"],
-      blacklistRE: exclusionList([/#current-cloud-backend\/.*/]),
     },
-  }
+  };
 })();
