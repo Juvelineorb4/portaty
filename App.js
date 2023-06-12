@@ -3,16 +3,18 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
-import { LogBox } from 'react-native';
 
 import Navigation from "@/routes/Navigation";
 // amplify 
-LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 import { Amplify } from 'aws-amplify';
 import awsconfig from './src/aws-exports.js';
 
 // stripe
 import { StripeProvider } from '@stripe/stripe-react-native'
+
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
 Amplify.configure({
   ...awsconfig,
@@ -29,6 +31,7 @@ Amplify.configure({
 const STRIPE_KEY = 'pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ'
 
 export default function App() {
+  const global = require("@/utils/styles/global.js");
   const [fontsLoaded] = useFonts({
     thin: require("@/utils/fonts/Montserrat-Thin.ttf"),
     regular: require("@/utils/fonts/Montserrat-Regular.ttf"),
@@ -65,3 +68,12 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

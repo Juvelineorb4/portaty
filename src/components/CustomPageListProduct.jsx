@@ -29,7 +29,7 @@ const CustomPageListProduct = ({ data = {}, route }) => {
         );
         setKeyImages(promises);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

@@ -67,7 +67,7 @@ const Register = () => {
         email: email,
       });
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setIsLoading(false);
     }
     setIsLoading(false);

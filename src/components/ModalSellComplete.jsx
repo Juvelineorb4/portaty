@@ -22,6 +22,7 @@ import {
 import { Auth, API, graphqlOperation } from "aws-amplify";
 import * as queries from "@/graphql/queries";
 import * as mutations from "@/graphql/mutations";
+import * as mutationsSell from '@/graphql/CustomMutations/Sell'
 import { useNavigation } from "@react-navigation/native";
 
 const ModalSellComplete = ({ onHandlePress, item = {} }) => {
@@ -75,7 +76,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
 
     // como el pago es exitoso crear registro de pago con la referencia del pago 
     const payment = await API.graphql({
-      query: mutations.createPaymentStripe,
+      query: mutationsSell.createPaymentStripe,
       variables: {
         input: {
           paymentStripeID: paymentID
@@ -86,7 +87,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
 
     // crear la order que asocia el pago con el producto comprado 
     const orderDetail = await API.graphql({
-      query: mutations.createOrderDetail,
+      query: mutationsSell.createOrderDetail,
       variables: {
         input: {
           purchaseUserID: attributes.sub,
@@ -106,7 +107,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
     });
     // asociar el prodcuto con la orden creada
     const orderItem = await API.graphql({
-      query: mutations.createOrderItem,
+      query: mutationsSell.createOrderItem,
       variables: {
         input: {
           orderID: orderDetail.data.createOrderDetail.id,
@@ -123,7 +124,7 @@ const ModalSellComplete = ({ onHandlePress, item = {} }) => {
       }
     }
     const changeStatusItem = await API.graphql(
-      graphqlOperation(mutations.updateCustomerProductStatus, statusParams)
+      graphqlOperation(mutationsSell.updateCustomerProductStatus, statusParams)
     )
     setDetail(orderDetail.data.createOrderDetail.id)
     setModalVisible(!modalVisible)

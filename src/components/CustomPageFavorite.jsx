@@ -48,7 +48,7 @@ import {
           setKeyImages(promises);
         });
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     const onHandleNavigation = () =>

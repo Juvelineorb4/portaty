@@ -29,7 +29,7 @@ const CustomSearchProductCard = ({ product = {} }) => {
       );
       setKeyImages(promises);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
   const onCreateFavorites = async () => {

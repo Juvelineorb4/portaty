@@ -1,16 +1,15 @@
 {
   "expo": {
-    "name": "portaty",
-    "slug": "app-dev",
-    "owner": "team-portaty",
-    "version": "1.0.0",
+    "name": "Portaty-dev",
+    "slug": "Portaty-dev",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/utils/images/splash.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffa424"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -116,7 +115,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "280e21d8-e7dc-41ad-8b85-9e4972adc8f3"
+        "projectId": "0a7e0a56-514b-4a29-a2e3-3e4e488a80db"
       }
     }
   }

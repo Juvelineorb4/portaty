@@ -33,7 +33,7 @@ const PreviewProduct = ({ data = {}, route, navigation }) => {
         setKeyImages(promises);
       });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
   useLayoutEffect(() => {
