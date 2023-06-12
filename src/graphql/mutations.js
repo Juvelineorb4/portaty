@@ -54,7 +54,7 @@ export const createADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -96,7 +96,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -112,7 +112,7 @@ export const createADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -122,7 +122,7 @@ export const createADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -171,7 +171,7 @@ export const updateADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -213,7 +213,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -229,7 +229,7 @@ export const updateADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -239,7 +239,7 @@ export const updateADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -288,7 +288,7 @@ export const deleteADCategory = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -330,7 +330,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -346,7 +346,7 @@ export const deleteADCategory = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -356,7 +356,7 @@ export const deleteADCategory = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -405,7 +405,7 @@ export const createADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -447,7 +447,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -463,7 +463,7 @@ export const createADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -473,7 +473,7 @@ export const createADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -522,7 +522,7 @@ export const updateADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -564,7 +564,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -580,7 +580,7 @@ export const updateADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -590,7 +590,7 @@ export const updateADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -639,7 +639,7 @@ export const deleteADBrand = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -681,7 +681,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -697,7 +697,7 @@ export const deleteADBrand = /* GraphQL */ `
               nextToken
             }
             abreviation
-            createdBy
+            
             createdAt
             updatedAt
           }
@@ -707,7 +707,7 @@ export const deleteADBrand = /* GraphQL */ `
         nextToken
       }
       abreviation
-      createdBy
+      
       createdAt
       updatedAt
     }
@@ -750,7 +750,7 @@ export const createADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -810,7 +810,7 @@ export const createADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -912,7 +912,7 @@ export const updateADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -972,7 +972,7 @@ export const updateADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1074,7 +1074,7 @@ export const deleteADProduct = /* GraphQL */ `
           usb
         }
       }
-      createdBy
+      
       customerProduct {
         items {
           id
@@ -1134,7 +1134,7 @@ export const deleteADProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1427,7 +1427,7 @@ export const createCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1694,7 +1694,7 @@ export const updateCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -1961,7 +1961,7 @@ export const deleteCustomerShop = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2183,7 +2183,7 @@ export const updateFavoriteItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2413,7 +2413,7 @@ export const createCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -2515,7 +2515,7 @@ export const createCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
+        
         customerProduct {
           items {
             id
@@ -2552,7 +2552,7 @@ export const createCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -2663,7 +2663,7 @@ export const createCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -2893,7 +2893,7 @@ export const updateCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -2995,7 +2995,7 @@ export const updateCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
+        
         customerProduct {
           items {
             id
@@ -3032,7 +3032,7 @@ export const updateCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -3143,7 +3143,7 @@ export const updateCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -3373,7 +3373,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -3475,7 +3475,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
             usb
           }
         }
-        createdBy
+        
         customerProduct {
           items {
             id
@@ -3512,7 +3512,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -3623,7 +3623,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -3859,7 +3859,7 @@ export const createCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -3929,7 +3929,7 @@ export const createCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -4178,7 +4178,7 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -4248,7 +4248,7 @@ export const updateCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -4497,7 +4497,7 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               usb
             }
           }
-          createdBy
+          
           customerProduct {
             items {
               id
@@ -4567,7 +4567,7 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
               suggestedPrice
               categoryID
               brandID
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -4959,7 +4959,7 @@ export const createOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5117,7 +5117,7 @@ export const updateOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5275,7 +5275,7 @@ export const deleteOrderItem = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5440,7 +5440,7 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5460,7 +5460,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5470,7 +5470,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5480,7 +5480,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5507,7 +5507,7 @@ export const createCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5527,7 +5527,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5537,7 +5537,7 @@ export const createCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5547,7 +5547,7 @@ export const createCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5588,7 +5588,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5608,7 +5608,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5618,7 +5618,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5628,7 +5628,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5655,7 +5655,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5675,7 +5675,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5685,7 +5685,7 @@ export const updateCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5695,7 +5695,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5736,7 +5736,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5756,7 +5756,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5766,7 +5766,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5776,7 +5776,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }
@@ -5803,7 +5803,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               depth
               weight
             }
-            createdBy
+            
             customerProduct {
               nextToken
             }
@@ -5823,7 +5823,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5833,7 +5833,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
               image
               path
               abreviation
-              createdBy
+              
               createdAt
               updatedAt
             }
@@ -5843,7 +5843,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           nextToken
         }
         abreviation
-        createdBy
+        
         createdAt
         updatedAt
       }

@@ -51,7 +51,7 @@ export const isFilterShow = atom({
 // user auth
 export const userAutenticated = atom({
   key: "userAutenticatedValue",
-  default: null,
+  default: {},
 });
 
 // Post Product Modals Data
