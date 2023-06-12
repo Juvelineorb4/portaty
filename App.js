@@ -1,19 +1,20 @@
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
-import { LogBox } from "react-native";
 
 import Navigation from "@/routes/Navigation";
-// amplify
-LogBox.ignoreLogs(["new NativeEventEmitter"]); // Ignore log notification by message
-import { Amplify } from "aws-amplify";
-import awsconfig from "./src/aws-exports.js";
+// amplify 
+import { Amplify } from 'aws-amplify';
+import awsconfig from './src/aws-exports.js';
 
 // stripe
-import { StripeProvider } from "@stripe/stripe-react-native";
-import { StatusBar } from "expo-status-bar";
+import { StripeProvider } from '@stripe/stripe-react-native'
+
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
 Amplify.configure({
   ...awsconfig,
@@ -21,16 +22,16 @@ Amplify.configure({
     endpoints: [
       {
         name: "api-gateway-dev",
-        endpoint: "https://h5920e8h3l.execute-api.us-east-1.amazonaws.com/dev",
+        endpoint: "https://h5920e8h3l.execute-api.us-east-1.amazonaws.com/dev"
       },
-    ],
-  },
+    ]
+  }
 });
 
-const STRIPE_KEY =
-  "pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ";
+const STRIPE_KEY = 'pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ'
 
 export default function App() {
+  const global = require("@/utils/styles/global.js");
   const [fontsLoaded] = useFonts({
     thin: require("@/utils/fonts/Montserrat-Thin.ttf"),
     regular: require("@/utils/fonts/Montserrat-Regular.ttf"),
@@ -56,17 +57,23 @@ export default function App() {
     return null;
   }
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <RecoilRoot>
-            <StripeProvider publishableKey={STRIPE_KEY}>
-              <StatusBar style="auto" />
-              <Navigation />
-            </StripeProvider>
-          </RecoilRoot>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <RecoilRoot>
+          <StripeProvider publishableKey={STRIPE_KEY}>
+            <Navigation />
+          </StripeProvider>
+        </RecoilRoot>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
