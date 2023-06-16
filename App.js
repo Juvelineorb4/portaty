@@ -1,13 +1,15 @@
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  SafeAreaView as SafeAreaAndroid,
+} from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
-import { LogBox } from "react-native";
+import { Platform, SafeAreaView as SafeAreaIOS } from "react-native";
 
 import Navigation from "@/routes/Navigation";
 // amplify
-LogBox.ignoreLogs(["new NativeEventEmitter"]); // Ignore log notification by message
 import { Amplify } from "aws-amplify";
 import awsconfig from "./src/aws-exports.js";
 
@@ -55,18 +57,33 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <RecoilRoot>
-            <StripeProvider publishableKey={STRIPE_KEY}>
-              <StatusBar style="auto" />
-              <Navigation />
-            </StripeProvider>
-          </RecoilRoot>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </SafeAreaView>
-  );
+
+  if (Platform.OS === "ios") return (
+      <SafeAreaIOS style={{flex: 1}}>
+        <SafeAreaProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <RecoilRoot>
+              <StripeProvider publishableKey={STRIPE_KEY}>
+                <Navigation />
+              </StripeProvider>
+            </RecoilRoot>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </SafeAreaIOS>
+    );
+
+    return (
+      <SafeAreaAndroid style={{flex: 1}}>
+        <SafeAreaProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <RecoilRoot>
+              <StripeProvider publishableKey={STRIPE_KEY}>
+                <StatusBar style="auto" />
+                <Navigation />
+              </StripeProvider>
+            </RecoilRoot>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </SafeAreaAndroid>
+    );
 }
