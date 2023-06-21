@@ -37,10 +37,10 @@ import { useIsFocused } from "@react-navigation/native";
 const Profile = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
   const userAuth = useRecoilValue(userAutenticated);
-  const [items, setItems] = useState([])
-  const isFocus = useIsFocused()
-  const [purchaseOrders, setPurchaseOrders] = useState([])
-  const [salesOrders, setSalesOrders] = useState([])
+  const [items, setItems] = useState([]);
+  const isFocus = useIsFocused();
+  const [purchaseOrders, setPurchaseOrders] = useState([]);
+  const [salesOrders, setSalesOrders] = useState([]);
   const [selectCustomerId, setSelectCustomerId] = useRecoilState(customerId);
   const { buttons } = settings;
   const onHandleLogout = async () => {
@@ -72,15 +72,20 @@ const Profile = ({ navigation }) => {
     useRecoilState(errorPostProduct);
 
   const fecthShop = async () => {
-    const result = await API.graphql({
-      query: customProfile.getCustomerShop,
-      variables: { userID: userAuth.attributes.sub },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    setItems(result.data.getCustomerShop.products.items)
-    setSelectCustomerId(result.data.getCustomerShop.userID);
-    setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items)
-    setSalesOrders(result.data.getCustomerShop.salesOrders.items)
+    try {
+      const result = await API.graphql({
+        query: customProfile.getCustomerShop,
+        variables: { userID: userAuth.attributes.sub },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      setItems(result.data.getCustomerShop.products.items);
+      setSelectCustomerId(result.data.getCustomerShop.userID);
+      setPurchaseOrders(result.data.getCustomerShop.purchaseOrders.items);
+      setSalesOrders(result.data.getCustomerShop.salesOrders.items);
+    } catch (error) {
+      console.log('error', error)
+    }
+
   };
 
   const resetPost = () => {
@@ -101,11 +106,14 @@ const Profile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fecthShop();
+    if (userAuth) fecthShop();
   }, [userAuth, isFocus]);
 
   return (
-    <ScrollView style={[styles.container, global.bgWhite]} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={[styles.container, global.bgWhite]}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.profile}>
         <View style={styles.containerImage}>
           <View style={styles.image}></View>
@@ -115,96 +123,108 @@ const Profile = ({ navigation }) => {
           />
         </View>
         <Text style={[styles.user, global.black]}>
-          {userAuth && (userAuth?.attributes?.name)}
+          {userAuth && userAuth?.attributes?.name}
         </Text>
         <Text style={[styles.user, { color: "lightgray", marginTop: 0 }]}>
-          {userAuth && (userAuth?.attributes?.email)}
+          {userAuth && userAuth?.attributes?.email}
         </Text>
       </View>
-      <View style={styles.content}>
-        <Text style={[styles.titleSettings, global.black]}>
-          {es.profile.shop.title}
-        </Text>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            resetPost();
-            navigation.navigate("Post_Navigator");
-          }}
-        >
+      {userAuth && (
+        <View style={styles.content}>
+          <Text style={[styles.titleSettings, global.black]}>
+            {es.profile.shop.title}
+          </Text>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => {
+              resetPost();
+              navigation.navigate("Post_Navigator");
+            }}
+          >
+            <View style={[styles.line, global.bgWhiteSmoke]} />
+            <CustomSelect
+              title={es.profile.shop.post.title}
+              subtitle={es.profile.shop.post.subtitle}
+              styled={{
+                text: {
+                  container: styles.textContainerSelect,
+                  title: [styles.textTitleSelect, global.black],
+                  subtitle: [styles.textSubtitleSelect, global.topGray],
+                },
+                container: styles.containerSelect,
+                iconLeft: [styles.iconLeft, global.mainBgColor],
+                iconRight: styles.iconRight,
+              }}
+              icon={{
+                left: require("@/utils/images/post.png"),
+                right: require("@/utils/images/arrow_right.png"),
+              }}
+              toogle={false}
+            />
+          </TouchableOpacity>
+
           <View style={[styles.line, global.bgWhiteSmoke]} />
-          <CustomSelect
-            title={es.profile.shop.post.title}
-            subtitle={es.profile.shop.post.subtitle}
-            styled={{
-              text: {
-                container: styles.textContainerSelect,
-                title: [styles.textTitleSelect, global.black],
-                subtitle: [styles.textSubtitleSelect, global.topGray],
-              },
-              container: styles.containerSelect,
-              iconLeft: [styles.iconLeft, global.mainBgColor],
-              iconRight: styles.iconRight,
-            }}
-            icon={{
-              left: require("@/utils/images/post.png"),
-              right: require("@/utils/images/arrow_right.png"),
-            }}
-            toogle={false}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() =>
+              navigation.navigate("ListProducts", {
+                data: items,
+              })
+            }
+          >
+            <CustomSelect
+              title={es.profile.shop.products.title}
+              subtitle={es.profile.shop.products.subtitle}
+              styled={{
+                text: {
+                  container: styles.textContainerSelect,
+                  title: [styles.textTitleSelect, global.black],
+                  subtitle: [styles.textSubtitleSelect, global.topGray],
+                },
+                container: styles.containerSelect,
+                iconLeft: [styles.iconLeft, global.mainBgColor],
+                iconRight: styles.iconRight,
+              }}
+              icon={{
+                left: require("@/utils/images/product.png"),
+                right: require("@/utils/images/arrow_right.png"),
+              }}
+              toogle={false}
+            />
+          </TouchableOpacity>
 
-        <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListProducts", {
-          data: items
-        })}>
-          <CustomSelect
-            title={es.profile.shop.products.title}
-            subtitle={es.profile.shop.products.subtitle}
-            styled={{
-              text: {
-                container: styles.textContainerSelect,
-                title: [styles.textTitleSelect, global.black],
-                subtitle: [styles.textSubtitleSelect, global.topGray],
-              },
-              container: styles.containerSelect,
-              iconLeft: [styles.iconLeft, global.mainBgColor],
-              iconRight: styles.iconRight,
-            }}
-            icon={{
-              left: require("@/utils/images/product.png"),
-              right: require("@/utils/images/arrow_right.png"),
-            }}
-            toogle={false}
-          />
-        </TouchableOpacity>
-
-        <View style={[styles.line, global.bgWhiteSmoke]} />
-        <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ListOrders", {
-          purchase: purchaseOrders,
-          sales: salesOrders
-        })}>
-          <CustomSelect
-            title={es.profile.shop.orders.title}
-            subtitle={es.profile.shop.orders.subtitle}
-            styled={{
-              text: {
-                container: styles.textContainerSelect,
-                title: [styles.textTitleSelect, global.black],
-                subtitle: [styles.textSubtitleSelect, global.topGray],
-              },
-              container: styles.containerSelect,
-              iconLeft: [styles.iconLeft, global.mainBgColor],
-              iconRight: styles.iconRight,
-            }}
-            icon={{
-              left: require("@/utils/images/order.png"),
-              right: require("@/utils/images/arrow_right.png"),
-            }}
-            toogle={false}
-          />
-        </TouchableOpacity>
-      </View>
+          <View style={[styles.line, global.bgWhiteSmoke]} />
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() =>
+              navigation.navigate("ListOrders", {
+                purchase: purchaseOrders,
+                sales: salesOrders,
+              })
+            }
+          >
+            <CustomSelect
+              title={es.profile.shop.orders.title}
+              subtitle={es.profile.shop.orders.subtitle}
+              styled={{
+                text: {
+                  container: styles.textContainerSelect,
+                  title: [styles.textTitleSelect, global.black],
+                  subtitle: [styles.textSubtitleSelect, global.topGray],
+                },
+                container: styles.containerSelect,
+                iconLeft: [styles.iconLeft, global.mainBgColor],
+                iconRight: styles.iconRight,
+              }}
+              icon={{
+                left: require("@/utils/images/order.png"),
+                right: require("@/utils/images/arrow_right.png"),
+              }}
+              toogle={false}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
       <View style={styles.content}>
         <Text style={[styles.titleSettings, global.black]}>
           {es.profile.settings.title}

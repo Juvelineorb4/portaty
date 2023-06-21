@@ -45,40 +45,6 @@ const CustomProductCard = ({ product = {} }) => {
              : require("@/utils/images/notimage.png")
           }
         />
-        <TouchableOpacity
-          style={[
-            {
-              alignItems: "center",
-              justifyContent: "center",
-              position: "absolute",
-              top: 10,
-              right: 10,
-            },
-          ]}
-          onPress={() => setFavorites(!favorites)}
-        >
-          {favorites ? (
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                height: 30,
-                resizeMode: "contain",
-              }}
-              source={require("@/utils/images/favorites_active.png")}
-            />
-          ) : (
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                height: 30,
-                resizeMode: "contain",
-              }}
-              source={require("@/utils/images/favorites_white.png")}
-            />
-          )}
-        </TouchableOpacity>
       </View>
       <View
         style={[

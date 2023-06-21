@@ -17,17 +17,22 @@ import SearchNavigator from "./Tabs/SearchNavigator";
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
   const [userAuth, setUserAuth] = useRecoilState(userAutenticated);
-
+  console.log(userAuth);
   const checkUser = async () => {
     try {
       const result = await Auth.currentAuthenticatedUser({
-        bypassCache: true
+        bypassCache: true,
       });
+      console.log(result);
       setUserAuth(result);
-      if (!result.attributes['custom:identityID'] || result.attributes['custom:identityID'] === "") await updateAttributeIdentityID(result)
+      if (
+        !result.attributes["custom:identityID"] ||
+        result.attributes["custom:identityID"] === ""
+      )
+        await updateAttributeIdentityID(result);
     } catch (error) {
       setUserAuth(null);
-      console.log("CHECK USER ERROR: ", error)
+      console.log("CHECK USER ERROR: ", error);
     }
   };
 
@@ -37,41 +42,39 @@ const Navigation = () => {
       const { identityId } = await Auth.currentUserCredentials();
       // cargar atributo en cognito
       await Auth.updateUserAttributes(user, {
-        "custom:identityID": identityId
-      })
+        "custom:identityID": identityId,
+      });
       // cargar en customer shop
       const params = {
         input: {
           userID: user.attributes.sub,
-          identityId: identityId
-        }
-      }
+          identityId: identityId,
+        },
+      };
       const ejele = await API.graphql({
         query: mutationsNavigation.updateChargeIdentityIdCustomerShop,
         authMode: "AMAZON_COGNITO_USER_POOLS",
-        variables: params
-      })
-      console.log("EJELE: ", ejele)
+        variables: params,
+      });
+      console.log("EJELE: ", ejele);
     } catch (error) {
       console.log("Error al cargar Atributo: ", error);
     }
-
-  }
+  };
 
   const configStoragePrefix = (result) => {
     Storage.configure({
       customPrefix: {
-        public: 'myPublicPrefix/',
-        protected: 'myProtectedPrefix/',
-        private: 'myPrivatePrefix/'
+        public: "myPublicPrefix/",
+        protected: "myProtectedPrefix/",
+        private: "myPrivatePrefix/",
       },
-
-    })
-  }
+    });
+  };
   useEffect(() => {
     // crear subscripcion
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
-      console.log("HUB: ", event)
+      console.log("HUB: ", event);
       switch (event) {
         case "signIn":
           checkUser();
@@ -92,8 +95,6 @@ const Navigation = () => {
     return unsubscribe;
   }, []);
 
-
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={`Login`}>
@@ -106,21 +107,25 @@ const Navigation = () => {
             }}
           />
         )}
-        <Stack.Screen
-          name={`Navigator`}
-          component={Tabs}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="SearchNavigator"
-          component={SearchNavigator}
-          options={{
-            headerShown: false,
-            animation: "slide_from_right",
-          }}
-        />
+        {userAuth && (
+          <Stack.Screen
+            name={`Navigator`}
+            component={Tabs}
+            options={{
+              headerShown: false,
+            }}
+          />
+        )}
+        {userAuth && (
+          <Stack.Screen
+            name="SearchNavigator"
+            component={SearchNavigator}
+            options={{
+              headerShown: false,
+              animation: "slide_from_right",
+            }}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
