@@ -263,7 +263,9 @@ const CustomModal = ({
                 </View>
                 {selectErrorPostProduct || selectError ? (
                   !categoriesSelect ? (
-                    <Text style={styles.errorBrand}>Selecciona la categoría antes</Text>
+                    <Text style={styles.errorBrand}>
+                      Selecciona la categoría antes
+                    </Text>
                   ) : !brandsSelect ? (
                     <Text style={styles.errorBrand}>Requerido</Text>
                   ) : (
@@ -325,7 +327,7 @@ const CustomModal = ({
                     />
                     <View style={styles.modalBot}>
                       <Text style={styles.modalTextSelect}>
-                      Seleccionaste:{" "}
+                        Seleccionaste:{" "}
                         {selectItemBrand.aDCategoryId === categoriesSelect
                           ? selectItemBrand.aDBrand.name
                           : ""}
@@ -881,14 +883,16 @@ const CustomModal = ({
                       {selectId ? selectItemCondition.title : placeholder}
                     </Text>
                     {selectId ? (
-                      <View
-                        style={{
-                          backgroundColor: selectItemCondition.bgCondition,
-                          height: 15,
-                          width: 15,
-                          borderRadius: 60,
-                        }}
-                      ></View>
+                      <View>
+                        <Image
+                          style={{
+                            width: 18,
+                            height: 18,
+                            resizeMode: "contain",
+                          }}
+                          source={selectItemCondition.icon}
+                        />
+                      </View>
                     ) : (
                       ""
                     )}
@@ -942,6 +946,7 @@ const CustomModal = ({
                           title={item.title || item.name}
                           condition
                           bgCondition={item.bgCondition}
+                          iconCondition={item.icon}
                           itemId={item.id}
                           onPress={() => {
                             setSelectId(item.id);
