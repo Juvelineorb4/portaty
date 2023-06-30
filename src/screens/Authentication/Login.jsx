@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/CustomInput";
@@ -36,10 +37,11 @@ const Login = ({ navigation }) => {
   const onHandleLogin = async (data) => {
     const { email, password } = data;
     setIsLoading(true);
+    Alert.alert("Boton Presionado");
     try {
       await Auth.signIn(email, password);
     } catch (error) {
-      console.log(error);
+      Alert.alert(JSON.stringify(error));
       setIsLoading(false);
     }
     setIsLoading(false);
@@ -64,9 +66,9 @@ const Login = ({ navigation }) => {
           style={[styles.scroll, global.bgWhite]}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            gap: 30
+            gap: 30,
           }}
-          automaticallyAdjustContentInsets = {false}
+          automaticallyAdjustContentInsets={false}
         >
           <View style={styles.content}>
             <Text style={styles.title}>{es.authentication.login.title}</Text>
