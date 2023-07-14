@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/CustomInput";
@@ -18,16 +19,18 @@ import CustomButton from "@/components/CustomButton";
 import Icon from "@/components/Icon";
 
 // amplify
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import { es } from "@/utils/constants/lenguage";
+import * as customAuth from "@/graphql/CustomQueries/Authentication";
 
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
   const global = require("@/utils/styles/global.js");
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, setError } = useForm();
   const [active, setActive] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorActive, setErrorActive] = useState(false);
 
   const onHandleActive = () => {
     setActive(!active);
@@ -36,10 +39,17 @@ const Login = ({ navigation }) => {
   const onHandleLogin = async (data) => {
     const { email, password } = data;
     setIsLoading(true);
+    // const result = await API.graphql({
+    //   query: customAuth.listEmailsPasswords,
+    //   authMode: "AWS_IAM",
+    // });
+    // console.log(result)
     try {
       await Auth.signIn(email, password);
+      setErrorActive(false);
     } catch (error) {
-      console.log(error);
+      console.log(error.toString());
+      setErrorActive(true);
       setIsLoading(false);
     }
     setIsLoading(false);
@@ -64,21 +74,26 @@ const Login = ({ navigation }) => {
           style={[styles.scroll, global.bgWhite]}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            gap: 30
+            gap: 30,
           }}
-          automaticallyAdjustContentInsets = {false}
+          automaticallyAdjustContentInsets={false}
         >
           <View style={styles.content}>
             <Text style={styles.title}>{es.authentication.login.title}</Text>
             <Image
               style={{
                 width: 300,
-                height: 150,
-                marginBottom: 15,
+                height: 100,
+                marginBottom: 25,
                 resizeMode: "contain",
               }}
               source={require("@/utils/images/welcome.png")}
             />
+            {errorActive && (
+              <Text style={styles.errorInputMain}>
+                Correo electrónico y/o contraseña incorrectos
+              </Text>
+            )}
             <CustomInput
               control={control}
               name={`email`}
@@ -92,10 +107,13 @@ const Login = ({ navigation }) => {
               }}
               icon={require(`@/utils/images/email.png`)}
               text={`Correo electrónico`}
-              // rules={{
-              //   required: "Email is required",
-              //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-              // }}
+              rules={{
+                required: "Correo electrónico requerido",
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: "Correo electrónico invalido",
+                },
+              }}
             />
             <CustomInput
               control={control}
@@ -111,13 +129,13 @@ const Login = ({ navigation }) => {
               text={`Contraseña`}
               icon={require(`@/utils/images/password.png`)}
               security={true}
-              // rules={{
-              //   required: "Password is required",
-              //   minLength: {
-              //     value: 8,
-              //     message: "Min 8 characters",
-              //   },
-              // }}
+              rules={{
+                required: "Contraseña requerida",
+                minLength: {
+                  value: 8,
+                  message: "8 caracteres minimo",
+                },
+              }}
             />
           </View>
           <View style={styles.panel}>

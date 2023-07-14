@@ -15,8 +15,8 @@ import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
 import { API, Storage } from "aws-amplify";
 import * as customHome from "@/graphql/CustomQueries/Home";
-import { useRecoilValue } from "recoil";
-import { userAutenticated } from "@/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { conditionItem, userAutenticated } from "@/atoms";
 import CustomFilter from "./CustomFilter";
 import CustomModal from "./CustomModal";
 import { useForm } from "react-hook-form";
@@ -29,6 +29,7 @@ const CustomPageProduct = ({ route, navigation }) => {
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
   const user = useRecoilValue(userAutenticated);
+  const condition = useRecoilValue(conditionItem);
   const [items, setItems] = useState([]);
   const fetchData = async () => {
     try {
@@ -76,25 +77,25 @@ const CustomPageProduct = ({ route, navigation }) => {
   const conditions = [
     {
       title: "NUEVO",
-      id: "new",
+      id: "NEW",
       bgCondition: "#fff",
       icon: require("@/utils/images/new.png"),
     },
     {
       title: "PERFECTO",
-      id: "perfect",
+      id: "PERFECT",
       bgCondition: "#fff",
       icon: require("@/utils/images/perfect.png"),
     },
     {
       title: "BUENO",
-      id: "good",
+      id: "GOOD",
       bgCondition: "#fff",
       icon: require("@/utils/images/bueno.png"),
     },
     {
       title: "USADO",
-      id: "used",
+      id: "USED",
       bgCondition: "#fff",
       icon: require("@/utils/images/used.png"),
     },
@@ -102,7 +103,8 @@ const CustomPageProduct = ({ route, navigation }) => {
   useEffect(() => {
     fetchData();
     backNavigation();
-  }, [navigation, hasUnsavedChanges]);
+    if (condition === undefined) return condition === "GOOD";
+  }, [navigation, hasUnsavedChanges, condition]);
 
   return (
     <ScrollView
@@ -270,9 +272,9 @@ const CustomPageProduct = ({ route, navigation }) => {
             </View>
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
-
           {items.map((item, index) =>
             item.status === "PUBLISHED" &&
+            item.product.condition === condition.id &&
             item.product.customerID !== user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
@@ -284,6 +286,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                 }
               />
             ) : item.status === "PUBLISHED" &&
+              item.product.condition === condition.id &&
               item.product.customerID === user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
@@ -296,12 +299,22 @@ const CustomPageProduct = ({ route, navigation }) => {
                 }
               />
             ) : (
-              ""
+              <Text
+              key={index}
+                style={{
+                  fontFamily: "light",
+                  textAlign: "center",
+                  fontSize: 24,
+                  marginBottom: 15
+                }}
+              >
+                N/T
+              </Text>
             )
           )}
           {items.length <= 0 ? (
             <Text
-              style={{ fontFamily: "light", textAlign: "center", fontSize: 24 }}
+              style={{ fontFamily: "light", textAlign: "center", fontSize: 24, marginBottom: 15  }}
             >
               N/T
             </Text>
