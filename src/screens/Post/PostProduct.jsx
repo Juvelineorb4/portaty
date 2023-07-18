@@ -247,10 +247,10 @@ const PostProduct = ({ navigation, route }) => {
     });
   };
   const conditions = [
-    { title: "NUEVO", id: "new", bgCondition: "#35BF05" },
-    { title: "PERFECTO", id: "perfect", bgCondition: "#FFC700" },
-    { title: "BUENO", id: "good", bgCondition: "#F60A0A" },
-    { title: "USADO", id: "used", bgCondition: "#F60A0A" },
+    { title: "NUEVO", id: "new", bgCondition: "#fff", icon: require('@/utils/images/new.png') },
+    { title: "PERFECTO", id: "perfect", bgCondition: "#fff", icon: require('@/utils/images/perfect.png') },
+    { title: "BUENO", id: "good", bgCondition: "#fff", icon: require('@/utils/images/bueno.png') },
+    { title: "USADO", id: "used", bgCondition: "#fff", icon: require('@/utils/images/used.png') },
   ];
 
   const models = [
@@ -413,7 +413,8 @@ const PostProduct = ({ navigation, route }) => {
                     width: 95,
                     height: 95,
                     resizeMode: "contain",
-                    left: 6,
+                    left: imagesPostSelect[1] ? 5.5 : 2.5,
+                    marginLeft: 0,
                     borderRadius: 8,
                     position: "absolute",
                   }}
@@ -427,7 +428,7 @@ const PostProduct = ({ navigation, route }) => {
                     width: 100,
                     height: 100,
                     resizeMode: "contain",
-                    marginLeft: 10,
+                    marginLeft: 0,
                   }}
                   source={require("@/utils/images/rectangle-add.png")}
                 />
@@ -447,7 +448,7 @@ const PostProduct = ({ navigation, route }) => {
                     width: 100,
                     height: 100,
                     resizeMode: "contain",
-                    marginLeft: 10,
+                    marginLeft: imagesPostSelect[2] ? 0 : 10,
                   }}
                   source={require("@/utils/images/rectangle.png")}
                 />
@@ -456,8 +457,8 @@ const PostProduct = ({ navigation, route }) => {
                     width: 95,
                     height: 95,
                     resizeMode: "contain",
-                    marginLeft: 5,
-                    left: 6,
+                    marginLeft:0,
+                    left: imagesPostSelect[2] ? 6 : 10,
                     borderRadius: 8,
                     position: "absolute",
                   }}
@@ -501,7 +502,7 @@ const PostProduct = ({ navigation, route }) => {
                     width: 100,
                     height: 100,
                     resizeMode: "contain",
-                    marginLeft: 10,
+                    marginLeft: 0,
                   }}
                   source={require("@/utils/images/rectangle.png")}
                 />
@@ -510,7 +511,7 @@ const PostProduct = ({ navigation, route }) => {
                     width: 95,
                     height: 95,
                     resizeMode: "contain",
-                    marginLeft: 5,
+                    marginLeft: 0,
                     left: 6,
                     borderRadius: 8,
                     position: "absolute",

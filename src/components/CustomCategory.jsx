@@ -8,7 +8,7 @@ const CustomCategory = ({
   activeSelect = "",
   itemId,
   condition,
-  bgCondition
+  iconCondition
 }) => {
   const global = require("@/utils/styles/global.js");
   return (
@@ -35,18 +35,14 @@ const CustomCategory = ({
           },
         ]}
       >
-        {condition ? (
-          <View style={{backgroundColor: bgCondition, height: 30, width: 30, borderRadius: 60}} />
-        ) : (
           <Image
             style={{
               width: 30,
               height: 30,
               resizeMode: "contain",
             }}
-            source={{ uri: icon }}
+            source={condition ? iconCondition : { uri: icon }}
           />
-        )}
       </View>
 
       <Text

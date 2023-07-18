@@ -1,8 +1,6 @@
-import { View, Text, Image, Pressable, ScrollView } from "react-native";
+import { View, Text, Image, Pressable, ScrollView, Modal, TouchableOpacity } from "react-native";
 import styles from "@/utils/styles/AddressEdit.module.css";
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
-import { Modal } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CustomInput from "./CustomInput";
 import { useForm } from "react-hook-form";

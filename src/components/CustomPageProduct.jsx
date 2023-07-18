@@ -1,4 +1,11 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "@/utils/styles/CustomProductPage.module.css";
 import CustomButton from "./CustomButton";
@@ -8,13 +15,21 @@ import CustomCardList from "./CustomCardList";
 import CustomCardPage from "./CustomCardPage";
 import { API, Storage } from "aws-amplify";
 import * as customHome from "@/graphql/CustomQueries/Home";
-import { useRecoilValue } from "recoil";
-import { userAutenticated } from "@/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { conditionItem, userAutenticated } from "@/atoms";
+import CustomFilter from "./CustomFilter";
+import CustomModal from "./CustomModal";
+import { useForm } from "react-hook-form";
+import CustomInput from "./CustomInput";
 
 const CustomPageProduct = ({ route, navigation }) => {
+  const { control, handleSubmit, watch } = useForm();
+  const { initialPrice, endingPrice } = control;
+  const hasUnsavedChanges = Boolean(initialPrice);
   const global = require("@/utils/styles/global.js");
   const { data } = route.params;
   const user = useRecoilValue(userAutenticated);
+  const condition = useRecoilValue(conditionItem);
   const [items, setItems] = useState([]);
   const fetchData = async () => {
     try {
@@ -32,9 +47,64 @@ const CustomPageProduct = ({ route, navigation }) => {
     }
   };
 
+  const backNavigation = () =>
+    navigation.addListener("beforeRemove", (e) => {
+      if (!hasUnsavedChanges) {
+        // If we don't have unsaved changes, then we don't need to do anything
+        return;
+      }
+
+      // Prevent default behavior of leaving the screen
+      e.preventDefault();
+
+      // Prompt the user before leaving the screen
+      Alert.alert(
+        "Discard changes?",
+        "You have unsaved changes. Are you sure to discard them and leave the screen?",
+        [
+          { text: "Don't leave", style: "cancel", onPress: () => {} },
+          {
+            text: "Discard",
+            style: "destructive",
+            // If the user confirmed, then we dispatch the action we blocked earlier
+            // This will continue the action that had triggered the removal of the screen
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ]
+      );
+    });
+
+  const conditions = [
+    {
+      title: "NUEVO",
+      id: "NEW",
+      bgCondition: "#fff",
+      icon: require("@/utils/images/new.png"),
+    },
+    {
+      title: "PERFECTO",
+      id: "PERFECT",
+      bgCondition: "#fff",
+      icon: require("@/utils/images/perfect.png"),
+    },
+    {
+      title: "BUENO",
+      id: "GOOD",
+      bgCondition: "#fff",
+      icon: require("@/utils/images/bueno.png"),
+    },
+    {
+      title: "USADO",
+      id: "USED",
+      bgCondition: "#fff",
+      icon: require("@/utils/images/used.png"),
+    },
+  ];
   useEffect(() => {
     fetchData();
-  }, []);
+    backNavigation();
+    if (condition === undefined) return condition === "GOOD";
+  }, [navigation, hasUnsavedChanges, condition]);
 
   return (
     <ScrollView
@@ -76,195 +146,135 @@ const CustomPageProduct = ({ route, navigation }) => {
                 N/T
               </Text>
             </View>
-            <View style={styles.features}>
-              <Text style={[styles.title, global.black]}>
-                {es.post.preview.features}
-              </Text>
-              <View style={styles.bothFeatures}>
-                <View style={styles.leftFeatures}>
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/carrier.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.carrier}
-                      </Text>
-                    </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
-                  <View style={styles.feature}>
-                    <View
-                      style={{
-                        width: 50,
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/imei.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.imei}
-                      </Text>
-                    </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
+            <View>
+              <Text
+                style={[
+                  {
+                    fontFamily: "light",
+                    fontSize: 16,
+                    marginTop: 20,
+                    // marginBottom: 25,
+                  },
+                  global.black,
+                ]}
+              >{`Filtrar lista`}</Text>
+              {/* <Touchable style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10}}> */}
+              <View style={[styles.lineMid, global.bgWhiteSmoke]} />
 
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/batery.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.batery}
-                      </Text>
-                    </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
+              <CustomModal
+                control={control}
+                name={`condition`}
+                placeholder={es.post.product.condition.placeholder}
+                text={es.post.product.condition.title}
+                modal={{
+                  text: es.post.product.condition.modal,
+                }}
+                data={conditions}
+                dataValue={""}
+              />
+              <Text
+                style={[
+                  {
+                    fontFamily: "light",
+                    fontSize: 14,
+                    marginTop: 20,
+                    marginBottom: 3,
+                  },
+                  global.black,
+                ]}
+              >
+                Precio
+              </Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  columnGap: 15,
+                  // justifyContent: "space-between",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: "thinItalic",
+                      marginRight: 5,
+                      fontSize: 14,
+                      alignSelf: "flex-end",
+                    }}
+                  >
+                    Min:
+                  </Text>
+                  <View>
+                    <CustomInput
+                      control={control}
+                      name={`initialPrice`}
+                      placeholder={`0$`}
+                      styled={{
+                        text: styles.textInput,
+                        label: [styles.labelInput],
+                        error: styles.errorInput,
+                        input: [styles.inputContainer],
+                        placeholder: styles.placeholder,
+                      }}
+                      numeric={true}
+                    />
                   </View>
                 </View>
-                <View style={styles.rightFeatures}>
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/model.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.model}
-                      </Text>
-                    </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
-                  </View>
-
-                  <View style={styles.feature}>
-                    <View style={styles.labelFeature}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/storage.png")}
-                      />
-                      <Text style={styles.labelTextFeature}>
-                        {es.post.preview.storage}
-                      </Text>
-                    </View>
-                    <Text style={styles.textFeature}>
-                      {es.post.preview.none}
-                    </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: "thinItalic",
+                      marginRight: 5,
+                      fontSize: 14,
+                      alignSelf: "flex-end",
+                    }}
+                  >
+                    Max:
+                  </Text>
+                  <View>
+                    <CustomInput
+                      control={control}
+                      name={`endingPrice`}
+                      placeholder={`1000$`}
+                      styled={{
+                        text: styles.textInput,
+                        label: [styles.labelInput],
+                        error: styles.errorInput,
+                        input: [styles.inputContainer],
+                        placeholder: styles.placeholder,
+                      }}
+                      numeric={true}
+                    />
                   </View>
                 </View>
               </View>
             </View>
-
-            <View style={styles.abouts}>
-              <Text style={[styles.title, global.black]}>
-                {es.post.preview.about}
+            <View style={styles.textList}>
+              <Text
+                style={[
+                  styles.textMain,
+                  global.black,
+                  { letterSpacing: -0.5 },
+                  global.mainColor,
+                ]}
+              >
+                {`Lista de productos disponibles`}
               </Text>
-              <View style={styles.bothAbout}>
-                <View style={styles.leftAbout}>
-                  <View style={styles.about}>
-                    <View style={styles.labelAbout}>
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/question_black.png")}
-                      />
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.condition}
-                      </Text>
-                    </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                  <View style={styles.about}>
-                    <View style={styles.labelAbout}>
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.category}
-                      </Text>
-                    </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                </View>
-                <View style={styles.rightAbout}>
-                  <View style={styles.about}>
-                    <View
-                      style={{
-                        width: 40,
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
-                        style={{
-                          width: 25,
-                          height: 25,
-                          resizeMode: "contain",
-                        }}
-                        source={require("@/utils/images/id.png")}
-                      />
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.id}
-                      </Text>
-                    </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                  <View style={styles.about}>
-                    <View
-                      style={{
-                        width: 40,
-                        flexDirection: "column",
-                        marginRight: 18,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text style={styles.labelTextAbout}>
-                        {es.post.preview.brand}
-                      </Text>
-                    </View>
-                    <Text style={styles.textAbout}>{es.post.preview.none}</Text>
-                  </View>
-                </View>
-              </View>
             </View>
             <View style={[styles.lineBot, global.bgWhiteSmoke]} />
           </View>
           {items.map((item, index) =>
             item.status === "PUBLISHED" &&
+            item.product.condition === condition.id &&
             item.product.customerID !== user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
@@ -276,6 +286,7 @@ const CustomPageProduct = ({ route, navigation }) => {
                 }
               />
             ) : item.status === "PUBLISHED" &&
+              item.product.condition === condition.id &&
               item.product.customerID === user?.attributes?.sub ? (
               <CustomCardPage
                 key={index}
@@ -288,12 +299,22 @@ const CustomPageProduct = ({ route, navigation }) => {
                 }
               />
             ) : (
-              ""
+              <Text
+              key={index}
+                style={{
+                  fontFamily: "light",
+                  textAlign: "center",
+                  fontSize: 24,
+                  marginBottom: 15
+                }}
+              >
+                N/T
+              </Text>
             )
           )}
           {items.length <= 0 ? (
             <Text
-              style={{ fontFamily: "light", textAlign: "center", fontSize: 24 }}
+              style={{ fontFamily: "light", textAlign: "center", fontSize: 24, marginBottom: 15  }}
             >
               N/T
             </Text>
