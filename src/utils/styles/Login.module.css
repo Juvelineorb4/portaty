@@ -42,8 +42,7 @@
 .textInput {
   font-family: 'light';
   margin-left: 5px;
-  width: 70%;
-
+  /* width: 70%; */
 }
 .errorInput {
   font-family: 'light';

@@ -55,6 +55,7 @@ const Login = ({ navigation }) => {
     setIsLoading(false);
   };
 
+
   const onHandleLoginWithGoogle = async () => {
     try {
       const google = await Auth.federatedSignIn({ provider: "Google" });

@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import CustomInput from "@/components/CustomInput";
@@ -96,6 +97,7 @@ const Forgot = ({ navigation }) => {
               buttonStyles={[styles.continue, global.mainBgColor]}
             />
             {/* </View> */}
+            <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}><Text>Hey</Text></TouchableOpacity>
           </View>
         </View>
       </TouchableWithoutFeedback>

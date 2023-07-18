@@ -204,6 +204,7 @@ const PostProduct = ({ navigation, route }) => {
       // Crear Relacion bidirecional entre CustomerProduct y Status
       const updateStatus = await API.graphql({
         query: mutations.updateCustomerProduct,
+        authMode: "AMAZON_COGNITO_USER_POOLS",
         variables: {
           input: {
             id: createCustomerProduct.id,
