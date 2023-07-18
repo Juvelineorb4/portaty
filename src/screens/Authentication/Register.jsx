@@ -101,8 +101,8 @@ const Register = () => {
             <Image
               style={{
                 width: 300,
-                height: 180,
-                resizeMode: "cover",
+                height: 150,
+                resizeMode: "contain",
                 marginTop: -35,
                 marginBottom: 15,
                 alignSelf: "center",

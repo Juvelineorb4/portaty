@@ -26,6 +26,8 @@ const Forgot = ({ navigation }) => {
     },
   });
   const emailValue = watch("email");
+  const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
   // const navigation = useNavigation();
   return (
     <KeyboardAvoidingView
@@ -74,10 +76,10 @@ const Forgot = ({ navigation }) => {
               }}
               icon={require(`@/utils/images/email.png`)}
               text={`Correo electrónico`}
-              // rules={{
-              //   required: "Email is required",
-              //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-              // }}
+              rules={{
+                required: "Ingresa el correo electrónico",
+                pattern: { value: EMAIL_REGEX, message: "Invalido" },
+              }}
             />
             <Text style={[styles.code, global.topGray]}>
               {es.authentication.forgot.code}{" "}

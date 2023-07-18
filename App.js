@@ -81,7 +81,7 @@ export default function App() {
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RecoilRoot>
               <StripeProvider publishableKey={STRIPE_KEY}>
-                <StatusBar style="auto" />
+                <StatusBar style="dark" backgroundColor="#fff" />
                 <Navigation />
               </StripeProvider>
             </RecoilRoot>

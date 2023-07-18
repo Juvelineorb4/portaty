@@ -21,7 +21,6 @@ const CustomInput = ({
   errorPost = false,
 }) => {
   const [securityChange, setSecurityChange] = useState(true);
-  const [errorState, setErrorState] = useState(false);
   return (
     <Controller
       control={control}
@@ -36,8 +35,7 @@ const CustomInput = ({
           <View
             style={[
               styled.input,
-              (error || errorPost) &&
-                errorState && { borderColor: "red", borderWidth: 1 },
+              (error || errorPost) && { borderColor: "red", borderWidth: 0.5 },
             ]}
           >
             <View style={{ flexDirection: "row" }}>
@@ -99,7 +97,7 @@ const CustomInput = ({
                 )}
           </View>
           {error && (
-            <Text style={{ color: "red" }}>{error.message || "Required"}</Text>
+            <Text style={styled.error}>{error.message || "Requerido"}</Text>
           )}
           {errorPost && (
             <Text
@@ -113,7 +111,7 @@ const CustomInput = ({
                 textTransform: "capitalize",
               }}
             >
-              Required
+              Requerido
             </Text>
           )}
         </View>

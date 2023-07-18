@@ -45,6 +45,20 @@
   width: 70%;
 
 }
+.errorInput {
+  font-family: 'light';
+  color: red;
+  font-size: 12px;
+  position: relative;
+  top: -15px;
+}
+.errorInputMain {
+  font-family: 'light';
+  color: red;
+  font-size: 14px;
+  position: relative;
+  top: -10px;
+}
 .placeholder {
   text-align: left;
   font-family: 'light';

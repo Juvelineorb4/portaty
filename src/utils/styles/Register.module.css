@@ -47,7 +47,11 @@
 }
 
 .errorInput {
+  font-family: 'light';
   color: red;
+  font-size: 12px;
+  position: relative;
+  top: -15px;
 }
 
 .continue {

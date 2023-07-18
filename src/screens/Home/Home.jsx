@@ -77,7 +77,6 @@ const Home = ({ data, navigation }) => {
         query: customHome.listCustomerProductStatus,
         authMode: "AWS_IAM",
       });
-      console.log(categories)
       setListCategories(categories.data.listADCategories.items);
       setListBrands(brands.data.listADBrands.items);
     } catch (error) {
@@ -140,7 +139,7 @@ const Home = ({ data, navigation }) => {
             key={index}
             onPress={() =>
               navigation.navigate("Home_Search", {
-                data: category.products.items,
+                data: category.products?.items,
               })
             }
           />
@@ -159,7 +158,7 @@ const Home = ({ data, navigation }) => {
         </View>
         <View style={styles.productsTrendingPopular}>
           {listCategories[0] &&
-            listCategories[0].products.items.map((item, index) => (
+            listCategories[0].products?.items?.slice(0, 4).map((item, index) => (
               <CustomProductCard product={item} key={index} />
             ))}
         </View>
@@ -174,7 +173,7 @@ const Home = ({ data, navigation }) => {
                   icon={brand.image}
                   onPress={() =>
                     navigation.navigate("Home_Search", {
-                      data: brand.products.items,
+                      data: brand.products?.items,
                     })
                   }
                 />
@@ -196,7 +195,7 @@ const Home = ({ data, navigation }) => {
         </View>
         <View style={styles.productsTrendingPopular}>
           {listBrands[1] &&
-            listBrands[1].products.items.map((item, index) => (
+            listBrands[1].products?.items?.map((item, index) => (
               <CustomProductCard product={item} key={index} />
             ))}
         </View>
