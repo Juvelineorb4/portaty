@@ -16,30 +16,25 @@
         "portaty": {},
         "userPoolGroups": {}
       },
-      "storage": {
-        "s3portaty": {}
-      }
-    }
-  },
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-portaty-prod-93020-authRole",
-      "UnauthRoleArn": "arn:aws:iam::086563672363:role/amplify-portaty-prod-93020-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::086563672363:role/amplify-portaty-prod-93020-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-portaty-prod-93020-deployment",
-      "UnauthRoleName": "amplify-portaty-prod-93020-unauthRole",
-      "StackName": "amplify-portaty-prod-93020",
-      "StackId": "arn:aws:cloudformation:us-east-1:086563672363:stack/amplify-portaty-prod-93020/77f57af0-24ae-11ee-9222-0a60bc459e55",
-      "AmplifyAppId": "d220qpo5b9td3o"
-    },
-    "categories": {
-      "auth": {
-        "portaty": {},
-        "userPoolGroups": {}
+      "function": {
+        "Prueba": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/Prueba-4657443850632f2f7a57-build.zip"
+        },
+        "portaty11dae80f": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/portaty11dae80f-4653616c374768364663-build.zip"
+        },
+        "portatyPrueba": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/portatyPrueba-51355730544d58746177-build.zip"
+        }
       },
       "storage": {
         "s3portaty": {}
+      },
+      "api": {
+        "portaty": {}
       }
     }
   }

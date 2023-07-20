@@ -40,7 +40,7 @@ export const createADCategory = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -63,7 +63,7 @@ export const createADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -74,7 +74,7 @@ export const createADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -87,7 +87,7 @@ export const createADCategory = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -123,7 +123,7 @@ export const updateADCategory = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -146,7 +146,7 @@ export const updateADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -157,7 +157,7 @@ export const updateADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -170,7 +170,7 @@ export const updateADCategory = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -206,7 +206,7 @@ export const deleteADCategory = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -229,7 +229,7 @@ export const deleteADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -240,7 +240,7 @@ export const deleteADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -253,7 +253,7 @@ export const deleteADCategory = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -289,7 +289,7 @@ export const createADBrand = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -312,7 +312,7 @@ export const createADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -323,7 +323,7 @@ export const createADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -336,7 +336,7 @@ export const createADBrand = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -372,7 +372,7 @@ export const updateADBrand = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -395,7 +395,7 @@ export const updateADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -406,7 +406,7 @@ export const updateADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -419,7 +419,7 @@ export const updateADBrand = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -455,7 +455,7 @@ export const deleteADBrand = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -478,7 +478,7 @@ export const deleteADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -489,7 +489,7 @@ export const deleteADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -502,7 +502,7 @@ export const deleteADBrand = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -550,7 +550,7 @@ export const createADProduct = /* GraphQL */ `
         }
         __typename
       }
-      
+      createdBy
       customerProduct {
         items {
           id
@@ -590,7 +590,7 @@ export const createADProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -682,7 +682,7 @@ export const updateADProduct = /* GraphQL */ `
         }
         __typename
       }
-      
+      createdBy
       customerProduct {
         items {
           id
@@ -722,7 +722,7 @@ export const updateADProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -814,7 +814,7 @@ export const deleteADProduct = /* GraphQL */ `
         }
         __typename
       }
-      
+      createdBy
       customerProduct {
         items {
           id
@@ -854,7 +854,7 @@ export const deleteADProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1097,7 +1097,7 @@ export const createCustomerShop = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1310,7 +1310,7 @@ export const updateCustomerShop = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1523,7 +1523,7 @@ export const deleteCustomerShop = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1701,7 +1701,7 @@ export const createFavoriteItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1819,7 +1819,7 @@ export const updateFavoriteItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1937,7 +1937,7 @@ export const deleteFavoriteItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2157,7 +2157,7 @@ export const createCustomerProduct = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -2234,7 +2234,7 @@ export const createCustomerProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2466,7 +2466,7 @@ export const updateCustomerProduct = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -2543,7 +2543,7 @@ export const updateCustomerProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2775,7 +2775,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -2852,7 +2852,7 @@ export const deleteCustomerProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -3008,7 +3008,7 @@ export const createCustomerProductStatus = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -3180,7 +3180,7 @@ export const updateCustomerProductStatus = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -3352,7 +3352,7 @@ export const deleteCustomerProductStatus = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -3670,7 +3670,7 @@ export const createOrderItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -3788,7 +3788,7 @@ export const updateOrderItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -3906,7 +3906,7 @@ export const deleteOrderItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4046,7 +4046,7 @@ export const createCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4067,7 +4067,7 @@ export const createCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -4087,7 +4087,7 @@ export const createCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4108,7 +4108,7 @@ export const createCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -4143,7 +4143,7 @@ export const updateCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4164,7 +4164,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -4184,7 +4184,7 @@ export const updateCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4205,7 +4205,7 @@ export const updateCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -4240,7 +4240,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4261,7 +4261,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -4281,7 +4281,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -4302,7 +4302,7 @@ export const deleteCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename

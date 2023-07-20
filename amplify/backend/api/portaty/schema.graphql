@@ -157,17 +157,16 @@ type CustomerShop
   @auth(
     rules: [
       { allow: owner }
-      # { allow: owner, ownerField: "ownerByGoogle" }
+      # { allow: owner, ownerField: "ownerGoogle" }
+      # { allow: owner, ownerField: "ownerApple" }
       { allow: private, operations: [read] }
       { allow: private, provider: iam, operations: [read] }
       { allow: public, provider: iam, operations: [read] }
     ]
   ) {
-  # id: ID! 
   userID: ID! @primaryKey
-  # userGoogleID: ID
   name: String
-  email: String @index(name: "customerShopByEmail", queryField: "customerShopByEmail")
+  email: String
   description: String
   identityId: String
   favorites: [FavoriteItem]
@@ -180,26 +179,19 @@ type CustomerShop
     @hasMany(indexName: "byCustomerShop", fields: ["userID"])
   shippingAddress: [CustomerShippingAddress]
     @hasMany(indexName: "CustomerShippingAddress", fields: ["userID"])
-  owner: String
-    @auth(
-      rules: [
-        { allow: owner, operations: [read, delete] }
-        # {
-        #   allow: owner
-        #   ownerField: "ownerByGoogle"
-        #   operations: [read, delete]
-        # }
-      ]
-    )
-  # ownerByGoogle: String
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  # ownerGoogle: String
   #   @auth(
   #     rules: [
-  #       { allow: owner, operations: [read, delete] }
-  #       {
-  #         allow: owner
-  #         ownerField: "ownerByGoogle"
-  #         operations: [read, delete]
-  #       }
+  #       { allow: owner, operations: [create, read, delete] }
+  #       { allow: owner, ownerField: "ownerGoogle", operations: [read] }
+  #     ]
+  #   )
+  # ownerApple: String
+  #   @auth(
+  #     rules: [
+  #       { allow: owner, operations: [read, create, delete] }
+  #       { allow: owner, ownerField: "ownerApple", operations: [read] }
   #     ]
   #   )
 }
@@ -376,11 +368,11 @@ enum Condition {
 }
 
 type PhoneFields {
-  carrier: String
-  imei: String
-  model: String
-  storage: String
-  batery: String
+  carrier: String!
+  imei: String!
+  model: String!
+  storage: String!
+  batery: String!
 }
 
 type LaptoFields {

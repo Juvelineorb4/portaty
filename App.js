@@ -19,28 +19,41 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 //expo
+import Constants from "expo-constants";
 
 // configuracion de redireccion de url
 const isLocalhost = Boolean(__DEV__);
+let redirectSignIn = "";
+let redirectSignOut = "";
 
-const [localRedirectSignIn, productionRedirectSignIn] =
+const [localRedirectSignIn, expoGoRedirectSignIn, productionRedirectSignIn] =
   awsconfig.oauth.redirectSignIn.split(",");
 
-
-const [localRedirectSignOut, productionRedirectSignOut] =
+const [localRedirectSignOut, expoGoRedirectSignOut, productionRedirectSignOut] =
   awsconfig.oauth.redirectSignOut.split(",");
 
+if (isLocalhost) {
+  redirectSignIn = localRedirectSignIn;
+  redirectSignOut = localRedirectSignOut;
+} else if (Constants.appOwnership === "expo") {
+  redirectSignIn = expoGoRedirectSignIn;
+  redirectSignOut = expoGoRedirectSignOut;
+} else {
+  redirectSignIn = productionRedirectSignIn;
+  redirectSignOut = productionRedirectSignOut;
+}
+
+console.log({
+  redirectSignIn: redirectSignIn,
+  redirectSignOut: redirectSignOut,
+});
 
 const updatedAwsConfig = {
   ...awsconfig,
   oauth: {
     ...awsconfig.oauth,
-    redirectSignIn: isLocalhost
-      ? localRedirectSignIn
-      : productionRedirectSignIn,
-    redirectSignOut: isLocalhost
-      ? localRedirectSignOut
-      : productionRedirectSignOut,
+    redirectSignIn: redirectSignIn,
+    redirectSignOut: redirectSignOut,
   },
 };
 

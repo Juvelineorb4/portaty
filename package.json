@@ -1,6 +1,6 @@
 {
   "name": "portaty",
-  "version": "0.0.4",
+  "version": "0.0.1.1",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",

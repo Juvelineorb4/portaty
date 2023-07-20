@@ -24,7 +24,7 @@ import { es } from "@/utils/constants/lenguage";
 import * as customAuth from "@/graphql/CustomQueries/Authentication";
 import * as Linking from "expo-linking";
 import * as Device from "expo-device";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
@@ -219,7 +219,7 @@ const Login = ({ navigation }) => {
                 {es.authentication.login.question}
               </Text>
               <TouchableOpacity
-                onPress={() => _handlePressButtonAsync()}
+                onPress={() => navigation.navigate("Register_App")}
               >
                 <Text style={styles.signupBtn}>
                   {es.authentication.login.register}

@@ -27,7 +27,7 @@ export const getADCategory = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -50,7 +50,7 @@ export const getADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -61,7 +61,7 @@ export const getADCategory = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -74,7 +74,7 @@ export const getADCategory = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -103,7 +103,7 @@ export const listADCategories = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -124,7 +124,7 @@ export const listADCategories = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -160,7 +160,7 @@ export const getADBrand = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -183,7 +183,7 @@ export const getADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -194,7 +194,7 @@ export const getADBrand = /* GraphQL */ `
             image
             path
             abreviation
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -207,7 +207,7 @@ export const getADBrand = /* GraphQL */ `
         __typename
       }
       abreviation
-      
+      createdBy
       createdAt
       updatedAt
       __typename
@@ -236,7 +236,7 @@ export const listADBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -257,7 +257,7 @@ export const listADBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -305,7 +305,7 @@ export const getADProduct = /* GraphQL */ `
         }
         __typename
       }
-      
+      createdBy
       customerProduct {
         items {
           id
@@ -345,7 +345,7 @@ export const getADProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -439,7 +439,7 @@ export const listADProducts = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -523,7 +523,7 @@ export const aDProductsByCategoryIDAndName = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -607,7 +607,7 @@ export const aDProductsByBrandIDAndName = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -813,7 +813,7 @@ export const getCustomerShop = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1119,7 +1119,7 @@ export const getFavoriteItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1505,7 +1505,7 @@ export const getCustomerProduct = /* GraphQL */ `
           }
           __typename
         }
-        
+        createdBy
         customerProduct {
           items {
             id
@@ -1582,7 +1582,7 @@ export const getCustomerProduct = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -1741,7 +1741,7 @@ export const listCustomerProducts = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -1897,7 +1897,7 @@ export const customerProductsByCustomerIDAndCode = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -2051,7 +2051,7 @@ export const customerProductsByProductID = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -2195,7 +2195,7 @@ export const getCustomerProductStatus = /* GraphQL */ `
             weight
             __typename
           }
-          
+          createdBy
           customerProduct {
             nextToken
             __typename
@@ -2344,7 +2344,7 @@ export const listCustomerProductStatuses = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2686,7 +2686,7 @@ export const getOrderItem = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2919,7 +2919,7 @@ export const getCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2940,7 +2940,7 @@ export const getCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -2960,7 +2960,7 @@ export const getCategoryBrands = /* GraphQL */ `
             suggestedPrice
             categoryID
             brandID
-            
+            createdBy
             createdAt
             updatedAt
             __typename
@@ -2981,7 +2981,7 @@ export const getCategoryBrands = /* GraphQL */ `
           __typename
         }
         abreviation
-        
+        createdBy
         createdAt
         updatedAt
         __typename
@@ -3017,7 +3017,7 @@ export const listCategoryBrands = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename
@@ -3036,7 +3036,7 @@ export const listCategoryBrands = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename
@@ -3083,7 +3083,7 @@ export const categoryBrandsByADCategoryId = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename
@@ -3102,7 +3102,7 @@ export const categoryBrandsByADCategoryId = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename
@@ -3149,7 +3149,7 @@ export const categoryBrandsByADBrandId = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename
@@ -3168,7 +3168,7 @@ export const categoryBrandsByADBrandId = /* GraphQL */ `
             __typename
           }
           abreviation
-          
+          createdBy
           createdAt
           updatedAt
           __typename

@@ -71,6 +71,6 @@
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\"],\"LogoutURLs\":[\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\",\"exp://192.168.1.41:19000/--/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://192.168.1.41:19000/--/\",\"exp://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3?channel-name=dev&runtime-version=1.0.0/--/\",\"expo://\",\"exp://\",\"expo://\"],\"LogoutURLs\":[\"exp://192.168.1.41:19000/--/\",\"exp://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3?channel-name=dev&runtime-version=1.0.0/--/\",\"exp://\",\"exp://\",\"exp://\",\"exp://\"]}"
   }
 }
