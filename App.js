@@ -6,33 +6,58 @@ import {
 } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
-import { Platform, SafeAreaView as SafeAreaIOS } from "react-native";
-
+import { Platform, SafeAreaView as SafeAreaIOS, Alert } from "react-native";
 import Navigation from "@/routes/Navigation";
+
 // amplify
 import { Amplify } from "aws-amplify";
 import awsconfig from "./src/aws-exports.js";
 
 // stripe
-import { StripeProvider } from '@stripe/stripe-react-native'
+import { StripeProvider } from "@stripe/stripe-react-native";
+
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+//expo
+
+// configuracion de redireccion de url
+const isLocalhost = Boolean(__DEV__);
+
+const [localRedirectSignIn, productionRedirectSignIn] =
+  awsconfig.oauth.redirectSignIn.split(",");
 
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+const [localRedirectSignOut, productionRedirectSignOut] =
+  awsconfig.oauth.redirectSignOut.split(",");
+
+
+const updatedAwsConfig = {
+  ...awsconfig,
+  oauth: {
+    ...awsconfig.oauth,
+    redirectSignIn: isLocalhost
+      ? localRedirectSignIn
+      : productionRedirectSignIn,
+    redirectSignOut: isLocalhost
+      ? localRedirectSignOut
+      : productionRedirectSignOut,
+  },
+};
 
 Amplify.configure({
-  ...awsconfig,
+  ...updatedAwsConfig,
   API: {
     endpoints: [
       {
         name: "api-gateway-dev",
-        endpoint: "https://h5920e8h3l.execute-api.us-east-1.amazonaws.com/dev"
+        endpoint: "https://h5920e8h3l.execute-api.us-east-1.amazonaws.com/dev",
       },
-    ]
-  }
+    ],
+  },
 });
 
-const STRIPE_KEY = 'pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ'
+const STRIPE_KEY =
+  "pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ";
 
 export default function App() {
   const global = require("@/utils/styles/global.js");
@@ -61,8 +86,9 @@ export default function App() {
     return null;
   }
 
-  if (Platform.OS === "ios") return (
-      <SafeAreaIOS style={{flex: 1}}>
+  if (Platform.OS === "ios")
+    return (
+      <SafeAreaIOS style={{ flex: 1 }}>
         <SafeAreaProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RecoilRoot>
@@ -75,27 +101,27 @@ export default function App() {
       </SafeAreaIOS>
     );
 
-    return (
-      <SafeAreaAndroid style={{flex: 1}}>
-        <SafeAreaProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <RecoilRoot>
-              <StripeProvider publishableKey={STRIPE_KEY}>
-                <StatusBar style="dark" backgroundColor="#fff" />
-                <Navigation />
-              </StripeProvider>
-            </RecoilRoot>
-          </GestureHandlerRootView>
-        </SafeAreaProvider>
-      </SafeAreaAndroid>
-    );
+  return (
+    <SafeAreaAndroid style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <RecoilRoot>
+            <StripeProvider publishableKey={STRIPE_KEY}>
+              <StatusBar style="dark" backgroundColor="#fff" />
+              <Navigation />
+            </StripeProvider>
+          </RecoilRoot>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </SafeAreaAndroid>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

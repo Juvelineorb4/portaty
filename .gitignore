@@ -35,4 +35,6 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+@portaty__portaty-app.jks
+credentials/
 #amplify-do-not-edit-end

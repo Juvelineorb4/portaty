@@ -21,6 +21,20 @@
       },
       "api": {
         "portaty": {}
+      },
+      "function": {
+        "Prueba": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/Prueba-4657443850632f2f7a57-build.zip"
+        },
+        "portaty11dae80f": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/portaty11dae80f-4653616c374768364663-build.zip"
+        },
+        "portatyPrueba": {
+          "deploymentBucketName": "amplify-portaty-dev-165121-deployment",
+          "s3Key": "amplify-builds/portatyPrueba-51355730544d58746177-build.zip"
+        }
       }
     }
   },
@@ -46,6 +60,11 @@
       },
       "storage": {
         "s3portaty": {}
+      },
+      "function": {
+        "Prueba": {},
+        "portaty11dae80f": {},
+        "portatyPrueba": {}
       }
     }
   }

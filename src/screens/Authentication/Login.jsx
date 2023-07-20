@@ -22,16 +22,18 @@ import Icon from "@/components/Icon";
 import { Auth, API } from "aws-amplify";
 import { es } from "@/utils/constants/lenguage";
 import * as customAuth from "@/graphql/CustomQueries/Authentication";
-
+import * as Linking from "expo-linking";
+import * as Device from "expo-device";
+import * as WebBrowser from 'expo-web-browser';
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
+  const url = Linking.useURL();
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, setError } = useForm();
   const [active, setActive] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorActive, setErrorActive] = useState(false);
-
   const onHandleActive = () => {
     setActive(!active);
   };
@@ -39,25 +41,12 @@ const Login = ({ navigation }) => {
   const onHandleLogin = async (data) => {
     const { email, password } = data;
     setIsLoading(true);
-<<<<<<< HEAD
-    Alert.alert("Boton Presionado");
-=======
-    // const result = await API.graphql({
-    //   query: customAuth.listEmailsPasswords,
-    //   authMode: "AWS_IAM",
-    // });
-    // console.log(result)
->>>>>>> 080cf6f1c49fb7349028ecd0a33bd3d9afa3e310
     try {
       await Auth.signIn(email, password);
       setErrorActive(false);
     } catch (error) {
-<<<<<<< HEAD
-      Alert.alert(JSON.stringify(error));
-=======
       console.log(error.toString());
       setErrorActive(true);
->>>>>>> 080cf6f1c49fb7349028ecd0a33bd3d9afa3e310
       setIsLoading(false);
     }
     setIsLoading(false);
@@ -70,6 +59,11 @@ const Login = ({ navigation }) => {
     } catch (error) {
       console.log("Error al iniciar sesión con Google:", error);
     }
+  };
+
+  const _handlePressButtonAsync = async () => {
+    let result = await WebBrowser.openBrowserAsync("https://expo.dev");
+    console.log(result);
   };
   return (
     <KeyboardAvoidingView
@@ -87,6 +81,9 @@ const Login = ({ navigation }) => {
           automaticallyAdjustContentInsets={false}
         >
           <View style={styles.content}>
+            <Text>
+              {Device.manufacturer}: {Device.modelName} URL: {url}
+            </Text>
             <Text style={styles.title}>{es.authentication.login.title}</Text>
             <Image
               style={{
@@ -222,7 +219,7 @@ const Login = ({ navigation }) => {
                 {es.authentication.login.question}
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Register_App")}
+                onPress={() => _handlePressButtonAsync()}
               >
                 <Text style={styles.signupBtn}>
                   {es.authentication.login.register}

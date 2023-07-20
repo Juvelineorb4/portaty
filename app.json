@@ -1,8 +1,10 @@
 {
   "expo": {
-    "name": "Portaty-dev",
-    "slug": "Portaty-dev",
-    "version": "0.0.2",
+    "name": "portaty-app",
+    "slug": "portaty-app",
+    "owner": "portaty",
+    "version": "0.0.1.1",
+    "scheme:": "portaty",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,11 +14,10 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3"
     },
-    "assetBundlePatterns": [
-      "*/"
-    ],
+    "assetBundlePatterns": ["*/"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -26,7 +27,10 @@
         "NSPhotoLibraryUsageDescription": "Allow Portasty to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Portaty to save photos."
       },
-      "bundleIdentifier": "com.teamportaty.appdev"
+      "bundleIdentifier": "com.portaty.app",
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -47,18 +51,16 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
-      "package": "com.teamportaty.appdev"
+      "package": "com.portaty.app",
+      "runtimeVersion": "1.0.0",
+      "scheme:": "portaty"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "jsx",
-        "css"
-      ]
+      "sourceExts": ["js", "jsx", "css"]
     },
     "plugins": [
       [
@@ -115,7 +117,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "091e39db-c821-498e-9204-83786299f20e"
+        "projectId": "ff8431c6-5beb-4277-b29b-ab544b6af4b3"
       }
     }
   }

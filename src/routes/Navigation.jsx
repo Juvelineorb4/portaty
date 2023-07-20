@@ -17,13 +17,11 @@ import SearchNavigator from "./Tabs/SearchNavigator";
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
   const [userAuth, setUserAuth] = useRecoilState(userAutenticated);
-  console.log(userAuth);
   const checkUser = async () => {
     try {
       const result = await Auth.currentAuthenticatedUser({
         bypassCache: true,
       });
-      console.log(result);
       setUserAuth(result);
       if (
         !result.attributes["custom:identityID"] ||

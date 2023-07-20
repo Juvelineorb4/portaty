@@ -71,6 +71,6 @@
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://192.168.1.158:19000/--/\",\"exp://192.168.250.5:19000/--/\",\"portaty://\",\"exp://--/\",\"exp://192.168.68.101:19000/--/\"],\"LogoutURLs\":[\"exp://192.168.1.158:19000/--/\",\"exp://192.168.250.5:19000/--/\",\"portaty://\",\"exp://--/\",\"exp://192.168.68.101:19000/--/\",\"exp://192.168.68.101:19000/--/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://\",\"portaty://\",\"expo://\",\"exp://\",\"expo://\"],\"LogoutURLs\":[\"portaty://\",\"exp://\",\"exp://\",\"exp://\",\"exp://\",\"exp://\"]}"
   }
 }
