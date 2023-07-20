@@ -2,7 +2,7 @@ const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
   const {
-    resolver: { sourceExts },
+    resolver: { sourceExts, blacklistRE },
   } = await getDefaultConfig();
   return {
     transformer: {
@@ -10,6 +10,7 @@ module.exports = (async () => {
     },
     resolver: {
       sourceExts: [...sourceExts, "css"],
+      blacklistRE: [/#current-cloud-backend\/.*/],
     },
   };
 })();
