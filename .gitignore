@@ -19,7 +19,7 @@ web-build/
 #amplify-do-not-edit-begin
 android/
 credentials.json
-amplify/
+amplify/*
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
