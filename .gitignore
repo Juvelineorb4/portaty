@@ -17,6 +17,9 @@ web-build/
 .metro-health-check*
 
 #amplify-do-not-edit-begin
+android/
+credentials.json
+amplify/
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
@@ -36,7 +39,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
-android/
-credentials.json
-amplify/
+
 #amplify-do-not-edit-end
