@@ -5,6 +5,8 @@
     "owner": "portaty",
     "version": "0.0.1.1",
     "scheme:": "com.portaty.app",
+    "title": "portaty-app",
+    "description": "es una app increible",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +19,9 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3"
     },
-    "assetBundlePatterns": ["*/"],
+    "assetBundlePatterns": [
+      "*/"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -51,15 +55,18 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
-      "package": "com.portaty.app",
-      "runtimeVersion": "1.0.0"
+      "package": "com.portaty.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "css"]
+      "sourceExts": [
+        "js",
+        "jsx",
+        "css"
+      ]
     },
     "plugins": [
       [
@@ -118,6 +125,9 @@
       "eas": {
         "projectId": "ff8431c6-5beb-4277-b29b-ab544b6af4b3"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

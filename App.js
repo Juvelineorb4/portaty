@@ -17,7 +17,8 @@ import awsconfig from "./src/aws-exports.js";
 import { StripeProvider } from "@stripe/stripe-react-native";
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Linking } from "react-native";
+import * as WebBrowser from "expo-web-browser";
 //expo
 import Constants from "expo-constants";
 
@@ -37,10 +38,27 @@ if (isLocalhost) {
   redirectSignOut = localRedirectSignOut;
 } else if (Constants.appOwnership === "expo") {
   redirectSignIn = expoGoRedirectSignIn;
-  redirectSignOut = expoGoRedirectSignOut;
+  redirectSignOut = expoGoRedirectSignOut.slice(0, -1);
 } else {
   redirectSignIn = productionRedirectSignIn;
   redirectSignOut = productionRedirectSignOut;
+}
+
+async function urlOpener(url, redirectUrl) {
+  const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
+    url,
+    redirectUrl
+  );
+
+  console.log("URL: ", url);
+  console.log("REDIRECTURL", redirectUrl);
+  console.log("TYPE: ", type);
+  console.log("NEWURL: ", newUrl);
+
+  if (type === "success" && Platform.OS === "ios") {
+    WebBrowser.dismissBrowser();
+    return Linking.openURL(newUrl);
+  }
 }
 
 console.log({
@@ -54,6 +72,7 @@ const updatedAwsConfig = {
     ...awsconfig.oauth,
     redirectSignIn: redirectSignIn,
     redirectSignOut: redirectSignOut,
+    urlOpener,
   },
 };
 
