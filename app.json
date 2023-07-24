@@ -4,7 +4,7 @@
     "name": "portaty-app",
     "slug": "portaty-app",
     "owner": "portaty",
-    "version": "0.4.6",
+    "version": "0.4.7",
     "description": "es una app increible",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
