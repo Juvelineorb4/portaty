@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeAreaProvider,
@@ -6,6 +6,7 @@ import {
 } from "react-native-safe-area-context";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
+import * as Linking from "expo-linking";
 import { Platform, SafeAreaView as SafeAreaIOS, Alert } from "react-native";
 import Navigation from "@/routes/Navigation";
 
@@ -17,7 +18,7 @@ import awsconfig from "./src/aws-exports.js";
 import { StripeProvider } from "@stripe/stripe-react-native";
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Linking } from "react-native";
+import { StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 //expo
 import Constants from "expo-constants";
@@ -44,27 +45,22 @@ if (isLocalhost) {
   redirectSignOut = productionRedirectSignOut;
 }
 
-async function urlOpener(url, redirectUrl) {
-  const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
-    url,
-    redirectUrl
-  );
+// async function urlOpener(url, redirectUrl) {
+//   const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
+//     url,
+//     redirectUrl
+//   );
 
-  console.log("URL: ", url);
-  console.log("REDIRECTURL", redirectUrl);
-  console.log("TYPE: ", type);
-  console.log("NEWURL: ", newUrl);
+//   console.log("URL: ", url);
+//   console.log("REDIRECTURL", redirectUrl);
+//   console.log("TYPE: ", type);
+//   console.log("NEWURL: ", newUrl);
 
-  if (type === "success" && Platform.OS === "ios") {
-    WebBrowser.dismissBrowser();
-    return Linking.openURL(newUrl);
-  }
-}
-
-console.log({
-  redirectSignIn: redirectSignIn,
-  redirectSignOut: redirectSignOut,
-});
+//   if (type === "success" && Platform.OS === "ios") {
+//     WebBrowser.dismissBrowser();
+//     return Linking.openURL(newUrl);
+//   }
+// }
 
 const updatedAwsConfig = {
   ...awsconfig,
@@ -72,7 +68,6 @@ const updatedAwsConfig = {
     ...awsconfig.oauth,
     redirectSignIn: redirectSignIn,
     redirectSignOut: redirectSignOut,
-    urlOpener,
   },
 };
 
@@ -92,6 +87,7 @@ const STRIPE_KEY =
   "pk_test_51Mr0b4ATCZIkEkhB3Rt0AOz9zZ0UaseZRy9CCEomDtT0pxfoX0o64fYlwHxRJszj5OoqHXfb3lX8NQvGcQmRQgws00vTrph7XJ";
 
 export default function App() {
+  const url = Linking.useURL();
   const global = require("@/utils/styles/global.js");
   const [fontsLoaded] = useFonts({
     thin: require("@/utils/fonts/Montserrat-Thin.ttf"),
@@ -107,6 +103,26 @@ export default function App() {
     lightItalic: require("@/utils/fonts/Montserrat-LightItalic.ttf"),
     boldItalic: require("@/utils/fonts/Montserrat-BoldItalic.ttf"),
   });
+
+  const handleURL = (url) => {
+    const { hostname, path, queryParams } = Linking.parse(url);
+    Alert.alert("LINKING: ", JSON.stringify(Linking.parse(url)));
+    if (path === "alert") {
+      console.log(queryParams.str);
+      // Alert.alert(queryParams.str);
+    } else {
+      console.log(path, queryParams);
+    }
+  };
+
+  useEffect(() => {
+    Alert.alert("URL: ", url);
+    if (url) {
+      handleURL(url);
+    } else {
+      console.log("No URL");
+    }
+  }, [url]);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {

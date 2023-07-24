@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Linking,
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/CustomInput";
@@ -22,13 +23,11 @@ import Icon from "@/components/Icon";
 import { Auth, API } from "aws-amplify";
 import { es } from "@/utils/constants/lenguage";
 import * as customAuth from "@/graphql/CustomQueries/Authentication";
-import * as Linking from "expo-linking";
 import * as Device from "expo-device";
 import * as WebBrowser from "expo-web-browser";
 const EMAIL_REGEX = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
 const Login = ({ navigation }) => {
-  const url = Linking.useURL();
   const global = require("@/utils/styles/global.js");
   const { control, handleSubmit, setError } = useForm();
   const [active, setActive] = useState(true);
@@ -36,6 +35,12 @@ const Login = ({ navigation }) => {
   const [errorActive, setErrorActive] = useState(false);
   const onHandleActive = () => {
     setActive(!active);
+  };
+  const openCustomURL = () => {
+    const url = "https://portaty.com/app/alert?str=hello%20world";
+    Linking.openURL(url).catch((err) =>
+      console.error("Error al abrir la URL:", err)
+    );
   };
 
   const onHandleLogin = async (data) => {
@@ -81,9 +86,6 @@ const Login = ({ navigation }) => {
           automaticallyAdjustContentInsets={false}
         >
           <View style={styles.content}>
-            <Text>
-              {Device.manufacturer}: {Device.modelName} URL: {url}
-            </Text>
             <Text style={styles.title}>{es.authentication.login.title}</Text>
             <Image
               style={{
@@ -224,6 +226,9 @@ const Login = ({ navigation }) => {
                 <Text style={styles.signupBtn}>
                   {es.authentication.login.register}
                 </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => openCustomURL()}>
+                <Text style={styles.signupBtn}>---URL HTTPS2</Text>
               </TouchableOpacity>
             </View>
           </View>

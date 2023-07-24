@@ -1,11 +1,10 @@
 {
   "expo": {
+    "scheme": "portaty",
     "name": "portaty-app",
     "slug": "portaty-app",
     "owner": "portaty",
-    "version": "0.0.1.1",
-    "scheme:": "com.portaty.app",
-    "title": "portaty-app",
+    "version": "0.4.6",
     "description": "es una app increible",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,9 +18,7 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3"
     },
-    "assetBundlePatterns": [
-      "*/"
-    ],
+    "assetBundlePatterns": ["*/"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -31,17 +28,31 @@
         "NSPhotoLibraryUsageDescription": "Allow Portasty to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Portaty to save photos."
       },
-      "bundleIdentifier": "com.portaty.app",
+      "bundleIdentifier": "com.teamportaty.appdev",
       "runtimeVersion": {
         "policy": "sdkVersion"
       }
     },
     "android": {
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "portaty.com",
+              "pathPrefix": "/app"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "permissions": [
+        "android.gms.permission.AD_ID",
         "android.permission.RECORD_AUDIO",
         "android.permission.READ_CONTACTS",
         "android.permission.WRITE_CONTACTS",
@@ -55,18 +66,15 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
-      "package": "com.portaty.app"
+      "package": "com.teamportaty.appdev",
+      "versionCode": 16
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "jsx",
-        "css"
-      ]
+      "sourceExts": ["js", "jsx", "css"]
     },
     "plugins": [
       [

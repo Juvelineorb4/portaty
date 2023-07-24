@@ -1,12 +1,16 @@
 {
   "cli": {
-    "version": ">= 3.13.3"
+    "version": ">= 3.13.3",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "dev"
+      "channel": "dev",
+      "android": {
+        "buildType": "apk"
+      }
     },
     "preview": {
       "distribution": "internal",
@@ -17,7 +21,8 @@
       "channel": "prod",
       "android": {
         "buildType": "app-bundle"
-      }
+      },
+      "autoIncrement": true
     }
   },
   "submit": {
