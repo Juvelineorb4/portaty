@@ -113,13 +113,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.portatyapp"
+    namespace 'com.teamportaty.appdev'
     defaultConfig {
-        applicationId "com.portatyapp"
+        applicationId 'com.teamportaty.appdev'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 16
+        versionName "0.4.6"
     }
 
     splits {
