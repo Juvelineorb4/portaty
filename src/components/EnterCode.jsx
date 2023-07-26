@@ -5,7 +5,7 @@ import CustomText from "./CustomText";
 import { Controller } from "react-hook-form";
 
 const EnterCode = ({ title, subtitle, styled, control }) => {
-  const global = require('@/utils/styles/global.js');
+  const global = require("@/utils/styles/global.js");
 
   const one = useRef();
   const two = useRef();
@@ -16,21 +16,18 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
 
   return (
     <>
-
       <View style={styled.container}>
         <View style={styles.inputs}>
           <Controller
             control={control}
             name={"code"}
-            render={({
-              field: { value, onChange }
-            }) => (
+            render={({ field: { value = [], onChange } }) => (
               <>
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[0] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[0] = number;
+                    onChange(newValue);
                     number && two.current.focus();
                   }}
                   placeholder={`0`}
@@ -41,9 +38,9 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
                 />
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[1] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[1] = number;
+                    onChange(newValue);
                     number ? three.current.focus() : one.current.focus();
                   }}
                   placeholder={`0`}
@@ -54,9 +51,9 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
                 />
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[2] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[2] = number;
+                    onChange(newValue);
                     number ? four.current.focus() : two.current.focus();
                   }}
                   placeholder={`0`}
@@ -67,9 +64,9 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
                 />
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[3] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[3] = number;
+                    onChange(newValue);
                     number ? five.current.focus() : three.current.focus();
                   }}
                   placeholder={`0`}
@@ -80,9 +77,9 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
                 />
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[4] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[4] = number;
+                    onChange(newValue);
                     number ? six.current.focus() : four.current.focus();
                   }}
                   placeholder={`0`}
@@ -93,9 +90,9 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
                 />
                 <TextInput
                   onChangeText={(number) => {
-                    let newValue = [...value]
-                    newValue[5] = number
-                    onChange(newValue)
+                    let newValue = [...value];
+                    newValue[5] = number;
+                    onChange(newValue);
                     number ? six.current.focus() : five.current.focus();
                   }}
                   placeholder={`0`}
@@ -109,10 +106,14 @@ const EnterCode = ({ title, subtitle, styled, control }) => {
           />
         </View>
         <TouchableOpacity>
-          <CustomText title={title} subtitle={subtitle} styled={{
-            title: [styles.title, global.black],
-            subtitle: [styles.subtitle]
-          }} />
+          <CustomText
+            title={title}
+            subtitle={subtitle}
+            styled={{
+              title: [styles.title, global.black],
+              subtitle: [styles.subtitle],
+            }}
+          />
         </TouchableOpacity>
       </View>
     </>

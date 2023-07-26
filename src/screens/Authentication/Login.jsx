@@ -228,7 +228,7 @@ const Login = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => openCustomURL()}>
-                <Text style={styles.signupBtn}>---URL HTTPS2</Text>
+                <Text style={styles.signupBtn}>---URL HTTPS3</Text>
               </TouchableOpacity>
             </View>
           </View>

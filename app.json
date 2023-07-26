@@ -4,7 +4,7 @@
     "name": "portaty-app",
     "slug": "portaty-app",
     "owner": "portaty",
-    "version": "0.4.7",
+    "version": "0.5.2",
     "description": "es una app increible",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +18,9 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3"
     },
-    "assetBundlePatterns": ["*/"],
+    "assetBundlePatterns": [
+      "*/"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -37,14 +39,23 @@
       "intentFilters": [
         {
           "action": "VIEW",
+          "autoVerify": true,
           "data": [
             {
               "scheme": "https",
               "host": "portaty.com",
-              "pathPrefix": "/app"
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "http",
+              "host": "portaty.com",
+              "pathPrefix": "/"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ],
       "adaptiveIcon": {
@@ -67,14 +78,18 @@
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
       "package": "com.teamportaty.appdev",
-      "versionCode": 16
+      "versionCode": 22
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "css"]
+      "sourceExts": [
+        "js",
+        "jsx",
+        "css"
+      ]
     },
     "plugins": [
       [
