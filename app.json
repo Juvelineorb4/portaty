@@ -3,8 +3,8 @@
     "scheme": "portaty",
     "name": "portaty-app",
     "slug": "portaty-app",
-    "owner": "portaty",
-    "version": "0.5.2",
+    "owner": "juvelineorb4",
+    "version": "0.5.3",
     "description": "es una app increible",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/ff8431c6-5beb-4277-b29b-ab544b6af4b3"
+      "url": "https://u.expo.dev/572255cf-4105-4f69-b765-133fff3f8511"
     },
     "assetBundlePatterns": [
       "*/"
@@ -43,13 +43,7 @@
           "data": [
             {
               "scheme": "https",
-              "host": "portaty.com",
-              "pathPrefix": "/"
-            },
-            {
-              "scheme": "http",
-              "host": "portaty.com",
-              "pathPrefix": "/"
+              "host": "portaty.com"
             }
           ],
           "category": [
@@ -78,7 +72,7 @@
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
       "package": "com.teamportaty.appdev",
-      "versionCode": 22
+      "versionCode": 26
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -144,13 +138,13 @@
         }
       ]
     ],
-    "extra": {
-      "eas": {
-        "projectId": "ff8431c6-5beb-4277-b29b-ab544b6af4b3"
-      }
-    },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "572255cf-4105-4f69-b765-133fff3f8511"
+      }
     }
   }
 }
