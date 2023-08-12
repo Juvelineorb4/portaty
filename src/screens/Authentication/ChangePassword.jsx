@@ -25,6 +25,7 @@ const ChangePassword = ({ navigation, route }) => {
       code: ["", "", "", "", "", ""],
     },
   });
+  const pwd = watch("password");
   const onHandleConfirm = () => navigation.replace("Login_Welcome");
   return (
     <KeyboardAvoidingView
@@ -73,10 +74,13 @@ const ChangePassword = ({ navigation, route }) => {
                   icon={require(`@/utils/images/email.png`)}
                   text={`Nueva contraseña`}
                   security={true}
-                  // rules={{
-                  //   required: "Email is required",
-                  //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-                  // }}
+                  rules={{
+                    required: es.authentication.register.password.rules,
+                    minLength: {
+                      value: 8,
+                      message: "Mínimo 8 caracteres",
+                    },
+                  }}
                 />
                 {/* <Text style={styles.textRules}>
               Minimum 8 characters, with a combination of upper and lower case
@@ -96,10 +100,10 @@ const ChangePassword = ({ navigation, route }) => {
                   icon={require(`@/utils/images/email.png`)}
                   text={`Repetir contraseña`}
                   security={true}
-                  // rules={{
-                  //   required: "Email is required",
-                  //   pattern: { value: EMAIL_REGEX, message: "Invalid Email" },
-                  // }}
+                  rules={{
+                    required: es.authentication.register.repeat.rules,
+                    validate: (value) => value == pwd || "No coincide",
+                  }}
                 />
               </View>
               <Text style={[styles.code, global.topGray]}>

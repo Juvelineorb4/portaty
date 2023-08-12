@@ -115,11 +115,12 @@ const CustomPageProduct = ({ route, navigation }) => {
         <View style={styles.containerImages}>
           <Image
             style={{
-              width: 300,
+              width: 190,
               height: 250,
-              marginRight: 10,
-              resizeMode: "contain",
+              marginRight: -55,
+              // resizeMode: "center",
               borderRadius: 8,
+              backgroundColor: '#fff'
             }}
             source={
               data.images[0]
